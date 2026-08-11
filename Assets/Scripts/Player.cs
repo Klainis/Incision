@@ -65,14 +65,26 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
 
-        /////////////////////
         if (characterInput.Shoot)
         {
-            var gun = FindAnyObjectByType<GunAttack>();
-            gun.Attack();
+            //var gun = FindAnyObjectByType<GunAttack>();
+            //gun?.Attack();
+            //StartCoroutine(ThrowAttack());
+            PlayerAnimation.Instance.StartThrowCard();
         }
-        ///////////////
     }
+
+    //private IEnumerator ThrowAttack()
+    //{
+    //    PlayerAnimation.Instance.StartThrowCard();
+
+    //    yield return new WaitForSeconds(0.3f);
+
+    //    var gun = FindAnyObjectByType<GunAttack>();
+    //    gun.Attack();
+
+    //    PlayerAnimation.Instance.EndThrowCard();
+    //}
 
     private void LateUpdate()
     {

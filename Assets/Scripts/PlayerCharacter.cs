@@ -208,6 +208,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             //Момент столкновения с землей
             if (!_oldGroundingStatus)
             {
+                CallEndFallAnimation();
+
                 _oldGroundingStatus = true;
                 _isJumpingUp = false;
 
@@ -226,9 +228,20 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             {
                 currentVelocity = Vector3.Lerp(currentVelocity, _groundedMovementDirection * _groundMovementSpeed, _groundMovementSmooth);
             }
+
+            if (currentVelocity.x != 0 || currentVelocity.z != 0)
+            {
+                CallStartRunAnimation();
+            }
+            else
+            {
+                CallEndRunAnimation();
+            }
         }
         else
         {
+            CallStartFallAnimation();
+
             Vector3 horizontalVelocity = Vector3.ProjectOnPlane(currentVelocity, motor.CharacterUp);
             Vector3 targetHorizontalVelocity = _requestedMovement * _airMovementSpeed;
 
@@ -303,6 +316,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     #endregion
 
+    #region Coroutine
+
     private void StartDashRoutine()
     {
         if (_dashCoroutine != null)
@@ -360,5 +375,27 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _dashCoolDownCoroutine = null;
     }
 
+    #endregion
+
     public Transform GetCameraTarget() => cameraTarget;
+
+    private void CallStartRunAnimation()
+    {
+        PlayerAnimation.Instance.StartRun();
+    }
+
+    private void CallEndRunAnimation()
+    {
+        PlayerAnimation.Instance.EndRun();
+    }
+
+    private void CallStartFallAnimation()
+    {
+        PlayerAnimation.Instance.StartFall();
+    }
+
+    private void CallEndFallAnimation()
+    {
+        PlayerAnimation.Instance.EndFall();
+    }
 }

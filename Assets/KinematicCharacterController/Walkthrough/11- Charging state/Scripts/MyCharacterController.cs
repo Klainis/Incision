@@ -418,7 +418,7 @@ namespace KinematicCharacterController.Walkthrough.ChargingState
                             }
                             else
                             {
-                                // Keep track of time since we were last able to jump (for grace period)
+                                // Keep track of _time since we were last able to jump (for grace period)
                                 _timeSinceLastAbleToJump += deltaTime;
                             }
                         }
@@ -449,7 +449,7 @@ namespace KinematicCharacterController.Walkthrough.ChargingState
                     }
                 case CharacterState.Charging:
                     {
-                        // Detect being stopped by elapsed time
+                        // Detect being stopped by elapsed _time
                         if (!_isStopped && _timeSinceStartedCharge > MaxChargeTime)
                         {
                             _mustStopVelocity = true;

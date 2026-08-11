@@ -272,7 +272,7 @@ namespace KinematicCharacterController.Walkthrough.MovingPlatform
                 }
                 else
                 {
-                    // Keep track of time since we were last able to jump (for grace period)
+                    // Keep track of _time since we were last able to jump (for grace period)
                     _timeSinceLastAbleToJump += deltaTime;
                 }
             }

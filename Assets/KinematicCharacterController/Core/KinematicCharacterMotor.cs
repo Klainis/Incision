@@ -657,7 +657,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Moves the character position, taking all movement collision solving int account. The actual move is done the next time the motor updates are called
+        /// Moves the character position, taking all movement collision solving int account. The actual move is done the next _time the motor updates are called
         /// </summary>
         public void MoveCharacter(Vector3 toPosition)
         {
@@ -666,7 +666,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Moves the character rotation. The actual move is done the next time the motor updates are called
+        /// Moves the character rotation. The actual move is done the next _time the motor updates are called
         /// </summary>
         public void RotateCharacter(Quaternion toRotation)
         {

@@ -469,7 +469,7 @@ namespace KinematicCharacterController.Walkthrough.ClimbingLadders
                             }
                             else
                             {
-                                // Keep track of time since we were last able to jump (for grace period)
+                                // Keep track of _time since we were last able to jump (for grace period)
                                 _timeSinceLastAbleToJump += deltaTime;
                             }
                         }
@@ -538,7 +538,7 @@ namespace KinematicCharacterController.Walkthrough.ClimbingLadders
                                     }
                                 }
 
-                                // Keep track of time since we started anchoring
+                                // Keep track of _time since we started anchoring
                                 _anchoringTimer += deltaTime;
                                 break;
                         }

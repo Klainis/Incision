@@ -1,24 +1,163 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+[SelectionBase]
+[RequireComponent(typeof(Rigidbody))]
+public abstract class Projectile : MonoBehaviour
 {
-    //damage
+    [Header("Common")]
+    [SerializeField, Min(0f)] private float _damage = 10f;
+    [SerializeField] private ProjectileDisposeType _disposeType = ProjectileDisposeType.OnTargetCollision;
+    [SerializeField] private GameObject _cardRoot;
+    [SerializeField] private float _destroyTime = 6f;
+
+    [Header("Overlap Scale By Distance")]
+    [SerializeField] private float _projectileMinScale = 1f;
+    //[SerializeField] private float _projectileMiddleScaleDistance = 1.2f;
+    [SerializeField] private float _projectileMaxScale = 2f;
+    [SerializeField] private float _distanceForChangeScale = 50f;
+    //Свойства типа проджектайла
 
     [Header("Rigidbody")]
     [SerializeField] private Rigidbody _projectileRigidbody;
 
+    [Header("Effect On Destroy")]
+    [SerializeField] private bool _spawnEffectOnDestroy = false;
+    [SerializeField] private ParticleSystem _hitEffect;
+    [SerializeField] private ParticleSystem _bloodHitEffect;
 
+    [Header("Effects")]
+    [SerializeField] private float _cardRotaionSpeed = 180f;
+    [SerializeField] private TrailRenderer _trailRenderer;
+
+    [Header("Collision")]
+    [SerializeField] private SphereCollider _projectileColliderForEnemy;
+
+    private bool _isProjectileDisposed;
+    private bool _canRotationCard = true;
+
+    private float _time = 0f;
+    private float _scaleTime = 0f;
+    private float _initialColliderRadiusForEnemyScale;
+    private float _currentColliderRadiusForEnemyScale;
+
+    private Vector3 _initialPosition;
+
+    private ParticleSystem _hitEffectInstance;
+    private ParticleSystem _bloodHitEffectInstance;
+
+    public float Damage { get { return _damage; } }
+    public ProjectileDisposeType DisposeType { get { return _disposeType; } }
     public Rigidbody Rigidbody { get { return _projectileRigidbody; } }
 
-    private float time = 0;
+    private void Start()
+    {
+        if (_trailRenderer != null && !_trailRenderer.enabled)
+        {
+            _trailRenderer.enabled = true;
+        }
+        else if (_trailRenderer == null)
+        {
+            Debug.LogError("[Projectile.cs] : Отсутствует компонент TrailRenderer");
+        }
+
+        _initialPosition = transform.position;
+        _initialColliderRadiusForEnemyScale = _projectileColliderForEnemy.radius;
+        _currentColliderRadiusForEnemyScale = _initialColliderRadiusForEnemyScale;
+    }
+
 
     private void Update()
     {
-        time += Time.deltaTime;
+        _time += Time.deltaTime;
+        _scaleTime += Time.deltaTime;
 
-        if (time > 10)
+        if (_time > _destroyTime)
+        {
+            if (_trailRenderer != null && _trailRenderer.enabled)
+            {
+                _trailRenderer.enabled = false;
+            }
             Destroy(gameObject);
+        }
+
+        //Изменение размера коллайдера
+        if (_scaleTime >= 1)
+        {
+            _scaleTime = 0;
+
+            var currentDistance = Vector3.Distance(_initialPosition, transform.position);
+            if (currentDistance >= _distanceForChangeScale)
+            {
+                ChangeProjectileScale();
+            }
+        }
+
+        if (_canRotationCard)
+        {
+            _cardRoot?.transform.Rotate(0, _cardRotaionSpeed * Time.deltaTime, 0, Space.Self);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_isProjectileDisposed)
+            return;
+
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        {
+            OnTargetCollision(collision, damageable);
+
+            if (_disposeType == ProjectileDisposeType.OnTargetCollision)
+            {
+                DisposeProjectile();
+            }
+        }
+        else
+        {
+            _canRotationCard = false;
+            OnOtherCollision();
+        }
+
+        OnAnyCollision();
+
+        if (_disposeType == ProjectileDisposeType.OnAnyCollision)
+        {
+            DisposeProjectile();
+        }
+    }
+     
+    public void DisposeProjectile()
+    {
+        OnProjectileDispose();
+
+        SpawnEffectOnDestroy();
+
+        Destroy(gameObject);
+
+        _isProjectileDisposed = true;
+    }
+
+    private void ChangeProjectileScale()
+    {
+        _currentColliderRadiusForEnemyScale = _projectileMaxScale;
+        _projectileColliderForEnemy.radius = _currentColliderRadiusForEnemyScale;
+    }
+
+    protected virtual void OnProjectileDispose() { }
+
+    protected virtual void OnAnyCollision() { }
+
+    protected virtual void OnOtherCollision() { }
+
+    protected virtual void OnTargetCollision(Collision collision, IDamageable damageable) { }
+
+    private void SpawnEffectOnDestroy()
+    {
+        _hitEffectInstance = Instantiate(_hitEffect, transform.position, transform.rotation);
+        _bloodHitEffectInstance = Instantiate(_bloodHitEffect, transform.position, transform.rotation);
     }
 }
