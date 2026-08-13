@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6006597717926973051}
   - component: {fileID: 7040988457720755023}
   - component: {fileID: 8592896625477048602}
+  - component: {fileID: 5130038960231607317}
   m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
@@ -245,6 +246,20 @@ MonoBehaviour:
   _cardRotaionSpeed: 600
   _trailRenderer: {fileID: 4962274793527217642}
   _projectileColliderForEnemy: {fileID: 7040988457720755023}
+--- !u!114 &5130038960231607317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073034408043554007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcabe56ae2822fb419a5f0843d11fe1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyTime: 5
+  _trailRenderer: {fileID: 4962274793527217642}
 --- !u!1 &8752483660794919853
 GameObject:
   m_ObjectHideFlags: 0

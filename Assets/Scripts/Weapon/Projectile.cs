@@ -72,17 +72,7 @@ public abstract class Projectile : MonoBehaviour
 
     private void Update()
     {
-        _time += Time.deltaTime;
         _scaleTime += Time.deltaTime;
-
-        if (_time > _destroyTime)
-        {
-            if (_trailRenderer != null && _trailRenderer.enabled)
-            {
-                _trailRenderer.enabled = false;
-            }
-            Destroy(gameObject);
-        }
 
         //Изменение размера коллайдера
         if (_scaleTime >= 1)
