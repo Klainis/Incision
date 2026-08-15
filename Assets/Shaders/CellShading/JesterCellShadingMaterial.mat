@@ -43,19 +43,20 @@ Material:
     m_Floats:
     - _1ToneStep: 1
     - _2ToneStep: 0.75
-    - _3ToneStep: 0.4
-    - _4ToneStep: 0.2
+    - _3ToneStep: 0.5
+    - _4ToneStep: 0.25
     - _Dither: 0.162
-    - _GeneralStrength: 7
+    - _GeneralStrength: 9
     - _GlareSize: -1
     - _LightBlend: 0.5
-    - _NoiseMultiply: -4.22
+    - _NoiseMultiply: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ToneAmount: 6
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _PositionRam: {r: 16, g: 16, b: 0, a: 0}
+    - _PositionRam: {r: 200, g: 200, b: 0, a: 0}
+    - _PosterizeSteps: {r: 8, g: 8, b: 8, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3053994328553856380
 MonoBehaviour:

@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BlitTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,10 +45,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _1ToneStep: 1
+    - _2ToneStep: 0.75
+    - _3ToneStep: 0.5
+    - _4ToneStep: 0.25
+    - _GeneralStrength: 9
+    - _GlareSize: -1
+    - _LightBlend: 0.5
+    - _NoiseMultiply: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 0.69182384, g: 0.69182384, b: 0.69182384, a: 1}
+    - _PositionRam: {r: 200, g: 200, b: 0, a: 0}
+    - _PosterizeSteps: {r: 8, g: 8, b: 8, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3053994328553856380
 MonoBehaviour:
