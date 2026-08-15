@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 918439466793943256}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 527.12, y: 1.9, z: 544.63}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -69,5 +69,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcabe56ae2822fb419a5f0843d11fe1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyTime: 5
+  _destroyTime: 10
   _trailRenderer: {fileID: 0}

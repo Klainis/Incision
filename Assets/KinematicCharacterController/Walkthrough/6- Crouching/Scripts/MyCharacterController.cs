@@ -59,7 +59,7 @@ namespace KinematicCharacterController.Walkthrough.Crouching
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

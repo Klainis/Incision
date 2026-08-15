@@ -61,7 +61,7 @@ namespace KinematicCharacterController.Walkthrough.CollisionFiltering
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

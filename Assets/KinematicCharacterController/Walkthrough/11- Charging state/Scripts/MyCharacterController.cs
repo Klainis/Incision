@@ -84,7 +84,7 @@ namespace KinematicCharacterController.Walkthrough.ChargingState
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
 
             // Handle initial state

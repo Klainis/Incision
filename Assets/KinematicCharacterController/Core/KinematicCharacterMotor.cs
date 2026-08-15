@@ -27,7 +27,7 @@ namespace KinematicCharacterController
     }
 
     /// <summary>
-    /// Represents the entire state of a character motor that is pertinent for simulation.
+    /// Represents the entire state of a character _motor that is pertinent for simulation.
     /// Use this to save state or revert to past state
     /// </summary>
     [System.Serializable]
@@ -62,7 +62,7 @@ namespace KinematicCharacterController
     }
 
     /// <summary>
-    /// Contains all the information for the motor's grounding status
+    /// Contains all the information for the _motor's grounding status
     /// </summary>
     public struct CharacterGroundingReport
     {
@@ -91,7 +91,7 @@ namespace KinematicCharacterController
     }
 
     /// <summary>
-    /// Contains the simulation-relevant information for the motor's grounding status
+    /// Contains the simulation-relevant information for the _motor's grounding status
     /// </summary>
     public struct CharacterTransientGroundingReport
     {
@@ -158,7 +158,7 @@ namespace KinematicCharacterController
 #pragma warning disable 0414
         [Header("Components")]
         /// <summary>
-        /// The capsule collider of this motor
+        /// The capsule collider of this _motor
         /// </summary>
         [ReadOnly]
         public CapsuleCollider Capsule;
@@ -339,7 +339,7 @@ namespace KinematicCharacterController
         public LayerMask CollidableLayers = -1;
 
         /// <summary>
-        /// The Transform of the character motor
+        /// The Transform of the character _motor
         /// </summary>
         public Transform Transform { get { return _transform; } }
         private Transform _transform;
@@ -420,17 +420,17 @@ namespace KinematicCharacterController
         private OverlapResult[] _overlaps = new OverlapResult[MaxRigidbodyOverlapsCount];
 
         /// <summary>
-        /// The motor's assigned controller
+        /// The _motor's assigned controller
         /// </summary>
         [NonSerialized]
         public ICharacterController CharacterController;
         /// <summary>
-        /// Did the motor's last swept collision detection find a ground?
+        /// Did the _motor's last swept collision detection find a ground?
         /// </summary>
         [NonSerialized]
         public bool LastMovementIterationFoundAnyGround;
         /// <summary>
-        /// Index of this motor in KinematicCharacterSystem arrays
+        /// Index of this _motor in KinematicCharacterSystem arrays
         /// </summary>
         [NonSerialized]
         public int IndexInCharacterSystem;
@@ -593,7 +593,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Sets whether or not the motor will solve collisions when moving (or moved onto)
+        /// Sets whether or not the _motor will solve collisions when moving (or moved onto)
         /// </summary>
         public void SetMovementCollisionsSolvingActivation(bool movementCollisionsSolvingActive)
         {
@@ -657,7 +657,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Moves the character position, taking all movement collision solving int account. The actual move is done the next _time the motor updates are called
+        /// Moves the character position, taking all movement collision solving int account. The actual move is done the next _time the _motor updates are called
         /// </summary>
         public void MoveCharacter(Vector3 toPosition)
         {
@@ -666,7 +666,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Moves the character rotation. The actual move is done the next _time the motor updates are called
+        /// Moves the character rotation. The actual move is done the next _time the _motor updates are called
         /// </summary>
         public void RotateCharacter(Quaternion toRotation)
         {
@@ -675,7 +675,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Returns all the state information of the motor that is pertinent for simulation
+        /// Returns all the state information of the _motor that is pertinent for simulation
         /// </summary>
         public KinematicCharacterMotorState GetState()
         {
@@ -697,7 +697,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Applies a motor state instantly
+        /// Applies a _motor state instantly
         /// </summary>
         public void ApplyState(KinematicCharacterMotorState state, bool bypassInterpolation = true)
         {
@@ -1019,7 +1019,7 @@ namespace KinematicCharacterController
 
         /// <summary>
         /// Update phase 2 is meant to be called after physics movers have simulated their goal positions/rotations. 
-        /// At the end of this, the TransientPosition/Rotation values will be up-to-date with where the motor should be at the end of its move. 
+        /// At the end of this, the TransientPosition/Rotation values will be up-to-date with where the _motor should be at the end of its move. 
         /// It is responsible for:
         /// - Solving Rotation
         /// - Handle MoveRotation calls
@@ -1202,7 +1202,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Determines if motor can be considered stable on given slope normal
+        /// Determines if _motor can be considered stable on given slope normal
         /// </summary>
         private bool IsStableOnNormal(Vector3 normal)
         {
@@ -1210,7 +1210,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Determines if motor can be considered stable on given slope normal
+        /// Determines if _motor can be considered stable on given slope normal
         /// </summary>
         private bool IsStableWithSpecialCases(ref HitStabilityReport stabilityReport, Vector3 velocity)
         {
@@ -1360,7 +1360,7 @@ namespace KinematicCharacterController
 
         /// <summary>
         /// Moves the character's position by given movement while taking into account all physics simulation, step-handling and 
-        /// velocity projection rules that affect the character motor
+        /// velocity projection rules that affect the character _motor
         /// </summary>
         /// <returns> Returns false if movement could not be solved until the end </returns>
         private bool InternalCharacterMove(ref Vector3 transientVelocity, float deltaTime)
@@ -2016,7 +2016,7 @@ namespace KinematicCharacterController
         }
 
         /// <summary>
-        /// Determines if the motor is considered stable on a given hit
+        /// Determines if the _motor is considered stable on a given hit
         /// </summary>
         public void EvaluateHitStability(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, Vector3 withCharacterVelocity, ref HitStabilityReport stabilityReport)
         {

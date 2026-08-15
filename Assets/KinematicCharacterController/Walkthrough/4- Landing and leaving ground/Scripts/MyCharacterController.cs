@@ -53,7 +53,7 @@ namespace KinematicCharacterController.Walkthrough.LandingLeavingGround
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

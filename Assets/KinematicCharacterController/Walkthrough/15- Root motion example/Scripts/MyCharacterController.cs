@@ -59,7 +59,7 @@ namespace KinematicCharacterController.Walkthrough.RootMotionExample
             _rootMotionPositionDelta = Vector3.zero;
             _rootMotionRotationDelta = Quaternion.identity;
 
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

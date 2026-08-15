@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     private PlayerInputActions _inputActions;
 
+    private float _jumpTimeBuffer = 0;
+
     void Start()
     {
         _inputActions = new PlayerInputActions();
@@ -45,6 +47,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (_jumpTimeBuffer > 0)
+        {
+            _jumpTimeBuffer -= Time.deltaTime;
+        }
+
         var input = _inputActions.Player;
 
         var cameraInput = new CameraInput 
@@ -54,11 +61,17 @@ public class Player : MonoBehaviour
         };
         playerCamera.UpdateRotation(cameraInput);
 
+        if (input.Jump.WasPressedThisFrame())
+        {
+            _jumpTimeBuffer = playerMovementData.JumpBufferTime;
+            Debug.Log(_jumpTimeBuffer);
+        }
+
         var characterInput = new CharacterInput
         {
             Rotation = playerCamera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),
+            Jump = _jumpTimeBuffer > 0,
             JumpSustain = input.Jump.IsPressed(),
             Dash = input.Dash.WasPressedThisFrame(),
             Shoot = input.Shoot.WasPressedThisFrame() 
@@ -72,6 +85,11 @@ public class Player : MonoBehaviour
             //StartCoroutine(ThrowAttack());
             PlayerAnimation.Instance.StartThrowCard();
         }
+    }
+
+    public void ConsumeJumpBuffer()
+    {
+        _jumpTimeBuffer = 0f;
     }
 
     //private IEnumerator ThrowAttack()

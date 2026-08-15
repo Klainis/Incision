@@ -50,7 +50,7 @@ namespace KinematicCharacterController.Walkthrough.SimpleJumping
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

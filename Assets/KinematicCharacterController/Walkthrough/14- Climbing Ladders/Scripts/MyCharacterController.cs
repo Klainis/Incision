@@ -111,7 +111,7 @@ namespace KinematicCharacterController.Walkthrough.ClimbingLadders
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
 
             // Handle initial state

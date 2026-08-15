@@ -21,6 +21,7 @@ MonoBehaviour:
   jumpSpeed: 35
   doubleJumpSpeed: 28
   smallJumpSpeed: 35
+  jumpBufferTime: 0.14
   _jumpSmoothStopper: 0.3
   dashSpeed: 50
   dashTime: 0.3

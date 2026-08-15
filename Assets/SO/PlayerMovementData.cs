@@ -19,6 +19,7 @@ public class PlayerMovementData : ScriptableObject
     [SerializeField] private float jumpSpeed = 20f;
     [SerializeField] private float doubleJumpSpeed = 20f;
     [SerializeField] private float smallJumpSpeed = 5f;
+    [SerializeField] private float jumpBufferTime = 0.14f;
 
     [Space]
     [SerializeField][Range(0f, 1f)] private float _jumpSmoothStopper = 0.1f;
@@ -51,4 +52,5 @@ public class PlayerMovementData : ScriptableObject
     public float DashTime => dashTime;
     public float GravityInDash => gravityInDash;
     public float DashCoolDown => dashCoolDown;
+    public float JumpBufferTime => jumpBufferTime;
 }

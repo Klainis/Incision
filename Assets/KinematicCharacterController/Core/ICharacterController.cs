@@ -7,35 +7,35 @@ namespace KinematicCharacterController
     public interface ICharacterController
     {
         /// <summary>
-        /// This is called when the motor wants to know what its rotation should be right now
+        /// This is called when the _motor wants to know what its rotation should be right now
         /// </summary>
         void UpdateRotation(ref Quaternion currentRotation, float deltaTime);
         /// <summary>
-        /// This is called when the motor wants to know what its velocity should be right now
+        /// This is called when the _motor wants to know what its velocity should be right now
         /// </summary>
         void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime);
         /// <summary>
-        /// This is called before the motor does anything
+        /// This is called before the _motor does anything
         /// </summary>
         void BeforeCharacterUpdate(float deltaTime);
         /// <summary>
-        /// This is called after the motor has finished its ground probing, but before PhysicsMover/Velocity/etc.... handling
+        /// This is called after the _motor has finished its ground probing, but before PhysicsMover/Velocity/etc.... handling
         /// </summary>
         void PostGroundingUpdate(float deltaTime);
         /// <summary>
-        /// This is called after the motor has finished everything in its update
+        /// This is called after the _motor has finished everything in its update
         /// </summary>
         void AfterCharacterUpdate(float deltaTime);
         /// <summary>
-        /// This is called after when the motor wants to know if the collider can be collided with (or if we just go through it)
+        /// This is called after when the _motor wants to know if the collider can be collided with (or if we just go through it)
         /// </summary>
         bool IsColliderValidForCollisions(Collider coll);
         /// <summary>
-        /// This is called when the motor's ground probing detects a ground hit
+        /// This is called when the _motor's ground probing detects a ground hit
         /// </summary>
         void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport);
         /// <summary>
-        /// This is called when the motor's movement logic detects a hit
+        /// This is called when the _motor's movement logic detects a hit
         /// </summary>
         void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport);
         /// <summary>
@@ -43,7 +43,7 @@ namespace KinematicCharacterController
         /// </summary>
         void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport);
         /// <summary>
-        /// This is called when the character detects discrete collisions (collisions that don't result from the motor's capsuleCasts when moving)
+        /// This is called when the character detects discrete collisions (collisions that don't result from the _motor's capsuleCasts when moving)
         /// </summary>
         void OnDiscreteCollisionDetected(Collider hitCollider);
     }

@@ -60,7 +60,7 @@ namespace KinematicCharacterController.Walkthrough.OrientingArbitraryDirection
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

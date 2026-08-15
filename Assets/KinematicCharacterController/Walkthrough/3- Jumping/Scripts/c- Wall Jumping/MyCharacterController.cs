@@ -54,7 +54,7 @@ namespace KinematicCharacterController.Walkthrough.WallJumping
 
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

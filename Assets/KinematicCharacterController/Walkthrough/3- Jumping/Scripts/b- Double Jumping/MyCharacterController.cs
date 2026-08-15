@@ -51,7 +51,7 @@ namespace KinematicCharacterController.Walkthrough.DoubleJumping
         
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 

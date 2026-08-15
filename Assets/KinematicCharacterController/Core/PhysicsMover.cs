@@ -37,7 +37,7 @@ namespace KinematicCharacterController
         public bool MoveWithPhysics = true;
 
         /// <summary>
-        /// Index of this motor in KinematicCharacterSystem arrays
+        /// Index of this _motor in KinematicCharacterSystem arrays
         /// </summary>
         [NonSerialized]
         public IMoverController MoverController;
@@ -63,7 +63,7 @@ namespace KinematicCharacterController
         public Quaternion RotationDeltaFromInterpolation;
 
         /// <summary>
-        /// Index of this motor in KinematicCharacterSystem arrays
+        /// Index of this _motor in KinematicCharacterSystem arrays
         /// </summary>
         public int IndexInCharacterSystem { get; set; }
         /// <summary>

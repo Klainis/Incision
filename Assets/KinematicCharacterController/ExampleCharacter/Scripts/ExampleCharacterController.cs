@@ -94,7 +94,7 @@ namespace KinematicCharacterController.Examples
             // Handle initial state
             TransitionToState(CharacterState.Default);
 
-            // Assign the characterController to the motor
+            // Assign the characterController to the _motor
             Motor.CharacterController = this;
         }
 

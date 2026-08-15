@@ -37,7 +37,7 @@ namespace KinematicCharacterController.Walkthrough.BasicMovement
         
         private void Start()
         {
-            // Assign to motor
+            // Assign to _motor
             Motor.CharacterController = this;
         }
 
