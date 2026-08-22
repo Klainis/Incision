@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UICamera
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3795612753
+    locked: 0
+  - name: FX
+    uniqueID: 3454055787
     locked: 0

@@ -56,7 +56,7 @@ MonoBehaviour:
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.4}
   m_Size: {x: 8, y: 8, z: 0.1}
-  m_FadeFactor: 0.8
+  m_FadeFactor: 0.4
 --- !u!114 &-4093837153445898206
 MonoBehaviour:
   m_ObjectHideFlags: 0

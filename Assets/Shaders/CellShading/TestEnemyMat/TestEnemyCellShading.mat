@@ -46,7 +46,7 @@ Material:
     - _3ToneStep: 0.5
     - _4ToneStep: 0.25
     - _GeneralStrength: 3
-    - _GlareSize: -1
+    - _GlareSize: -0.5
     - _LightBlend: 0.5
     - _NoiseMultiply: 0.1
     - _QueueControl: 0
