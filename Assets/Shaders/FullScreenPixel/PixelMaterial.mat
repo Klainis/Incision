@@ -44,13 +44,15 @@ Material:
     - _1: 0.5
     - _2: 0.5
     - _Float: 0.5
-    - _LightValue: 1.2
+    - _LightValue: 1
+    - _LightValueAfter: 1.5
+    - _LightValueBefore: 1.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _addFloat: 0.5
     - _worldPixelSize: 15.1
     m_Colors:
-    - _PosterizeSteps: {r: 40, g: 40, b: 40, a: 0}
+    - _PosterizeSteps: {r: 32, g: 32, b: 32, a: 0}
     - _Resolution: {r: 900, g: 560, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8286069230466513333

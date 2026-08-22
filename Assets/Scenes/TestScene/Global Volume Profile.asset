@@ -40,10 +40,10 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9907198, z: 0.8599752, w: 0}
+    m_Value: {x: 1, y: 0.9280967, z: 0.81191605, w: 0.038350914}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.92111015, z: 0.7816678, w: 0}
 --- !u!114 &-5758646740923736545
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -59,10 +59,10 @@ MonoBehaviour:
   active: 0
   type:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 8
   intensity:
     m_OverrideState: 1
-    m_Value: 0.487
+    m_Value: 0.05
   response:
     m_OverrideState: 1
     m_Value: 1
@@ -192,10 +192,10 @@ MonoBehaviour:
     m_Value: 0
   quality:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 0.06
+    m_Value: 0.03
   clamp:
     m_OverrideState: 1
     m_Value: 0.1
