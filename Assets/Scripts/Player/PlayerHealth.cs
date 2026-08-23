@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerStats _playerStatsData;
+    [SerializeField] private UIHealth _healthBar;
 
     private float _maxHealth;
-    private float _currentHealt;
+    public float _currentHealt;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void ApplyDamage(float damage)
     {
         _currentHealt -= damage;
+
+        _healthBar.TakeDamage(_maxHealth, _currentHealt);
 
         if (_currentHealt <= 0)
         {

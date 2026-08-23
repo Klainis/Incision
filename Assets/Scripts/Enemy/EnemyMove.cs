@@ -46,7 +46,7 @@ public class EnemyMove : MonoBehaviour
 
         float playerDest = Mathf.Abs(Vector3.Distance(transform.position, _player.transform.position));
 
-        if (playerDest <= 10 && _currentCoolDown <= 0)
+        if (playerDest <= _enemyAttack.AttackRange && _currentCoolDown <= 0)
         {
             _currentCoolDown = _enemyAttack.AttackCoolDown;
             _oldAttack = true;
