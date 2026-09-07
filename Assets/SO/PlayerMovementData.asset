@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7305d8709cb009f4c90cd4218b757c37, type: 3}
   m_Name: PlayerMovementData
   m_EditorClassIdentifier: 
-  cameraSensitivity: 0.15
-  cameraMoveOffsetSmooth: 0.05
-  groundMovementSpeed: 20
-  airMovementSpeed: 18
+  cameraSensitivity: 0.2
+  cameraMoveOffsetSmooth: 0.06
+  groundMovementSpeed: 22
+  airMovementSpeed: 20
   groundMovementSmooth: 0.4
   airMovementSmooth: 0.05
-  jumpSpeed: 35
-  doubleJumpSpeed: 28
+  jumpSpeed: 38
+  doubleJumpSpeed: 30
   smallJumpSpeed: 35
-  jumpBufferTime: 0.14
+  jumpBufferTime: 0.15
   _jumpSmoothStopper: 0.3
   dashSpeed: 50
-  dashTime: 0.3
+  dashTime: 0.25
   dashCoolDown: 0.2
   gravityInDash: 0
-  gravity: -85
+  gravity: -82
   gravityInJumpUp: 0.8

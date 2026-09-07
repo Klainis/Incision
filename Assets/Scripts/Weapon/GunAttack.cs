@@ -20,32 +20,6 @@ public class GunAttack : MonoBehaviour
     [Header("Range")]
     [SerializeField] private float _maxRange = 500f;
 
-    //private Ray _rayForGizmos = new Ray();
-    //private Vector3 _directionForGizmos = Vector3.one;
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawRay(_weaponMuzzle.position, _directionForGizmos);
-    //}
-
-    //private void Update()
-    //{
-    //    _rayForGizmos = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-
-    //    Vector3 targetPoint;
-
-    //    if (Physics.Raycast(_rayForGizmos, out RaycastHit hit, _maxRange))
-    //    {
-    //        targetPoint = hit.point;
-    //    }
-    //    else
-    //    {
-    //        targetPoint = _rayForGizmos.GetPoint(_maxRange);
-    //    }
-
-    //    _directionForGizmos = (targetPoint - _weaponMuzzle.position).normalized;
-    //}
-
     public void Attack()
     {
         Ray ray = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));

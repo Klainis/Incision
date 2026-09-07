@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -7,7 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     public static PlayerAnimation Instance { get; private set; }
 
     [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private Animator _cameraAnimator;
+    //[SerializeField] private Animator _cameraAnimator;
 
     private void Awake()
     {
@@ -18,34 +19,25 @@ public class PlayerAnimation : MonoBehaviour
         Instance = this;
     }
 
-    public void StartThrowCard()
+    public void ThrowCardTrigger()
     {
+        _playerAnimator?.SetBool("IsGrounded", true);
         _playerAnimator?.SetTrigger("IsThrow");
     }
 
-    //public void EndThrowCard()
-    //{
-    //    _playerAnimator?.SetBool("IsThrow", false);
-    //}
-
-    public void StartRun()
+    public void RunAnimation(float speed)
     {
-        _cameraAnimator?.SetBool("IsRun", true);
+        _playerAnimator?.SetFloat("Speed", speed);
     }
 
-    public void EndRun()
+    public void FallAnimation(bool isGrounded)
     {
-        _cameraAnimator?.SetBool("IsRun", false);
+        _playerAnimator?.SetBool("IsGrounded", isGrounded);
     }
 
-    public void StartFall()
+    public void DashAnimation()
     {
-        _cameraAnimator?.SetBool("IsRun", false);
-        _playerAnimator?.SetBool("IsFall", true);
-    }
-
-    public void EndFall()
-    {
-        _playerAnimator?.SetBool("IsFall", false);
+        Debug.Log("Dash");
+        _playerAnimator?.SetTrigger("IsDashing");
     }
 }

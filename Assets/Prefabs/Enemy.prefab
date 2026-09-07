@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf55705dc04e9c46bdf6b3c84b5e653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damagePopupPrefab: {fileID: 1155535204364478155, guid: 935154cb9a696574fac4af28c066baed, type: 3}
   _bloodEffect: {fileID: 7310943912595671841, guid: d8f3852bf451fb943914d5f110ef0f64, type: 3}
   maxHealth: 40
 --- !u!114 &6634663010973871138
@@ -1257,12 +1258,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: fe2e1fea37a78f1438bd09c0e52f7625, type: 2}
+      objectReference: {fileID: 2100000, guid: 93761508d1028e64cb87ecd94ad9f93d, type: 2}
     - target: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 

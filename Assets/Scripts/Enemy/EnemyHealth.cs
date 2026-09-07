@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
+    [SerializeField] private GameObject _damagePopupPrefab;
+
     public ParticleSystem _bloodEffect;
+
     public float maxHealth;
 
     private float _currentHealt;
 
     private ParticleSystem _bloodEffectInstance;
+    private GameObject _damagePopupInstance;
 
     private void Start()
     {
@@ -19,6 +23,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float damage)
     {
+        UIEffectManager.Instance.ShowDamagePopup(transform.position, damage);
+
         _currentHealt -= damage;
 
         if (_currentHealt <= 0 )

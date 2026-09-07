@@ -64,6 +64,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _isJumpingUp;
 
     public bool IsDashing {  get { return _isDashing; } }
+    public Transform GetCameraTarget() => _cameraTarget;
 
     private Coroutine _dashCoroutine;
     private Coroutine _dashCoolDownCoroutine;
@@ -188,6 +189,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _canDash = false;
             _isDashing = true;
 
+            CallDashAnimation();
             _effecter.PlaySpeedLines();
 
             Vector3 rawDir = _requestedMovement.magnitude > 0.01f ? _requestedMovement : _forwardDirection;
@@ -206,11 +208,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
         if (_motor.GroundingStatus.IsStableOnGround)
         {
+            CallFallAnimation(true);
             //Момент столкновения с землей
             if (!_oldGroundingStatus)
             {
-                CallEndFallAnimation();
-
                 _oldGroundingStatus = true;
                 _isJumpingUp = false;
 
@@ -228,20 +229,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             if (!_isDashing)
             {
                 currentVelocity = Vector3.Lerp(currentVelocity, _groundedMovementDirection * _groundMovementSpeed, _groundMovementSmooth);
-            }
 
-            if (currentVelocity.x != 0 || currentVelocity.z != 0)
-            {
-                CallStartRunAnimation();
-            }
-            else
-            {
-                CallEndRunAnimation();
+                var normVel = currentVelocity.normalized.magnitude;
+                CallRunAnimation(normVel);
             }
         }
         else
         {
-            CallStartFallAnimation();
+            CallFallAnimation(false);
 
             Vector3 horizontalVelocity = Vector3.ProjectOnPlane(currentVelocity, _motor.CharacterUp);
             Vector3 targetHorizontalVelocity = _requestedMovement * _airMovementSpeed;
@@ -382,25 +377,28 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     #endregion
 
-    public Transform GetCameraTarget() => _cameraTarget;
-
-    private void CallStartRunAnimation()
+    private void CallRunAnimation(float speed)
     {
-        PlayerAnimation.Instance.StartRun();
+        PlayerAnimation.Instance.RunAnimation(speed);
     }
 
-    private void CallEndRunAnimation()
+    //private void CallEndRunAnimation(bool r)
+    //{
+    //    PlayerAnimation.Instance.EndRun();
+    //}
+
+    private void CallFallAnimation(bool isFalling)
     {
-        PlayerAnimation.Instance.EndRun();
+        PlayerAnimation.Instance.FallAnimation(isFalling);
     }
 
-    private void CallStartFallAnimation()
-    {
-        PlayerAnimation.Instance.StartFall();
-    }
+    //private void CallEndFallAnimation(bool r)
+    //{
+    //    PlayerAnimation.Instance.EndFall();
+    //}
 
-    private void CallEndFallAnimation()
+    private void CallDashAnimation()
     {
-        PlayerAnimation.Instance.EndFall();
+        PlayerAnimation.Instance.DashAnimation();
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
 
@@ -12,7 +14,18 @@ public class Player : MonoBehaviour
 
     private PlayerInputActions _inputActions;
 
+    private bool _isAttacing = false;
+
     private float _jumpTimeBuffer = 0;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+    }
 
     void Start()
     {
@@ -64,7 +77,7 @@ public class Player : MonoBehaviour
         if (input.Jump.WasPressedThisFrame())
         {
             _jumpTimeBuffer = playerMovementData.JumpBufferTime;
-            Debug.Log(_jumpTimeBuffer);
+            //Debug.Log(_jumpTimeBuffer);
         }
 
         var characterInput = new CharacterInput
@@ -78,34 +91,25 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
 
-        if (characterInput.Shoot)
+        if (characterInput.Shoot && !_isAttacing)
         {
-            //var gun = FindAnyObjectByType<GunAttack>();
-            //gun?.Attack();
-            //StartCoroutine(ThrowAttack());
-            PlayerAnimation.Instance.StartThrowCard();
+            //_isAttacing = true;
+            PlayerAnimation.Instance.ThrowCardTrigger();
         }
     }
 
-    public void ConsumeJumpBuffer()
+    public void OnAttackEnded()
     {
-        _jumpTimeBuffer = 0f;
+        _isAttacing = false;
     }
-
-    //private IEnumerator ThrowAttack()
-    //{
-    //    PlayerAnimation.Instance.StartThrowCard();
-
-    //    yield return new WaitForSeconds(0.3f);
-
-    //    var gun = FindAnyObjectByType<GunAttack>();
-    //    gun.Attack();
-
-    //    PlayerAnimation.Instance.EndThrowCard();
-    //}
 
     private void LateUpdate()
     {
         playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
+    }
+    
+    public void ConsumeJumpBuffer()
+    {
+        _jumpTimeBuffer = 0f;
     }
 }
