@@ -130,13 +130,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 681510488576423133, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 681510488576423133, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_Cameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1027899176}
+    - target: {fileID: 681510488576423133, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1961918049}
+    - target: {fileID: 1030261373031699272, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627132473916012924, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661505768889276292, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2909298530171555054, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3011090602149981843, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 3144671244526508261, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718966421925615790, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_ClearDepth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718966421925615790, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_RendererIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718966421925615790, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6619,7 +6655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &637595046
 Transform:
   m_ObjectHideFlags: 0
@@ -7045,7 +7081,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 407
+    m_Bits: 471
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -12122,6 +12158,11 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!20 &1027899176 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1627132473916012924, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+  m_PrefabInstance: {fileID: 299563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1046234509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19239,6 +19280,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1961918049 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3427324717546539563, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+  m_PrefabInstance: {fileID: 299563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068740712
 GameObject:
   m_ObjectHideFlags: 0
@@ -23304,10 +23350,6 @@ PrefabInstance:
     - target: {fileID: 3073034408043554007, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
       propertyPath: m_Name
       value: Projectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 3073034408043554007, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -105,9 +105,18 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         _requestedRotation = input.Rotation;
 
-        _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
-        _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
-        _requestedMovement = input.Rotation * _requestedMovement;
+        //_requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
+        //_requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
+        //_requestedMovement = input.Rotation * _requestedMovement;
+        Vector3 planarForward = Vector3.ProjectOnPlane(input.Rotation * Vector3.forward, _motor.CharacterUp);
+        if (planarForward.sqrMagnitude < 0.0001f)
+        {
+            planarForward = _forwardDirection.sqrMagnitude > 0f ? _forwardDirection : Vector3.forward;
+        }
+        Quaternion yawRotation = Quaternion.LookRotation(planarForward.normalized, _motor.CharacterUp);
+
+        Vector3 move = new Vector3(input.Move.x, 0f, input.Move.y);
+        _requestedMovement = yawRotation * Vector3.ClampMagnitude(move, 1f);
 
         _requestedJump = _requestedJump || input.Jump;
         _requestedSustainJump = input.JumpSustain;
@@ -382,20 +391,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         PlayerAnimation.Instance.RunAnimation(speed);
     }
 
-    //private void CallEndRunAnimation(bool r)
-    //{
-    //    PlayerAnimation.Instance.EndRun();
-    //}
-
     private void CallFallAnimation(bool isFalling)
     {
         PlayerAnimation.Instance.FallAnimation(isFalling);
     }
-
-    //private void CallEndFallAnimation(bool r)
-    //{
-    //    PlayerAnimation.Instance.EndFall();
-    //}
 
     private void CallDashAnimation()
     {
