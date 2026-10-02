@@ -77,7 +77,6 @@ public class Player : MonoBehaviour
         if (input.Jump.WasPressedThisFrame())
         {
             _jumpTimeBuffer = playerMovementData.JumpBufferTime;
-            //Debug.Log(_jumpTimeBuffer);
         }
 
         var characterInput = new CharacterInput
@@ -87,13 +86,13 @@ public class Player : MonoBehaviour
             Jump = _jumpTimeBuffer > 0,
             JumpSustain = input.Jump.IsPressed(),
             Dash = input.Dash.WasPressedThisFrame(),
-            Shoot = input.Shoot.WasPressedThisFrame() 
+            Shoot = input.Shoot.WasPressedThisFrame(),
+            Slam = input.Slam.WasPressedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
 
         if (characterInput.Shoot && !_isAttacing)
         {
-            //_isAttacing = true;
             PlayerAnimation.Instance.ThrowCardTrigger();
         }
     }

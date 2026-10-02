@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using KinematicCharacterController;
+using System;
 
 public struct CharacterInput
 {
@@ -11,6 +12,7 @@ public struct CharacterInput
     public bool JumpSustain;
     public bool Dash;
     public bool Shoot;
+    public bool Slam;
 }
 
 public class PlayerCharacter : MonoBehaviour, ICharacterController
@@ -55,6 +57,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private float _gravityInDash;
     private float _dashDelay;
 
+    private float _slamSpeed;
+    private float _slamMinHeight;
+    private float _slamStartY = 0;
+
     private bool _requestedJump;
     private bool _requestedSustainJump;
     private bool _canJump = true;
@@ -64,7 +70,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _isDashing;
     private bool _canDash = true;
 
-    private bool _oldGroundingStatus = false;
+    private bool _requestedSlam;
+    private bool _isSlamming;
+    private bool _canSlam = true;
+
+    //private bool _oldGroundingStatus = false;
     private bool _isJumpingUp;
 
     public bool IsDashing {  get { return _isDashing; } }
@@ -72,6 +82,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private Coroutine _dashCoroutine;
     private Coroutine _dashCoolDownCoroutine;
+
+    public event Action<float> SlamLamded;
 
     private void Awake()
     {
@@ -100,6 +112,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _dashTime = data.DashTime;
         _gravityInDash = data.GravityInDash;
         _dashDelay = data.DashDelay;
+        _slamSpeed = data.SlamSpeed;
+        _slamMinHeight = data.SlamMinHeight;
 
         _canJump = true;
         _canDash = true;
@@ -123,6 +137,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _requestedSustainJump = input.JumpSustain;
 
         _requestedDash = _requestedDash || input.Dash;
+
+        _requestedSlam = _requestedSlam || input.Slam;
     }
 
     #region Interface
@@ -158,7 +174,28 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     public void PostGroundingUpdate(float deltaTime)
     {
+        bool isGrounded = _motor.GroundingStatus.IsStableOnGround;
+        bool wasGrounded = _motor.LastGroundingStatus.IsStableOnGround;
 
+        if (isGrounded && !wasGrounded)
+        {
+            _isJumpingUp = false;
+
+            _canJump = true;
+            _canDoubleJump = false;
+
+            CallFallAnimation(false);
+        }
+
+        if (isGrounded)
+        {
+            EndSlam();
+        }
+
+        if (!isGrounded && wasGrounded)
+        {
+            CallFallAnimation(true);
+        }
     }
 
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
@@ -193,42 +230,63 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
 
         //DASH
-        if (_requestedDash && _canDash && _dashStamina.TryConsumeStamina())
+        if (_requestedDash && _canDash && !_isSlamming)
         {
             _requestedDash = false;
-            _canDash = false;
-            _isDashing = true;
 
-            CallDashAnimation();
-            _effecter.PlaySpeedLines();
+            if (_dashStamina.TryConsumeStamina())
+            {
+                _canDash = false;
+                _isDashing = true;
 
-            Vector3 rawDir = _requestedMovement.magnitude > 0.01f ? _requestedMovement : _forwardDirection;
-            _dashDirection = Vector3.ProjectOnPlane(rawDir, _motor.CharacterUp).normalized;
+                CallDashAnimation();
+                _effecter.PlaySpeedLines();
 
-            StartDashRoutine();
+                Vector3 rawDir = _requestedMovement.magnitude > 0.01f ? _requestedMovement : _forwardDirection;
+                _dashDirection = Vector3.ProjectOnPlane(rawDir, _motor.CharacterUp).normalized;
+
+                StartDashRoutine();
+            }
         }
         if (_isDashing)
         {
             _requestedDash = false;
             _requestedJump = false;
+            _requestedSlam = false;
 
             currentVelocity = _dashDirection * _dashSpeed;
             return;
         }
 
-        if (_motor.GroundingStatus.IsStableOnGround)
+        //SLAM
+        if (_requestedSlam && _canSlam)
         {
-            CallFallAnimation(true);
-            //Момент столкновения с землей
-            if (!_oldGroundingStatus)
+            _requestedSlam = false;
+
+            bool inAir = !_motor.GroundingStatus.IsStableOnGround;
+            bool highEnough = !Physics.Raycast(_motor.TransientPosition, -_motor.CharacterUp, _slamMinHeight, _motor.StableGroundLayers);
+
+            if (inAir && highEnough && !_isSlamming)
             {
-                _oldGroundingStatus = true;
+                _canSlam = false;
+                _canJump = false;
+                _canDoubleJump = false;
+
+                _isSlamming = true;
+                _isDashing = false;
                 _isJumpingUp = false;
 
-                _canJump = true;
-                _canDoubleJump = false;
+                _slamStartY = _motor.TransientPosition.y;
             }
+        }
+        if (_isSlamming)
+        {
+            currentVelocity = -_motor.CharacterUp * _slamSpeed;
+            return;
+        }
 
+        if (_motor.GroundingStatus.IsStableOnGround)
+        {
             //MOVE
             _groundedMovementDirection = _motor.GetDirectionTangentToSurface
             (
@@ -246,8 +304,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
         else
         {
-            CallFallAnimation(false);
-
             Vector3 horizontalVelocity = Vector3.ProjectOnPlane(currentVelocity, _motor.CharacterUp);
             Vector3 targetHorizontalVelocity = _requestedMovement * _airMovementSpeed;
 
@@ -272,7 +328,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
             currentVelocity += _motor.CharacterUp * effectivedGravity * deltaTime;
 
-            _oldGroundingStatus = false;
+            //_oldGroundingStatus = false;
         }
 
         //JUMP
@@ -386,6 +442,19 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     }
 
     #endregion
+
+    private void EndSlam()
+    {
+        if (_isSlamming)
+        {
+            _isSlamming = false;
+            _canSlam = true;
+
+            float slamHeight = _slamStartY - _motor.TransientPosition.y;
+            SlamLamded?.Invoke(slamHeight);
+            _slamStartY = 0;
+        }
+    }
 
     private void CallRunAnimation(float speed)
     {

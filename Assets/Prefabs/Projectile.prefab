@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a05d861dd28bf4583d9a1f4c0e6549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 20
   _disposeType: 1
   _cardRoot: {fileID: 543331352684829255}
   _destroyTime: 5

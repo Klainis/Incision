@@ -3852,7 +3852,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 1473
     maxCollisionShapes: 30
     quality: 0
     voxelSize: 0.5
@@ -4904,8 +4904,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodDecalPrefab: {fileID: 756927296452940245, guid: f3366fc71dbaa3d4182470ee4ac5abec, type: 3}
-  _minDecalSize: 8
-  _maxDecalSize: 14
+  _minDecalSize: 9
+  _maxDecalSize: 15
 --- !u!1 &6615860830862593056
 GameObject:
   m_ObjectHideFlags: 0
