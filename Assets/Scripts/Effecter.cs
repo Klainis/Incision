@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Effecter : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem speedLinesParticle;
+    [SerializeField] private ParticleSystem _speedLinesParticle;
+    [SerializeField] private ParticleSystem _slamLinesParticle;
 
     public void PlaySpeedLines()
     {
-        speedLinesParticle.Play();
+        _speedLinesParticle.Play();
     }
 
     public void StopSpeedLines()
     {
-        speedLinesParticle.Stop();
+        _speedLinesParticle.Stop();
+    }
+
+    public void PlaySlamLines()
+    {
+        _slamLinesParticle.Play();
+    }
+
+    public void StopSlamLines()
+    {
+        _slamLinesParticle.Stop();
     }
 }

@@ -277,6 +277,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _isJumpingUp = false;
 
                 _slamStartY = _motor.TransientPosition.y;
+
+                _effecter.PlaySlamLines();
             }
         }
         if (_isSlamming)
@@ -449,6 +451,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             _isSlamming = false;
             _canSlam = true;
+
+            _effecter.StopSlamLines();
 
             float slamHeight = _slamStartY - _motor.TransientPosition.y;
             SlamLamded?.Invoke(slamHeight);
