@@ -23,6 +23,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("Camera Transform")]
     [SerializeField] private Transform _cameraTarget;
 
+    [Header("Movement")]
+    [SerializeField] private DashStamina _dashStamina;
+
+    [Header("Effects")]
     [SerializeField] private Effecter _effecter;
 
     private Quaternion _requestedRotation;
@@ -49,7 +53,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private float _dashSpeed;
     private float _dashTime;
     private float _gravityInDash;
-    private float _dashCoolDown;
+    private float _dashDelay;
 
     private bool _requestedJump;
     private bool _requestedSustainJump;
@@ -95,7 +99,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _dashSpeed = data.DashSpeed;
         _dashTime = data.DashTime;
         _gravityInDash = data.GravityInDash;
-        _dashCoolDown = data.DashCoolDown;
+        _dashDelay = data.DashDelay;
 
         _canJump = true;
         _canDash = true;
@@ -105,9 +109,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         _requestedRotation = input.Rotation;
 
-        //_requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
-        //_requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
-        //_requestedMovement = input.Rotation * _requestedMovement;
         Vector3 planarForward = Vector3.ProjectOnPlane(input.Rotation * Vector3.forward, _motor.CharacterUp);
         if (planarForward.sqrMagnitude < 0.0001f)
         {
@@ -192,7 +193,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
 
         //DASH
-        if (_requestedDash && _canDash)
+        if (_requestedDash && _canDash && _dashStamina.TryConsumeStamina())
         {
             _requestedDash = false;
             _canDash = false;
@@ -312,15 +313,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             currentVelocity += _motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
         }
 
-        //JUMP STOP
-        if(_isJumpingUp && !_requestedSustainJump)
-        {
-            _isJumpingUp = false;
-            float verticalSpeed = Vector3.Dot(currentVelocity, _motor.CharacterUp);
-            verticalSpeed = Mathf.Lerp(verticalSpeed, 0f, _jumpSmooth);
+        ////JUMP STOP
+        //if(_isJumpingUp && !_requestedSustainJump)
+        //{
+        //    _isJumpingUp = false;
+        //    float verticalSpeed = Vector3.Dot(currentVelocity, _motor.CharacterUp);
+        //    verticalSpeed = Mathf.Lerp(verticalSpeed, 0f, _jumpSmooth);
 
-            currentVelocity = Vector3.ProjectOnPlane(currentVelocity, _motor.CharacterUp) + (_motor.CharacterUp * verticalSpeed);
-        }
+        //    currentVelocity = Vector3.ProjectOnPlane(currentVelocity, _motor.CharacterUp) + (_motor.CharacterUp * verticalSpeed);
+        //}
     }
 
     #endregion
@@ -361,7 +362,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _effecter.StopSpeedLines();
         _isDashing = false;
 
-        _motor.BaseVelocity = Vector3.zero;
+        //_motor.BaseVelocity = Vector3.zero;
 
         StartDashCoolDownRoutine();
 
@@ -370,7 +371,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private IEnumerator DashCoolDownRoutine()
     {
-        float dashTime = _dashCoolDown;
+        float dashTime = _dashDelay;
         float requestedTime = 0;
 
         while (requestedTime <= dashTime)

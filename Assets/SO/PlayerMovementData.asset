@@ -18,14 +18,16 @@ MonoBehaviour:
   airMovementSpeed: 20
   groundMovementSmooth: 0.35
   airMovementSmooth: 0.07
-  jumpSpeed: 38
+  jumpSpeed: 35
   doubleJumpSpeed: 30
   smallJumpSpeed: 35
   jumpBufferTime: 0.15
   _jumpSmoothStopper: 0.3
-  dashSpeed: 60
-  dashTime: 0.25
-  dashCoolDown: 0.2
+  dashSpeed: 50
+  dashTime: 0.2
+  dashDelay: 0.1
+  dashCoolDown: 0.8
+  dashMaxCharges: 3
   gravityInDash: 0
-  gravity: -82
+  gravity: -80
   gravityInJumpUp: 0.8

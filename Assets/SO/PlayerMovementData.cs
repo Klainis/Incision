@@ -28,7 +28,9 @@ public class PlayerMovementData : ScriptableObject
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 40f;
     [SerializeField] private float dashTime = 1f;
-    [SerializeField] private float dashCoolDown = 1f;
+    [SerializeField] private float dashDelay = 0.1f;
+    [SerializeField] private float dashCoolDown = 0.8f;
+    [SerializeField] private int dashMaxCharges = 3;
     [SerializeField][Range(0f, 1f)] private float gravityInDash = 0f;
 
     [Header("Gravity")]
@@ -51,6 +53,8 @@ public class PlayerMovementData : ScriptableObject
     public float DashSpeed => dashSpeed;
     public float DashTime => dashTime;
     public float GravityInDash => gravityInDash;
+    public float DashDelay => dashDelay;
     public float DashCoolDown => dashCoolDown;
+    public int DashMaxCharges => dashMaxCharges;
     public float JumpBufferTime => jumpBufferTime;
 }
