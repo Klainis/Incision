@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class DashStamina : MonoBehaviour
 {
-    [Header("Data")]
-    [SerializeField] private PlayerMovementData _playerMovementData;
+    private PlayerMovementData _playerMovementData;
 
     private int _dashMaxCharges = 1;
     private float _dashCoolDown = 0;
@@ -22,10 +21,12 @@ public class DashStamina : MonoBehaviour
 
     public event Action<float, int> Changed;
 
-    private void Awake()
+    private void Start()
     {
-        if (_playerMovementData != null)
+        if (Player.Instance.PlayerMovementData != null)
         {
+            _playerMovementData = Player.Instance.PlayerMovementData;
+
             _dashMaxCharges = _playerMovementData.DashMaxCharges;
             _dashDelay = _playerMovementData.DashDelay;
             _dashCoolDown = _playerMovementData.DashCoolDown;
