@@ -28,6 +28,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("Movement")]
     [SerializeField] private DashStamina _dashStamina;
 
+    [Header("Collisions")]
+    [SerializeField] private LayerMask _enemyLayers;
+
     [Header("Effects")]
     [SerializeField] private Effecter _effecter;
 
@@ -74,6 +77,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _isSlamming;
     private bool _canSlam = true;
 
+    private bool _ignoreEnemies;
+
     //private bool _oldGroundingStatus = false;
     private bool _isJumpingUp;
 
@@ -82,6 +87,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private Coroutine _dashCoroutine;
     private Coroutine _dashCoolDownCoroutine;
+
+    private readonly Collider[] _overlaps = new Collider[4];
 
     public event Action<float> SlamLamded;
 
@@ -149,11 +156,32 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     public void BeforeCharacterUpdate(float deltaTime)
     {
+        if (_isDashing || _isSlamming)
+        {
+            _ignoreEnemies = true;
+        }
+        else if (_ignoreEnemies)
+        {
+            _ignoreEnemies = false;
 
+            int count = _motor.CharacterOverlap(
+                _motor.TransientPosition,
+                _motor.TransientRotation,
+                _overlaps,
+                _enemyLayers,
+                QueryTriggerInteraction.Ignore);
+
+            _ignoreEnemies = count > 0;
+        }
     }
 
     public bool IsColliderValidForCollisions(Collider coll)
     {
+        bool isEnemy = (_enemyLayers.value & (1 << coll.gameObject.layer)) != 0;
+
+        if (isEnemy && (_isDashing || _isSlamming || _ignoreEnemies))
+            return false;
+
         return true;
     }
 

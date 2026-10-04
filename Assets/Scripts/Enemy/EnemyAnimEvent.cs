@@ -8,6 +8,12 @@ public class EnemyAnimEvent : MonoBehaviour
     [SerializeField] private Transform _point;
     [SerializeField] private float _overlapRadius = 2;
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_point.position, _overlapRadius);
+    }
+
     public void DoDamage()
     {
         Collider[] _hits = Physics.OverlapSphere(_point.position, _overlapRadius, _enemyAttack.Playerlayer);

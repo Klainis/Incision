@@ -5524,7 +5524,7 @@ MonoBehaviour:
   MaxStableSlopeAngle: 60
   StableGroundLayers:
     serializedVersion: 2
-    m_Bits: 1041
+    m_Bits: 1025
   DiscreteCollisionEvents: 0
   StepHandling: 1
   MaxStepHeight: 1.5
@@ -5561,6 +5561,9 @@ MonoBehaviour:
   _player: {fileID: 3657837160234566478}
   _cameraTarget: {fileID: 4002188108109614242}
   _dashStamina: {fileID: 2885246274822901776}
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
   _effecter: {fileID: 3252590677362873563}
 --- !u!114 &2885246274822901776
 MonoBehaviour:

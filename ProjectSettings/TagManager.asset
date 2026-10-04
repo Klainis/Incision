@@ -13,11 +13,11 @@ TagManager:
   - Water
   - UI
   - PlayerModel
-  - Enemy
+  - EnemySimple
   - CardProjectile
   - Player
   - Ground
-  - 
+  - EnemyHeavy
   - 
   - 
   - 
