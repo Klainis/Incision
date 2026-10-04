@@ -292,7 +292,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _requestedSlam = false;
 
             bool inAir = !_motor.GroundingStatus.IsStableOnGround;
-            bool highEnough = !Physics.Raycast(_motor.TransientPosition, -_motor.CharacterUp, _slamMinHeight, _motor.StableGroundLayers);
+            bool highEnough = !Physics.Raycast(_motor.TransientPosition - Vector3.up, -_motor.CharacterUp, _slamMinHeight, _motor.StableGroundLayers);
 
             if (inAir && highEnough && !_isSlamming)
             {

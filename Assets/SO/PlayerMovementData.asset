@@ -30,6 +30,6 @@ MonoBehaviour:
   dashMaxCharges: 3
   gravityInDash: 0
   slamSpeed: 120
-  slamMinHeight: 1.5
+  slamMinHeight: 3
   gravity: -80
   gravityInJumpUp: 0.8

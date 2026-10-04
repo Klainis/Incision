@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.67
+      value: 4.85
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -253,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 7908590264128257279, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: slamDamage
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051458590544949642, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: slamHeigh
+      value: 18.85
       objectReference: {fileID: 0}
     - target: {fileID: 9208874870437484218, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23417,7 +23421,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2112868470
 MonoBehaviour:
   m_ObjectHideFlags: 0
