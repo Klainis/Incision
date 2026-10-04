@@ -1,4 +1,9 @@
-﻿public interface IDamageable
+﻿using Incision.Enemies.Structs;
+
+namespace Incision.Enemies.Interfaces
 {
-    public void ApplyDamage(float damage);
+    public interface IDamageable
+    {
+        public void TakeDamage(DamageInfo info);
+    }
 }

@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
+using Incision.Enemies.Structs;
 using UnityEngine;
 
 public class EnemyAnimEvent : MonoBehaviour
@@ -17,7 +17,7 @@ public class EnemyAnimEvent : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable)
                 && hit.CompareTag("Player"))
             {
-                damageable.ApplyDamage(_enemyAttack.Damage);
+                damageable.TakeDamage(new DamageInfo(_enemyAttack.Damage, gameObject, _point.position));
             }
         }
     }

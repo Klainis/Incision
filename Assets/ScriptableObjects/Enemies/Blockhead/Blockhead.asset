@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdc11818dd45a142a8d5b0c343b6ab4, type: 3}
+  m_Name: Blockhead
+  m_EditorClassIdentifier: 
+  _id: blockhead
+  _prefab: {fileID: 5796007725544060031, guid: 35669ec0c593bfa4fa1b0731656f02af, type: 3}
+  _stats: {fileID: 11400000, guid: 99a760eadec6f9b4882ab15d188e6fcb, type: 2}
+  _aiProfile: {fileID: 11400000, guid: 0bb0ae88d834c43478527c59ab5e89ae, type: 2}
+  _attacks:
+  - {fileID: 11400000, guid: 04aa8982d6b501d47ab09a8ec4fcc2d5, type: 2}

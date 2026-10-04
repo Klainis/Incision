@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
+using Incision.Enemies.Structs;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
@@ -16,9 +18,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _currentHealt = _maxHealth;
     }
 
-    public void ApplyDamage(float damage)
+    public void TakeDamage(DamageInfo damageInfo)
     {
-        _currentHealt -= damage;
+        _currentHealt -= damageInfo.Amount;
 
         _healthBar.TakeDamage(_maxHealth, _currentHealt);
 

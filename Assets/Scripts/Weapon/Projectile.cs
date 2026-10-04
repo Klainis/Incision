@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public abstract class Projectile : MonoBehaviour
     //[SerializeField] private float _projectileMiddleScaleDistance = 1.2f;
     [SerializeField] private float _projectileMaxScale = 2f;
     [SerializeField] private float _distanceForChangeScale = 50f;
-    //Свойства типа проджектайла
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     [Header("Rigidbody")]
     [SerializeField] private Rigidbody _projectileRigidbody;
@@ -61,7 +62,7 @@ public abstract class Projectile : MonoBehaviour
         }
         else if (_trailRenderer == null)
         {
-            Debug.LogError("[Projectile.cs] : Отсутствует компонент TrailRenderer");
+            Debug.LogError("[Projectile.cs] : пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ TrailRenderer");
         }
 
         _initialPosition = transform.position;
@@ -74,7 +75,7 @@ public abstract class Projectile : MonoBehaviour
     {
         _scaleTime += Time.deltaTime;
 
-        //Изменение размера коллайдера
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_scaleTime >= 1)
         {
             _scaleTime = 0;

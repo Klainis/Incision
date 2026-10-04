@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
+using Incision.Enemies.Runtime.States;
+using Incision.Enemies.Templates;
+using UnityEngine;
+
+namespace Incision.Enemies.Components
+{
+
+    public class EnemyBrain : MonoBehaviour
+    {
+        private Enemy _enemy;
+        private Health _health;
+        private EnemyAITemplate _profile;
+        private EnemyStateBase _current;
+        private readonly Dictionary<Type, EnemyStateBase> _states = new();
+
+        public EnemyAITemplate Profile => _profile;
+
+        public void Initialize(Enemy enemy, EnemyAITemplate profile, Health health, EnemyAnimEvents animEvents, ITargetProvider targetProvider)
+        {
+            _profile = profile;
+            _enemy = enemy;
+            _health = health;
+            _health.OnDied += _ => ChangeState<EnemyDeadState>();
+
+            _states[typeof(EnemyIdleState)] = new EnemyIdleState(this, enemy, targetProvider);
+            _states[typeof(EnemyPatrolState)] = new EnemyPatrolState(this, enemy, targetProvider);
+            _states[typeof(EnemyChaseState)] = new EnemyChaseState(this, enemy);
+            _states[typeof(EnemyAttackState)] = new EnemyAttackState(this, enemy);
+            _states[typeof(EnemyDeadState)] = new EnemyDeadState(this, enemy);
+            
+            ChangeState<EnemyIdleState>();
+        }
+
+        private void Update() => _current?.Tick();
+
+        public void ChangeState<T>() where T : EnemyStateBase
+        {
+            if (!_states.TryGetValue(typeof(T), out var next)) return;
+            _current?.Dispose();
+            _current = next;
+            _current.Start();
+            Debug.Log($"<color=red>{_enemy.name}</color> is now at <color=yellow>{typeof(T).Name}</color> state");
+        }
+        
+        public Transform CurrentTarget { get; private set; }
+        public void SetTarget(Transform target) => CurrentTarget = target;
+
+        void OnDrawGizmos()
+        {
+            if (_current.GetType().Name == nameof(EnemyPatrolState))
+            {
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawWireSphere(_enemy.transform.position, Profile.PatrolRadius);
+            }
+
+            if (_current.GetType().Name == nameof(EnemyChaseState))
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(_enemy.transform.position, Profile.ChaseSpeedMultiplier);
+            }
+            
+        }
+    }
+}
