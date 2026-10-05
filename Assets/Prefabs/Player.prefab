@@ -5379,6 +5379,8 @@ GameObject:
   - component: {fileID: 8051458590544949642}
   - component: {fileID: 2885246274822901776}
   - component: {fileID: 7908590264128257279}
+  - component: {fileID: 2628344061339571928}
+  - component: {fileID: 4599563740351019121}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -5448,10 +5450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ff8c1068e2d2c459ea58a24004c914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hand: {fileID: 2628344061339571928}
   _mainCamera: {fileID: 289127154514065990}
   _crosshair: {fileID: 8934482276816931846}
   _weaponMuzzle: {fileID: 6856499010022338986}
-  _projectilePrefab: {fileID: 8592896625477048602, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
   _forceMode: 1
   _force: 150
   _maxRange: 500
@@ -5598,6 +5600,40 @@ MonoBehaviour:
   hitHeight: 2
   heightSpeed: 1
   slamDamage: 50
+--- !u!114 &2628344061339571928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909298530171555054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386476b5481d5104f928e72e431696b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handSize: 2
+  _startingCards:
+  - {fileID: 11400000, guid: 6976f3f99419b324796f1db427973f6c, type: 2}
+  - {fileID: 11400000, guid: 8d3bb313bbfcf9d4fb98246072c254e0, type: 2}
+--- !u!114 &4599563740351019121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909298530171555054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4561e44ebc3b1544f87603179ca646f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hand: {fileID: 2628344061339571928}
+  _shoot: {fileID: 4967416684659149328, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}
+  _switchScroll: {fileID: 669538653059802732, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}
+  _slotActions:
+  - {fileID: 5041095828193644857, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}
+  - {fileID: 690932272719516791, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}
 --- !u!1 &3011090602149981843
 GameObject:
   m_ObjectHideFlags: 0
@@ -13099,6 +13135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47306cf3d09af9d4f808f3d8ba796492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gun: {fileID: 0}
 --- !u!114 &3854926242217512886
 MonoBehaviour:
   m_ObjectHideFlags: 0

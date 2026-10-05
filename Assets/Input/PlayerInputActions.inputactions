@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchCard",
+                    "type": "Value",
+                    "id": "9de4dfc0-88d8-4f21-b6ba-26640aaf7292",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -199,6 +208,65 @@
                     "processors": "",
                     "groups": "",
                     "action": "Slam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71d7f7b0-2882-4644-8d51-cdd0a7e4ace3",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "SlotActions",
+            "id": "1f6dad90-9538-42ec-b636-082c63b2c6b0",
+            "actions": [
+                {
+                    "name": "ActiveCardSlot1",
+                    "type": "Button",
+                    "id": "6e902b0f-0b85-4d89-be24-1988be352600",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActiveCardSlot2",
+                    "type": "Button",
+                    "id": "bab7b562-4dd7-4ec6-a1f6-2a07d61a06ba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7d7a43e6-5159-40b7-abd0-4def1747285f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActiveCardSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52feac56-0244-4f17-8b9d-3f23c4820eb8",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActiveCardSlot2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     private PlayerInputActions _inputActions;
 
-    private bool _isAttacking = false;
+    //private bool _isAttacking = false;
 
     private float _jumpTimeBuffer = 0;
 
@@ -95,18 +95,18 @@ public class Player : MonoBehaviour
         };
         _playerCharacter.UpdateInput(characterInput);
 
-        bool shoot = input.Shoot.WasPressedThisFrame() || input.Shoot.IsPressed();
+        //bool shoot = input.Shoot.WasPressedThisFrame() || input.Shoot.IsPressed();
 
-        if (shoot && !_isAttacking)
-        {
-            PlayerAnimation.Instance.ThrowCardTrigger();
-        }
+        //if (shoot && !_isAttacking)
+        //{
+        //    PlayerAnimation.Instance.ThrowCardTrigger();
+        //}
     }
 
-    public void OnAttackEnded()
-    {
-        _isAttacking = false;
-    }
+    //public void OnAttackEnded()
+    //{
+    //    _isAttacking = false;
+    //}
 
     private void LateUpdate()
     {

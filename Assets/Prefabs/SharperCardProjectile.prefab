@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8592896625477048602}
   - component: {fileID: 5130038960231607317}
   m_Layer: 8
-  m_Name: Projectile
+  m_Name: SharperCardProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 3073034408043554007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 537.1055, y: 7.0558825, z: 565.7964}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
