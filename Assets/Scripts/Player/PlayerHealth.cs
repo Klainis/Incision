@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -33,6 +34,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Die()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         //DieEffect();
     }

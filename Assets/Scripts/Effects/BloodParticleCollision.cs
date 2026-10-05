@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class BloodParticleCollision : MonoBehaviour
 {
-    [SerializeField] private DecalProjector _bloodDecalPrefab;
     [SerializeField] private float _minDecalSize = 8f;
     [SerializeField] private float _maxDecalSize = 14f;
 
     private ParticleSystem _particleSystem;
+    private readonly List<ParticleCollisionEvent> _events = new List<ParticleCollisionEvent>();
 
     private void Awake()
     {
@@ -16,40 +17,12 @@ public class BloodParticleCollision : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        int eventCount = _particleSystem.GetSafeCollisionEventSize();
-
-        ParticleCollisionEvent[] events =
-            new ParticleCollisionEvent[eventCount];
-
-        int count = _particleSystem.GetCollisionEvents(other, events);
+        int count = _particleSystem.GetCollisionEvents(other, _events);
 
         for (int i = 0; i < count; i++)
         {
-            SpawnBloodDecal(events[i].intersection, events[i].normal);
+            float size = Random.Range(_minDecalSize, _maxDecalSize);
+            DecalBuffer.Instance.SpawnDecal(_events[i].intersection, _events[i].normal, size);
         }
-    }
-
-    private void SpawnBloodDecal(Vector3 position, Vector3 normal)
-    {
-        Quaternion rotation = Quaternion.LookRotation(-normal);
-
-        rotation *= Quaternion.AngleAxis(
-            Random.Range(0f, 360f),
-            Vector3.forward
-        );
-
-        DecalProjector decal = Instantiate(
-            _bloodDecalPrefab,
-            position - normal * 0.1f,
-            rotation
-        );
-
-        float size = Random.Range(_minDecalSize, _maxDecalSize);
-
-        decal.size = new Vector3(
-            size,
-            size,
-            decal.size.z
-        );
     }
 }

@@ -14,18 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSensitivity: 0.2
   cameraMoveOffsetSmooth: 0.06
-  groundMovementSpeed: 22
-  airMovementSpeed: 20
-  groundMovementSmooth: 0.4
-  airMovementSmooth: 0.05
-  jumpSpeed: 38
+  groundMovementSpeed: 20
+  airMovementSpeed: 18
+  groundMovementSmooth: 0.35
+  airMovementSmooth: 0.07
+  jumpSpeed: 35
   doubleJumpSpeed: 30
   smallJumpSpeed: 35
   jumpBufferTime: 0.15
   _jumpSmoothStopper: 0.3
-  dashSpeed: 50
-  dashTime: 0.25
-  dashCoolDown: 0.2
+  dashSpeed: 40
+  dashTime: 0.2
+  dashDelay: 0.1
+  dashCoolDown: 1
+  dashMaxCharges: 3
   gravityInDash: 0
-  gravity: -82
+  slamSpeed: 120
+  slamMinHeight: 3
+  gravity: -80
   gravityInJumpUp: 0.8

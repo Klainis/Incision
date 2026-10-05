@@ -30,9 +30,9 @@ public class PlayerAnimation : MonoBehaviour
         _playerAnimator?.SetFloat("Speed", speed);
     }
 
-    public void FallAnimation(bool isGrounded)
+    public void FallAnimation(bool isFalling)
     {
-        _playerAnimator?.SetBool("IsGrounded", isGrounded);
+        _playerAnimator?.SetBool("IsGrounded", !isFalling);
     }
 
     public void DashAnimation()

@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStatData
   m_EditorClassIdentifier: 
   _maxHP: 100
+  _slamOverlapRadius: 4
+  _slamStunTime: 1

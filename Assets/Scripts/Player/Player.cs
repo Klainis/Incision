@@ -7,16 +7,20 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
-    [SerializeField] private PlayerCharacter playerCharacter;
-    [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private PlayerCharacter _playerCharacter;
+    [SerializeField] private PlayerCamera _playerCamera;
 
-    [SerializeField] private PlayerMovementData playerMovementData;
+    [SerializeField] private PlayerMovementData _playerMovementData;
+    [SerializeField] private PlayerStats _playerStatsData;
 
     private PlayerInputActions _inputActions;
 
-    private bool _isAttacing = false;
+    private bool _isAttacking = false;
 
     private float _jumpTimeBuffer = 0;
+
+    public PlayerMovementData PlayerMovementData { get { return _playerMovementData; } }
+    public PlayerStats PlayerStatsData { get { return _playerStatsData; } }
 
     private void Awake()
     {
@@ -34,18 +38,18 @@ public class Player : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        if ( playerCharacter != null )
+        if ( _playerCharacter != null )
         {
-            playerCharacter.Initialize(playerMovementData);
+            _playerCharacter.Initialize(_playerMovementData);
         }
         else
         {
             Debug.LogError("[Player.cs] : отсутствует ссылка на PlayerCharacter");
         }
 
-        if (playerCamera != null)
+        if (_playerCamera != null)
         {
-            playerCamera.Initialize(playerCharacter.GetCameraTarget(), playerMovementData);
+            _playerCamera.Initialize(_playerCharacter.GetCameraTarget(), _playerMovementData);
         }
         else
         {
@@ -72,40 +76,41 @@ public class Player : MonoBehaviour
             Look = input.Look.ReadValue<Vector2>(),
             Move = input.Move.ReadValue<Vector2>(),
         };
-        playerCamera.UpdateRotation(cameraInput);
+        _playerCamera.UpdateRotation(cameraInput);
 
         if (input.Jump.WasPressedThisFrame())
         {
-            _jumpTimeBuffer = playerMovementData.JumpBufferTime;
-            //Debug.Log(_jumpTimeBuffer);
+            _jumpTimeBuffer = _playerMovementData.JumpBufferTime;
         }
 
         var characterInput = new CharacterInput
         {
-            Rotation = playerCamera.transform.rotation,
+            Rotation = _playerCamera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
             Jump = _jumpTimeBuffer > 0,
             JumpSustain = input.Jump.IsPressed(),
             Dash = input.Dash.WasPressedThisFrame(),
-            Shoot = input.Shoot.WasPressedThisFrame() 
+            //Shoot = input.Shoot.WasPressedThisFrame(),
+            Slam = input.Slam.WasPressedThisFrame(),
         };
-        playerCharacter.UpdateInput(characterInput);
+        _playerCharacter.UpdateInput(characterInput);
 
-        if (characterInput.Shoot && !_isAttacing)
+        bool shoot = input.Shoot.WasPressedThisFrame() || input.Shoot.IsPressed();
+
+        if (shoot && !_isAttacking)
         {
-            //_isAttacing = true;
             PlayerAnimation.Instance.ThrowCardTrigger();
         }
     }
 
     public void OnAttackEnded()
     {
-        _isAttacing = false;
+        _isAttacking = false;
     }
 
     private void LateUpdate()
     {
-        playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
+        _playerCamera.UpdatePosition(_playerCharacter.GetCameraTarget());
     }
     
     public void ConsumeJumpBuffer()
