@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Incision.Enemies.Components;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
+using Incision.Enemies.Templates;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
@@ -8,41 +10,42 @@ namespace Incision.Enemies.Runtime.Attacks
     public class MeleeAttack : IEnemyAttack
     {
         private readonly string _animationTrigger;
-
         public float Damage { get; }
-        public float Range { get; }
+        public float HitRange { get; } 
+        public float OnHitRangeMultiplier { get; }
         public float Cooldown { get; }
 
-        public MeleeAttack(float damage, string animationTrigger, float cooldown, float range)
+        public MeleeAttack(MeleeAttackTemplate template)
         {
-            _animationTrigger = animationTrigger;
-            Damage = damage;
-            Range = range;
-            Cooldown = cooldown;
+            _animationTrigger = template.AnimationTrigger;
+            Damage = template.Damage;
+            HitRange = template.HitRange;
+            OnHitRangeMultiplier = template.OnHitRangeMultiplier;
+            Cooldown = template.Cooldown;
         }
 
         public bool CanAttack(Transform attackPoint, Transform target)
         {
             if (target == null) return false;
-            return Vector3.Distance(attackPoint.position, target.position) <= Range;
+            return Vector3.Distance(attackPoint.position, target.position) <= HitRange;
         }
 
-        public void Execute(Enemy enemy, Transform attackPoint, Transform target)
+        public Task Execute(Enemy enemy, Transform attackPoint, Transform target)
         {
-            if (target == null) return;
+            if (target == null) return Task.CompletedTask;
 
             var animEvents = enemy.AnimationEvents;
             animEvents.OnAttackHit += ApplyDamage;
             
             var view = enemy.View;
             view?.TriggerAttack(_animationTrigger);
-            return;
+            return Task.CompletedTask;
             
             void ApplyDamage()
             {
                 animEvents.OnAttackHit -= ApplyDamage;
                 var dist = Vector3.Distance(attackPoint.position, target.position);
-                if (dist > Range * 1.15f) return;
+                if (dist > HitRange * OnHitRangeMultiplier) return;
                 
                 if (target.TryGetComponent<IDamageable>(out var damageable))
                 {
@@ -53,7 +56,6 @@ namespace Incision.Enemies.Runtime.Attacks
                         target.position
                     ));
                 }
-                
             }
         }
     }

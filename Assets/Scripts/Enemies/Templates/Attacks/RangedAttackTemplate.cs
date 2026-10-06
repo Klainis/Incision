@@ -8,11 +8,14 @@ namespace Incision.Enemies.Templates
     [CreateAssetMenu(menuName = "Enemies/Attacks/Ranged", fileName = "RangedTemplate")]
     public class RangedAttackTemplate : AttackTemplate
     {
-        [SerializeField] private string _animationTrigger = "Shoot";
-        [SerializeField] private float _projectileSpeed = 14f;
+        [Header("Ranged specific parameters")]
         [SerializeField] private EnemyProjectile _projectilePrefab;
+        [SerializeField, Range(1f, 20f)] private float _projectileSpeed = 14f;
+        
+        public float ProjectileSpeed => _projectileSpeed;
+        public EnemyProjectile ProjectilePrefab => _projectilePrefab;
 
         public override IEnemyAttack CreateRuntime()
-            => new RangedAttack(Damage, _projectileSpeed, _projectilePrefab, _animationTrigger, Cooldown, Range);
+            => new RangedAttack(this);
     }
 }

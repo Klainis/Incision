@@ -30,6 +30,9 @@ namespace Incision.Enemies.Runtime.States
 
         public override void Tick()
         {
+            if (_attacker.IsAttacking)
+                return;
+            
             if (target == null)
             {
                 Brain.ChangeState<EnemyPatrolState>();

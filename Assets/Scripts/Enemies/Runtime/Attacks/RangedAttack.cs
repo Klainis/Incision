@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using Incision.Enemies.Components;
 using Incision.Enemies.Interfaces;
+using Incision.Enemies.Templates;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
@@ -11,26 +13,28 @@ namespace Incision.Enemies.Runtime.Attacks
         private readonly string _animationTrigger;
 
         public float Damage { get; }
-        public float Range { get; }
+        public float HitRange { get; }
+        public float OnHitRangeMultiplier { get; }
         public float Cooldown { get; }
 
-        public RangedAttack(float damage, float speed, EnemyProjectile prefab, string anim, float cooldown, float range)
+        public RangedAttack(RangedAttackTemplate template)
         {
-            _speed = speed;
-            _projectilePrefab = prefab;
-            _animationTrigger = anim;
-            Damage = damage;
-            Range = range;
-            Cooldown = cooldown;
+            _speed = template.ProjectileSpeed;
+            _projectilePrefab = template.ProjectilePrefab;
+            _animationTrigger = template.AnimationTrigger;
+            Damage = template.Damage;
+            HitRange = template.HitRange;
+            OnHitRangeMultiplier = template.OnHitRangeMultiplier;
+            Cooldown = template.Cooldown;
         }
 
         public bool CanAttack(Transform attackPoint, Transform target)
         {
             if (target == null || _projectilePrefab == null) return false;
-            return Vector3.Distance(attackPoint.position, target.position) <= Range;
+            return Vector3.Distance(attackPoint.position, target.position) <= HitRange;
         }
 
-        public void Execute(Enemy enemy, Transform attackPoint, Transform target)
+        public Task Execute(Enemy enemy, Transform attackPoint, Transform target)
         {
             enemy.View?.TriggerAttack(_animationTrigger);
             
@@ -39,6 +43,7 @@ namespace Incision.Enemies.Runtime.Attacks
 
             var p = Object.Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(dir));
             p.Launch(dir, _speed, Damage, enemy.gameObject);
+            return Task.CompletedTask;
         }
     }
 }

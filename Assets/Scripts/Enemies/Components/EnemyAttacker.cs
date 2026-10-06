@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Templates;
 using UnityEngine;
@@ -15,6 +15,10 @@ namespace Incision.Enemies.Components
         private Enemy _enemy;
         private float _cooldownTimer;
 
+        private float _minAttackRange = 9999999f;
+
+        public bool IsAttacking { get; private set; }
+
         public void Initialize(Enemy enemy, IReadOnlyList<AttackTemplate> attackTemplates)
         {
             _enemy = enemy;
@@ -26,6 +30,8 @@ namespace Incision.Enemies.Components
             {
                 if (tpl == null) continue;
                 _attacks.Add(tpl.CreateRuntime());
+                if (_minAttackRange > tpl.HitRange)
+                    _minAttackRange = tpl.HitRange;
             }
         }
         
@@ -39,35 +45,36 @@ namespace Incision.Enemies.Components
         {
             if (target == null || _attacks.Count == 0) return false;
 
-            float dist = Vector3.Distance(attackPoint.position, target.position);
-            for (int i = 0; i < _attacks.Count; i++)
-            {
-                if (dist <= _attacks[i].Range)
-                    return true;
-            }
-            return false;
+            var dist = Vector3.Distance(attackPoint.position, target.position);
+            
+            return dist < _minAttackRange;
         }
 
-        public bool TryAttack(Transform target)
+        public async Task TryAttack(Transform target)
         {
-            if (_cooldownTimer > 0f || target == null) return false;
+            if (_cooldownTimer > 0f || target == null) return;
+
+            IsAttacking = true;
 
             foreach (var attack in _attacks.Where(attack => attack.CanAttack(attackPoint, target)))
             {
-                attack.Execute(_enemy, attackPoint, target);
+                await attack.Execute(_enemy, attackPoint, target);
+                IsAttacking = false;
                 _cooldownTimer = attack.Cooldown;
-                return true;
+                return;
             }
-            return false;
+            IsAttacking = false;
         }
 
         private void OnDrawGizmos()
         {
             if (_attacks == null || _attacks.Count == 0) return;
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, _attacks.Min(a => a.Range));
+            var attackWithMinRange = _attacks.OrderBy(a => a.HitRange).First();
+            var attackWithMaxRange = _attacks.OrderByDescending(a => a.HitRange).First();
+            Gizmos.DrawWireSphere(attackPoint.position, attackWithMinRange.HitRange * attackWithMinRange.OnHitRangeMultiplier);
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(attackPoint.position, _attacks.Max(a => a.Range));
+            Gizmos.DrawWireSphere(attackPoint.position, attackWithMaxRange.HitRange * attackWithMaxRange.OnHitRangeMultiplier);
         }
     }
 }

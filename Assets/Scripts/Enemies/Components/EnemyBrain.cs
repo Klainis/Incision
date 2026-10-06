@@ -17,7 +17,7 @@ namespace Incision.Enemies.Components
 
         public EnemyAITemplate Profile => _profile;
 
-        public void Initialize(Enemy enemy, EnemyAITemplate profile, Health health, EnemyAnimEvents animEvents, ITargetProvider targetProvider)
+        public void Initialize(Enemy enemy, EnemyAITemplate profile, Health health, ITargetProvider targetProvider)
         {
             _profile = profile;
             _enemy = enemy;
@@ -64,6 +64,10 @@ namespace Incision.Enemies.Components
                     break;
                 case nameof(EnemyChaseState):
                     Gizmos.color = Color.yellow;
+                    Gizmos.DrawWireSphere(_enemy.transform.position, _enemy.Stats.DetectionRadius);
+                    break;
+                case nameof(EnemyAttackState):
+                    Gizmos.color = Color.red;
                     Gizmos.DrawWireSphere(_enemy.transform.position, _enemy.Stats.DetectionRadius);
                     break;
             }

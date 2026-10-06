@@ -41,7 +41,7 @@ namespace Incision.Enemies.Components
 
             _health.Initialize(stats);
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
-            _brain.Initialize(this, template.AIProfile, _health, _animEvents, _targetProvider);
+            _brain.Initialize(this, template.AIProfile, _health, _targetProvider);
             
             if (_attacker == null)
             {

@@ -11,6 +11,7 @@ namespace Incision.Enemies.Runtime.States
         private readonly ITargetProvider _targetProvider;
         
         private Transform target;
+        private Vector3 destination;
 
         public EnemyPatrolState(EnemyBrain brain, Enemy enemy, ITargetProvider targetProvider) : base(brain, enemy)
         {
@@ -33,7 +34,8 @@ namespace Incision.Enemies.Runtime.States
                 Brain.ChangeState<EnemyChaseState>();
                 return;
             }
-
+            
+            _motor.FaceTarget(destination);
             if (_motor.ReachedDestination)
                 PickNewDestination();
         }
@@ -41,8 +43,8 @@ namespace Incision.Enemies.Runtime.States
         private void PickNewDestination()
         {
             Vector2 rnd = Random.insideUnitCircle * Brain.Profile.PatrolRadius;
-            Vector3 dest = _home + new Vector3(rnd.x, 0f, rnd.y);
-            _motor.MoveTo(dest);
+            destination = _home + new Vector3(rnd.x, 0f, rnd.y);
+            _motor.MoveTo(destination);
         }
     }
 }
