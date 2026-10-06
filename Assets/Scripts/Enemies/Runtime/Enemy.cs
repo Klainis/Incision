@@ -25,18 +25,21 @@ namespace Incision.Enemies.Components
         [Inject] private IEventBus _eventBus;
 
         private EnemyTemplate template;
-        private EnemyStats stats;
+        private Stats stats;
 
         public EnemyTemplate Template => template;
         public EnemyView View => _view;
-        public EnemyStats Stats => stats;
+        public EnemyMotor Motor => _motor;
+        public EnemyAttacker Attacker => _attacker;
+        public EnemyAnimEvents AnimationEvents => _animEvents;
+        public Stats Stats => stats;
 
         public void Initialize(EnemyTemplate tpl)
         {
             template = tpl;
             stats = template.Stats.CreateRuntime();
 
-            _health.Initialize(stats, _eventBus);
+            _health.Initialize(stats);
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
             _brain.Initialize(this, template.AIProfile, _health, _animEvents, _targetProvider);
             

@@ -31,10 +31,10 @@ namespace Incision.Enemies.Runtime.Attacks
         {
             if (target == null) return;
 
-            var animEvents = enemy.GetComponentInChildren<EnemyAnimEvents>();
+            var animEvents = enemy.AnimationEvents;
             animEvents.OnAttackHit += ApplyDamage;
             
-            var view = enemy.GetComponent<EnemyView>();
+            var view = enemy.View;
             view?.TriggerAttack(_animationTrigger);
             return;
             

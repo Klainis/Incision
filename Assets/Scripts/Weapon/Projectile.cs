@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Incision.Enemies.Interfaces;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [SelectionBase]
@@ -10,7 +6,7 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     [Header("Common")]
-    [SerializeField, Min(0f)] private float _damage = 10f;
+    [SerializeField, Min(0f)] protected float _damage = 10f;
     [SerializeField] private ProjectileDisposeType _disposeType = ProjectileDisposeType.OnTargetCollision;
     [SerializeField] private GameObject _cardRoot;
     [SerializeField] private float _destroyTime = 6f;

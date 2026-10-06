@@ -1,37 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using Incision.Enemies.Interfaces;
-using Incision.Enemies.Structs;
+using Incision.Enemies.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : Health
 {
     [SerializeField] private PlayerStats _playerStatsData;
     [SerializeField] private UIHealth _healthBar;
-
-    private float _maxHealth;
-    public float _currentHealt;
-
+    
     private void Start()
     {
-        _maxHealth = _playerStatsData.MaxHP;
-        _currentHealt = _maxHealth;
+        Initialize(_playerStatsData.CreateRuntime());
     }
 
-    public void TakeDamage(DamageInfo damageInfo)
+    private void OnEnable()
     {
-        _currentHealt -= damageInfo.Amount;
-
-        _healthBar.TakeDamage(_maxHealth, _currentHealt);
-
-        if (_currentHealt <= 0)
-        {
-            Die();
-        }
+        OnChanged += _healthBar.TakeDamage;
+        OnDied += Die;
     }
 
-    private void Die()
+    private void OnDisable()
+    {
+        OnChanged -= _healthBar.TakeDamage;
+        OnDied -= Die;
+    }
+
+    private void Die(Health health)
     {
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

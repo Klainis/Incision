@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Incision.Enemies.Components
 {
-
     public class EnemyBrain : MonoBehaviour
     {
         private Enemy _enemy;
@@ -50,18 +49,24 @@ namespace Incision.Enemies.Components
 
         void OnDrawGizmos()
         {
-            if (_current.GetType().Name == nameof(EnemyPatrolState))
-            {
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawWireSphere(_enemy.transform.position, Profile.PatrolRadius);
-            }
-
-            if (_current.GetType().Name == nameof(EnemyChaseState))
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(_enemy.transform.position, Profile.ChaseSpeedMultiplier);
-            }
+            if (_current == null)
+                return;
             
+            switch (_current.GetType().Name)
+            {
+                case nameof(EnemyIdleState):
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireSphere(_enemy.transform.position, Profile.PatrolRadius);
+                    break;
+                case nameof(EnemyPatrolState):
+                    Gizmos.color = Color.magenta;
+                    Gizmos.DrawWireSphere(_enemy.transform.position, _enemy.Stats.DetectionRadius);
+                    break;
+                case nameof(EnemyChaseState):
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawWireSphere(_enemy.transform.position, _enemy.Stats.DetectionRadius);
+                    break;
+            }
         }
     }
 }

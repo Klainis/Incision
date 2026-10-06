@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace Incision.Enemies.Components
 {
-    public class EnemyProjectile : MonoBehaviour
+    public class EnemyProjectile : Projectile
     {
         private Vector3 _dir;
         private float _speed;
-        private float _damage;
         private GameObject _owner;
         private float _life = 5f;
 

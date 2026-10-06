@@ -9,7 +9,7 @@ public class UIHealth : MonoBehaviour
     [SerializeField] private Image _healthBarFill;
     [SerializeField] private TextMeshProUGUI _healthText;
 
-    public void TakeDamage(float maxHealth, float currentHealth)
+    public void TakeDamage(float currentHealth, float maxHealth)
     {
         if (currentHealth < 0) currentHealth = 0;
 

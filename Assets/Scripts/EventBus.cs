@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Incision.Enemies.Interfaces;
+using UnityEngine;
 
 namespace Incision
 {
@@ -26,6 +27,7 @@ namespace Incision
 
         public void Publish<T>(T evt)
         {
+            Debug.Log($"<color=green>[Event Bus]</color>: Event <color=lime>{typeof(T).Name}</color> invoked");
             if (_handlers.TryGetValue(typeof(T), out var d))
                 (d as Action<T>)?.Invoke(evt);
         }

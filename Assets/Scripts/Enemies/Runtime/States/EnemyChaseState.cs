@@ -13,19 +13,20 @@ namespace Incision.Enemies.Runtime.States
 
         public EnemyChaseState(EnemyBrain brain, Enemy enemy) : base(brain, enemy)
         {
-            _motor = enemy.GetComponent<EnemyMotor>();
-            _attacker = enemy.GetComponent<EnemyAttacker>();
-            _view = enemy.GetComponent<EnemyView>();
+            _motor = enemy.Motor;
+            _attacker = enemy.Attacker;
+            _view = enemy.View;
         }
 
         public override void Start()
         {
-            // _view.SetSwitch("IsRunning", true);
+            _view.SetSwitch("IsRunning", true);
             target = Brain.CurrentTarget;
         }
 
         public override void Dispose()
         {
+            _view.SetSwitch("IsRunning", false);
             target = null;
             base.Dispose();
         }

@@ -3,6 +3,8 @@ using UnityEngine;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Structs;
+using Incision.Enemies.Structs.Events;
+using VContainer;
 
 namespace Incision.Enemies.Components
 {
@@ -11,13 +13,12 @@ namespace Incision.Enemies.Components
         public event Action<Health> OnDied;
         public event Action<float, float> OnChanged;
 
-        private EnemyStats _stats;
-        private IEventBus _eventBus;
+        private Stats _stats;
+        [Inject] private IEventBus _eventBus;
 
-        public void Initialize(EnemyStats stats, IEventBus eventBus)
+        public void Initialize(Stats stats)
         {
             _stats = stats;
-            _eventBus = eventBus;
             _stats.CurrentHealth = _stats.MaxHealth;
         }
 
@@ -28,6 +29,7 @@ namespace Incision.Enemies.Components
             float damage = Mathf.Max(0, info.Amount - _stats.Armor);
             _stats.CurrentHealth -= damage;
             OnChanged?.Invoke(_stats.CurrentHealth, _stats.MaxHealth);
+            _eventBus.Publish(new CreatureDamaged(info));
 
             if (_stats.CurrentHealth <= 0)
                 Die();

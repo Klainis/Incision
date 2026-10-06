@@ -11,11 +11,11 @@ namespace Incision.Enemies.Components
         [SerializeField] private float _stoppingDistance = 0.1f;
 
         private INavMeshService _navMesh;
-        private EnemyStats _stats;
+        private Stats _stats;
 
         public bool ReachedDestination => _navMesh != null && _navMesh.ReachedDestination(_agent);
 
-        public void Initialize(NavMeshAgent agent, EnemyStats stats, INavMeshService navMesh)
+        public void Initialize(NavMeshAgent agent, Stats stats, INavMeshService navMesh)
         {
             _agent = agent;
             _stats = stats;

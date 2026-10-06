@@ -12,7 +12,7 @@ namespace Incision.Enemies.Runtime.States
 
         public EnemyIdleState(EnemyBrain brain, Enemy enemy, ITargetProvider targetProvider) : base(brain, enemy)
         {
-            _motor = enemy.GetComponent<EnemyMotor>();
+            _motor = enemy.Motor;
             this.targetProvider = targetProvider;
         }
 
@@ -24,7 +24,7 @@ namespace Incision.Enemies.Runtime.States
 
         public override void Tick()
         {
-            var target = targetProvider.GetTarget(Enemy);
+            var target = targetProvider.GetTarget(Enemy.transform, Enemy.Stats.DetectionRadius);
             if (target != null)
             {
                 Brain.SetTarget(target);

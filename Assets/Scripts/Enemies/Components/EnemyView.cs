@@ -7,16 +7,13 @@ namespace Incision.Enemies.Components
         private Animator _animator;
         [SerializeField] private string _speedParam = "Speed";
         [SerializeField] private string _deathTrigger = "Death";
-
+        
         private EnemyMotor _motor;
 
         public void Initialize(EnemyMotor enemyMotor, Animator animator)
         {
             _motor = enemyMotor;
             _animator = animator;
-
-            if (_animator == null)
-                _animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()

@@ -8,22 +8,18 @@ namespace Incision.Enemies.Runtime.States
     {
         private readonly EnemyMotor _motor;
         private readonly EnemyView _view;
-        private readonly Collider _collider;
 
         public EnemyDeadState(EnemyBrain brain, Enemy enemy) : base(brain, enemy)
         {
-            _motor = enemy.GetComponent<EnemyMotor>();
-            _view = enemy.GetComponent<EnemyView>();
-            _collider = enemy.GetComponent<Collider>();
+            _motor = enemy.Motor;
+            _view = enemy.View;
         }
 
         public override void Start()
         {
             _motor?.Stop();
             _view?.TriggerDeath();
-
-            if (_collider != null)
-                _collider.enabled = false;
+            Object.Destroy(Enemy.gameObject);
         }
 
         public override void Tick() { }

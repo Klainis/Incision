@@ -3,7 +3,7 @@ using Incision.Enemies.Templates;
 
 namespace Incision.Enemies.Runtime
 {
-    public class EnemyStats
+    public class Stats
     {
         public float MaxHealth { get; }
         public float CurrentHealth { get; set; }
@@ -13,7 +13,7 @@ namespace Incision.Enemies.Runtime
         public float DetectionRadius { get; }
         public float LoseTargetRadius { get; }
 
-        public EnemyStats(EnemyStatsTemplate template)
+        public Stats(StatsTemplate template)
         {
             MaxHealth = template.MaxHealth;
             CurrentHealth = template.MaxHealth;

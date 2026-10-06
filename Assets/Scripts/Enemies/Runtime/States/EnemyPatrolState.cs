@@ -1,6 +1,5 @@
 using Incision.Enemies.Components;
 using Incision.Enemies.Interfaces;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.States
@@ -8,7 +7,6 @@ namespace Incision.Enemies.Runtime.States
     public class EnemyPatrolState : EnemyStateBase
     {
         private readonly EnemyMotor _motor;
-        private readonly EnemyView _view;
         private Vector3 _home;
         private readonly ITargetProvider _targetProvider;
         
@@ -16,22 +14,19 @@ namespace Incision.Enemies.Runtime.States
 
         public EnemyPatrolState(EnemyBrain brain, Enemy enemy, ITargetProvider targetProvider) : base(brain, enemy)
         {
-            _motor = enemy.GetComponent<EnemyMotor>();
-            _view = enemy.GetComponent<EnemyView>();
+            _motor = enemy.Motor;
             _targetProvider = targetProvider;
         }
 
         public override void Start()
         {
-            
             _home = Enemy.transform.position;
-            _view.SetSwitch("IsRunning", false);
             PickNewDestination();
         }
 
         public override void Tick()
         {
-            target = _targetProvider.GetTarget(Enemy);
+            target = _targetProvider.GetTarget(Enemy.transform, Enemy.Stats.DetectionRadius);
             if (target != null)
             {
                 Brain.SetTarget(target);
