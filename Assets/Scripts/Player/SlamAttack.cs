@@ -19,9 +19,9 @@ public class SlamAttack : MonoBehaviour
 
     private void Start()
     {
-        if (Player.Instance.PlayerStatsData != null)
+        if (PlayerInput.Instance.PlayerStatsData != null)
         {
-            _playerStatsData = Player.Instance.PlayerStatsData;
+            _playerStatsData = PlayerInput.Instance.PlayerStatsData;
 
             _slamRadius = _playerStatsData.SlamOverlapRadius;
         }
@@ -50,7 +50,7 @@ public class SlamAttack : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable) &&
                 hit.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
-                damageable.ApplyDamage(slamDamage);
+                damageable.ApplyDamage(slamDamage, false);
 
                 Vector3 hitPos = hit.gameObject.transform.position;
                 hitPos = Vector3.MoveTowards(hitPos, hitPos + Vector3.up * hitHeight, heightSpeed * Time.deltaTime);

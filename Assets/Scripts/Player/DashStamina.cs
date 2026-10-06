@@ -23,9 +23,9 @@ public class DashStamina : MonoBehaviour
 
     private void Start()
     {
-        if (Player.Instance.PlayerMovementData != null)
+        if (PlayerInput.Instance.PlayerMovementData != null)
         {
-            _playerMovementData = Player.Instance.PlayerMovementData;
+            _playerMovementData = PlayerInput.Instance.PlayerMovementData;
 
             _dashMaxCharges = _playerMovementData.DashMaxCharges;
             _dashDelay = _playerMovementData.DashDelay;

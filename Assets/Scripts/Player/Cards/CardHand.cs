@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct PlayerCardInput
+{
+    public bool Shoot;
+    public bool Ability;
+    public Vector2 SwitchScroll;
+    public bool FirstCardSlot;
+    public bool SecondCardSlot;
+}
+
 public class CardHand : MonoBehaviour
 {
     [SerializeField] private int _handSize = 2;
@@ -12,10 +21,19 @@ public class CardHand : MonoBehaviour
     private readonly Queue<CardInstance> _deck = new Queue<CardInstance>();
     private int _activeIndex;
 
+    private bool _requestedShoot;
+    private bool _requestedAbility;
+    private bool _requestedFirstCardSlot;
+    private bool _requestedSecondCardSlot;
+
+    private float _requestedSwitchScroll;
+
     public int ActiveIndex => _activeIndex;
     public CardInstance ActiveCard => _hand[_activeIndex];
     public IReadOnlyList<CardInstance> Hand => _hand;
     public CardInstance NextCardInDeck => _deck.Count > 0 ? _deck.Peek() : null;
+    public int DeckCount => _deck.Count;
+    public IEnumerable<CardInstance> Deck => _deck;
 
     public bool CanShoot => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextShotTime;
 
@@ -34,6 +52,50 @@ public class CardHand : MonoBehaviour
 
             if (slot < _handSize) _hand[slot++] = card;
             else _deck.Enqueue(card);
+        }
+    }
+
+    private void Update()
+    {
+        HandleSwitch();
+        HandleShoot();
+    }
+
+    public void UpdateInput(PlayerCardInput input)
+    {
+        _requestedShoot = input.Shoot;
+        _requestedSwitchScroll = input.SwitchScroll.y;
+        _requestedAbility = input.Ability;
+        _requestedFirstCardSlot = input.FirstCardSlot;
+        _requestedSecondCardSlot = input.SecondCardSlot;
+    }
+
+    private void HandleSwitch()
+    {
+        if (_requestedSwitchScroll > 0.1f)
+        {
+            SelectRelative(-1);
+        }
+        else if (_requestedSwitchScroll < -0.1f)
+        {
+            SelectRelative(1);
+        }
+
+        if (_requestedFirstCardSlot)
+        {
+            SelectSlot(0);
+        }
+        else if (_requestedSecondCardSlot)
+        {
+            SelectSlot(1);
+        }
+    }
+
+    private void HandleShoot()
+    {
+        if (_requestedShoot && CanShoot)
+        {
+            PlayerAnimation.Instance.ThrowCardTrigger();
         }
     }
 
@@ -58,7 +120,6 @@ public class CardHand : MonoBehaviour
         return SpendAmmo(card, 1);
     }
 
-    // Общий метод траты боезапаса, пригодится и для активного умения (клавиша E)
     public bool SpendAmmo(CardInstance card, int amount)
     {
         if (!card.TrySpendAmmo(amount))

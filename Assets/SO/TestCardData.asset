@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TestCardData
   m_EditorClassIdentifier: 
   _cardName: 
-  _cardIcon: {fileID: 0}
+  _cardIcon: {fileID: 1884183557, guid: bbb19eb7d57e62648ae0d11f1acb1f30, type: 3}
+  _cardHandMaterial: {fileID: 0}
   _projectilePrefab: {fileID: 8592896625477048602, guid: 73af19fc5fa2eee4fbfa647d7f0c595e, type: 3}
   _damage: 20
   _maxAmmo: 20
-  _attackSpeed: 1.5
-  _critChance: 0.1
+  _attackSpeed: 3
+  _critChance: 0.5
   _critDamageMultiplier: 1.5

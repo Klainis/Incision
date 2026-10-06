@@ -98,6 +98,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ba56d9c-dd7a-402b-bbfa-0b7f387b69f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,6 +252,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchCard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f75147e6-830b-40d2-b86c-03895d88f0e6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -307,6 +327,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Slam = m_Player.FindAction("Slam", throwIfNotFound: true);
         m_Player_SwitchCard = m_Player.FindAction("SwitchCard", throwIfNotFound: true);
+        m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         // SlotActions
         m_SlotActions = asset.FindActionMap("SlotActions", throwIfNotFound: true);
         m_SlotActions_ActiveCardSlot1 = m_SlotActions.FindAction("ActiveCardSlot1", throwIfNotFound: true);
@@ -386,6 +407,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Slam;
     private readonly InputAction m_Player_SwitchCard;
+    private readonly InputAction m_Player_Ability;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -398,6 +420,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Slam => m_Wrapper.m_Player_Slam;
         public InputAction @SwitchCard => m_Wrapper.m_Player_SwitchCard;
+        public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -431,6 +454,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwitchCard.started += instance.OnSwitchCard;
             @SwitchCard.performed += instance.OnSwitchCard;
             @SwitchCard.canceled += instance.OnSwitchCard;
+            @Ability.started += instance.OnAbility;
+            @Ability.performed += instance.OnAbility;
+            @Ability.canceled += instance.OnAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -459,6 +485,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwitchCard.started -= instance.OnSwitchCard;
             @SwitchCard.performed -= instance.OnSwitchCard;
             @SwitchCard.canceled -= instance.OnSwitchCard;
+            @Ability.started -= instance.OnAbility;
+            @Ability.performed -= instance.OnAbility;
+            @Ability.canceled -= instance.OnAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -540,6 +569,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSlam(InputAction.CallbackContext context);
         void OnSwitchCard(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
     }
     public interface ISlotActionsActions
     {

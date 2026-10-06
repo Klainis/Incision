@@ -23,7 +23,7 @@ public class EnemyAnimEvent : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable)
                 && hit.CompareTag("Player"))
             {
-                damageable.ApplyDamage(_enemyAttack.Damage);
+                damageable.ApplyDamage(_enemyAttack.Damage, false);
             }
         }
     }

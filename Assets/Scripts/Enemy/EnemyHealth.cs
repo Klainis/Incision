@@ -21,9 +21,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         _currentHealt = maxHealth;
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(float damage, bool isCrit)
     {
-        UIEffectManager.Instance.ShowDamagePopup(transform.position, damage);
+        UIEffectManager.Instance.ShowDamagePopup(transform.position, damage, isCrit);
 
         _currentHealt -= damage;
 

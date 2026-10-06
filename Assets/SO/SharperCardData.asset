@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
   m_Name: SharperCardData
   m_EditorClassIdentifier: 
+  _cardName: 
+  _cardIcon: {fileID: 2018903885, guid: bbb19eb7d57e62648ae0d11f1acb1f30, type: 3}
+  _cardHandMaterial: {fileID: 0}
   _projectilePrefab: {fileID: 8592896625477048602, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
   _damage: 20
+  _maxAmmo: 20
   _attackSpeed: 1.5
   _critChance: 0.1
   _critDamageMultiplier: 1.5

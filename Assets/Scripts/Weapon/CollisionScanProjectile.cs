@@ -6,7 +6,7 @@ public class CollisionScanProjectile : Projectile
 {
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
-        damageable.ApplyDamage(Damage);
+        damageable.ApplyDamage(Damage, IsCrit);
     }
 
     protected override void OnOtherCollision()

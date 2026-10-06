@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _currentHealt = _maxHealth;
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(float damage, bool isCrit)
     {
         _currentHealt -= damage;
 

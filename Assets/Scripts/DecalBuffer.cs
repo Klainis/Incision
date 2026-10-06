@@ -19,8 +19,8 @@ public class DecalBuffer : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnDestroy()
