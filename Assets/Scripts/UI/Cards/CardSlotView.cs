@@ -27,7 +27,8 @@ public class CardSlotView : MonoBehaviour
     public void SetCard(CardInstance card, bool snap = true)
     {
         bool hasCard = card != null;
-        gameObject.SetActive(hasCard);
+        //gameObject.SetActive(hasCard);
+        SetActiveSlot(hasCard);
         if (!hasCard) return;
 
         _cardIcon.sprite = card.Data.CardIcon;
@@ -52,10 +53,11 @@ public class CardSlotView : MonoBehaviour
 
     public void SetActiveSlot(bool isActive)
     {
-        if (_activeFrame != null) _activeFrame.SetActive(isActive);
+        //if (_activeFrame != null) _activeFrame.SetActive(isActive);
 
         _targetAlpha = isActive ? 1f : _inactiveAlpha;
         _targetScale = isActive ? 1f : _inactiveScale;
+        if (isActive) gameObject.transform.SetAsLastSibling();
     }
 
     private void Update()
