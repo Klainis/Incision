@@ -2,6 +2,7 @@
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Templates;
+using Incision.Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -9,8 +10,10 @@ using VContainer;
 namespace Incision.Enemies.Components
 {
     [RequireComponent(typeof(Health), typeof(EnemyMotor), typeof(EnemyBrain))]
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, ICreature
     {
+        public string Name { get; private set; }
+        
         [SerializeField] private Health _health;
         [SerializeField] private EnemyMotor _motor;
         [SerializeField] private EnemyBrain _brain;
@@ -38,6 +41,7 @@ namespace Incision.Enemies.Components
         {
             template = tpl;
             stats = template.Stats.CreateRuntime();
+            Name = gameObject.name;
 
             _health.Initialize(stats);
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
@@ -55,5 +59,7 @@ namespace Incision.Enemies.Components
             }
             _view.Initialize(_motor, _animator);
         }
+
+        
     }
 }

@@ -4,6 +4,7 @@ using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Structs.Events;
+using Incision.Interfaces;
 using VContainer;
 
 namespace Incision.Enemies.Components
@@ -29,15 +30,16 @@ namespace Incision.Enemies.Components
             float damage = Mathf.Max(0, info.Amount - _stats.Armor);
             _stats.CurrentHealth -= damage;
             OnChanged?.Invoke(_stats.CurrentHealth, _stats.MaxHealth);
-            _eventBus.Publish(new CreatureDamaged(info));
+            _eventBus.Publish(new OnCreatureDamaged(info));
 
             if (_stats.CurrentHealth <= 0)
-                Die();
+                Die(info);
         }
 
-        private void Die()
+        private void Die(DamageInfo info)
         {
             OnDied?.Invoke(this);
+            _eventBus.Publish(new OnCreatureDied(info));
         }
     }
 }

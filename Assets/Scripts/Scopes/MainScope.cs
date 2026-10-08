@@ -6,10 +6,14 @@ namespace Incision.Scopes
 {
     public class MainScope : LifetimeScope
     {
+        [Header("Logging")]
+        [SerializeField] private bool LoggingEnabled = true;
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log($"<color=purple>[DI]</color> Main scope configuration started");
-            builder.Register<EventBus>(Lifetime.Singleton).AsImplementedInterfaces();
+            Debug.unityLogger.logEnabled = LoggingEnabled;
+            
+            Debug.Log($"<color=white>[DI]</color> Main scope configuration started");
+            builder.Register<EventBus>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             
         }
     }

@@ -2,7 +2,7 @@ using System;
 
 namespace Incision.Extensions
 {
-    public static class FloatExtensions
+    public static partial class FloatExtensions
     {
         public static int AsMilliseconds(this float var)
         {

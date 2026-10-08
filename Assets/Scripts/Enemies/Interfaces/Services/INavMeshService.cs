@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Incision.Interfaces;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Incision.Enemies.Interfaces
 {
-    public interface INavMeshService
+    public interface INavMeshService : IService
     {
         void Configure(NavMeshAgent agent, float speed, float angularSpeed, float stoppingDistance);
 

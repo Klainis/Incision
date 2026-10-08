@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: BlockheadDash
   m_EditorClassIdentifier: 
   _damage: 5
-  _range: 2
+  _hitRange: 6
+  _onHitRangeMultiplier: 0.7
   _cooldown: 1
-  _animationTrigger: Attack
+  _animationTrigger: IsAttacking
+  startDelay: 0
+  endDelay: 0
+  duration: 1
+  speed: 3

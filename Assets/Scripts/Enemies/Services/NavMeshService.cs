@@ -1,5 +1,5 @@
 using Incision.Enemies.Interfaces;
-using Unity.VisualScripting;
+using Incision.Extensions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +7,7 @@ namespace Incision.Enemies.Services
 {
     public class NavMeshService : INavMeshService
     {
+        public string LOG_TAG { get; } = "[NavMeshService]".AsTag(Color.red);
         private int _areaMask;
         private float _sampleDistance;
         
@@ -95,8 +96,6 @@ namespace Incision.Enemies.Services
             result = source;
             return false;
         }
-
-        // ---------- helpers ----------
 
         private static bool IsUsable(NavMeshAgent agent)
             => agent != null && agent.enabled && agent.isOnNavMesh;

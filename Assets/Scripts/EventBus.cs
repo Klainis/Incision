@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Incision.Enemies.Interfaces;
+using Incision.Interfaces;
+using Incision.Extensions;
 using UnityEngine;
 
 namespace Incision
 {
-    public class EventBus : IEventBus
+    public class EventBus : IEventBus, ITaggable
     {
+        public string LOG_TAG { get; } = "[Event Bus]".AsTag(Color.green).Bold();
+        
         private readonly Dictionary<Type, Delegate> _handlers = new();
 
         public void Subscribe<T>(Action<T> handler)
@@ -27,9 +30,26 @@ namespace Incision
 
         public void Publish<T>(T evt)
         {
-            Debug.Log($"<color=green>[Event Bus]</color>: Event <color=lime>{typeof(T).Name}</color> invoked");
+            switch (evt)
+            {
+                case ILogEvent levt:
+                    Log(levt);
+                    return;
+                case IEvent eve:
+                    Debug.Log($"{LOG_TAG}: {eve.Message}");
+                    break;
+                default:
+                    Debug.LogWarning($"{LOG_TAG}: Event {typeof(T).Name.AsTag(Color.green)} invoked");
+                    break;
+            }
+
             if (_handlers.TryGetValue(typeof(T), out var d))
                 (d as Action<T>)?.Invoke(evt);
+        }
+
+        private void Log(ILogEvent levt)
+        {
+            Debug.Log($"{levt.Source}: {levt.Message}");
         }
     }
 }

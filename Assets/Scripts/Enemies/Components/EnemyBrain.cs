@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime.States;
+using Incision.Enemies.Structs.Events;
 using Incision.Enemies.Templates;
+using Incision.Interfaces;
 using UnityEngine;
+using VContainer;
 
 namespace Incision.Enemies.Components
 {
@@ -16,6 +19,7 @@ namespace Incision.Enemies.Components
         private readonly Dictionary<Type, EnemyStateBase> _states = new();
 
         public EnemyAITemplate Profile => _profile;
+        [Inject] private IEventBus _eventBus;
 
         public void Initialize(Enemy enemy, EnemyAITemplate profile, Health health, ITargetProvider targetProvider)
         {
@@ -39,9 +43,9 @@ namespace Incision.Enemies.Components
         {
             if (!_states.TryGetValue(typeof(T), out var next)) return;
             _current?.Dispose();
+            _eventBus.Publish(new OnEnemyStateChanged(_enemy,_current, next));
             _current = next;
             _current.Start();
-            Debug.Log($"<color=red>{_enemy.name}</color> is now at <color=yellow>{typeof(T).Name}</color> state");
         }
         
         public Transform CurrentTarget { get; private set; }

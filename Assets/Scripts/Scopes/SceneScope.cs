@@ -11,7 +11,7 @@ namespace Incision.Scopes
         [SerializeField] private Player player;
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log("<color=purple>[DI]</color> Scene scope configuration started");
+            Debug.Log("<color=white>[DI]</color> Scene scope configuration started");
             builder.Register<NearestPlayerTargetProvider>(Lifetime.Singleton)
                 .WithParameter(player.transform)
                 .AsImplementedInterfaces();
