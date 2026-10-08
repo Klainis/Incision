@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardHandHUD : MonoBehaviour
 {
+    [Header("Hand")]
     [SerializeField] private CardHand _hand;
     [SerializeField] private CardSlotView[] _slots;
+
+    [Header("NextCard")]
+    [SerializeField] private GameObject _nextRoot;
+    [SerializeField] private Image _nextIcon;
 
     private void OnEnable()
     {
@@ -21,7 +27,6 @@ public class CardHandHUD : MonoBehaviour
         _hand.AmmoChanged -= OnAmmoChanged;
     }
 
-    // Start, а не OnEnable: к этому моменту CardHand.Awake уже создал руку
     private void Start()
     {
         RefreshAll(snap: true);
@@ -46,6 +51,11 @@ public class CardHandHUD : MonoBehaviour
             CardInstance card = i < _hand.Hand.Count ? _hand.Hand[i] : null;
             _slots[i].SetCard(card, snap);
         }
+
+        CardInstance next = _hand.NextCardInDeck;
+
+        _nextRoot.SetActive(next != null);
+        if (next != null) _nextIcon.sprite = next.Data.CardIcon;
 
         RefreshActive();
     }

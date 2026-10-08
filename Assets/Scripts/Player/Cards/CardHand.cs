@@ -99,8 +99,6 @@ public class CardHand : MonoBehaviour
         }
     }
 
-    // Вызывается в момент реального броска (событие анимации).
-    // Возвращает данные карты и рассчитанный урон, тратит 1 боезапас.
     public bool TryConsumeShot(out CardData data, out float damage, out bool isCrit)
     {
         data = null;
