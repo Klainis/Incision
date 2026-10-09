@@ -5,10 +5,9 @@ using UnityEngine;
 public class CardInHandVisual : MonoBehaviour
 {
     [SerializeField] private CardHand _hand;
-    [SerializeField] private Renderer _cardRenderer;   // меш карты в руке
-    [SerializeField] private Animator _animator;       // необязательно
-    [SerializeField] private string _swapTrigger = "SwapCard";
-    [SerializeField] private float _swapDelay = 0f;    // момент смены лица в анимации смены
+    [SerializeField] private Renderer _cardRenderer;
+    [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private float _swapDelay = 0f;
 
     private Coroutine _routine;
 
@@ -29,17 +28,14 @@ public class CardInHandVisual : MonoBehaviour
         Apply();
     }
 
-    // Игрок выбрал другой слот: анимация и смена лица с задержкой
     private void OnActiveChanged(int _)
     {
-        if (_animator != null && !string.IsNullOrEmpty(_swapTrigger))
-            _animator.SetTrigger(_swapTrigger);
+        _playerAnimation.SwapCard();
 
         if (_routine != null) StopCoroutine(_routine);
         _routine = StartCoroutine(ApplyDelayed());
     }
 
-    // Активная карта закончилась и заменилась: лицо меняется сразу
     private void OnHandChanged()
     {
         if (_routine != null)

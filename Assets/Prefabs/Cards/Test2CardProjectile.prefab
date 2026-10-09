@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da9a6d2e852574f44b96a92263111a7e, type: 2}
+  - {fileID: 2100000, guid: 1a06642cecbb4204b8da2e5c0c1fd9d5, type: 2}
   - {fileID: 2100000, guid: 23c34133d87799143ad7d7ca3c30fc13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8592896625477048602}
   - component: {fileID: 5130038960231607317}
   m_Layer: 8
-  m_Name: TestCardProjectile
+  m_Name: Test2CardProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
