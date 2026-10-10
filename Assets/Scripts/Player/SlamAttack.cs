@@ -20,9 +20,9 @@ public class SlamAttack : MonoBehaviour
 
     private void Start()
     {
-        if (Player.Instance.PlayerStatsData != null)
+        if (PlayerInput.Instance.PlayerStatsData != null)
         {
-            _playerStatsData = Player.Instance.PlayerStatsData;
+            _playerStatsData = PlayerInput.Instance.PlayerStatsData;
 
             _slamRadius = _playerStatsData.SlamOverlapRadius;
         }

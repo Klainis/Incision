@@ -13,10 +13,8 @@ public abstract class Projectile : MonoBehaviour
 
     [Header("Overlap Scale By Distance")]
     [SerializeField] private float _projectileMinScale = 1f;
-    //[SerializeField] private float _projectileMiddleScaleDistance = 1.2f;
     [SerializeField] private float _projectileMaxScale = 2f;
     [SerializeField] private float _distanceForChangeScale = 50f;
-    //�������� ���� ������������
 
     [Header("Rigidbody")]
     [SerializeField] private Rigidbody _projectileRigidbody;
@@ -35,43 +33,50 @@ public abstract class Projectile : MonoBehaviour
 
     private bool _isProjectileDisposed;
     private bool _canRotationCard = true;
+    private bool _isCrit;
 
-    private float _time = 0f;
     private float _scaleTime = 0f;
     private float _initialColliderRadiusForEnemyScale;
     private float _currentColliderRadiusForEnemyScale;
 
     private Vector3 _initialPosition;
 
-    private ParticleSystem _hitEffectInstance;
-    private ParticleSystem _bloodHitEffectInstance;
+    public float Damage => _damage;
+    public bool IsCrit => _isCrit;
+    public ProjectileDisposeType DisposeType => _disposeType;
+    public Rigidbody Rigidbody => _projectileRigidbody;
 
-    public float Damage { get { return _damage; } }
-    public ProjectileDisposeType DisposeType { get { return _disposeType; } }
-    public Rigidbody Rigidbody { get { return _projectileRigidbody; } }
+    // �������� ����� ����� Instantiate
+    public void Initialize(float damage, bool isCrit)
+    {
+        _damage = damage;
+        _isCrit = isCrit;
+    }
 
     private void Start()
     {
-        if (_trailRenderer != null && !_trailRenderer.enabled)
+        if (_trailRenderer != null)
         {
             _trailRenderer.enabled = true;
         }
-        else if (_trailRenderer == null)
+        else
         {
-            Debug.LogError("[Projectile.cs] : ����������� ��������� TrailRenderer");
+            Debug.LogError("[Projectile.cs] : ����������� ��������� TrailRenderer", this);
         }
 
         _initialPosition = transform.position;
         _initialColliderRadiusForEnemyScale = _projectileColliderForEnemy.radius;
         _currentColliderRadiusForEnemyScale = _initialColliderRadiusForEnemyScale;
-    }
 
+        // ������, ������� �� �� ��� �� �����, �� ���� �����
+        Destroy(gameObject, _destroyTime);
+    }
 
     private void Update()
     {
         _scaleTime += Time.deltaTime;
 
-        //��������� ������� ����������
+        // ��������� ������� ����������
         if (_scaleTime >= 1)
         {
             _scaleTime = 0;
@@ -83,9 +88,10 @@ public abstract class Projectile : MonoBehaviour
             }
         }
 
-        if (_canRotationCard)
+        // �������� �����
+        if (_canRotationCard && _cardRoot != null)
         {
-            _cardRoot?.transform.Rotate(0, _cardRotaionSpeed * Time.deltaTime, 0, Space.Self);
+            _cardRoot.transform.Rotate(0, _cardRotaionSpeed * Time.deltaTime, 0, Space.Self);
         }
     }
 
@@ -94,7 +100,7 @@ public abstract class Projectile : MonoBehaviour
         if (_isProjectileDisposed)
             return;
 
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable) && collision.gameObject.tag != "Player")
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable) && !collision.gameObject.CompareTag("Player"))
         {
             OnTargetCollision(collision, damageable);
 
@@ -116,16 +122,18 @@ public abstract class Projectile : MonoBehaviour
             DisposeProjectile();
         }
     }
-     
+
     public void DisposeProjectile()
     {
-        OnProjectileDispose();
+        if (_isProjectileDisposed)
+            return;
 
+        _isProjectileDisposed = true;
+
+        OnProjectileDispose();
         SpawnEffectOnDestroy();
 
         Destroy(gameObject);
-
-        _isProjectileDisposed = true;
     }
 
     private void ChangeProjectileScale()
@@ -135,16 +143,19 @@ public abstract class Projectile : MonoBehaviour
     }
 
     protected virtual void OnProjectileDispose() { }
-
     protected virtual void OnAnyCollision() { }
-
     protected virtual void OnOtherCollision() { }
-
     protected virtual void OnTargetCollision(Collision collision, IDamageable damageable) { }
 
     private void SpawnEffectOnDestroy()
     {
-        _hitEffectInstance = Instantiate(_hitEffect, transform.position, transform.rotation);
-        _bloodHitEffectInstance = Instantiate(_bloodHitEffect, transform.position, transform.rotation);
+        if (!_spawnEffectOnDestroy)
+            return;
+
+        if (_hitEffect != null)
+            Instantiate(_hitEffect, transform.position, transform.rotation);
+
+        if (_bloodHitEffect != null)
+            Instantiate(_bloodHitEffect, transform.position, transform.rotation);
     }
 }

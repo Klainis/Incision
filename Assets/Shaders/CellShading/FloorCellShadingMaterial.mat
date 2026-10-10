@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CellShadingMaterial
+  m_Name: FloorCellShadingMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 3711f14e7eb3a484f87a75fac23497f7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -49,7 +49,7 @@ Material:
     - _2ToneStep: 0.75
     - _3ToneStep: 0.5
     - _4ToneStep: 0.25
-    - _GeneralStrength: 9
+    - _GeneralStrength: 6
     - _GlareSize: -1
     - _LightBlend: 0.5
     - _NoiseMultiply: 0.5
@@ -57,8 +57,10 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _PositionRam: {r: 200, g: 200, b: 0, a: 0}
     - _PosterizeSteps: {r: 8, g: 8, b: 8, a: 0}
+    - _Tilling: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3053994328553856380
 MonoBehaviour:

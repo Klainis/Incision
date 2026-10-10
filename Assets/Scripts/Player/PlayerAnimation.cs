@@ -23,8 +23,13 @@ public class PlayerAnimation : MonoBehaviour
 
     public void ThrowCardTrigger()
     {
-        _playerAnimator?.SetBool("IsGrounded", true);
+        //_playerAnimator?.SetBool("IsGrounded", true);
         _playerAnimator?.SetTrigger("IsThrow");
+    }
+
+    public void SwapCard()
+    {
+        _playerAnimator?.SetTrigger("SwapCard");
     }
 
     public void RunAnimation(float speed)

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
+  m_Name: TestCardData
+  m_EditorClassIdentifier: 
+  _cardName: 
+  _cardIcon: {fileID: 21300000, guid: 67f64b8e465b75d4ba208dc3a7700407, type: 3}
+  _cardHandMaterial: {fileID: 2100000, guid: 1a06642cecbb4204b8da2e5c0c1fd9d5, type: 2}
+  _projectilePrefab: {fileID: 8592896625477048602, guid: 73af19fc5fa2eee4fbfa647d7f0c595e, type: 3}
+  _damage: 20
+  _maxAmmo: 20
+  _attackSpeed: 3
+  _critChance: 0.5
+  _critDamageMultiplier: 1.5

@@ -89,6 +89,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCard"",
+                    ""type"": ""Value"",
+                    ""id"": ""9de4dfc0-88d8-4f21-b6ba-26640aaf7292"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ba56d9c-dd7a-402b-bbfa-0b7f387b69f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -223,6 +241,104 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Slam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71d7f7b0-2882-4644-8d51-cdd0a7e4ace3"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchCard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f75147e6-830b-40d2-b86c-03895d88f0e6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""SlotActions"",
+            ""id"": ""1f6dad90-9538-42ec-b636-082c63b2c6b0"",
+            ""actions"": [
+                {
+                    ""name"": ""ActiveCardSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e902b0f-0b85-4d89-be24-1988be352600"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActiveCardSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""bab7b562-4dd7-4ec6-a1f6-2a07d61a06ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7d7a43e6-5159-40b7-abd0-4def1747285f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActiveCardSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52feac56-0244-4f17-8b9d-3f23c4820eb8"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActiveCardSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""cb48a7c4-e319-47b4-a863-e560838c7be8"",
+            ""actions"": [
+                {
+                    ""name"": ""GameMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b0736c8-79ac-4ca7-9913-7d82bd04a7aa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7afa2b4e-077c-4caf-aaf6-2de37197cf1b"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GameMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -238,11 +354,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Slam = m_Player.FindAction("Slam", throwIfNotFound: true);
+        m_Player_SwitchCard = m_Player.FindAction("SwitchCard", throwIfNotFound: true);
+        m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
+        // SlotActions
+        m_SlotActions = asset.FindActionMap("SlotActions", throwIfNotFound: true);
+        m_SlotActions_ActiveCardSlot1 = m_SlotActions.FindAction("ActiveCardSlot1", throwIfNotFound: true);
+        m_SlotActions_ActiveCardSlot2 = m_SlotActions.FindAction("ActiveCardSlot2", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_GameMenu = m_UI.FindAction("GameMenu", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_SlotActions.enabled, "This will cause a leak and performance issues, PlayerInputActions.SlotActions.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -311,6 +438,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Slam;
+    private readonly InputAction m_Player_SwitchCard;
+    private readonly InputAction m_Player_Ability;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -322,6 +451,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Slam => m_Wrapper.m_Player_Slam;
+        public InputAction @SwitchCard => m_Wrapper.m_Player_SwitchCard;
+        public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -352,6 +483,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Slam.started += instance.OnSlam;
             @Slam.performed += instance.OnSlam;
             @Slam.canceled += instance.OnSlam;
+            @SwitchCard.started += instance.OnSwitchCard;
+            @SwitchCard.performed += instance.OnSwitchCard;
+            @SwitchCard.canceled += instance.OnSwitchCard;
+            @Ability.started += instance.OnAbility;
+            @Ability.performed += instance.OnAbility;
+            @Ability.canceled += instance.OnAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -377,6 +514,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Slam.started -= instance.OnSlam;
             @Slam.performed -= instance.OnSlam;
             @Slam.canceled -= instance.OnSlam;
+            @SwitchCard.started -= instance.OnSwitchCard;
+            @SwitchCard.performed -= instance.OnSwitchCard;
+            @SwitchCard.canceled -= instance.OnSwitchCard;
+            @Ability.started -= instance.OnAbility;
+            @Ability.performed -= instance.OnAbility;
+            @Ability.canceled -= instance.OnAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -394,6 +537,106 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // SlotActions
+    private readonly InputActionMap m_SlotActions;
+    private List<ISlotActionsActions> m_SlotActionsActionsCallbackInterfaces = new List<ISlotActionsActions>();
+    private readonly InputAction m_SlotActions_ActiveCardSlot1;
+    private readonly InputAction m_SlotActions_ActiveCardSlot2;
+    public struct SlotActionsActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public SlotActionsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ActiveCardSlot1 => m_Wrapper.m_SlotActions_ActiveCardSlot1;
+        public InputAction @ActiveCardSlot2 => m_Wrapper.m_SlotActions_ActiveCardSlot2;
+        public InputActionMap Get() { return m_Wrapper.m_SlotActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SlotActionsActions set) { return set.Get(); }
+        public void AddCallbacks(ISlotActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SlotActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SlotActionsActionsCallbackInterfaces.Add(instance);
+            @ActiveCardSlot1.started += instance.OnActiveCardSlot1;
+            @ActiveCardSlot1.performed += instance.OnActiveCardSlot1;
+            @ActiveCardSlot1.canceled += instance.OnActiveCardSlot1;
+            @ActiveCardSlot2.started += instance.OnActiveCardSlot2;
+            @ActiveCardSlot2.performed += instance.OnActiveCardSlot2;
+            @ActiveCardSlot2.canceled += instance.OnActiveCardSlot2;
+        }
+
+        private void UnregisterCallbacks(ISlotActionsActions instance)
+        {
+            @ActiveCardSlot1.started -= instance.OnActiveCardSlot1;
+            @ActiveCardSlot1.performed -= instance.OnActiveCardSlot1;
+            @ActiveCardSlot1.canceled -= instance.OnActiveCardSlot1;
+            @ActiveCardSlot2.started -= instance.OnActiveCardSlot2;
+            @ActiveCardSlot2.performed -= instance.OnActiveCardSlot2;
+            @ActiveCardSlot2.canceled -= instance.OnActiveCardSlot2;
+        }
+
+        public void RemoveCallbacks(ISlotActionsActions instance)
+        {
+            if (m_Wrapper.m_SlotActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISlotActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SlotActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SlotActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SlotActionsActions @SlotActions => new SlotActionsActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_GameMenu;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @GameMenu => m_Wrapper.m_UI_GameMenu;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @GameMenu.started += instance.OnGameMenu;
+            @GameMenu.performed += instance.OnGameMenu;
+            @GameMenu.canceled += instance.OnGameMenu;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @GameMenu.started -= instance.OnGameMenu;
+            @GameMenu.performed -= instance.OnGameMenu;
+            @GameMenu.canceled -= instance.OnGameMenu;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -403,5 +646,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnSlam(InputAction.CallbackContext context);
+        void OnSwitchCard(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
+    }
+    public interface ISlotActionsActions
+    {
+        void OnActiveCardSlot1(InputAction.CallbackContext context);
+        void OnActiveCardSlot2(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnGameMenu(InputAction.CallbackContext context);
     }
 }

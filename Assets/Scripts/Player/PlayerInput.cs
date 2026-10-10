@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
-    public static Player Instance { get; private set; }
+    public static PlayerInput Instance { get; private set; }
 
     [SerializeField] private PlayerCharacter _playerCharacter;
     [SerializeField] private PlayerCamera _playerCamera;
+    [SerializeField] private CardHand _cardHand;
 
     [SerializeField] private PlayerMovementData _playerMovementData;
     [SerializeField] private PlayerStats _playerStatsData;
 
     private PlayerInputActions _inputActions;
 
-    private bool _isAttacking = false;
+    //private bool _isAttacking = false;
 
     private float _jumpTimeBuffer = 0;
 
@@ -29,13 +30,13 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
-    }
 
-    void Start()
-    {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+    }
 
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
 
         if ( _playerCharacter != null )
@@ -69,16 +70,17 @@ public class Player : MonoBehaviour
             _jumpTimeBuffer -= Time.deltaTime;
         }
 
-        var input = _inputActions.Player;
+        var playerInput = _inputActions.Player;
+        var cardSlotInput = _inputActions.SlotActions;
 
         var cameraInput = new CameraInput 
         {
-            Look = input.Look.ReadValue<Vector2>(),
-            Move = input.Move.ReadValue<Vector2>(),
+            Look = playerInput.Look.ReadValue<Vector2>(),
+            Move = playerInput.Move.ReadValue<Vector2>(),
         };
         _playerCamera.UpdateRotation(cameraInput);
 
-        if (input.Jump.WasPressedThisFrame())
+        if (playerInput.Jump.WasPressedThisFrame())
         {
             _jumpTimeBuffer = _playerMovementData.JumpBufferTime;
         }
@@ -86,26 +88,23 @@ public class Player : MonoBehaviour
         var characterInput = new CharacterInput
         {
             Rotation = _playerCamera.transform.rotation,
-            Move = input.Move.ReadValue<Vector2>(),
+            Move = playerInput.Move.ReadValue<Vector2>(),
             Jump = _jumpTimeBuffer > 0,
-            JumpSustain = input.Jump.IsPressed(),
-            Dash = input.Dash.WasPressedThisFrame(),
-            //Shoot = input.Shoot.WasPressedThisFrame(),
-            Slam = input.Slam.WasPressedThisFrame(),
+            //JumpSustain = playerInput.Jump.IsPressed(),
+            Dash = playerInput.Dash.WasPressedThisFrame(),
+            Slam = playerInput.Slam.WasPressedThisFrame(),
         };
         _playerCharacter.UpdateInput(characterInput);
 
-        bool shoot = input.Shoot.WasPressedThisFrame() || input.Shoot.IsPressed();
-
-        if (shoot && !_isAttacking)
+        var cardHandInput = new PlayerCardInput
         {
-            PlayerAnimation.Instance.ThrowCardTrigger();
-        }
-    }
-
-    public void OnAttackEnded()
-    {
-        _isAttacking = false;
+            Shoot = playerInput.Shoot.IsPressed(),
+            Ability = playerInput.Ability.WasPressedThisFrame(),
+            SwitchScroll = playerInput.SwitchCard.ReadValue<Vector2>(),
+            FirstCardSlot = cardSlotInput.ActiveCardSlot1.WasPressedThisFrame(),
+            SecondCardSlot = cardSlotInput.ActiveCardSlot2.WasPressedThisFrame(),
+        };
+        _cardHand.UpdateInput(cardHandInput);
     }
 
     private void LateUpdate()

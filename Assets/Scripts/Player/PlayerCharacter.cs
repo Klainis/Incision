@@ -9,9 +9,8 @@ public struct CharacterInput
     public Quaternion Rotation;
     public Vector2 Move;
     public bool Jump;
-    public bool JumpSustain;
+    //public bool JumpSustain;
     public bool Dash;
-    public bool Shoot;
     public bool Slam;
 }
 
@@ -20,7 +19,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public static PlayerCharacter Instance {  get; private set; }
 
     [SerializeField] private KinematicCharacterMotor _motor;
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerInput _player;
 
     [Header("Camera Transform")]
     [SerializeField] private Transform _cameraTarget;
@@ -141,7 +140,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = yawRotation * Vector3.ClampMagnitude(move, 1f);
 
         _requestedJump = _requestedJump || input.Jump;
-        _requestedSustainJump = input.JumpSustain;
+        //_requestedSustainJump = input.JumpSustain;
 
         _requestedDash = _requestedDash || input.Dash;
 
