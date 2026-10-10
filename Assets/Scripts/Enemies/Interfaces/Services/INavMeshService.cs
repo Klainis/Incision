@@ -6,7 +6,7 @@ namespace Incision.Enemies.Interfaces
 {
     public interface INavMeshService : IService
     {
-        void Configure(NavMeshAgent agent, float speed, float angularSpeed, float stoppingDistance);
+        void Configure(NavMeshAgent agent, float speed, float acceleration, float angularSpeed, float stoppingDistance);
 
         bool MoveTo(NavMeshAgent agent, Vector3 worldPosition);
 

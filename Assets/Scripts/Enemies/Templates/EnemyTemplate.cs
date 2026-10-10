@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Incision.Enemies.Components;
+using Incision.Templates;
 using UnityEngine;
 
 namespace Incision.Enemies.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Enemy", fileName = "EnemyTemplate")]
+    [CreateAssetMenu(menuName = "General/Enemy", fileName = "EnemyTemplate")]
     public class EnemyTemplate : ScriptableObject
     {
         [SerializeField] private string _id;

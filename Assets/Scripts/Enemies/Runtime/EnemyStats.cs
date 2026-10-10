@@ -1,5 +1,5 @@
 
-using Incision.Enemies.Templates;
+using Incision.Templates;
 
 namespace Incision.Enemies.Runtime
 {
@@ -8,6 +8,7 @@ namespace Incision.Enemies.Runtime
         public float MaxHealth { get; }
         public float CurrentHealth { get; set; }
         public float MoveSpeed { get; }
+        public float Acceleration { get; }
         public float TurnSpeed { get; }
         public float Armor { get; }
         public float DetectionRadius { get; }
@@ -18,6 +19,7 @@ namespace Incision.Enemies.Runtime
             MaxHealth = template.MaxHealth;
             CurrentHealth = template.MaxHealth;
             MoveSpeed = template.MoveSpeed;
+            Acceleration = template.Acceleration;
             TurnSpeed = template.TurnSpeed;
             Armor = template.Armor;
             DetectionRadius = template.DetectionRadius;

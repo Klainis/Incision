@@ -11,20 +11,21 @@ namespace Incision.Enemies.Services
         private int _areaMask;
         private float _sampleDistance;
         
-        public void Configure(NavMeshAgent agent, float speed, float angularSpeed, float stoppingDistance)
+        public void Configure(NavMeshAgent agent, float speed, float acceleration, float angularSpeed, float stoppingDistance)
         {
-            Configure(agent, speed, angularSpeed, stoppingDistance, NavMesh.AllAreas, 2f);
+            Configure(agent, speed, acceleration, angularSpeed, stoppingDistance, NavMesh.AllAreas, 2f);
         }
 
-        public void Configure(NavMeshAgent agent, float speed, float angularSpeed, float stoppingDistance, int areaMask = NavMesh.AllAreas, float sampleDistance = 2f)
+        public void Configure(NavMeshAgent agent, float speed, float acceleration, float angularSpeed, float stoppingDistance, int areaMask = NavMesh.AllAreas, float sampleDistance = 2f)
         {
             if (agent == null) return;
 
             agent.speed = speed;
+            agent.acceleration = acceleration;
             agent.angularSpeed = angularSpeed;
             agent.stoppingDistance = stoppingDistance;
-            agent.updateRotation = false;   // крутим корпус вручную
-            agent.updateUpAxis = true;     // не наклоняем по рельефу
+            agent.updateRotation = false;
+            agent.updateUpAxis = true;     
             agent.autoBraking = true;
             agent.autoRepath = true;
             
@@ -49,9 +50,9 @@ namespace Incision.Enemies.Services
         {
             if (!IsUsable(agent)) return;
 
-            agent.isStopped = true;
             agent.ResetPath();
             agent.velocity = Vector3.zero;
+            agent.isStopped = true;
         }
 
         public bool Warp(NavMeshAgent agent, Vector3 worldPosition)

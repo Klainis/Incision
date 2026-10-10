@@ -8,7 +8,7 @@ namespace Incision.Enemies.Components
     public class EnemyMotor : MonoBehaviour
     {
         private NavMeshAgent _agent;
-        [SerializeField] private float _stoppingDistance = 0.1f;
+        [SerializeField] private float _stoppingDistance = 1f;
 
         private INavMeshService _navMesh;
         private Stats _stats;
@@ -24,6 +24,7 @@ namespace Incision.Enemies.Components
             _navMesh.Configure(
                 _agent,
                 speed: stats.MoveSpeed,
+                acceleration: stats.Acceleration,
                 angularSpeed: stats.TurnSpeed * 60f,
                 stoppingDistance: _stoppingDistance);
         }

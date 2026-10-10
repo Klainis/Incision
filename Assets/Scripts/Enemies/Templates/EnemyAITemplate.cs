@@ -7,12 +7,8 @@ namespace Incision.Enemies.Templates
     {
         [SerializeField] private float _idleTime = 2f;
         [SerializeField] private float _patrolRadius = 5f;
-        [SerializeField] private float _chaseSpeedMultiplier = 1f;
-        [SerializeField] private float _attackSpeedMultiplier = 1f;
 
         public float IdleTime => _idleTime;
         public float PatrolRadius => _patrolRadius;
-        public float ChaseSpeedMultiplier => _chaseSpeedMultiplier;
-        public float AttackSpeedMultiplier => _attackSpeedMultiplier;
     }
 }

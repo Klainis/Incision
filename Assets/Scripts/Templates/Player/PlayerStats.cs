@@ -1,4 +1,4 @@
-using Incision.Enemies.Templates;
+using Incision.Templates;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStatData", menuName = "Scriptable Objects/PlayerStatsData")]
