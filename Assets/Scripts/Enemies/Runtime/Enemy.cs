@@ -1,6 +1,7 @@
 
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime;
+using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
 using Incision.Interfaces;
 using UnityEngine;
@@ -36,6 +37,8 @@ namespace Incision.Enemies.Components
         public EnemyAttacker Attacker => _attacker;
         public EnemyAnimEvents AnimationEvents => _animEvents;
         public Stats Stats => stats;
+        
+        [Inject] private UIEffectManager _uiEffectManager;
 
         public void Initialize(EnemyTemplate tpl)
         {
@@ -44,6 +47,8 @@ namespace Incision.Enemies.Components
             Name = gameObject.name;
 
             _health.Initialize(stats);
+            _health.OnChanged += OnDamaged; 
+            
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
             _brain.Initialize(this, template.AIProfile, _health, _targetProvider);
             
@@ -59,7 +64,10 @@ namespace Incision.Enemies.Components
             }
             _view.Initialize(_motor, _animator);
         }
-
         
+        private void OnDamaged(DamageInfo info, float curr, float max)
+        {
+            _uiEffectManager.ShowDamagePopup(info.Point, info.Amount);
+        }
     }
 }

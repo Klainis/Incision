@@ -22,7 +22,7 @@ using UnityEngine;
 
         public void TakeDamage(DamageInfo damageInfo)
         {
-            UIEffectManager.Instance.ShowDamagePopup(transform.position, damageInfo.Amount);
+            // UIEffectManager.Instance.ShowDamagePopup(transform.position, damageInfo.Amount);
 
             _currentHealt -= damageInfo.Amount;
 

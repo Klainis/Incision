@@ -22945,6 +22945,7 @@ MonoBehaviour:
   - {fileID: 822825047}
   - {fileID: 426085047}
   player: {fileID: 799378782}
+  uiEffectManager: {fileID: 223143314}
 --- !u!1001 &8560302846988641726
 PrefabInstance:
   m_ObjectHideFlags: 0

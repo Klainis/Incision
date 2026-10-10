@@ -9,6 +9,7 @@ namespace Incision.Scopes
     public class SceneScope : LifetimeScope
     {
         [SerializeField] private Player player;
+        [SerializeField] private UIEffectManager uiEffectManager;
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log("<color=white>[DI]</color> Scene scope configuration started");
@@ -18,6 +19,7 @@ namespace Incision.Scopes
             builder.Register<NavMeshService>(Lifetime.Scoped).AsImplementedInterfaces();
             
             builder.Register<EnemyFactory>(Lifetime.Singleton); 
+            builder.RegisterComponent(uiEffectManager); 
         }
     }
 }

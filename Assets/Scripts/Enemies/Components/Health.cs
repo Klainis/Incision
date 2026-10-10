@@ -12,7 +12,7 @@ namespace Incision.Enemies.Components
     public class Health : MonoBehaviour, IDamageable
     {
         public event Action<Health> OnDied;
-        public event Action<float, float> OnChanged;
+        public event Action<DamageInfo, float, float> OnChanged;
 
         private Stats _stats;
         [Inject] private IEventBus _eventBus;
@@ -29,7 +29,7 @@ namespace Incision.Enemies.Components
 
             float damage = Mathf.Max(0, info.Amount - _stats.Armor);
             _stats.CurrentHealth -= damage;
-            OnChanged?.Invoke(_stats.CurrentHealth, _stats.MaxHealth);
+            OnChanged?.Invoke(info, _stats.CurrentHealth, _stats.MaxHealth);
             _eventBus.Publish(new OnCreatureDamaged(info));
 
             if (_stats.CurrentHealth <= 0)
