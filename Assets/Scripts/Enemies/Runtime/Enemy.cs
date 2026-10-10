@@ -67,7 +67,7 @@ namespace Incision.Enemies.Components
         
         private void OnDamaged(DamageInfo info, float curr, float max)
         {
-            _uiEffectManager.ShowDamagePopup(info.Point, info.Amount);
+            _uiEffectManager.ShowDamagePopup(info.Point, info.Amount, info.IsCritical);
         }
     }
 }

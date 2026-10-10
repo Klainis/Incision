@@ -16,8 +16,8 @@ public class UIEffectManager : MonoBehaviour
             Debug.LogWarning("UIEffectManager: �� ��������� ������ Popup ��� Canvas!");
             return;
         }
-
-        _popupInstance = isCrit ? Instantiate(_critDamagePopupPrefab, _damageCanvas.transform) : Instantiate(_baseDamagePopupPrefab, _damageCanvas.transform);
+        var selectedPrefab = isCrit ? _critDamagePopupPrefab : _baseDamagePopupPrefab;
+        _popupInstance = Instantiate(selectedPrefab, _damageCanvas.transform);
         _popupInstance.SetDamageText(worldPosition, damage);
     }
 }

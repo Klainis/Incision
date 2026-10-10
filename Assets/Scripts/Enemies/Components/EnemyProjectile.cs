@@ -31,7 +31,8 @@ namespace Incision.Enemies.Components
                 (   
                     _damage,
                     _owner,
-                    transform.position
+                    transform.position,
+                    IsCrit
                 ));
             }
             Destroy(gameObject);

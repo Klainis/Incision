@@ -8,7 +8,7 @@ namespace Incision.Scopes
 {
     public class SceneScope : LifetimeScope
     {
-        [SerializeField] private Player player;
+        [SerializeField] private PlayerInput player;
         [SerializeField] private UIEffectManager uiEffectManager;
         protected override void Configure(IContainerBuilder builder)
         {
