@@ -41,6 +41,7 @@ public class CardHand : MonoBehaviour
     public event Action HandChanged;                // карта в слоте заменилась
     public event Action<int> ActiveChanged;         // сменился активный слот
     public event Action<CardInstance> AmmoChanged;  // изменился боезапас
+    public event Action<CardInstance> AbilityUsed;
 
     private void Awake()
     {
@@ -124,7 +125,7 @@ public class CardHand : MonoBehaviour
         data = card.Data;
         card.NextShotTime = Time.time + 1f / data.AttackSpeed;
 
-        return SpendAmmo(card, data.SpendAttackAmmo);
+        return SpendAttackAmmo(card, data.SpendAttackAmmo);
     }
 
     public bool TryConsumeAbility(out CardData data)
@@ -139,14 +140,28 @@ public class CardHand : MonoBehaviour
         data = card.Data;
         card.NextAbilityTime = Time.time + data.AbilityCoolDown;
 
-        return SpendAmmo(card, data.SpendAbilityAmmo);
+        return SpendAbilityAmmo(card, data.SpendAbilityAmmo);
     }
 
-    public bool SpendAmmo(CardInstance card, int amount)
+    public bool SpendAttackAmmo(CardInstance card, int amount)
     {
         if (!card.TrySpendAmmo(amount))
             return false;
 
+        AmmoChanged?.Invoke(card);
+
+        if (card.IsEmpty)
+            CycleOut(Array.IndexOf(_hand, card));
+
+        return true;
+    }
+
+    public bool SpendAbilityAmmo(CardInstance card, int amount)
+    {
+        if (!card.TrySpenAbilityAmmo(amount))
+            return false;
+
+        AbilityUsed?.Invoke(card);
         AmmoChanged?.Invoke(card);
 
         if (card.IsEmpty)

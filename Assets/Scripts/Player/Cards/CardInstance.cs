@@ -26,6 +26,16 @@ public class CardInstance
         return true;
     }
 
+    public bool TrySpenAbilityAmmo(int amount)
+    {
+        if (Ammo < amount) 
+            Ammo = 0;
+        else
+            Ammo -= amount;
+
+        return true;
+    }
+
     public void Reload()
     {
         Ammo = Data.MaxAmmo;
