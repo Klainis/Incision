@@ -7,6 +7,7 @@ public class CardInstance
     public CardData Data { get; }
     public int Ammo { get; private set; }
     public float NextShotTime { get; set; }
+    public float NextAbilityTime { get; set; }
 
     public bool IsEmpty => Ammo <= 0;
 

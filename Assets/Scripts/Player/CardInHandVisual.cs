@@ -30,7 +30,7 @@ public class CardInHandVisual : MonoBehaviour
 
     private void OnActiveChanged(int _)
     {
-        _playerAnimation.SwapCard();
+        _playerAnimation.SwapCardAnimation();
 
         if (_routine != null) StopCoroutine(_routine);
         _routine = StartCoroutine(ApplyDelayed());

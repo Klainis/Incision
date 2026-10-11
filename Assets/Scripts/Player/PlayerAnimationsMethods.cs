@@ -25,6 +25,6 @@ public class PlayerAnimationsMethods : MonoBehaviour
 
     public void Attack()
     {
-        _gun?.Attack();
+        _gun?.CardAttack();
     }
 }

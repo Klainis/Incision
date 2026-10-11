@@ -13,7 +13,7 @@ public class DeckUI : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private Transform _listRoot;
     [SerializeField] private DeckCardItem _itemPrefab;
-    [SerializeField] private InputActionReference _toggleAction; // Button, например Tab
+    [SerializeField] private InputActionReference _toggleAction; // Button, потом переместить в главный ui класс
 
     private readonly List<DeckCardItem> _items = new List<DeckCardItem>();
 
@@ -79,7 +79,6 @@ public class DeckUI : MonoBehaviour
             order++;
         }
 
-        // Лишние строки прячем, а не удаляем: так нет мусора для GC
         for (int i = order; i < _items.Count; i++)
             _items[i].gameObject.SetActive(false);
     }

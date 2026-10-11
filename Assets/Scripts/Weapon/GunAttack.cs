@@ -21,18 +21,12 @@ public class GunAttack : MonoBehaviour
     [Header("Range")]
     [SerializeField] private float _maxRange = 500f;
 
-    public void Attack()
+    public void CardAttack()
     {
         if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
             return;
 
-        Ray ray = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-
-        Vector3 targetPoint = Physics.Raycast(ray, out RaycastHit hit, _maxRange)
-            ? hit.point
-            : ray.GetPoint(_maxRange);
-
-        Vector3 direction = (targetPoint - _weaponMuzzle.position).normalized;
+        Vector3 direction = CalculateAttackDirection();
 
         Projectile projectile = Instantiate(
             card.CardPrefab,
@@ -41,5 +35,22 @@ public class GunAttack : MonoBehaviour
 
         projectile.Initialize(damage, isCrit);
         projectile.Rigidbody.AddForce(direction * _force, _forceMode);
+    }
+
+    public void AbilityAttack()
+    {
+        if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
+            return;
+    }
+
+    private Vector3 CalculateAttackDirection()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+
+        Vector3 targetPoint = Physics.Raycast(ray, out RaycastHit hit, _maxRange)
+            ? hit.point
+            : ray.GetPoint(_maxRange);
+
+        return (targetPoint - _weaponMuzzle.position).normalized;
     }
 }
