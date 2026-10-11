@@ -8,7 +8,6 @@ public class PlayerAnimation : MonoBehaviour
     public static PlayerAnimation Instance { get; private set; }
 
     [SerializeField] private Animator _playerAnimator;
-    //[SerializeField] private Animator _cameraAnimator;
 
     private void Awake()
     {
@@ -21,7 +20,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public void ThrowCardTriggerAnimation()
     {
-        //_playerAnimator?.SetBool("IsGrounded", true);
         _playerAnimator?.SetTrigger("IsThrow");
     }
 
@@ -42,7 +40,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public void DashAnimation()
     {
-        Debug.Log("Dash");
         _playerAnimator?.SetTrigger("IsDashing");
     }
 }

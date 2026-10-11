@@ -18,6 +18,9 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 8592896625477048602, guid: f0002c332644ed047a596b84a759aa48, type: 3}
   _damage: 20
   _maxAmmo: 20
-  _attackSpeed: 1.5
+  _spendAttackAmmo: 1
+  _attackSpeed: 100
   _critChance: 0.5
   _critDamageMultiplier: 1.5
+  _abilityCoolDown: 5
+  _spendAbilityAmmo: 10

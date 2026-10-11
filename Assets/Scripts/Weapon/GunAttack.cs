@@ -37,11 +37,11 @@ public class GunAttack : MonoBehaviour
         projectile.Rigidbody.AddForce(direction * _force, _forceMode);
     }
 
-    public void AbilityAttack()
-    {
-        if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
-            return;
-    }
+    //public void AbilityAttack()
+    //{
+    //    if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
+    //        return;
+    //}
 
     private Vector3 CalculateAttackDirection()
     {
