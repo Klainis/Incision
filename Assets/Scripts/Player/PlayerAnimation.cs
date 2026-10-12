@@ -1,13 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Incision.Extensions;
+using Incision.Interfaces;
+using Incision.Structs.Events;
 using UnityEngine;
+using VContainer;
 
 public class PlayerAnimation : MonoBehaviour
 {
     public static PlayerAnimation Instance { get; private set; }
 
     [SerializeField] private Animator _playerAnimator;
+    [Inject] private IEventBus _eventBus;
+    //[SerializeField] private Animator _cameraAnimator;
 
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void DashAnimation()
     {
+        _eventBus.Publish(new Log("[PlayerAnim]".AsTag(Color.blue),"Dash"));
         _playerAnimator?.SetTrigger("IsDashing");
     }
 }

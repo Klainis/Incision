@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
 using UnityEngine;
 
 public class SlamAttack : MonoBehaviour
@@ -27,7 +28,7 @@ public class SlamAttack : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"[SlamAttack.cs] : Не удалось установить PlayerStatsData");
+            Debug.LogError($"[SlamAttack.cs] : пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PlayerStatsData");
         }
 
         if (_playerCharacter == null)
@@ -36,7 +37,7 @@ public class SlamAttack : MonoBehaviour
 
             if (_playerCharacter == null )
             {
-                Debug.LogError($"[SlamAttack.cs] : Не удалось найти PlayerCharacter");
+                Debug.LogError($"[SlamAttack.cs] : пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ PlayerCharacter");
             }
         }
     }
@@ -50,7 +51,7 @@ public class SlamAttack : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable) &&
                 hit.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
-                damageable.ApplyDamage(slamDamage, false);
+                damageable.TakeDamage(new (slamDamage, gameObject, hit.transform.position));
 
                 Vector3 hitPos = hit.gameObject.transform.position;
                 hitPos = Vector3.MoveTowards(hitPos, hitPos + Vector3.up * hitHeight, heightSpeed * Time.deltaTime);

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Incision.Enemies.Structs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,7 @@ public class UIHealth : MonoBehaviour
     [SerializeField] private Image _healthBarFill;
     [SerializeField] private TextMeshProUGUI _healthText;
 
-    public void TakeDamage(float maxHealth, float currentHealth)
+    public void TakeDamage(DamageInfo info, float currentHealth, float maxHealth)
     {
         if (currentHealth < 0) currentHealth = 0;
 

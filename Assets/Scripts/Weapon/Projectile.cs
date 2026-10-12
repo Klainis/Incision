@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Incision.Enemies.Interfaces;
 using UnityEngine;
 
 [SelectionBase]
@@ -9,7 +6,7 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     [Header("Common")]
-    [SerializeField, Min(0f)] private float _damage = 10f;
+    [SerializeField, Min(0f)] protected float _damage = 10f;
     [SerializeField] private ProjectileDisposeType _disposeType = ProjectileDisposeType.OnTargetCollision;
     [SerializeField] private GameObject _cardRoot;
     [SerializeField] private float _destroyTime = 6f;
@@ -49,7 +46,7 @@ public abstract class Projectile : MonoBehaviour
     public ProjectileDisposeType DisposeType => _disposeType;
     public Rigidbody Rigidbody => _projectileRigidbody;
 
-    // Вызывать сразу после Instantiate
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Instantiate
     public void Initialize(float damage, bool isCrit)
     {
         _damage = damage;
@@ -64,14 +61,14 @@ public abstract class Projectile : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[Projectile.cs] : Отсутствует компонент TrailRenderer", this);
+            Debug.LogError("[Projectile.cs] : пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ TrailRenderer", this);
         }
 
         _initialPosition = transform.position;
         _initialColliderRadiusForEnemyScale = _projectileColliderForEnemy.radius;
         _currentColliderRadiusForEnemyScale = _initialColliderRadiusForEnemyScale;
 
-        // Снаряд, который ни во что не попал, не живёт вечно
+        // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         Destroy(gameObject, _destroyTime);
     }
 
@@ -79,19 +76,19 @@ public abstract class Projectile : MonoBehaviour
     {
         _scaleTime += Time.deltaTime;
 
-        // Изменение размера коллайдера
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_scaleTime >= 1)
         {
             _scaleTime = 0;
 
-            float currentDistance = Vector3.Distance(_initialPosition, transform.position);
+            var currentDistance = Vector3.Distance(_initialPosition, transform.position);
             if (currentDistance >= _distanceForChangeScale)
             {
                 ChangeProjectileScale();
             }
         }
 
-        // Вращение карты
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (_canRotationCard && _cardRoot != null)
         {
             _cardRoot.transform.Rotate(0, _cardRotaionSpeed * Time.deltaTime, 0, Space.Self);

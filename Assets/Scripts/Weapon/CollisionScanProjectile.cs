@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Incision.Enemies.Interfaces;
 using UnityEngine;
 
 public class CollisionScanProjectile : Projectile
 {
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
-        damageable.ApplyDamage(Damage, IsCrit);
+        damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
     }
 
     protected override void OnOtherCollision()
