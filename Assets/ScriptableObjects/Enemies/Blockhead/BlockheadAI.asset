@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _idleTime: 0.5
   _patrolRadius: 2
-  _chaseSpeedMultiplier: 2
-  _attackSpeedMultiplier: 3
