@@ -39,7 +39,7 @@ public class AttackAnimationSpeed : MonoBehaviour
 
         _animator.SetFloat(_speedHash, /*_throwClip.length * */card.Data.AttackSpeed);
 
-        AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log($"state speedMultiplier = {info.speedMultiplier}");
+        //AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
+        //Debug.Log($"state speedMultiplier = {info.speedMultiplier}");
     }
 }
