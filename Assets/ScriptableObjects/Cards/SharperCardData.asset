@@ -15,9 +15,12 @@ MonoBehaviour:
   _cardName: 
   _cardIcon: {fileID: 2018903885, guid: bbb19eb7d57e62648ae0d11f1acb1f30, type: 3}
   _cardHandMaterial: {fileID: 2100000, guid: 8d47df33388786042a51f558e51f2de0, type: 2}
-  _projectilePrefab: {fileID: 8592896625477048602, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
+  _projectilePrefab: {fileID: 5048540492764176421, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
   _damage: 20
   _maxAmmo: 20
+  _spendAttackAmmo: 1
   _attackSpeed: 1.5
   _critChance: 0.1
   _critDamageMultiplier: 1.5
+  _abilityCoolDown: 5
+  _spendAbilityAmmo: 10

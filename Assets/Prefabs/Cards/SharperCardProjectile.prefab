@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 4962274793527217642}
   - component: {fileID: 6006597717926973051}
   - component: {fileID: 7040988457720755023}
-  - component: {fileID: 8592896625477048602}
   - component: {fileID: 5130038960231607317}
+  - component: {fileID: 5048540492764176421}
   m_Layer: 8
   m_Name: SharperCardProjectile
   m_TagString: Untagged
@@ -304,32 +304,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8592896625477048602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3073034408043554007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a05d861dd28bf4583d9a1f4c0e6549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 20
-  _disposeType: 1
-  _cardRoot: {fileID: 543331352684829255}
-  _destroyTime: 5
-  _projectileMinScale: 1
-  _projectileMaxScale: 1.5
-  _distanceForChangeScale: 35
-  _projectileRigidbody: {fileID: 4275104548347982271}
-  _spawnEffectOnDestroy: 1
-  _hitEffect: {fileID: 9222612009757004086, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  _bloodHitEffect: {fileID: 6077063526601698735, guid: 416405224c9ff874eb6a082a293d6975, type: 3}
-  _cardRotaionSpeed: 600
-  _trailRenderer: {fileID: 4962274793527217642}
-  _projectileColliderForEnemy: {fileID: 7040988457720755023}
 --- !u!114 &5130038960231607317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,3 +318,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyTime: 5
   _trailRenderer: {fileID: 4962274793527217642}
+--- !u!114 &5048540492764176421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073034408043554007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cae1f6b64833b840ac89e52aaaf6fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 20
+  _disposeType: 2
+  _cardRoot: {fileID: 543331352684829255}
+  _destroyTime: 5
+  _projectileMinScale: 1
+  _projectileMaxScale: 2
+  _distanceForChangeScale: 35
+  _projectileRigidbody: {fileID: 4275104548347982271}
+  _spawnEffectOnDestroy: 1
+  _hitEffect: {fileID: 9222612009757004086, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
+  _bloodHitEffect: {fileID: 6077063526601698735, guid: 416405224c9ff874eb6a082a293d6975, type: 3}
+  _cardRotaionSpeed: 600
+  _trailRenderer: {fileID: 4962274793527217642}
+  _projectileColliderForEnemy: {fileID: 7040988457720755023}
+  _baseBounces: 1
+  _searchRadius: 100
+  _ricochetSpeed: 150
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 2176
