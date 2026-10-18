@@ -5,6 +5,7 @@ public class CollisionScanProjectile : Projectile
 {
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
+        SpawnEffectOnDestroy();
         damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
     }
 

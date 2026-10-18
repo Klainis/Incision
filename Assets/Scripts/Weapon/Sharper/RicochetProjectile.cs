@@ -8,7 +8,6 @@ public class RicochetProjectile : Projectile
     [Header("Ricochet")]
     [SerializeField] private int _baseBounces = 1;
     [SerializeField] private float _searchRadius = 25f;
-    [SerializeField] private float _ricochetSpeed = 30f;
     [SerializeField] private LayerMask _enemyLayers;
 
     private readonly Collider[] _buffer = new Collider[32];
@@ -32,15 +31,14 @@ public class RicochetProjectile : Projectile
 
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
-        Debug.Log("œŒœ¿À» –» Œÿ≈“ŒÃ");
         if (!_alreadyHit.Add(damageable))
             return;
 
-        damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
+        SpawnEffectOnDestroy();
+        damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit)/*Eventbus*/);
 
         if (_bouncesLeft <= 0)
         {
-            Debug.Log("”Õ»◊“Œ∆≈Õ —Õ¿–ﬂƒ 1");
             DisposeProjectile();
             return;
         }
@@ -49,7 +47,6 @@ public class RicochetProjectile : Projectile
         Collider next = FindNearestEnemy(from);
         if (next == null)
         {
-            Debug.Log("”Õ»◊“Œ∆≈Õ —Õ¿–ﬂƒ 2");
             DisposeProjectile();
             return;
         }
@@ -60,7 +57,6 @@ public class RicochetProjectile : Projectile
         if (_bouncesLeft == 0 && _finalBounceHandler != null
             && _finalBounceHandler(from, dir, collision.collider))
         {
-            Debug.Log("”Õ»◊“Œ∆≈Õ —Õ¿–ﬂƒ 3");
             DisposeProjectile();
             return;
         }
@@ -69,8 +65,9 @@ public class RicochetProjectile : Projectile
         foreach (Collider c in _ownColliders)
             Physics.IgnoreCollision(c, collision.collider);
 
-        Rigidbody.AddForce(dir * _ricochetSpeed, ForceMode.Impulse);
-        //Rigidbody.rotation = Quaternion.LookRotation(dir);
+        Rigidbody.velocity = Vector3.zero;
+        Quaternion.LookRotation(dir);
+        Rigidbody.AddForce(dir * CardData.ProjectileSpeed, ForceMode.Impulse);
     }
 
     protected override void OnOtherCollision()

@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     [Header("Common")]
-    [SerializeField, Min(0f)] protected float _damage = 10f;
     [SerializeField] private ProjectileDisposeType _disposeType = ProjectileDisposeType.OnTargetCollision;
     [SerializeField] private GameObject _cardRoot;
     [SerializeField] private float _destroyTime = 6f;
@@ -35,20 +34,25 @@ public abstract class Projectile : MonoBehaviour
     private bool _canRotationCard = true;
     private bool _isCrit;
 
+    protected float _damage = 10f;
     private float _scaleTime = 0f;
     private float _initialColliderRadiusForEnemyScale;
     private float _currentColliderRadiusForEnemyScale;
 
     private Vector3 _initialPosition;
 
+    private CardData _cardData;
+
     public float Damage => _damage;
     public bool IsCrit => _isCrit;
+    public CardData CardData => _cardData;
     public ProjectileDisposeType DisposeType => _disposeType;
     public Rigidbody Rigidbody => _projectileRigidbody;
 
     // �������� ����� ����� Instantiate
-    public void Initialize(float damage, bool isCrit)
+    public void Initialize(float damage, bool isCrit, CardData cardData = null)
     {
+        if (cardData != null) _cardData = cardData;
         _damage = damage;
         _isCrit = isCrit;
     }
@@ -131,7 +135,7 @@ public abstract class Projectile : MonoBehaviour
         _isProjectileDisposed = true;
 
         OnProjectileDispose();
-        SpawnEffectOnDestroy();
+        //SpawnEffectOnDestroy();
 
         Destroy(gameObject);
     }
@@ -147,7 +151,7 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void OnOtherCollision() { }
     protected virtual void OnTargetCollision(Collision collision, IDamageable damageable) { }
 
-    private void SpawnEffectOnDestroy()
+    public void SpawnEffectOnDestroy()
     {
         if (!_spawnEffectOnDestroy)
             return;

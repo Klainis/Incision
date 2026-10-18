@@ -12,6 +12,7 @@ public class CardData : ScriptableObject
 
     [Header("Card Projectile")]
     [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private float _projectileSpeed;
 
     [Header("Card Attack Stats")]
     [SerializeField] private float _damage = 20f;
@@ -29,6 +30,7 @@ public class CardData : ScriptableObject
     public Sprite CardIcon => _cardIcon;
     public Material CardHandMaterial => _cardHandMaterial;
     public Projectile CardPrefab => _projectilePrefab;
+    public float ProjectileSpeed => _projectileSpeed;
     public float Damage => _damage;
     public float AttackSpeed => _attackSpeed;
     public int MaxAmmo => _maxAmmo;

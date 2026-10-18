@@ -16,30 +16,29 @@ public class GunAttack : MonoBehaviour
 
     [Header("Force Settings")]
     [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
-    [SerializeField] private float _force = 20f;
 
     [Header("Range")]
     [SerializeField] private float _maxRange = 500f;
 
     public void CardAttack()
     {
-        if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
+        if (!_hand.TryConsumeShot(out CardData cardData, out float damage, out bool isCrit))
             return;
 
         Vector3 direction = CalculateAttackDirection();
 
         Projectile projectile = Instantiate(
-            card.CardPrefab,
+            cardData.CardPrefab,
             _weaponMuzzle.position,
             Quaternion.LookRotation(direction));
 
-        projectile.Initialize(damage, isCrit);
-        projectile.Rigidbody.AddForce(direction * _force, _forceMode);
+        projectile.Initialize(damage, isCrit, cardData);
+        projectile.Rigidbody.AddForce(direction * cardData.ProjectileSpeed, _forceMode);
     }
 
     //public void AbilityAttack()
     //{
-    //    if (!_hand.TryConsumeShot(out CardData card, out float damage, out bool isCrit))
+    //    if (!_hand.TryConsumeShot(out CardData cardData, out float damage, out bool isCrit))
     //        return;
     //}
 
