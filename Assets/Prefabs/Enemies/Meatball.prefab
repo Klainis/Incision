@@ -288,6 +288,7 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 1017903920227990166}
   _animator: {fileID: 1116640285004390585}
   _animEvents: {fileID: 1741186227648248699}
+  _effecter: {fileID: 8291198321038622214}
 --- !u!114 &5971353343630096215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,5 +364,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593c6aefbb3583b4788e89a9e2a120d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHealth: {fileID: 5971353343630096215}
   _bloodExplosionEffect: {fileID: 7310943912595671841, guid: 83d27d01b5c0e044eb09dabb214e7c78, type: 3}
+  _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}

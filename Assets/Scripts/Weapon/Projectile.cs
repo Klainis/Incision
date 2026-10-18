@@ -159,7 +159,7 @@ public abstract class Projectile : MonoBehaviour
         if (_hitEffect != null)
             Instantiate(_hitEffect, transform.position, transform.rotation);
 
-        if (_bloodHitEffect != null)
-            Instantiate(_bloodHitEffect, transform.position, transform.rotation);
+        //if (_bloodHitEffect != null)
+        //    Instantiate(_bloodHitEffect, transform.position, transform.rotation);
     }
 }
