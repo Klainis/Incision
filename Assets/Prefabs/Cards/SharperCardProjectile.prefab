@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cae1f6b64833b840ac89e52aaaf6fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
   _disposeType: 2
   _cardRoot: {fileID: 543331352684829255}
   _destroyTime: 5
@@ -340,13 +339,12 @@ MonoBehaviour:
   _projectileRigidbody: {fileID: 4275104548347982271}
   _spawnEffectOnDestroy: 1
   _hitEffect: {fileID: 9222612009757004086, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  _bloodHitEffect: {fileID: 6077063526601698735, guid: 416405224c9ff874eb6a082a293d6975, type: 3}
+  _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}
   _cardRotaionSpeed: 600
   _trailRenderer: {fileID: 4962274793527217642}
   _projectileColliderForEnemy: {fileID: 7040988457720755023}
   _baseBounces: 1
   _searchRadius: 100
-  _ricochetSpeed: 150
   _enemyLayers:
     serializedVersion: 2
     m_Bits: 2176

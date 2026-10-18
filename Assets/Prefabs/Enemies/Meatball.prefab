@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 7277317956220746456}
   - component: {fileID: 4668799313484945798}
   - component: {fileID: 3089595376552935454}
+  - component: {fileID: 8291198321038622214}
   m_Layer: 7
   m_Name: Meatball
   m_TagString: Untagged
@@ -336,7 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db414825b27aace4c99e6f6eaec9c922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedParam: Speed
   _deathTrigger: Death
 --- !u!114 &3089595376552935454
 MonoBehaviour:
@@ -351,3 +351,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5364793232085874737}
+--- !u!114 &8291198321038622214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343032202664805475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593c6aefbb3583b4788e89a9e2a120d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: {fileID: 5971353343630096215}
+  _bloodExplosionEffect: {fileID: 7310943912595671841, guid: 83d27d01b5c0e044eb09dabb214e7c78, type: 3}
