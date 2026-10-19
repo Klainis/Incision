@@ -23,6 +23,7 @@ namespace Incision.Enemies.Components
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
         [SerializeField] private EnemyAnimEvents _animEvents;
+        [SerializeField] private EnemyEffecter _effecter;
         
         [Inject] private ITargetProvider _targetProvider;
         [Inject] private INavMeshService _navMesh;
@@ -37,8 +38,6 @@ namespace Incision.Enemies.Components
         public EnemyAttacker Attacker => _attacker;
         public EnemyAnimEvents AnimationEvents => _animEvents;
         public Stats Stats => stats;
-        
-        [Inject] private UIEffectManager _uiEffectManager;
 
         public void Initialize(EnemyTemplate tpl)
         {
@@ -47,8 +46,9 @@ namespace Incision.Enemies.Components
             Name = gameObject.name;
 
             _health.Initialize(stats);
-            _health.OnChanged += OnDamaged; 
-            
+
+            _effecter.Initialize(_health);
+
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
             _brain.Initialize(this, template.AIProfile, _health, _targetProvider);
             
@@ -63,11 +63,6 @@ namespace Incision.Enemies.Components
                 _view = gameObject.AddComponent<EnemyView>();
             }
             _view.Initialize(_motor, _animator);
-        }
-        
-        private void OnDamaged(DamageInfo info, float curr, float max)
-        {
-            _uiEffectManager.ShowDamagePopup(info.Point, info.Amount, info.IsCritical);
         }
     }
 }

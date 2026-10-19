@@ -21,13 +21,12 @@ public class PlayerAnimation : MonoBehaviour
         Instance = this;
     }
 
-    public void ThrowCardTrigger()
+    public void ThrowCardTriggerAnimation()
     {
-        //_playerAnimator?.SetBool("IsGrounded", true);
         _playerAnimator?.SetTrigger("IsThrow");
     }
 
-    public void SwapCard()
+    public void SwapCardAnimation()
     {
         _playerAnimator?.SetTrigger("SwapCard");
     }

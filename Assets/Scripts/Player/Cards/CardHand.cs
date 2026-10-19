@@ -36,10 +36,12 @@ public class CardHand : MonoBehaviour
     public IEnumerable<CardInstance> Deck => _deck;
 
     public bool CanShoot => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextShotTime;
+    public bool CanUseAbility => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextAbilityTime;
 
     public event Action HandChanged;                // карта в слоте заменилась
     public event Action<int> ActiveChanged;         // сменился активный слот
     public event Action<CardInstance> AmmoChanged;  // изменился боезапас
+    public event Action<CardInstance> AbilityUsed;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class CardHand : MonoBehaviour
     {
         HandleSwitch();
         HandleShoot();
+        HandleAbility();
     }
 
     public void UpdateInput(PlayerCardInput input)
@@ -95,7 +98,15 @@ public class CardHand : MonoBehaviour
     {
         if (_requestedShoot && CanShoot)
         {
-            PlayerAnimation.Instance.ThrowCardTrigger();
+            PlayerAnimation.Instance.ThrowCardTriggerAnimation();
+        }
+    }
+
+    private void HandleAbility()
+    {
+        if (_requestedAbility && CanUseAbility)
+        {
+            TryConsumeAbility(out CardData data);
         }
     }
 
@@ -112,17 +123,45 @@ public class CardHand : MonoBehaviour
 
         damage = card.RollDamage(out isCrit);
         data = card.Data;
-        card.NextShotTime = Time.time + 1f / card.Data.AttackSpeed;
+        card.NextShotTime = Time.time + 1f / data.AttackSpeed;
 
-        // Последним: если патроны кончатся, карта уйдёт в колоду, а данные уже сохранены
-        return SpendAmmo(card, 1);
+        return SpendAttackAmmo(card, data.SpendAttackAmmo);
     }
 
-    public bool SpendAmmo(CardInstance card, int amount)
+    public bool TryConsumeAbility(out CardData data)
+    {
+        data = null;
+
+        CardInstance card = ActiveCard;
+
+        if (card == null || card.IsEmpty || Time.time < card.NextAbilityTime)
+            return false;
+
+        data = card.Data;
+        card.NextAbilityTime = Time.time + data.AbilityCoolDown;
+
+        return SpendAbilityAmmo(card, data.SpendAbilityAmmo);
+    }
+
+    public bool SpendAttackAmmo(CardInstance card, int amount)
     {
         if (!card.TrySpendAmmo(amount))
             return false;
 
+        AmmoChanged?.Invoke(card);
+
+        if (card.IsEmpty)
+            CycleOut(Array.IndexOf(_hand, card));
+
+        return true;
+    }
+
+    public bool SpendAbilityAmmo(CardInstance card, int amount)
+    {
+        if (!card.TrySpenAbilityAmmo(amount))
+            return false;
+
+        AbilityUsed?.Invoke(card);
         AmmoChanged?.Invoke(card);
 
         if (card.IsEmpty)
@@ -142,7 +181,6 @@ public class CardHand : MonoBehaviour
             _hand[slot] = _deck.Dequeue(); // на её место встаёт следующая
             _deck.Enqueue(spent);          // пустая уходит в конец колоды
         }
-        // иначе других карт нет: карта просто перезарядилась на месте
 
         HandChanged?.Invoke();
         AmmoChanged?.Invoke(_hand[slot]);

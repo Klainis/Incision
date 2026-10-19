@@ -11,11 +11,14 @@ public class DeckUI : MonoBehaviour
 
     [Header("Deck Panel")]
     [SerializeField] private GameObject _panel;
-    [SerializeField] private Transform _listRoot;
+    [SerializeField] private Transform _deckListRoot;
+    [SerializeField] private Transform _handListRoot;
     [SerializeField] private DeckCardItem _itemPrefab;
-    [SerializeField] private InputActionReference _toggleAction; // Button, например Tab
+    [SerializeField] private InputActionReference _toggleAction; // Button, потом переместить в главный ui класс
 
-    private readonly List<DeckCardItem> _items = new List<DeckCardItem>();
+    private readonly List<DeckCardItem> _deckItems = new List<DeckCardItem>();
+    private readonly List<DeckCardItem> _handItems = new List<DeckCardItem>();
+
 
     private void Awake()
     {
@@ -69,18 +72,29 @@ public class DeckUI : MonoBehaviour
     {
         int order = 0;
 
-        foreach (CardInstance card in _hand.Deck)
+        foreach (CardInstance card in _hand.Hand)
         {
-            if (order >= _items.Count)
-                _items.Add(Instantiate(_itemPrefab, _listRoot));
+            if (order >= _handItems.Count)
+                _handItems.Add(Instantiate(_itemPrefab, _handListRoot));
 
-            _items[order].gameObject.SetActive(true);
-            _items[order].Set(card, order + 1);
+            _handItems[order].gameObject.SetActive(true);
+            _handItems[order].Set(card, order + 1);
             order++;
         }
 
-        // Лишние строки прячем, а не удаляем: так нет мусора для GC
-        for (int i = order; i < _items.Count; i++)
-            _items[i].gameObject.SetActive(false);
+        order = 0;
+
+        foreach (CardInstance card in _hand.Deck)
+        {
+            if (order >= _deckItems.Count)
+                _deckItems.Add(Instantiate(_itemPrefab, _deckListRoot));
+
+            _deckItems[order].gameObject.SetActive(true);
+            _deckItems[order].Set(card, order + 1);
+            order++;
+        }
+
+        for (int i = order; i < _deckItems.Count; i++)
+            _deckItems[i].gameObject.SetActive(false);
     }
 }

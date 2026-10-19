@@ -18,6 +18,7 @@ public class CardHandHUD : MonoBehaviour
         _hand.HandChanged += OnHandChanged;
         _hand.ActiveChanged += OnActiveChanged;
         _hand.AmmoChanged += OnAmmoChanged;
+        //_hand.AbilityUsed += OnAbilityUsed;
     }
 
     private void OnDisable()
@@ -25,6 +26,7 @@ public class CardHandHUD : MonoBehaviour
         _hand.HandChanged -= OnHandChanged;
         _hand.ActiveChanged -= OnActiveChanged;
         _hand.AmmoChanged -= OnAmmoChanged;
+        //_hand.AbilityUsed -= OnAbilityUsed;
     }
 
     private void Start()

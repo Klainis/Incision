@@ -7,6 +7,7 @@ public class CardInstance
     public CardData Data { get; }
     public int Ammo { get; private set; }
     public float NextShotTime { get; set; }
+    public float NextAbilityTime { get; set; }
 
     public bool IsEmpty => Ammo <= 0;
 
@@ -21,6 +22,16 @@ public class CardInstance
         if (Ammo < amount) return false;
 
         Ammo -= amount;
+
+        return true;
+    }
+
+    public bool TrySpenAbilityAmmo(int amount)
+    {
+        if (Ammo < amount) 
+            Ammo = 0;
+        else
+            Ammo -= amount;
 
         return true;
     }
