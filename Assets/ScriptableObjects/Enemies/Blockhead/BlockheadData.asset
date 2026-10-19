@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: BlockheadData
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _moveSpeed: 3.5
-  _turnSpeed: 10
   _armor: 0
-  _detectionRadius: 12
+  _moveSpeed: 10
+  _accelerationRate: 10
+  _acceleration: 100
+  _turnSpeed: 10
+  _detectionRadius: 32
   _loseDetectionRadiusDelta: 3
-  _loseTargetRadius: 15
+  _loseTargetRadius: 35
