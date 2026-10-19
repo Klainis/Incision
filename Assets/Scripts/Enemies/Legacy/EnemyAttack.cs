@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("Use IEnemyAttack implementations instead")]
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private Animator _animator;

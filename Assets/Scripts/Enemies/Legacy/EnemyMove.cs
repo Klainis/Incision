@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using Unity.AI;
 using UnityEngine.AI;
-using TMPro;
 
+[Obsolete("Use EnemyMotor component instead")]
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMove : MonoBehaviour
 {

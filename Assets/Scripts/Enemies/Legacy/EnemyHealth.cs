@@ -1,7 +1,9 @@
+using System;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using UnityEngine;
 
+[Obsolete("Use Health component instead")]
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
         [SerializeField] private GameObject _damagePopupPrefab;

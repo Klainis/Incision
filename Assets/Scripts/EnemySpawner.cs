@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("Use Incision.Enemies.Components.EnemySpawner instead")]
 public class EnemySpawner : MonoBehaviour
 {
     private static EnemySpawner _instance;
@@ -139,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (spawnPosition == Vector3.zero)
         {
-            Debug.Log("Не нашли место спавна для врага");
+            Debug.Log("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
             return;
         }
 
@@ -158,7 +159,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (returnsCount >= 10)
         {
-            Debug.LogWarning("Враг не нашел идеальную точку за 10 попыток. Спауним в резервной точке.");
+            Debug.LogWarning("пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 10 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.");
             return Vector3.zero;
         }
 
@@ -218,7 +219,7 @@ public class EnemySpawner : MonoBehaviour
 
                 if (distance > _despawnDistance)
                 {
-                    Debug.Log("Враг переспаунен");
+                    Debug.Log("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     Destroy(enemy);
                     _activeEnemies.RemoveAt(i);
                 }
