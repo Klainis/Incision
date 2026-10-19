@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Incision.Interfaces;
 using Incision.Extensions;
+using Incision.Structs.Events;
 using UnityEngine;
 
 namespace Incision
@@ -49,7 +50,19 @@ namespace Incision
 
         private void Log(ILogEvent levt)
         {
-            Debug.Log($"{levt.Source}: {levt.Message}");
+            var msg = $"{levt.Source}: {levt.Message}";
+            switch (levt)
+            {
+                case LogError levtError:
+                    Debug.LogError(msg);
+                    break;
+                case LogWarning levtWarning:
+                    Debug.LogWarning(msg);
+                    break;
+                case Log levtLog:
+                    Debug.Log(msg);
+                    break;
+            }
         }
     }
 }
