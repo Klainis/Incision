@@ -288,7 +288,7 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 1017903920227990166}
   _animator: {fileID: 1116640285004390585}
   _animEvents: {fileID: 1741186227648248699}
-  _effecter: {fileID: 8291198321038622214}
+  _effector: {fileID: 8291198321038622214}
 --- !u!114 &5971353343630096215
 MonoBehaviour:
   m_ObjectHideFlags: 0

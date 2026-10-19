@@ -1,17 +1,17 @@
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
-public class EnemyEffecter : MonoBehaviour
+public class EnemyEffector : MonoBehaviour
 {
     [Header("Effects")]
     [SerializeField] private ParticleSystem _bloodExplosionEffect;
     [SerializeField] private ParticleSystem _bloodHitEffect;
 
     private Health _enemyHealth;
+    [Inject] private IObjectResolver _resolver;
 
     [Inject] private UIEffectManager _uiEffectManager;
 
@@ -45,11 +45,11 @@ public class EnemyEffecter : MonoBehaviour
     private void HitBloodEffect(DamageInfo info)
     {
         if (_bloodHitEffect != null)
-            Instantiate(_bloodHitEffect, info.Point, Quaternion.identity);
+            _resolver.Instantiate(_bloodHitEffect, info.Point, Quaternion.identity);
     }
 
     private void DieBloodExplosion(Health health)
     {
-        Instantiate(_bloodExplosionEffect, transform.position, Quaternion.identity);
+        _resolver.Instantiate(_bloodExplosionEffect, transform.position, Quaternion.identity);
     }
 }

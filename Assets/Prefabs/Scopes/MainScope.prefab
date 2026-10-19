@@ -49,3 +49,4 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   LoggingEnabled: 1
+  decalBufferTemplate: {fileID: 11400000, guid: 57e222ac0491e194190f44eea0789e1b, type: 2}
