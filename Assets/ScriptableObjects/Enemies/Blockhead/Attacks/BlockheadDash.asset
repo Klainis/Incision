@@ -17,6 +17,8 @@ MonoBehaviour:
   _onHitRangeMultiplier: 0.7
   _cooldown: 1
   _animationTrigger: IsAttacking
+  distance: 10
+  jumpHeight: 2
   startDelay: 0
   endDelay: 0
   duration: 1

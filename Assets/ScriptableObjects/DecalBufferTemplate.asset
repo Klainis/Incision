@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29587459a9f490d459b44e184586920f, type: 3}
   m_Name: DecalBufferTemplate
   m_EditorClassIdentifier: 
-  projector: {fileID: 0}
+  projector: {fileID: 756927296452940245, guid: f3366fc71dbaa3d4182470ee4ac5abec, type: 3}
   maxDecals: 80

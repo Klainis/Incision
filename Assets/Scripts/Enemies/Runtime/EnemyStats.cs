@@ -5,6 +5,7 @@ namespace Incision.Enemies.Runtime
 {
     public class Stats
     {
+        public float Mass { get; }
         public float MaxHealth { get; }
         public float CurrentHealth { get; set; }
         public float MoveSpeed { get; }
@@ -16,6 +17,7 @@ namespace Incision.Enemies.Runtime
 
         public Stats(StatsTemplate template)
         {
+            Mass = template.Mass;
             MaxHealth = template.MaxHealth;
             CurrentHealth = template.MaxHealth;
             MoveSpeed = template.MoveSpeed;
