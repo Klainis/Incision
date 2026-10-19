@@ -127,7 +127,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: da9a6d2e852574f44b96a92263111a7e, type: 2}
+  - {fileID: 2100000, guid: 0a3237d583c709f41b575a80bafa16a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -364,5 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593c6aefbb3583b4788e89a9e2a120d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyRenderers:
+  - {fileID: 5895140281324335160}
   _bloodExplosionEffect: {fileID: 7310943912595671841, guid: 83d27d01b5c0e044eb09dabb214e7c78, type: 3}
   _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}
+  _flashAmount: 1
+  _flashTime: 0.15
