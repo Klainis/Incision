@@ -7,30 +7,16 @@ using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
 {
-    public class MeleeAttack : IEnemyAttack
+    public class MeleeAttack : Attack
     {
         private readonly string _animationTrigger;
-        public float Damage { get; }
-        public float HitRange { get; } 
-        public float OnHitRangeMultiplier { get; }
-        public float Cooldown { get; }
-
-        public MeleeAttack(MeleeAttackTemplate template)
+        
+        public MeleeAttack(MeleeAttackTemplate template) : base(template)
         {
             _animationTrigger = template.AnimationTrigger;
-            Damage = template.Damage;
-            HitRange = template.HitRange;
-            OnHitRangeMultiplier = template.OnHitRangeMultiplier;
-            Cooldown = template.Cooldown;
         }
 
-        public bool CanAttack(Transform attackPoint, Transform target)
-        {
-            if (target == null) return false;
-            return Vector3.Distance(attackPoint.position, target.position) <= HitRange;
-        }
-
-        public Task Execute(Enemy enemy, Transform attackPoint, Transform target)
+        public override Task Execute(Enemy enemy, Transform attackPoint, Transform target)
         {
             if (target == null) return Task.CompletedTask;
 

@@ -9,20 +9,15 @@ using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
 {
-    public class DashAttack : IEnemyAttack
+    public class DashAttack : Attack
     {
         private readonly string _animationTrigger;
-        public float Damage { get; }
-        public float HitRange { get; }
-        public float OnHitRangeMultiplier { get; }
         public float EffectiveHitRange { get; }
-        public float Cooldown { get; }
         public float Distance { get; }
         public float JumpHeight { get; }
         public float StartDelay { get; }
         public float EndDelay { get; }
         public float Duration { get; }
-
         public float Speed { get; }
         
         private Enemy _pendingEnemy;
@@ -31,13 +26,9 @@ namespace Incision.Enemies.Runtime.Attacks
         private EnemyAnimEvents _pendingEvents;
         private int _pendingVersion;
 
-        public DashAttack(DashAttackTemplate template)
+        public DashAttack(DashAttackTemplate template) : base(template)
         {
             _animationTrigger = template.AnimationTrigger;
-            Damage = template.Damage;
-            HitRange = template.HitRange;
-            OnHitRangeMultiplier = template.OnHitRangeMultiplier;
-            Cooldown = template.Cooldown;
             Distance = template.Distance;
             JumpHeight = template.JumpHeight;
             StartDelay = template.StartDelay;
@@ -48,19 +39,7 @@ namespace Incision.Enemies.Runtime.Attacks
             EffectiveHitRange = HitRange * OnHitRangeMultiplier;
         }
 
-        public bool CanAttack(Transform attackPoint, Transform target)
-        {
-            if (target == null)
-                return false;
-            return TargetInRange(attackPoint, target, HitRange);
-        }
-
-        private bool TargetInRange(Transform attackPoint, Transform target, float range)
-        {
-            return Vector3.Distance(attackPoint.position, target.position) <= range;
-        }
-
-        public async Task Execute(Enemy enemy, Transform attackPoint, Transform target)
+        public override async Task Execute(Enemy enemy, Transform attackPoint, Transform target)
         {
             if (enemy == null || attackPoint == null || target == null) return;
             if (enemy.AnimationEvents == null) return;
