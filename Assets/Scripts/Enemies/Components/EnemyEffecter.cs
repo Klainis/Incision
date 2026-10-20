@@ -1,5 +1,6 @@
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
+using System.Collections;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
