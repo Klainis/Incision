@@ -22,7 +22,7 @@ public abstract class Projectile : MonoBehaviour
     public ProjectileDisposeType DisposeType => _disposeType;
     public Rigidbody Rigidbody => _projectileRigidbody;
 
-    private void Start()
+    protected virtual void Start()
     {
         Destroy(gameObject, _destroyTime);
     }

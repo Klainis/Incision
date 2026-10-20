@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Incision
@@ -40,7 +38,6 @@ namespace Incision
         protected override void OnOtherCollision()
         {
             _canRotationCard = false;
-            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         public void Initialize(float damage, bool isCrit, CardData cardData = null)
@@ -50,8 +47,10 @@ namespace Incision
             _isCrit = isCrit;
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             if (_trailRenderer != null)
             {
                 _trailRenderer.enabled = true;

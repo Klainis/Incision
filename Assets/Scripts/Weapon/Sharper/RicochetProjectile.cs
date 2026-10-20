@@ -66,8 +66,15 @@ public class RicochetProjectile : CardProjectile
             Physics.IgnoreCollision(c, collision.collider);
 
         Rigidbody.velocity = Vector3.zero;
-        Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.LookRotation(dir);
         Rigidbody.AddForce(dir * CardData.ProjectileSpeed, ForceMode.Impulse);
+    }
+
+    protected override void OnOtherCollision()
+    {
+        base.OnOtherCollision();
+
+        Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     private Collider FindNearestEnemy(Vector3 from)
