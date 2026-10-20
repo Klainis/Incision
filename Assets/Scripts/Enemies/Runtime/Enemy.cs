@@ -23,7 +23,8 @@ namespace Incision.Enemies.Components
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
         [SerializeField] private EnemyAnimEvents _animEvents;
-        [SerializeField] private EnemyEffecter _effecter;
+        [SerializeField] private EnemyEffector _effector;
+        [SerializeField] private Rigidbody _rigidbody;
         
         [Inject] private ITargetProvider _targetProvider;
         [Inject] private INavMeshService _navMesh;
@@ -35,7 +36,9 @@ namespace Incision.Enemies.Components
         public EnemyTemplate Template => template;
         public EnemyView View => _view;
         public EnemyMotor Motor => _motor;
+        public Rigidbody Rigidbody => _rigidbody;
         public EnemyAttacker Attacker => _attacker;
+        public NavMeshAgent Agent => _navMeshAgent;
         public EnemyAnimEvents AnimationEvents => _animEvents;
         public Stats Stats => stats;
 
@@ -47,7 +50,9 @@ namespace Incision.Enemies.Components
 
             _health.Initialize(stats);
 
-            _effecter.Initialize(_health);
+            _effector.Initialize(_health);
+            
+            _rigidbody.mass = stats.Mass;
 
             _motor.Initialize(_navMeshAgent, stats, _navMesh);
             _brain.Initialize(this, template.AIProfile, _health, _targetProvider);

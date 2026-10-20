@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3cc13ac0bb8c346ba1f1000b228d98, type: 3}
   m_Name: MeatballAI
   m_EditorClassIdentifier: 
+  _type: 2
   _idleTime: 0.5
   _patrolRadius: 2
-  _chaseSpeedMultiplier: 2
-  _attackSpeedMultiplier: 3

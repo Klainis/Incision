@@ -6,6 +6,9 @@ namespace Incision.Templates
     [CreateAssetMenu(menuName = "Enemies/Stats", fileName = "StatsTemplate")]
     public class StatsTemplate : ScriptableObject
     {
+        [Header("General")]
+        [SerializeField, Min(0f)] private float _mass = 70f;
+        
         [Header("Survivability")]
         [SerializeField, Range(50f, 500f)] private float _maxHealth = 100f;
         [SerializeField, Range(0f, 50f)] private float _armor = 0f;
@@ -27,7 +30,8 @@ namespace Incision.Templates
             _loseTargetRadius = _detectionRadius + _loseDetectionRadiusDelta;
             _loseTargetRadius = Mathf.Clamp(_loseTargetRadius, 0, _loseTargetRadius);
         }
-
+        
+        public float Mass => _mass;
         public float MaxHealth => _maxHealth;
         public float MoveSpeed => _moveSpeed;
         public float TurnSpeed => _turnSpeed;

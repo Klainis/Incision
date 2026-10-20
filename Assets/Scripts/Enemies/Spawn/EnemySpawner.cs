@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Structs.Events;
@@ -16,7 +18,7 @@ namespace Incision.Enemies.Components
         public string LOG_TAG { get; } = "[Enemy Spawner]".AsTag(Color.magenta);
         
         [SerializeField] private WavePatternTemplate _waveTemplate;
-        [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private List<Spawnpoint> _spawnPoints;
 
         [Inject] private EnemyFactory _factory;
         [Inject] private IEventBus _eventBus;
@@ -37,14 +39,22 @@ namespace Incision.Enemies.Components
             {
                 await Task.Delay(wave.StartDelay);
                 _eventBus.Publish(new OnWaveStarted(wave));
-                // Debug.Log($"Spawning {wave}");
+                
                 foreach (var entry in wave.Entries)
                 {
-                    for (int i = 0; i < entry.Count; i++)
+                    var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.AIProfile.Type)).ToArray();
+                    var listSize = allowedList.Length;
+                    if (listSize == 0)
                     {
-                        _eventBus.Publish(new Log(LOG_TAG, $"Spawning {entry.Enemy.Id}_{i}"));
-                        var point = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-                        var enemy = _factory.Create(entry.Enemy, point.position, point.rotation, transform);
+                        _eventBus.Publish(new LogError(LOG_TAG, $"Failed to spawn {entry.Enemy.Id.AsTag(Color.red)}. There is no spawn points for them to spawn."));
+                        continue;
+                    }
+                    
+                    for (var i = 0; i < entry.Count; i++)
+                    {
+                        _eventBus.Publish(new Log(LOG_TAG, $"Spawning {$"{entry.Enemy.Id}_{i}".AsTag(Color.red)}"));
+                        var point = allowedList[Random.Range(0, listSize)];
+                        var enemy = _factory.Create(entry.Enemy, point.transform.position, point.transform.rotation, transform);
                         await Task.Delay(entry.Interval);
                     }
                 }

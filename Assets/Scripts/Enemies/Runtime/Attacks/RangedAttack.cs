@@ -6,32 +6,23 @@ using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
 {
-    public class RangedAttack : IEnemyAttack
+    public class RangedAttack : Attack
     {
         private readonly float _speed;
         private readonly EnemyProjectile _projectilePrefab;
         private readonly string _animationTrigger;
 
-        public float Damage { get; }
-        public float HitRange { get; }
-        public float OnHitRangeMultiplier { get; }
-        public float Cooldown { get; }
-
-        public RangedAttack(RangedAttackTemplate template)
+        public RangedAttack(RangedAttackTemplate template) : base(template)
         {
             _speed = template.ProjectileSpeed;
             _projectilePrefab = template.ProjectilePrefab;
             _animationTrigger = template.AnimationTrigger;
-            Damage = template.Damage;
-            HitRange = template.HitRange;
-            OnHitRangeMultiplier = template.OnHitRangeMultiplier;
-            Cooldown = template.Cooldown;
         }
 
-        public bool CanAttack(Transform attackPoint, Transform target)
+        public override bool CanAttack(Transform attackPoint, Transform target)
         {
-            if (target == null || _projectilePrefab == null) return false;
-            return Vector3.Distance(attackPoint.position, target.position) <= HitRange;
+            if (_projectilePrefab == null) return false;
+            return base.CanAttack(attackPoint, target);
         }
 
         public Task Execute(Enemy enemy, Transform attackPoint, Transform target)

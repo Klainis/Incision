@@ -1,7 +1,9 @@
+using System;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using UnityEngine;
 
+[Obsolete("Use EnemyAnimEvents instead")]
 public class EnemyAnimEvent : MonoBehaviour
 {
     [SerializeField] private EnemyAttack _enemyAttack;

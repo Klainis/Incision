@@ -6,10 +6,10 @@ namespace Incision.Enemies.Templates
     public abstract class AttackTemplate : ScriptableObject
     {
         [Header("Base")]
-        [SerializeField] protected float _damage = 5f;
-        [SerializeField] protected float _hitRange = 2f;
-        [SerializeField] protected float _onHitRangeMultiplier = 1.15f;
-        [SerializeField] protected float _cooldown = 1f;
+        [SerializeField, Min(0f)] protected float _damage = 5f;
+        [SerializeField, Min(0f)] protected float _hitRange = 2f;
+        [SerializeField, Min(0f)] protected float _onHitRangeMultiplier = 1.15f;
+        [SerializeField, Min(0f)] protected float _cooldown = 1f;
         [SerializeField] protected string _animationTrigger = "IsAttacking";
 
         public float Cooldown => _cooldown;
