@@ -32,7 +32,7 @@ public abstract class Projectile : MonoBehaviour
         if (_isProjectileDisposed)
             return;
 
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable) && !collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
         {
             OnTargetCollision(collision, damageable);
 
