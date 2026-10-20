@@ -8,9 +8,13 @@ namespace Incision.Enemies.Runtime.Attacks
 {
     public class RangedAttack : Attack
     {
+        [Header("Force Settings")]
+        [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
+
         private readonly float _speed;
         private readonly EnemyProjectile _projectilePrefab;
         private readonly string _animationTrigger;
+
 
         public RangedAttack(RangedAttackTemplate template) : base(template)
         {
@@ -33,7 +37,8 @@ namespace Incision.Enemies.Runtime.Attacks
             Vector3 dir = (target.position - origin).normalized;
 
             var p = Object.Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(dir));
-            p.Launch(dir, _speed, Damage, enemy.gameObject);
+            p.Initialize(Damage);
+            p.Rigidbody.AddForce(dir * _speed, _forceMode);
             return Task.CompletedTask;
         }
     }

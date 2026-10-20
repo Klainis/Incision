@@ -6,36 +6,23 @@ namespace Incision.Enemies.Components
 {
     public class EnemyProjectile : Projectile
     {
-        private Vector3 _dir;
-        private float _speed;
-        private GameObject _owner;
-        private float _life = 5f;
-
-        public void Launch(Vector3 dir, float speed, float damage, GameObject owner)//Наверное лучше получать через Launch data врага и потом назначать урон из нее? 
+        public void Initialize(float damage)
         {
-            _dir = dir; _speed = speed; _damage = damage; _owner = owner;
-            Destroy(gameObject, _life);
+            _damage = damage;
         }
 
-        private void Update()
+        protected override void OnTargetCollision(Collision collision, IDamageable damageable)
         {
-            transform.position += _speed * Time.deltaTime * _dir;
+            base.OnTargetCollision(collision, damageable);
+
+            damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void OnOtherCollision()
         {
-            if (other.gameObject == _owner) return;
-            if (other.TryGetComponent<IDamageable>(out var d))
-            {
-                d.TakeDamage(new DamageInfo
-                (   
-                    _damage,
-                    _owner,
-                    transform.position,
-                    IsCrit
-                ));
-            }
-            Destroy(gameObject);
+            base.OnOtherCollision();
+            
+            DisposeProjectile();
         }
     }
 }
