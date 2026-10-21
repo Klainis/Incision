@@ -1,9 +1,10 @@
+using Incision;
 using Incision.Enemies.Interfaces;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RicochetProjectile : Projectile
+public class RicochetProjectile : CardProjectile
 {
     [Header("Ricochet")]
     [SerializeField] private int _baseBounces = 1;
@@ -22,8 +23,7 @@ public class RicochetProjectile : Projectile
         _bouncesLeft = _baseBounces;
     }
 
-    // Умение карты переопределяет количество рикошетов и поведение последнего
-    public void ConfigureRicochet(int bounces, Func<Vector3, Vector3, Collider, bool> finalBounceHandler)
+    public void ConfigureRicochet(int bounces, Func<Vector3, Vector3, Collider, bool> finalBounceHandler) // For card ability
     {
         _bouncesLeft = bounces;
         _finalBounceHandler = finalBounceHandler;
@@ -66,12 +66,14 @@ public class RicochetProjectile : Projectile
             Physics.IgnoreCollision(c, collision.collider);
 
         Rigidbody.velocity = Vector3.zero;
-        Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.LookRotation(dir);
         Rigidbody.AddForce(dir * CardData.ProjectileSpeed, ForceMode.Impulse);
     }
 
     protected override void OnOtherCollision()
     {
+        base.OnOtherCollision();
+
         Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 

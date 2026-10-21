@@ -431,8 +431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593c6aefbb3583b4788e89a9e2a120d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyRenderers:
+  - {fileID: 4903055396089185682}
   _bloodExplosionEffect: {fileID: 7310943912595671841, guid: 83d27d01b5c0e044eb09dabb214e7c78, type: 3}
   _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}
+  _flashAmount: 1
+  _flashTime: 0.1
 --- !u!1001 &2879748201042012161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1613,6 +1617,11 @@ Transform:
 --- !u!4 &4880711010162650236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1995886872618285955, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
+  m_PrefabInstance: {fileID: 2879748201042012161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4903055396089185682 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
   m_PrefabInstance: {fileID: 2879748201042012161}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5310268367181975289 stripped

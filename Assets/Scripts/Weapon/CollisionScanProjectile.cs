@@ -1,7 +1,8 @@
+using Incision;
 using Incision.Enemies.Interfaces;
 using UnityEngine;
 
-public class CollisionScanProjectile : Projectile
+public class CollisionScanProjectile : CardProjectile
 {
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
@@ -11,6 +12,8 @@ public class CollisionScanProjectile : Projectile
 
     protected override void OnOtherCollision()
     {
+        base.OnOtherCollision();
+
         Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 }

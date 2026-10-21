@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 6006597717926973051}
   - component: {fileID: 7040988457720755023}
   - component: {fileID: 8592896625477048602}
-  - component: {fileID: 5130038960231607317}
   m_Layer: 8
   m_Name: TestCardProjectile
   m_TagString: Untagged
@@ -317,29 +316,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _disposeType: 1
-  _cardRoot: {fileID: 543331352684829255}
-  _destroyTime: 5
-  _projectileMinScale: 1
-  _projectileMaxScale: 1.5
-  _distanceForChangeScale: 35
+  _destroyTime: 7
   _projectileRigidbody: {fileID: 4275104548347982271}
+  _cardRoot: {fileID: 543331352684829255}
+  _projectileMinScale: 1
+  _projectileMaxScale: 2
+  _distanceForChangeScale: 35
   _spawnEffectOnDestroy: 1
   _hitEffect: {fileID: 9222612009757004086, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}
   _cardRotaionSpeed: 600
   _trailRenderer: {fileID: 4962274793527217642}
   _projectileColliderForEnemy: {fileID: 7040988457720755023}
---- !u!114 &5130038960231607317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3073034408043554007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcabe56ae2822fb419a5f0843d11fe1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _destroyTime: 5
-  _trailRenderer: {fileID: 4962274793527217642}

@@ -1,15 +1,16 @@
+using Incision;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GunAttack : MonoBehaviour
 {
-   [SerializeField] private CardHand _hand;
+    [SerializeField] private CardHand _hand;
 
     [Header("Camera")]
     [SerializeField] private Camera _mainCamera;
 
-    [Header("UI Crosshair (RectTransform)")]
+    [Header("UI Crosshair")]
     [SerializeField] private RectTransform _crosshair;
 
     [SerializeField] private Transform _weaponMuzzle;
@@ -27,7 +28,7 @@ public class GunAttack : MonoBehaviour
 
         Vector3 direction = CalculateAttackDirection();
 
-        Projectile projectile = Instantiate(
+        CardProjectile projectile = (CardProjectile)Instantiate(
             cardData.CardPrefab,
             _weaponMuzzle.position,
             Quaternion.LookRotation(direction));

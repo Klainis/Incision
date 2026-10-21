@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4275104548347982271}
   - component: {fileID: 4962274793527217642}
   - component: {fileID: 7040988457720755023}
-  - component: {fileID: 5130038960231607317}
+  - component: {fileID: 5632573158831545179}
   - component: {fileID: 7386654290326206366}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 886
+    m_Bits: 6583
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -198,7 +198,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5130038960231607317
+--- !u!114 &5632573158831545179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,11 +207,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3073034408043554007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcabe56ae2822fb419a5f0843d11fe1c, type: 3}
+  m_Script: {fileID: 11500000, guid: bed292c4d16b97149aabb6f73cbb4ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyTime: 5
-  _trailRenderer: {fileID: 4962274793527217642}
+  _disposeType: 1
+  _destroyTime: 7
+  _projectileRigidbody: {fileID: 0}
 --- !u!114 &7386654290326206366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,7 @@ GameObject:
   - component: {fileID: 1432731467708799152}
   - component: {fileID: 2388615194675819355}
   - component: {fileID: 3750521517939360346}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,6 +299,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 93761508d1028e64cb87ecd94ad9f93d, type: 2}
   - {fileID: 2100000, guid: 1b36630a06900c1459e4f69ee0e71c89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
