@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
-using Incision.Enemies.Interfaces;
 using Incision.Enemies.Templates;
 using UnityEngine;
 
@@ -15,7 +14,9 @@ namespace Incision.Enemies.Runtime.Attacks
         private readonly EnemyProjectile _projectilePrefab;
         private readonly string _animationTrigger;
 
-
+        private Vector3 direction;
+        private Vector3 origin;
+        
         public RangedAttack(RangedAttackTemplate template) : base(template)
         {
             _speed = template.ProjectileSpeed;
@@ -29,17 +30,22 @@ namespace Incision.Enemies.Runtime.Attacks
             return base.CanAttack(attackPoint, target);
         }
 
-        protected override Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
+        protected override async Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
         {
             enemy.View?.TriggerAttack(_animationTrigger);
             
-            Vector3 origin = attackPoint.position + Vector3.up * 1.2f;
-            Vector3 dir = (target.position - origin).normalized;
+            origin = attackPoint.position + Vector3.up * 1.2f;
+            direction = (target.position - origin).normalized;
 
-            var p = Object.Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(dir));
+            await Task.Yield();
+        }
+
+        protected override async Task ExecuteAttack(Enemy enemy)
+        {
+            var p = Object.Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(direction));
             p.Initialize(Damage);
-            p.Rigidbody.AddForce(dir * _speed, _forceMode);
-            return Task.CompletedTask;
+            p.Rigidbody.AddForce(direction * _speed, _forceMode);
+            await Task.Yield();
         }
     }
 }
