@@ -1,11 +1,16 @@
 using Incision.Enemies.Components;
+using Incision.Enemies.Structs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
+using VContainer.Unity;
 
 public class PlayerHealth : Health
 {
     [SerializeField] private PlayerStats _playerStatsData;
     [SerializeField] private UIHealth _healthBar;
+
+    [Inject] private UIEffectManager _uiEffectManager;
     
     private void Start()
     {
@@ -15,12 +20,14 @@ public class PlayerHealth : Health
     private void OnEnable()
     {
         OnChanged += _healthBar.TakeDamage;
+        OnChanged += TakeDamageEffect;
         OnDied += Die;
     }
 
     private void OnDisable()
     {
         OnChanged -= _healthBar.TakeDamage;
+        OnChanged -= TakeDamageEffect;
         OnDied -= Die;
     }
 
@@ -30,5 +37,10 @@ public class PlayerHealth : Health
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         //DieEffect();
+    }
+
+    private void TakeDamageEffect(DamageInfo info, float currentHealth, float maxHealth)
+    {
+        _uiEffectManager.ShowBloodScreen();
     }
 }
