@@ -11,7 +11,7 @@ namespace Incision.Enemies.Components
         private GameObject _owner;
         private float _life = 5f;
 
-        public void Launch(Vector3 dir, float speed, float damage, GameObject owner)//Наверное лучше получать через Launch data врага и потом назначать урон из нее? 
+        public void Launch(Vector3 dir, float speed, float damage, GameObject owner)
         {
             _dir = dir; _speed = speed; _damage = damage; _owner = owner;
             Destroy(gameObject, _life);
@@ -21,21 +21,34 @@ namespace Incision.Enemies.Components
         {
             transform.position += _speed * Time.deltaTime * _dir;
         }
-
-        private void OnTriggerEnter(Collider other)
+        
+        protected override void OnTargetCollision(Collision collision, IDamageable damageable)
         {
-            if (other.gameObject == _owner) return;
-            if (other.TryGetComponent<IDamageable>(out var d))
-            {
-                d.TakeDamage(new DamageInfo
-                (   
-                    _damage,
-                    _owner,
-                    transform.position,
-                    IsCrit
-                ));
-            }
-            Destroy(gameObject);
+            SpawnEffectOnDestroy();
+            damageable.TakeDamage(new DamageInfo
+            (
+                _damage,
+                _owner,
+                transform.position,
+                IsCrit
+            ));
         }
+
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     Debug.Log($"Collision with {other.gameObject.name}");
+        //     if (other.gameObject == _owner) return;
+        //     if (other.TryGetComponent<IDamageable>(out var d))
+        //     {
+        //         d.TakeDamage(new DamageInfo
+        //         (   
+        //             _damage,
+        //             _owner,
+        //             transform.position,
+        //             IsCrit
+        //         ));
+        //     }
+        //     Destroy(gameObject);
+        // }
     }
 }

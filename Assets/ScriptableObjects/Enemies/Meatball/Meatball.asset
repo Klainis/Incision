@@ -17,5 +17,4 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: 52d3e7e03fd54474d9d05745500293e6, type: 2}
   _aiProfile: {fileID: 11400000, guid: a86a05e7f6e803d48979bc18307fb036, type: 2}
   _attacks:
-  - {fileID: 11400000, guid: b53d50fab6ed0554882cd455e88ece2b, type: 2}
   - {fileID: 11400000, guid: 23ab4d2f54e9ec64eb0c671c07e95644, type: 2}

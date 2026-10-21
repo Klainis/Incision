@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: MeatballRanged
   m_EditorClassIdentifier: 
   _damage: 8
-  _range: 2
+  _hitRange: 20
+  _onHitRangeMultiplier: 1.15
   _cooldown: 1
   _animationTrigger: Shoot
-  _projectileSpeed: 14
-  _projectilePrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 7386654290326206366, guid: 50c4c51417f3f2148a298f3639464b04, type: 3}
+  _projectileSpeed: 20

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5364793232085874737}
   m_Layer: 7
-  m_Name: OverlapPoint
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
