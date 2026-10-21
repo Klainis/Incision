@@ -292,6 +292,7 @@ MonoBehaviour:
   _animEvents: {fileID: 1741186227648248699}
   _effector: {fileID: 8291198321038622214}
   _rigidbody: {fileID: 1568119767686972368}
+  _collider: {fileID: 1778571768955393300}
 --- !u!114 &5971353343630096215
 MonoBehaviour:
   m_ObjectHideFlags: 0

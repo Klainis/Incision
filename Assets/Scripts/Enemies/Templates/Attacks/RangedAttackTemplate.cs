@@ -10,7 +10,7 @@ namespace Incision.Enemies.Templates
     {
         [Header("Ranged specific parameters")]
         [SerializeField] private EnemyProjectile _projectilePrefab;
-        [SerializeField, Range(1f, 20f)] private float _projectileSpeed = 14f;
+        [SerializeField, Range(1f, 100f)] private float _projectileSpeed = 14f;
         
         public float ProjectileSpeed => _projectileSpeed;
         public EnemyProjectile ProjectilePrefab => _projectilePrefab;

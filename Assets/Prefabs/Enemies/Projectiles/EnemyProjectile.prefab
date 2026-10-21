@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4275104548347982271}
   - component: {fileID: 4962274793527217642}
   - component: {fileID: 7040988457720755023}
-  - component: {fileID: 5632573158831545179}
   - component: {fileID: 7386654290326206366}
   m_Layer: 12
   m_Name: EnemyProjectile
@@ -60,7 +59,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 16
   m_CollisionDetection: 2
@@ -198,21 +197,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5632573158831545179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3073034408043554007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed292c4d16b97149aabb6f73cbb4ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _disposeType: 1
-  _destroyTime: 7
-  _projectileRigidbody: {fileID: 0}
 --- !u!114 &7386654290326206366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,18 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _disposeType: 1
-  _cardRoot: {fileID: 0}
   _destroyTime: 6
-  _projectileMinScale: 1
-  _projectileMaxScale: 2
-  _distanceForChangeScale: 50
   _projectileRigidbody: {fileID: 4275104548347982271}
-  _spawnEffectOnDestroy: 0
-  _hitEffect: {fileID: 0}
-  _bloodHitEffect: {fileID: 0}
-  _cardRotaionSpeed: 180
-  _trailRenderer: {fileID: 4962274793527217642}
-  _projectileColliderForEnemy: {fileID: 7040988457720755023}
 --- !u!1 &4249867061663105013
 GameObject:
   m_ObjectHideFlags: 0

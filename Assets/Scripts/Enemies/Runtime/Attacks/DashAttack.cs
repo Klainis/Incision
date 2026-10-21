@@ -1,133 +1,138 @@
-using System;
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
-using Incision.Extensions;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Incision.Enemies.Runtime.Attacks
 {
     public class DashAttack : Attack
     {
+        #region Fields
         private readonly string _animationTrigger;
         public float EffectiveHitRange { get; }
         public float Distance { get; }
         public float JumpHeight { get; }
-        public float StartDelay { get; }
-        public float EndDelay { get; }
         public float Duration { get; }
         public float Speed { get; }
+        #endregion
         
         private Enemy _pendingEnemy;
         private Transform _pendingAttackPoint;
         private Transform _pendingTarget;
         private EnemyAnimEvents _pendingEvents;
-        private int _pendingVersion;
+        private byte _currentVersion;
+        private byte _pendingVersion;
+
+        private Vector3 _direction;
+
+        private Rigidbody _rb;
+        private NavMeshAgent _agent;
+
+        private bool _wasAgentOn;
+        private bool _rbWasKinematic;
+        private bool _rbHadGravity;
+        private RigidbodyInterpolation _rbInterpolation;
+        private CollisionDetectionMode _rbCollisionMode;
 
         public DashAttack(DashAttackTemplate template) : base(template)
         {
             _animationTrigger = template.AnimationTrigger;
             Distance = template.Distance;
             JumpHeight = template.JumpHeight;
-            StartDelay = template.StartDelay;
-            EndDelay = template.EndDelay;
             Duration = template.Duration;
             Speed = template.Speed;
 
             EffectiveHitRange = HitRange * OnHitRangeMultiplier;
         }
 
-        public override async Task Execute(Enemy enemy, Transform attackPoint, Transform target)
+        protected override bool AreConditionsMet(Enemy enemy, Transform attackPoint, Transform target)
         {
-            if (enemy == null || attackPoint == null || target == null) return;
-            if (enemy.AnimationEvents == null) return;
-            if (!enemy.Rigidbody) return;
-
-            var agent = enemy.Agent;
-            var rb = enemy.Rigidbody;
-            
-            var wasAgentOn = agent != null && agent.enabled;
-            var wasKinematic = rb.isKinematic;
-            var hadGravity = rb.useGravity;
-            var  wasInterp = rb.interpolation;
-            var  wasCollision = rb.collisionDetectionMode;
-            var  wasConstraints = rb.constraints;
-            
-            var version = BeginPendingHit(enemy, attackPoint, target, enemy.AnimationEvents);
-            try
-            {
-                if (enemy == null || version != _pendingVersion) return;
-                await Task.Delay(StartDelay.AsMilliseconds());
-
-                enemy.View?.TriggerAttack(_animationTrigger);
-
-                if (agent != null && agent.enabled)
-                {
-                    agent.isStopped = true;
-                    agent.enabled = false;
-                }
-
-                rb.isKinematic = false;
-                rb.useGravity = false;
-                rb.interpolation = RigidbodyInterpolation.Interpolate;
-                rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
-
-                Vector3 dir = enemy.transform.forward;
-
-                float linearSpeed = Distance / Duration * Speed;
-                float elapsed = 0f;
-
-                while (elapsed < Duration)
-                {
-                    if (version != _pendingVersion || enemy == null) return;
-                    if (Time.timeScale <= 0f) { await Task.Yield(); continue; }
-
-                    var t  = elapsed / Duration;
-                    var vy = JumpHeight > 0f
-                        ? JumpHeight * Mathf.PI / Duration * Mathf.Cos(t * Mathf.PI)
-                        : 0f;
-
-                    rb.velocity = dir * linearSpeed + Vector3.up * vy;
-
-                    await Task.Yield();
-                    elapsed += Time.deltaTime;
-                }
-
-                rb.velocity = Vector3.zero;
-                
-                await Task.Delay(EndDelay.AsMilliseconds());
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-            }
-            finally
-            {
-                if (rb != null)
-                {
-                    rb.velocity = Vector3.zero;
-                    rb.isKinematic = wasKinematic;
-                    rb.useGravity = hadGravity;
-                    rb.interpolation = wasInterp;
-                    rb.collisionDetectionMode = wasCollision;
-                    rb.constraints = wasConstraints;
-                }
-
-                if (agent != null && wasAgentOn)
-                {
-                    agent.enabled = true;
-                    if (agent.isOnNavMesh) agent.isStopped = false;
-                }
-
-                if (version == _pendingVersion) 
-                    EndPendingHit();
-            }
+            var prev = base.AreConditionsMet(enemy,attackPoint,target);
+            return
+                prev &&
+                enemy.Agent &&
+                enemy.AnimationEvents &&
+                enemy.Rigidbody;
         }
 
-        private int BeginPendingHit(Enemy enemy, Transform attackPoint, Transform target, EnemyAnimEvents events)
+        protected override async Task ExecuteAttack(Enemy enemy)
+        {
+            var linearSpeed = Distance / Duration * Speed;
+            var elapsed = 0f;
+
+            while (elapsed < Duration)
+            {
+                if (_currentVersion != _pendingVersion || !enemy) return;
+                if (Time.timeScale <= 0f) { await Task.Yield(); continue; }
+
+                var t  = elapsed / Duration;
+                var vy = JumpHeight > 0f
+                    ? JumpHeight * Mathf.PI / Duration * Mathf.Cos(t * Mathf.PI)
+                    : 0f;
+
+                _rb.velocity = _direction * linearSpeed + Vector3.up * vy;
+
+                await Task.Yield();
+                elapsed += Time.deltaTime;
+            }
+
+            _rb.velocity = Vector3.zero;
+        }
+
+        protected override async Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
+        {
+            _agent = enemy.Agent;
+            _rb = enemy.Rigidbody;
+            
+            _rbWasKinematic = _rb.isKinematic;
+            _rbHadGravity = _rb.useGravity;
+            _rbInterpolation = _rb.interpolation;
+            _rbCollisionMode = _rb.collisionDetectionMode;
+            
+            enemy.View?.TriggerAttack(_animationTrigger);
+
+            _wasAgentOn = _agent.enabled;
+            _agent.isStopped = true;
+            _agent.enabled = false;
+
+            _rb.isKinematic = false;
+            _rb.useGravity = false;
+            _rb.interpolation = RigidbodyInterpolation.Interpolate;
+            _rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            
+            _direction = enemy.transform.forward;
+            
+            _currentVersion = BeginPendingHit(enemy, attackPoint, target, enemy.AnimationEvents);
+            await Task.Yield();
+        }
+
+        protected override async Task EndAttack()
+        {
+            if (_rb)
+            {
+                _rb.velocity = Vector3.zero;
+                _rb.isKinematic = _rbWasKinematic;
+                _rb.useGravity = _rbHadGravity;
+                _rb.interpolation = _rbInterpolation;
+                _rb.collisionDetectionMode = _rbCollisionMode;
+            }
+
+            if (_agent)
+            {
+                _agent.enabled = _wasAgentOn;
+                if (_agent.isOnNavMesh) _agent.isStopped = !_wasAgentOn;
+            }
+
+            if (_currentVersion == _pendingVersion) 
+                EndPendingHit();
+            
+            await Task.Yield();
+        }
+
+        private byte BeginPendingHit(Enemy enemy, Transform attackPoint, Transform target, EnemyAnimEvents events)
         {
             EndPendingHit();
 

@@ -525,7 +525,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1937
+    m_Bits: 8081
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6369,7 +6369,6 @@ MonoBehaviour:
   _crosshair: {fileID: 8934482276816931846}
   _weaponMuzzle: {fileID: 6856499010022338986}
   _forceMode: 1
-  _force: 150
   _maxRange: 500
 --- !u!114 &407688280574520054
 MonoBehaviour:

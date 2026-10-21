@@ -29,7 +29,7 @@ namespace Incision.Enemies.Runtime.Attacks
             return base.CanAttack(attackPoint, target);
         }
 
-        public override Task Execute(Enemy enemy, Transform attackPoint, Transform target)
+        protected override Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
         {
             enemy.View?.TriggerAttack(_animationTrigger);
             
