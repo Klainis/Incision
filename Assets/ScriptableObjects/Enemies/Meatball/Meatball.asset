@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Meatball
   m_EditorClassIdentifier: 
   _id: meatball
+  _type: 2
   _prefab: {fileID: 5796007725544060031, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
   _stats: {fileID: 11400000, guid: 52d3e7e03fd54474d9d05745500293e6, type: 2}
-  _aiProfile: {fileID: 11400000, guid: a86a05e7f6e803d48979bc18307fb036, type: 2}
+  _aiProfile: {fileID: 11400000, guid: fc15ae34daa9b9c4099defe210f94a5d, type: 2}
   _attacks:
   - {fileID: 11400000, guid: 23ab4d2f54e9ec64eb0c671c07e95644, type: 2}

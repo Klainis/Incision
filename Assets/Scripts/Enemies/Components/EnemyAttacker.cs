@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Templates;
 using UnityEngine;
+using VContainer;
 
 namespace Incision.Enemies.Components
 {
@@ -19,6 +20,8 @@ namespace Incision.Enemies.Components
 
         public bool IsAttacking { get; private set; }
 
+        [Inject] private IObjectResolver _resolver;
+
         public void Initialize(Enemy enemy, IReadOnlyList<AttackTemplate> attackTemplates)
         {
             _enemy = enemy;
@@ -29,7 +32,9 @@ namespace Incision.Enemies.Components
             foreach (var tpl in attackTemplates)
             {
                 if (tpl == null) continue;
-                _attacks.Add(tpl.CreateRuntime());
+                var attack = tpl.CreateRuntime();
+                _resolver.Inject(attack);
+                _attacks.Add(attack);
                 if (_minAttackRange > tpl.HitRange)
                     _minAttackRange = tpl.HitRange;
             }
@@ -52,7 +57,7 @@ namespace Incision.Enemies.Components
 
         public async Task TryAttack(Transform target)
         {
-            if (_cooldownTimer > 0f || target == null) return;
+            if (_cooldownTimer > 0f || !target) return;
 
             IsAttacking = true;
 
@@ -66,7 +71,7 @@ namespace Incision.Enemies.Components
             IsAttacking = false;
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (_attacks == null || _attacks.Count == 0) return;
             Gizmos.color = Color.red;

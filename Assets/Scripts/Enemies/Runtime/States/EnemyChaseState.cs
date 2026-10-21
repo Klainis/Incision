@@ -1,15 +1,16 @@
 using Incision.Enemies.Components;
+using Incision.Enemies.Enums;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.States
 {
-
     public class EnemyChaseState : EnemyStateBase
     {
         private readonly EnemyMotor _motor;
         private readonly EnemyAttacker _attacker;
         private readonly EnemyView _view;
-        private Transform target;
+        
+        private Transform _target;
 
         public EnemyChaseState(EnemyBrain brain, Enemy enemy) : base(brain, enemy)
         {
@@ -21,25 +22,25 @@ namespace Incision.Enemies.Runtime.States
         public override void Start()
         {
             _view.SetSwitch("IsRunning", true);
-            target = Brain.CurrentTarget;
+            _target = Brain.CurrentTarget;
         }
 
         public override void Dispose()
         {
             _view.SetSwitch("IsRunning", false);
-            target = null;
+            _target = null;
             base.Dispose();
         }
 
         public override void Tick()
         {
-            if (target == null)
+            if (!_target)
             {
                 Brain.ChangeState<EnemyPatrolState>();
                 return;
             }
 
-            float dist = Vector3.Distance(Enemy.transform.position, target.position);
+            float dist = Vector3.Distance(Enemy.transform.position, _target.position);
             if (dist > Enemy.Stats.LoseTargetRadius)
             {
                 Brain.SetTarget(null);
@@ -47,14 +48,18 @@ namespace Incision.Enemies.Runtime.States
                 return;
             }
 
-            if (_attacker != null && _attacker.IsInRange(target))
+            if (_attacker && _attacker.IsInRange(_target))
             {
-                Brain.ChangeState<EnemyAttackState>();
+                if (Enemy.Template.Type == EnemyType.Flying && 
+                    Brain.HasState<EnemyStrafeState>())
+                    Brain.ChangeState<EnemyStrafeState>();
+                else
+                    Brain.ChangeState<EnemyAttackState>();
                 return;
             }
             
-            _motor.FaceTarget(target.position);
-            _motor.MoveTo(target.position);
+            _motor.FaceTarget(_target.position);
+            _motor.MoveTo(_target.position);
         }
     }
 }

@@ -9,9 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3cc13ac0bb8c346ba1f1000b228d98, type: 3}
+  m_Script: {fileID: 11500000, guid: 917e6218f5c61fe44a6403a75bd38682, type: 3}
   m_Name: MeatballAI
   m_EditorClassIdentifier: 
-  _type: 2
-  _idleTime: 0.5
-  _patrolRadius: 2
+  _idleTime: 2
+  _patrolRadius: 3
+  _minAltitude: 8
+  _maxAltitude: 100
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 1025
+  _hoverAmplitude: 2.5
+  _hoverFrequency: 0.5
+  _maxBankAngle: 30
+  _bankSmoothing: 6
+  _avoidanceRadius: 5
+  _avoidanceLookAhead: 1
+  _avoidanceStrength: 3
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 7575
+  _arriveSlowdownRadius: 4
+  _stopDistance: 1
+  _useStrafe: 1
+  _flyingCombatHeight: 10
+  _strafeRadius: 8
+  _strafeSwitchInterval: 8

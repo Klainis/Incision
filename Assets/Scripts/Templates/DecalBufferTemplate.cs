@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-[CreateAssetMenu(fileName = "DecalBufferTemplate", menuName = "Global/DecalBuffer")]
+[CreateAssetMenu(menuName = "General/DecalBuffer", fileName = "DecalBufferTemplate")]
 public class DecalBufferTemplate : ScriptableObject
 {
     [SerializeField] private DecalProjector projector;

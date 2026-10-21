@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Incision.Enemies.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Attacks/Ranged", fileName = "RangedTemplate")]
+    [CreateAssetMenu(menuName = "General/Enemy/Attacks/Ranged", fileName = "RangedTemplate")]
     public class RangedAttackTemplate : AttackTemplate
     {
         [Header("Ranged specific parameters")]

@@ -1,4 +1,5 @@
 using System;
+using Incision.Data;
 using UnityEngine;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime;

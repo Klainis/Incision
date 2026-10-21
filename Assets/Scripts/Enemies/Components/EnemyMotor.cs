@@ -1,46 +1,31 @@
+using Incision.Data;
 using Incision.Enemies.Interfaces;
-using Incision.Enemies.Runtime;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Incision.Enemies.Components
-{
-    public class EnemyMotor : MonoBehaviour
+{ 
+    public abstract class EnemyMotor : MonoBehaviour
     {
-        private NavMeshAgent _agent;
-        [SerializeField] private float _stoppingDistance = 1f;
+        protected Stats _stats;
+        protected Stats Stats => _stats;
 
-        private INavMeshService _navMesh;
-        private Stats _stats;
+        public abstract float CurrentSpeed { get; }
+        public abstract bool ReachedDestination { get; }
+        public abstract Vector3 Velocity { get; }
 
-        public bool ReachedDestination => _navMesh != null && _navMesh.ReachedDestination(_agent);
+        public bool IsMovementLocked { get; protected set; } = false;
 
-        public void Initialize(NavMeshAgent agent, Stats stats, INavMeshService navMesh)
-        {
-            _agent = agent;
-            _stats = stats;
-            _navMesh = navMesh;
+        public virtual float NormalizedSpeed
+            => Stats is { MoveSpeed: > 0.0001f }
+                ? Mathf.Clamp01(CurrentSpeed / Stats.MoveSpeed)
+                : 0f;
 
-            _navMesh.Configure(
-                _agent,
-                speed: stats.MoveSpeed,
-                acceleration: stats.Acceleration,
-                angularSpeed: stats.TurnSpeed * 60f,
-                stoppingDistance: _stoppingDistance);
-        }
+        public virtual bool IsMoving => CurrentSpeed > 0.05f;
 
-        public bool MoveTo(Vector3 position)
-            => _navMesh.MoveTo(_agent, position);
-
-        public void Stop()
-            => _navMesh.Stop(_agent);
-
-        public bool Warp(Vector3 position)
-            => _navMesh.Warp(_agent, position);
-
-        public void FaceTarget(Vector3 worldPosition)
-            => _navMesh.FaceTarget(transform, worldPosition, _stats.TurnSpeed);
-        
-        
+        public abstract void Initialize(Enemy enemy, Stats stats, INavMeshService services);
+        public abstract bool MoveTo(Vector3 position);
+        public abstract void Stop();
+        public abstract bool Warp(Vector3 position);
+        public abstract void FaceTarget(Vector3 position);
     }
 }

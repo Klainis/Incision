@@ -42,7 +42,7 @@ namespace Incision.Enemies.Components
                 
                 foreach (var entry in wave.Entries)
                 {
-                    var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.AIProfile.Type)).ToArray();
+                    var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.Type)).ToArray();
                     var listSize = allowedList.Length;
                     if (listSize == 0)
                     {

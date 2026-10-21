@@ -1,9 +1,9 @@
-using Incision.Enemies.Runtime;
+using Incision.Data;
 using UnityEngine;
 
 namespace Incision.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Stats", fileName = "StatsTemplate")]
+    [CreateAssetMenu(menuName = "General/Stats", fileName = "StatsTemplate")]
     public class StatsTemplate : ScriptableObject
     {
         [Header("General")]
@@ -20,9 +20,9 @@ namespace Incision.Templates
         [SerializeField, Range(5f, 20f)] private float _turnSpeed = 10f;
         
         [Header("Detection")]
-        [SerializeField, Range(0f, 50f)] private float _detectionRadius = 12;
+        [SerializeField, Range(0f, 100f)] private float _detectionRadius = 12;
         [SerializeField, Range(0f, 10f)] private float _loseDetectionRadiusDelta = 3;
-        [ReadOnly] [SerializeField, Range(0f, 100f)] private float _loseTargetRadius;
+        [ReadOnly] [SerializeField, Range(0f, 200f)] private float _loseTargetRadius;
 
         private void OnValidate()
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Incision.Enemies.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Attacks/Dash", fileName = "DashTemplate")]
+    [CreateAssetMenu(menuName = "General/Enemy/Attacks/Dash", fileName = "DashTemplate")]
     public class DashAttackTemplate : AttackTemplate
     {
         [Header("Dash specific parameters")] 

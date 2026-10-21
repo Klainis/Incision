@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Incision.Enemies.Enums;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Runtime.States;
 using Incision.Enemies.Structs.Events;
@@ -33,6 +34,12 @@ namespace Incision.Enemies.Components
             _states[typeof(EnemyChaseState)] = new EnemyChaseState(this, enemy);
             _states[typeof(EnemyAttackState)] = new EnemyAttackState(this, enemy);
             _states[typeof(EnemyDeadState)] = new EnemyDeadState(this, enemy);
+
+            if (_enemy.Template.Type == EnemyType.Flying &&
+                _profile is FlyingEnemyAITemplate { UseStrafe: true } flyingProfile)
+            {
+                _states[typeof(EnemyStrafeState)] = new EnemyStrafeState(this, enemy, flyingProfile);
+            }
             
             ChangeState<EnemyIdleState>();
         }
@@ -48,10 +55,15 @@ namespace Incision.Enemies.Components
             _current.Start();
         }
         
+        public bool HasState<T>() where T : EnemyStateBase
+        {
+            return _states.ContainsKey(typeof(T));
+        }
+        
         public Transform CurrentTarget { get; private set; }
         public void SetTarget(Transform target) => CurrentTarget = target;
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             if (_current == null)
                 return;

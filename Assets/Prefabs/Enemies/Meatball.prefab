@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3788130338309070002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.96, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 5926420458263635318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -193,13 +193,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8335477266685251302}
   - component: {fileID: 1778571768955393300}
-  - component: {fileID: 1017903920227990166}
   - component: {fileID: 5796007725544060031}
   - component: {fileID: 5971353343630096215}
-  - component: {fileID: 6329988965933231909}
   - component: {fileID: 7277317956220746456}
   - component: {fileID: 4668799313484945798}
   - component: {fileID: 3089595376552935454}
+  - component: {fileID: 1779657087116370144}
   - component: {fileID: 8291198321038622214}
   - component: {fileID: 1568119767686972368}
   m_Layer: 7
@@ -247,29 +246,7 @@ CapsuleCollider:
   m_Radius: 1.5
   m_Height: 2.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
---- !u!195 &1017903920227990166
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343032202664805475}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.5
-  m_Speed: 8
-  m_Acceleration: 10
-  avoidancePriority: 50
-  m_AngularSpeed: 360
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 3
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5796007725544060031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,16 +260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 5971353343630096215}
-  _motor: {fileID: 6329988965933231909}
+  _motor: {fileID: 1779657087116370144}
   _brain: {fileID: 7277317956220746456}
   _attacker: {fileID: 3089595376552935454}
   _view: {fileID: 4668799313484945798}
-  _navMeshAgent: {fileID: 1017903920227990166}
+  _navMeshAgent: {fileID: 0}
   _animator: {fileID: 1116640285004390585}
   _animEvents: {fileID: 1741186227648248699}
   _effector: {fileID: 8291198321038622214}
   _rigidbody: {fileID: 1568119767686972368}
-  _collider: {fileID: 1778571768955393300}
 --- !u!114 &5971353343630096215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,19 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa0b1bfb06594d4a90ebcfbb4986ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6329988965933231909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343032202664805475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a86845a558d12c44975f6ba12d62bda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stoppingDistance: 0.1
 --- !u!114 &7277317956220746456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +319,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5364793232085874737}
+--- !u!114 &1779657087116370144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343032202664805475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be97282489a511848969c917056dd84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8291198321038622214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +372,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 80
+  m_CollisionDetection: 3

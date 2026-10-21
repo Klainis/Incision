@@ -1,7 +1,7 @@
 
 using Incision.Templates;
 
-namespace Incision.Enemies.Runtime
+namespace Incision.Data
 {
     public class Stats
     {
