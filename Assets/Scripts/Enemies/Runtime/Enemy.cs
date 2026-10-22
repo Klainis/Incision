@@ -1,7 +1,6 @@
 
+using Incision.Data;
 using Incision.Enemies.Interfaces;
-using Incision.Enemies.Runtime;
-using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
 using Incision.Interfaces;
 using UnityEngine;
@@ -54,7 +53,7 @@ namespace Incision.Enemies.Components
             
             _rigidbody.mass = stats.Mass;
 
-            _motor.Initialize(_navMeshAgent, stats, _navMesh);
+            _motor.Initialize(this, stats, _navMesh);
             _brain.Initialize(this, template.AIProfile, _health, _targetProvider);
             
             if (_attacker == null)

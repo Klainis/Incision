@@ -28,7 +28,7 @@ namespace Incision.Enemies.Runtime.States
         public override void Tick()
         {
             target = _targetProvider.GetTarget(Enemy.transform, Enemy.Stats.DetectionRadius);
-            if (target != null)
+            if (target)
             {
                 Brain.SetTarget(target);
                 Brain.ChangeState<EnemyChaseState>();

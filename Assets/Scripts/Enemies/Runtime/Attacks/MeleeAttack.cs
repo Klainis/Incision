@@ -16,7 +16,7 @@ namespace Incision.Enemies.Runtime.Attacks
             _animationTrigger = template.AnimationTrigger;
         }
 
-        public override Task Execute(Enemy enemy, Transform attackPoint, Transform target)
+        protected override Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
         {
             if (target == null) return Task.CompletedTask;
 

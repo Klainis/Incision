@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18abcb83bc72bb4bb6f8129cc198ad5, type: 3}
   m_Name: MeatballData
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _moveSpeed: 3.5
-  _turnSpeed: 10
+  _mass: 100
+  _maxHealth: 75
   _armor: 0
-  _attackDamage: 10
-  _attackRange: 2
-  _attackCooldown: 1
-  _detectionRadius: 12
-  _loseTargetRadius: 8
+  _moveSpeed: 10
+  _accelerationRate: 10
+  _acceleration: 100
+  _turnSpeed: 12
+  _detectionRadius: 50
+  _loseDetectionRadiusDelta: 3
+  _loseTargetRadius: 53

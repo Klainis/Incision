@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7158b56b90539c2458fde8856c3fc169, type: 3}
-  m_Name: MeatballMelee
+  m_Script: {fileID: 11500000, guid: 1add1f58fec1bb24384cad6bfab86cf8, type: 3}
+  m_Name: OnlyFlyingWavePattern
   m_EditorClassIdentifier: 
-  _damage: 8
-  _range: 2
-  _cooldown: 1
-  _animationTrigger: Melee
+  _waves:
+  - StartDelay: 300
+    Entries:
+    - Enemy: {fileID: 11400000, guid: 757a6e15508412b489888be931e0076c, type: 2}
+      Count: 20
+      Interval: 150

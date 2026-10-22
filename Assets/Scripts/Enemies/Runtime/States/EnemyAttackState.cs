@@ -12,8 +12,8 @@ namespace Incision.Enemies.Runtime.States
 
         public EnemyAttackState(EnemyBrain brain, Enemy enemy) : base(brain, enemy)
         {
-            _motor = enemy.GetComponent<EnemyMotor>();
-            _attacker = enemy.GetComponent<EnemyAttacker>();
+            _motor = enemy.Motor;
+            _attacker = enemy.Attacker;
         }
 
         public override void Start()
@@ -33,7 +33,7 @@ namespace Incision.Enemies.Runtime.States
             if (_attacker.IsAttacking)
                 return;
             
-            if (target == null)
+            if (!target)
             {
                 Brain.ChangeState<EnemyPatrolState>();
                 return;
@@ -47,7 +47,7 @@ namespace Incision.Enemies.Runtime.States
                 return;
             }
             
-            _attacker.TryAttack(target);
+            _ = _attacker.TryAttack(target);
         }
     }
 }

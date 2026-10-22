@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8ca7b22b1fd614f8af696ee19534f5, type: 3}
   m_Name: PlayerStatData
   m_EditorClassIdentifier: 
-  _maxHP: 100
+  _mass: 70
+  _maxHealth: 100
+  _armor: 0
+  _moveSpeed: 3.5
+  _accelerationRate: 10
+  _acceleration: 35
+  _turnSpeed: 10
+  _detectionRadius: 12
+  _loseDetectionRadiusDelta: 3
+  _loseTargetRadius: 15
   _slamOverlapRadius: 4
   _slamStunTime: 1

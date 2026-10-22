@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Incision.Enemies.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Attacks/Melee", fileName = "MeleeTemplate")]
+    [CreateAssetMenu(menuName = "General/Enemy/Attacks/Melee", fileName = "MeleeTemplate")]
     public class MeleeAttackTemplate : AttackTemplate
     {
         public override IEnemyAttack CreateRuntime()

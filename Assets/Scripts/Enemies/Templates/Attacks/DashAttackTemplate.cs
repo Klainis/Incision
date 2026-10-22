@@ -4,21 +4,17 @@ using UnityEngine;
 
 namespace Incision.Enemies.Templates
 {
-    [CreateAssetMenu(menuName = "Enemies/Attacks/Dash", fileName = "DashTemplate")]
+    [CreateAssetMenu(menuName = "General/Enemy/Attacks/Dash", fileName = "DashTemplate")]
     public class DashAttackTemplate : AttackTemplate
     {
         [Header("Dash specific parameters")] 
         [SerializeField, Range(1f, 10f)] private float distance = 5f;
         [SerializeField, Range(0f, 10f)] private float jumpHeight = 5f;
-        [SerializeField, Range(0f, 3f)] private float startDelay = 0.1f;
-        [SerializeField, Range(0f, 3f)] private float endDelay = 0.1f;
         [SerializeField, Min(0f)] private float duration = 0.5f;
         [SerializeField, Min(0f)] private float speed = 3f;
         
         public float Distance => distance;
         public float JumpHeight => jumpHeight;
-        public float StartDelay => startDelay;
-        public float EndDelay => endDelay;
         public float Duration => duration;
         public float Speed => speed;
 

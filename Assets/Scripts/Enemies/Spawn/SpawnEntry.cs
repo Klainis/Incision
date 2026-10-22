@@ -1,5 +1,6 @@
 ﻿using System;
 using Incision.Enemies.Templates;
+using UnityEngine;
 
 namespace Incision.Enemies.Runtime
 {
@@ -7,7 +8,7 @@ namespace Incision.Enemies.Runtime
     public class SpawnEntry
     {
         public EnemyTemplate Enemy;
-        public int Count = 1;
-        public int Interval = 500;
+        [Min(0)] public int Count = 1;
+        [Min(0)] public int Interval = 500;
     }
 }
