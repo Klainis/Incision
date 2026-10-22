@@ -19,6 +19,6 @@ MonoBehaviour:
   _accelerationRate: 10
   _acceleration: 100
   _turnSpeed: 10
-  _detectionRadius: 32
+  _detectionRadius: 50
   _loseDetectionRadiusDelta: 3
-  _loseTargetRadius: 35
+  _loseTargetRadius: 53

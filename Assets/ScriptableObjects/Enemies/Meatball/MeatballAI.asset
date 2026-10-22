@@ -19,18 +19,18 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 1025
-  _hoverAmplitude: 2.5
+  _hoverAmplitude: 1
   _hoverFrequency: 0.5
   _maxBankAngle: 30
   _bankSmoothing: 6
   _avoidanceRadius: 5
-  _avoidanceLookAhead: 2
+  _avoidanceLookAhead: 3
   _avoidanceStrength: 3
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 7569
-  _arriveSlowdownRadius: 4
-  _stopDistance: 3
+  _arriveSlowdownRadius: 7
+  _stopDistance: 4
   _useStrafe: 0
   _flyingCombatHeight: 10
   _strafeRadius: 8

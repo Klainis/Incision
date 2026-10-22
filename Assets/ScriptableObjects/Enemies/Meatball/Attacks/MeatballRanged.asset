@@ -20,4 +20,4 @@ MonoBehaviour:
   endDelay: 0
   _animationTrigger: Shoot
   _projectilePrefab: {fileID: 7386654290326206366, guid: 50c4c51417f3f2148a298f3639464b04, type: 3}
-  _projectileSpeed: 25
+  _projectileSpeed: 32
