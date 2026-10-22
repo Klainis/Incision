@@ -47,7 +47,7 @@ namespace KinematicCharacterController.Walkthrough.Crouching
 
         private void HandleCameraInput()
         {
-            // Create the look input vector for the camera
+            // CreateCardProjectile the look input vector for the camera
             float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput);
             float mouseLookAxisRight = Input.GetAxisRaw(MouseXInput);
             Vector3 lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);

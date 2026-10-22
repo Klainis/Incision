@@ -5,18 +5,16 @@ namespace Incision.Enemies.Components
 {
     public class EnemyProjectile : Projectile
     {
-        private GameObject _owner;
-        public void Initialize(float damage, GameObject owner)
+        public void Initialize(float damage)
         {
             _damage = damage;
-            _owner = owner;
         }
 
         protected override void OnTargetCollision(Collision collision, IDamageable damageable)
         {
             base.OnTargetCollision(collision, damageable);
 
-            damageable.TakeDamage(new(Damage, _owner, collision.transform.position, IsCrit));
+            damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
         }
 
         protected override void OnOtherCollision()

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
   m_Name: Test2CardData
   m_EditorClassIdentifier: 
+  _id: test_card2_projectile
   _cardName: 
   _cardIcon: {fileID: 21300000, guid: 67f64b8e465b75d4ba208dc3a7700407, type: 3}
   _cardHandMaterial: {fileID: 2100000, guid: 1a06642cecbb4204b8da2e5c0c1fd9d5, type: 2}
@@ -23,5 +24,6 @@ MonoBehaviour:
   _attackSpeed: 50
   _critChance: 0.5
   _critDamageMultiplier: 1.5
+  _cardAbility: {fileID: 0}
   _abilityCoolDown: 5
   _spendAbilityAmmo: 10

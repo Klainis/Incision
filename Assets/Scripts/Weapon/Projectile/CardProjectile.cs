@@ -40,9 +40,10 @@ namespace Incision
             _canRotationCard = false;
         }
 
-        public void Initialize(float damage, bool isCrit, CardData cardData = null)
+        public void Initialize(float damage, bool isCrit, CardData cardData)
         {
-            if (cardData != null) _cardData = cardData;
+            _cardData = cardData;
+            _name = gameObject.name;
             _damage = damage;
             _isCrit = isCrit;
         }

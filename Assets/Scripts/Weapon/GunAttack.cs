@@ -1,7 +1,9 @@
 using Incision;
+using Incision.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class GunAttack : MonoBehaviour
 {
@@ -21,6 +23,9 @@ public class GunAttack : MonoBehaviour
     [Header("Range")]
     [SerializeField] private float _maxRange = 500f;
 
+    [Inject] private ProjectileFactory _projectileFactory;
+    [Inject] private IEventBus _eventBus;
+
     public void CardAttack()
     {
         if (!_hand.TryConsumeShot(out CardData cardData, out float damage, out bool isCrit))
@@ -28,12 +33,7 @@ public class GunAttack : MonoBehaviour
 
         Vector3 direction = CalculateAttackDirection();
 
-        CardProjectile projectile = (CardProjectile)Instantiate(
-            cardData.CardPrefab,
-            _weaponMuzzle.position,
-            Quaternion.LookRotation(direction));
-
-        projectile.Initialize(damage, isCrit, cardData);
+        var projectile = SpawnProjectile(cardData, damage, isCrit, direction);
         projectile.Rigidbody.AddForce(direction * cardData.ProjectileSpeed, _forceMode);
     }
 
@@ -43,9 +43,14 @@ public class GunAttack : MonoBehaviour
     //        return;
     //}
 
-    public Projectile SpawnProjectile()
+    public Projectile SpawnProjectile(CardData cardData, float damage, bool isCrit, Vector3 direction)
     {
-        return null;
+        var position = _weaponMuzzle.position;
+        var rotation = Quaternion.LookRotation(direction);
+
+        CardProjectile projectile = _projectileFactory.CreateCardProjectile(cardData, damage, isCrit, position, rotation);
+
+        return projectile;
     }
 
     private Vector3 CalculateAttackDirection()

@@ -41,26 +41,26 @@ public class DoubleRicochetAbility : CardAbility
         // Последний рикошет: бросает вторая карта в руке
         private bool FireSecondCard(AbilityContext ctx, Vector3 origin, Vector3 dir, Collider ignore)
         {
-            CardInstance second = null;
-            foreach (CardInstance c in ctx.Hand.Hand)
-            {
-                if (c != null && c != Owner) { second = c; break; }
-            }
+            //CardInstance second = null;
+            //foreach (CardInstance c in ctx.Hand.Hand)
+            //{
+            //    if (c != null && c != Owner) { second = c; break; }
+            //}
 
-            if (second == null || second.IsEmpty) return false;
+            //if (second == null || second.IsEmpty) return false;
 
-            float damage = second.RollDamage(out bool isCrit);
+            //float damage = second.RollDamage(out bool isCrit);
 
-            // applyAbility: false — умение второй карты не должно срабатывать от чужого броска
-            Projectile p = ctx.Gun.SpawnProjectile(
-                /*second, origin + dir * _def._followUpOffset, dir, damage, isCrit, applyAbility: false*/);
+            //// applyAbility: false — умение второй карты не должно срабатывать от чужого броска
+            //Projectile p = ctx.Gun.SpawnProjectile(
+            //    /*second, origin + dir * _def._followUpOffset, dir, damage, isCrit, applyAbility: false*/);
 
-            foreach (Collider col in p.GetComponentsInChildren<Collider>())
-                Physics.IgnoreCollision(col, ignore);
+            //foreach (Collider col in p.GetComponentsInChildren<Collider>())
+            //    Physics.IgnoreCollision(col, ignore);
 
-            // Вторая карта не запускает свою цепочку рикошетов
-            if (p is RicochetProjectile r)
-                r.ConfigureRicochet(0, null);
+            //// Вторая карта не запускает свою цепочку рикошетов
+            //if (p is RicochetProjectile r)
+            //    r.ConfigureRicochet(0, null);
 
             return true;
         }

@@ -41,7 +41,7 @@ namespace KinematicCharacterController.Walkthrough.PlayerCameraCharacterSetup
 
         private void HandleCameraInput()
         {
-            // Create the look input vector for the camera
+            // CreateCardProjectile the look input vector for the camera
             float mouseLookAxisUp = Input.GetAxisRaw("Mouse Y");
             float mouseLookAxisRight = Input.GetAxisRaw("Mouse X");
             _lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);
