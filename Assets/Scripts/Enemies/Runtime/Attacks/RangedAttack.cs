@@ -55,8 +55,6 @@ namespace Incision.Enemies.Runtime.Attacks
         {
             var projectile = _projectileFactory.CreateEnemyProjectile(_rangedAttackTemplate, Damage, origin, rotation);
 
-            //var p = _resolver.Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(direction));
-            //p.Initialize(Damage);
             projectile.Rigidbody.AddForce(direction * _speed, _forceMode);
             await Task.Yield();
         }

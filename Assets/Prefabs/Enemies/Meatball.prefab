@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 634035304570811870}
   - component: {fileID: 3054604690687893543}
   - component: {fileID: 5895140281324335160}
-  - component: {fileID: 1116640285004390585}
   - component: {fileID: 1741186227648248699}
   m_Layer: 7
   m_Name: Sphere
@@ -150,27 +149,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &1116640285004390585
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5926420458263635318}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b655ab6d038e5ad4a90a6ab15c868bdd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1741186227648248699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +243,7 @@ MonoBehaviour:
   _attacker: {fileID: 3089595376552935454}
   _view: {fileID: 4668799313484945798}
   _navMeshAgent: {fileID: 0}
-  _animator: {fileID: 1116640285004390585}
+  _animator: {fileID: 0}
   _animEvents: {fileID: 1741186227648248699}
   _effector: {fileID: 8291198321038622214}
   _rigidbody: {fileID: 1568119767686972368}
