@@ -1,3 +1,4 @@
+using Incision;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,8 @@ public class CardData : ScriptableObject
     [SerializeField][Range(0f, 1f)] private float _critChance = 0.1f;
     [SerializeField] private float _critDamageMultiplier = 1.5f;
 
-    [Header("Card Ability Attack")]
+    [Header("Card Ability")]
+    [SerializeField] private CardAbility _cardAbility;
     [SerializeField] private float _abilityCoolDown = 5f;
     [SerializeField] private int _spendAbilityAmmo = 10;
 
@@ -39,4 +41,5 @@ public class CardData : ScriptableObject
     public float CritDamageMultiplier => _critDamageMultiplier;
     public float AbilityCoolDown => _abilityCoolDown;
     public int SpendAbilityAmmo => _spendAbilityAmmo;
+    public CardAbility CardAbility => _cardAbility;
 }

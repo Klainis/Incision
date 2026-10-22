@@ -43,6 +43,11 @@ public class GunAttack : MonoBehaviour
     //        return;
     //}
 
+    public Projectile SpawnProjectile()
+    {
+        return null;
+    }
+
     private Vector3 CalculateAttackDirection()
     {
         Ray ray = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
