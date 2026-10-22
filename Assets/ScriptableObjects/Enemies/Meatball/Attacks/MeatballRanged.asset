@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeatballRanged
   m_EditorClassIdentifier: 
   _damage: 5
-  _hitRange: 18
+  _hitRange: 15
   _onHitRangeMultiplier: 1
   _cooldown: 2.5
   startDelay: 0

@@ -23,15 +23,15 @@ MonoBehaviour:
   _hoverFrequency: 0.5
   _maxBankAngle: 30
   _bankSmoothing: 6
-  _avoidanceRadius: 5
-  _avoidanceLookAhead: 3
-  _avoidanceStrength: 3
+  _avoidanceRadius: 7
+  _avoidanceLookAhead: 2
+  _avoidanceStrength: 1
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 7569
   _arriveSlowdownRadius: 7
-  _stopDistance: 4
-  _useStrafe: 0
+  _stopDistance: 2.5
+  _useStrafe: 1
   _flyingCombatHeight: 10
   _strafeRadius: 8
   _strafeSwitchInterval: 8

@@ -15,9 +15,9 @@ MonoBehaviour:
   _mass: 100
   _maxHealth: 75
   _armor: 0
-  _moveSpeed: 10
+  _moveSpeed: 12
   _accelerationRate: 10
-  _acceleration: 100
+  _acceleration: 120
   _turnSpeed: 12
   _detectionRadius: 50
   _loseDetectionRadiusDelta: 3
