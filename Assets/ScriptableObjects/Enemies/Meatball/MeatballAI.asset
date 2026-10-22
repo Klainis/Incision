@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Bits: 1025
   _hoverAmplitude: 1
   _hoverFrequency: 0.5
-  _maxBankAngle: 30
+  _maxBankAngle: 45
   _bankSmoothing: 6
   _avoidanceRadius: 7
   _avoidanceLookAhead: 2
@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Bits: 7569
   _arriveSlowdownRadius: 7
   _stopDistance: 2.5
-  _useStrafe: 1
+  _useStrafe: 0
   _flyingCombatHeight: 10
   _strafeRadius: 8
   _strafeSwitchInterval: 8

@@ -204,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.9
+      value: -30.48
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -45.61
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2523,13 +2523,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1116640285004390585, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8335477266685251302, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.6
+      value: -5.15
       objectReference: {fileID: 0}
     - target: {fileID: 8335477266685251302, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2537,7 +2533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8335477266685251302, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.7
+      value: -21.91
       objectReference: {fileID: 0}
     - target: {fileID: 8335477266685251302, guid: 2ceede8fb0366db48a527e53540c45a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17108,7 +17104,7 @@ PrefabInstance:
     - target: {fileID: 7372285748065355647, guid: e9f832f30fce2764b87aaf229f7ec1c2, type: 3}
       propertyPath: _waveTemplate
       value: 
-      objectReference: {fileID: 11400000, guid: 6663d0aa9c04b4b45acb154cf4e2ca2a, type: 2}
+      objectReference: {fileID: 11400000, guid: 3329440c5c4d9c942b9cbf1ca5a4b31f, type: 2}
     - target: {fileID: 7372285748065355647, guid: e9f832f30fce2764b87aaf229f7ec1c2, type: 3}
       propertyPath: _spawnPoints.Array.size
       value: 9
