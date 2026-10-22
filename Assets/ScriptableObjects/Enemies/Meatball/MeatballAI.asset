@@ -24,14 +24,14 @@ MonoBehaviour:
   _maxBankAngle: 30
   _bankSmoothing: 6
   _avoidanceRadius: 5
-  _avoidanceLookAhead: 1
+  _avoidanceLookAhead: 2
   _avoidanceStrength: 3
   _obstacleMask:
     serializedVersion: 2
-    m_Bits: 7575
+    m_Bits: 7569
   _arriveSlowdownRadius: 4
-  _stopDistance: 1
-  _useStrafe: 1
+  _stopDistance: 3
+  _useStrafe: 0
   _flyingCombatHeight: 10
   _strafeRadius: 8
   _strafeSwitchInterval: 8

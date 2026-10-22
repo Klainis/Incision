@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0007c46865d84c388b5b93914fc17fc3, type: 3}
   m_Name: MeatballRanged
   m_EditorClassIdentifier: 
-  _damage: 4
+  _damage: 5
   _hitRange: 18
   _onHitRangeMultiplier: 1
-  _cooldown: 0.5
+  _cooldown: 2.5
   startDelay: 0
   endDelay: 0
   _animationTrigger: Shoot
   _projectilePrefab: {fileID: 7386654290326206366, guid: 50c4c51417f3f2148a298f3639464b04, type: 3}
-  _projectileSpeed: 70
+  _projectileSpeed: 25

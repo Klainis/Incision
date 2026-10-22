@@ -53,11 +53,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.13760401, b: 0.08962262, a: 1}
-    - _FlashColor: {r: 0.7106918, g: 0.7106918, b: 0.7106918, a: 1}
+    - _Color: {r: 1, g: 0.050980374, b: 0, a: 1}
+    - _FlashColor: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0.25, g: 0, b: 0, a: 0}
     - _PositionRam: {r: 200, g: 200, b: 0, a: 0}
-    - _Tilling: {r: 4, g: 1, b: 0, a: 0}
+    - _Tilling: {r: 2, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4291787585093212539
 MonoBehaviour:
