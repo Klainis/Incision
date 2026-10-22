@@ -874,6 +874,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCanvas: {fileID: 914829754}
+  _hudCanvas: {fileID: 1015477106}
+  _bloodScreenObject: {fileID: 2128108747}
+  _bloodScreenDuration: 0.15
   _baseDamagePopupPrefab: {fileID: 9053562691385174541, guid: 935154cb9a696574fac4af28c066baed, type: 3}
   _critDamagePopupPrefab: {fileID: 9053562691385174541, guid: a0bfc5e5625d13243b2b093789386165, type: 3}
 --- !u!4 &223143315
@@ -12385,6 +12388,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!223 &1015477106 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4246069856598743805, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+  m_PrefabInstance: {fileID: 299563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1018945576
 GameObject:
   m_ObjectHideFlags: 0
@@ -23319,6 +23327,11 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!1 &2128108747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3902011087899527618, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+  m_PrefabInstance: {fileID: 299563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &324907880403113349
 PrefabInstance:
   m_ObjectHideFlags: 0
