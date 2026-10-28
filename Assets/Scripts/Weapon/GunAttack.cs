@@ -17,6 +17,9 @@ public class GunAttack : MonoBehaviour
 
     [SerializeField] private Transform _weaponMuzzle;
 
+    [Header("Collisions")]
+    [SerializeField] private LayerMask _enemyLayers;
+
     [Header("Force Settings")]
     [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
 
@@ -57,9 +60,7 @@ public class GunAttack : MonoBehaviour
     {
         Ray ray = _mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
 
-        Vector3 targetPoint = Physics.Raycast(ray, out RaycastHit hit, _maxRange)
-            ? hit.point
-            : ray.GetPoint(_maxRange);
+        Vector3 targetPoint = Physics.Raycast(ray, out RaycastHit hit, _maxRange) ? hit.point : ray.GetPoint(_maxRange);
 
         return (targetPoint - _weaponMuzzle.position).normalized;
     }
