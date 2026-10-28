@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SharperCardData
   m_EditorClassIdentifier: 
   _id: sharper_card_projectile
-  _cardName: 
+  _cardName: "\u0428\u0443\u043B\u0435\u0440"
   _cardIcon: {fileID: 2018903885, guid: bbb19eb7d57e62648ae0d11f1acb1f30, type: 3}
   _cardHandMaterial: {fileID: 2100000, guid: 8d47df33388786042a51f558e51f2de0, type: 2}
   _projectilePrefab: {fileID: 5048540492764176421, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
@@ -24,6 +24,6 @@ MonoBehaviour:
   _attackSpeed: 3
   _critChance: 0.1
   _critDamageMultiplier: 1.5
-  _cardAbility: {fileID: 0}
-  _abilityCoolDown: 5
-  _spendAbilityAmmo: 10
+  _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
+  _abilityCoolDown: 10
+  _spendAbilityAmmo: 5

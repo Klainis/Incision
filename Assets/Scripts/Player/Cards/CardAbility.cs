@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace Incision
 {
@@ -25,14 +26,14 @@ namespace Incision
 
     public abstract class CardAbilityRuntime
     {
+        [Inject] public ProjectileFactory projectileFactory;
+
         protected CardInstance Owner { get; }
 
         protected CardAbilityRuntime(CardInstance owner) => Owner = owner;
 
-        // Ќажали умение (после успешной траты боезапаса)
         public virtual void Activate(AbilityContext ctx) { }
 
-        //  арта бросила снар€д: умение может его изменить
         public virtual void OnProjectileSpawned(Projectile projectile, AbilityContext ctx) { }
     }
 }

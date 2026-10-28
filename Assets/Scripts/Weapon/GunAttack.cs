@@ -31,12 +31,24 @@ public class GunAttack : MonoBehaviour
 
     public void CardAttack()
     {
+        CardInstance card = _hand.ActiveCard;
+
         if (!_hand.TryConsumeShot(out CardData cardData, out float damage, out bool isCrit))
             return;
 
         Vector3 direction = CalculateAttackDirection();
 
         var projectile = SpawnProjectile(cardData, damage, isCrit, direction);
+
+        if (card != null && card.AbilityRuntime != null)
+        {
+            AbilityContext ctx = new AbilityContext(_hand, this, card);
+
+            card.AbilityRuntime.OnProjectileSpawned(
+                projectile,
+                ctx);
+        }
+
         projectile.Rigidbody.AddForce(direction * cardData.ProjectileSpeed, _forceMode);
     }
 
@@ -52,6 +64,7 @@ public class GunAttack : MonoBehaviour
         var rotation = Quaternion.LookRotation(direction);
 
         CardProjectile projectile = _projectileFactory.CreateCardProjectile(cardData, damage, isCrit, position, rotation);
+
 
         return projectile;
     }

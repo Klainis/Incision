@@ -1,3 +1,4 @@
+using Incision;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ public class CardHand : MonoBehaviour
 {
     [SerializeField] private int _handSize = 2;
     [SerializeField] private List<CardData> _startingCards = new List<CardData>();
+
+    [SerializeField] private GunAttack _gunAttack;
 
     private CardInstance[] _hand;
     private readonly Queue<CardInstance> _deck = new Queue<CardInstance>();
@@ -36,7 +39,7 @@ public class CardHand : MonoBehaviour
     public IEnumerable<CardInstance> Deck => _deck;
 
     public bool CanShoot => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextShotTime;
-    public bool CanUseAbility => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextAbilityTime;
+    public bool CanUseAbility => ActiveCard != null && !ActiveCard.IsEmpty && ActiveCard.AbilityRuntime != null && Time.time >= ActiveCard.NextAbilityTime;
 
     public event Action HandChanged;                // карта в слоте заменилась
     public event Action<int> ActiveChanged;         // сменился активный слот
@@ -134,13 +137,25 @@ public class CardHand : MonoBehaviour
 
         CardInstance card = ActiveCard;
 
-        if (card == null || card.IsEmpty || Time.time < card.NextAbilityTime)
+        if (card == null ||
+            card.IsEmpty ||
+            card.AbilityRuntime == null ||
+            Time.time < card.NextAbilityTime)
+        {
+            return false;
+        }
+
+        if (!SpendAbilityAmmo(card, card.Data.SpendAbilityAmmo))
             return false;
 
         data = card.Data;
+
         card.NextAbilityTime = Time.time + data.AbilityCoolDown;
 
-        return SpendAbilityAmmo(card, data.SpendAbilityAmmo);
+        AbilityContext ctx = new AbilityContext(this, _gunAttack, card);
+        card.AbilityRuntime.Activate(ctx);
+
+        return true;
     }
 
     public bool SpendAttackAmmo(CardInstance card, int amount)

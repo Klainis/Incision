@@ -1,8 +1,7 @@
 using Incision;
 using Incision.Enemies.Interfaces;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class RicochetProjectile : CardProjectile
 {
@@ -12,68 +11,64 @@ public class RicochetProjectile : CardProjectile
     [SerializeField] private LayerMask _enemyLayers;
 
     private readonly Collider[] _buffer = new Collider[32];
-    private readonly HashSet<IDamageable> _alreadyHit = new HashSet<IDamageable>();
+    private RicochetChain _chain;
 
-    private Collider[] _ownColliders;
-    private int _bouncesLeft;
-    private Func<Vector3, Vector3, Collider, bool> _finalBounceHandler;
+    [Inject] private ProjectileFactory _projectileFactory;
 
-    private void Awake()
+    private void OnEnable()
     {
-        _bouncesLeft = _baseBounces;
+        _chain = new RicochetChain { BouncesLeft = _baseBounces };
     }
 
-    public void ConfigureRicochet(int bounces, Func<Vector3, Vector3, Collider, bool> finalBounceHandler) // For card ability
-    {
-        _bouncesLeft = bounces;
-        _finalBounceHandler = finalBounceHandler;
-    }
+    public void SetChain(RicochetChain chain) => _chain = chain;
 
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
-        if (!_alreadyHit.Add(damageable))
+        if (!_chain.AlreadyHit.Add(damageable))
             return;
 
-        SpawnEffectOnDestroy();
-        damageable.TakeDamage(new(Damage, gameObject, transform.position, IsCrit)/*Eventbus*/);
+        Vector3 hitPoint = collision.GetContact(0).point;
 
-        if (_bouncesLeft <= 0)
+        SpawnEffectOnDestroy();
+        damageable.TakeDamage(new(Damage, gameObject, transform.position, IsCrit));
+
+        if (_chain.BouncesLeft <= 0)
         {
             DisposeProjectile();
             return;
         }
 
-        Vector3 from = transform.position;
-        Collider next = FindNearestEnemy(from);
+        Collider next = FindNearestEnemy(hitPoint);
         if (next == null)
         {
             DisposeProjectile();
             return;
         }
 
-        _bouncesLeft--;
-        Vector3 dir = (next.bounds.center - from).normalized;
+        _chain.BouncesLeft--;
+        Vector3 dir = (next.bounds.center - hitPoint).normalized;
 
-        if (_bouncesLeft == 0 && _finalBounceHandler != null
-            && _finalBounceHandler(from, dir, collision.collider))
+        bool handled = _chain.BouncesLeft == 0
+                       && _chain.FinalBounce != null
+                       && _chain.FinalBounce(hitPoint, dir, collision.collider, _projectileFactory);
+
+        if (!handled)
         {
-            DisposeProjectile();
-            return;
+            CardProjectile spawned = _chain.Spawn(_projectileFactory, CardData, Damage, IsCrit, hitPoint, dir);
+            if (spawned is RicochetProjectile bounce)
+            {
+                bounce.SetChain(_chain);
+                foreach (Collider c in bounce.GetComponentsInChildren<Collider>())
+                    Physics.IgnoreCollision(c, collision.collider);
+            }
         }
 
-        _ownColliders ??= GetComponentsInChildren<Collider>();
-        foreach (Collider c in _ownColliders)
-            Physics.IgnoreCollision(c, collision.collider);
-
-        Rigidbody.velocity = Vector3.zero;
-        transform.rotation = Quaternion.LookRotation(dir);
-        Rigidbody.AddForce(dir * CardData.ProjectileSpeed, ForceMode.Impulse);
+        DisposeProjectile();
     }
 
     protected override void OnOtherCollision()
     {
         base.OnOtherCollision();
-
         Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
@@ -86,9 +81,8 @@ public class RicochetProjectile : CardProjectile
         for (int i = 0; i < count; i++)
         {
             Collider c = _buffer[i];
-
             IDamageable target = c.GetComponentInParent<IDamageable>();
-            if (target == null || _alreadyHit.Contains(target))
+            if (target == null || _chain.AlreadyHit.Contains(target))
                 continue;
 
             float sqr = (c.bounds.center - from).sqrMagnitude;
