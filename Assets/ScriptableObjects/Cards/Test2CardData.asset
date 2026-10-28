@@ -24,6 +24,6 @@ MonoBehaviour:
   _attackSpeed: 50
   _critChance: 0.5
   _critDamageMultiplier: 1.5
-  _cardAbility: {fileID: 0}
+  _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
   _abilityCoolDown: 5
   _spendAbilityAmmo: 10

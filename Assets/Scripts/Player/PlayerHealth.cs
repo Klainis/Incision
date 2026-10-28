@@ -21,17 +21,17 @@ public class PlayerHealth : Health
     {
         OnChanged += _healthBar.TakeDamage;
         OnChanged += TakeDamageEffect;
-        OnDied += Die;
+        OnDied += PlayerDie;
     }
 
     private void OnDisable()
     {
         OnChanged -= _healthBar.TakeDamage;
         OnChanged -= TakeDamageEffect;
-        OnDied -= Die;
+        OnDied -= PlayerDie;
     }
 
-    private void Die(Health health)
+    private void PlayerDie(Health health)
     {
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

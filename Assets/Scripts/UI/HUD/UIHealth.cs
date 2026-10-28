@@ -6,14 +6,45 @@ using UnityEngine.UI;
 public class UIHealth : MonoBehaviour
 {
     [SerializeField] private Image _healthBarFill;
+    [SerializeField] private Image _damageBarFill;
+    [SerializeField] private float _delay = 0.4f;
+    [SerializeField] private float _speed = 0.5f;
+
+    [Space(5)]
     [SerializeField] private TextMeshProUGUI _healthText;
+
+    private float _delayTimer;
 
     public void TakeDamage(DamageInfo info, float currentHealth, float maxHealth)
     {
-        if (currentHealth < 0) currentHealth = 0;
+        float target = maxHealth > 0f ? Mathf.Clamp01(currentHealth / maxHealth) : 0f;
 
-        _healthBarFill.fillAmount = currentHealth / maxHealth;
+        if (target < _healthBarFill.fillAmount)
+        {
+            _delayTimer = _delay;
+        }
+        else if (target > _damageBarFill.fillAmount)
+        {
+            _damageBarFill.fillAmount = target;
+        }
+
+        _healthBarFill.fillAmount = target;
 
         _healthText.text = $"{currentHealth}/{maxHealth}";
+    }
+
+    private void Update()
+    {
+        if (_damageBarFill.fillAmount <= _healthBarFill.fillAmount)
+            return;
+
+        if (_delayTimer > 0f)
+        {
+            _delayTimer -= Time.deltaTime;
+            return;
+        }
+
+        _damageBarFill.fillAmount = Mathf.MoveTowards(
+            _damageBarFill.fillAmount, _healthBarFill.fillAmount, _speed * Time.deltaTime);
     }
 }
