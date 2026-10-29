@@ -14,7 +14,7 @@ namespace Incision.Enemies.Components
     public class EnemyBrain : MonoBehaviour
     {
         private Enemy _enemy;
-        private Health _health;
+        private EnemyHealth _health;
         private EnemyAITemplate _profile;
         private EnemyStateBase _current;
         private readonly Dictionary<Type, EnemyStateBase> _states = new();
@@ -22,7 +22,7 @@ namespace Incision.Enemies.Components
         public EnemyAITemplate Profile => _profile;
         [Inject] private IEventBus _eventBus;
 
-        public void Initialize(Enemy enemy, EnemyAITemplate profile, Health health, ITargetProvider targetProvider)
+        public void Initialize(Enemy enemy, EnemyAITemplate profile, EnemyHealth health, ITargetProvider targetProvider)
         {
             _profile = profile;
             _enemy = enemy;

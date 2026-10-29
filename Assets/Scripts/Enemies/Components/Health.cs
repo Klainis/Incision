@@ -14,6 +14,7 @@ namespace Incision.Enemies.Components
     {
         public event Action<Health> OnDied;
         public event Action<DamageInfo, float, float> OnChanged;
+        public event Action<DamageInfo, float, float> OnHealed;
 
         private Stats _stats;
         [Inject] private IEventBus _eventBus;

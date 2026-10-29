@@ -22,7 +22,7 @@ public class EnemyEffector : MonoBehaviour
     [SerializeField][Range(0, 1)] private float _flashAmount = 1;
     [SerializeField] private float _flashTime = 0.25f;
 
-    private Health _enemyHealth;
+    private EnemyHealth _enemyHealth;
     [Inject] private IObjectResolver _resolver;
 
     private MaterialPropertyBlock _propertyBlock;
@@ -33,7 +33,7 @@ public class EnemyEffector : MonoBehaviour
 
     private Coroutine _flashCoroutine;
 
-    public void Initialize(Health health)
+    public void Initialize(EnemyHealth health)
     {
         _enemyHealth = health;
 

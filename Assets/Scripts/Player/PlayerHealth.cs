@@ -36,8 +36,6 @@ public class PlayerHealth : Health
     {
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-        //DieEffect();
     }
 
     private void TakeDamageEffect(DamageInfo info, float currentHealth, float maxHealth)

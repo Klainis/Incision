@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 669264173755606509}
   - component: {fileID: 1017903920227990166}
   - component: {fileID: 5796007725544060031}
-  - component: {fileID: 5971353343630096215}
+  - component: {fileID: 3502351292455870783}
   - component: {fileID: 6329988965933231909}
   - component: {fileID: 7277317956220746456}
   - component: {fileID: 4668799313484945798}
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea868cd7fa37f4db087861374b5cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 5971353343630096215}
+  _health: {fileID: 3502351292455870783}
   _motor: {fileID: 6329988965933231909}
   _brain: {fileID: 7277317956220746456}
   _attacker: {fileID: 3089595376552935454}
@@ -357,7 +357,7 @@ MonoBehaviour:
   _animEvents: {fileID: 268026863280735180}
   _effector: {fileID: 7826030874927524179}
   _rigidbody: {fileID: 669264173755606509}
---- !u!114 &5971353343630096215
+--- !u!114 &3502351292455870783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8343032202664805475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa0b1bfb06594d4a90ebcfbb4986ecc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b7f70854413146419a3aa5bd53d8ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6329988965933231909
