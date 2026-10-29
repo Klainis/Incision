@@ -12460,8 +12460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBarFill: {fileID: 2640197166962666936}
   _damageBarFill: {fileID: 6210025026791303033}
-  _delay: 0.4
-  _speed: 0.5
+  _damageBarData: {fileID: 11400000, guid: 010d08e1483e2b249928998fd759bdd4, type: 2}
   _healthText: {fileID: 2659030444368582655}
 --- !u!1 &4622972511342158686
 GameObject:

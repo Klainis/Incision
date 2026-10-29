@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Incision.Enemies.Interfaces;
+using Incision.Interfaces;
 using UnityEngine;
 
 public class SlamAttack : MonoBehaviour

@@ -475,6 +475,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBarFill: {fileID: 4800179167192586028}
   _damageBarFill: {fileID: 2163251742140579930}
-  _delay: 0.4
-  _speed: 0.5
+  _damageBarData: {fileID: 11400000, guid: 825cb9fc18bd0c04a9343142a5f8358c, type: 2}
   _barObject: {fileID: 5596909462664461681}

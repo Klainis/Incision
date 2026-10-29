@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Incision;
-using Incision.Enemies.Interfaces;
+using Incision.Interfaces;
 using UnityEngine;
 using VContainer;
 

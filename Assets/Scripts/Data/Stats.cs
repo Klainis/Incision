@@ -19,7 +19,7 @@ namespace Incision.Data
         {
             Mass = template.Mass;
             MaxHealth = template.MaxHealth;
-            CurrentHealth = template.MaxHealth;
+            CurrentHealth = template.CurrentHealth;
             MoveSpeed = template.MoveSpeed;
             Acceleration = template.Acceleration;
             TurnSpeed = template.TurnSpeed;

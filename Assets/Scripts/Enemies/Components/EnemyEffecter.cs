@@ -37,8 +37,8 @@ public class EnemyEffector : MonoBehaviour
     {
         _enemyHealth = health;
 
-        _enemyHealth.OnChanged += OnDamaged;
-        _enemyHealth.OnChanged += _healthBar.TakeDamage;
+        _enemyHealth.OnDamaged += OnDamaged;
+        _enemyHealth.OnDamaged += _healthBar.TakeDamage;
         _enemyHealth.OnDied += DieBloodExplosion;
 
         _propertyBlock = new MaterialPropertyBlock();
@@ -46,8 +46,8 @@ public class EnemyEffector : MonoBehaviour
 
     private void OnDisable()
     {
-        _enemyHealth.OnChanged -= OnDamaged;
-        _enemyHealth.OnChanged -= _healthBar.TakeDamage;
+        _enemyHealth.OnDamaged -= OnDamaged;
+        _enemyHealth.OnDamaged -= _healthBar.TakeDamage;
         _enemyHealth.OnDied -= DieBloodExplosion;
     }
 

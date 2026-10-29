@@ -16,19 +16,22 @@ public class PlayerHealth : Health
     private void Start()
     {
         Initialize(_playerStatsData.CreateRuntime());
+        _healthBar.Initialize(_playerStatsData.CurrentHealth, _playerStatsData.MaxHealth, _healthBar.HealthText);
     }
 
     private void OnEnable()
     {
-        OnChanged += _healthBar.TakeDamage;
-        OnChanged += TakeDamageEffect;
+        OnDamaged += _healthBar.TakeDamage;
+        OnHealed += _healthBar.Heal;
+        OnDamaged += TakeDamageEffect;
         OnDied += PlayerDie;
     }
 
     private void OnDisable()
     {
-        OnChanged -= _healthBar.TakeDamage;
-        OnChanged -= TakeDamageEffect;
+        OnDamaged -= _healthBar.TakeDamage;
+        OnHealed -= _healthBar.Heal;
+        OnDamaged -= TakeDamageEffect;
         OnDied -= PlayerDie;
     }
 

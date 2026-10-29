@@ -3,6 +3,7 @@ using Incision.Enemies.Components;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
+using Incision.Interfaces;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks

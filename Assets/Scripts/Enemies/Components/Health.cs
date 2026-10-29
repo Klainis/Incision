@@ -10,11 +10,11 @@ using VContainer;
 
 namespace Incision.Enemies.Components
 {
-    public class Health : MonoBehaviour, IDamageable
+    public class Health : MonoBehaviour, IDamageable, IHealable
     {
         public event Action<Health> OnDied;
-        public event Action<DamageInfo, float, float> OnChanged;
-        public event Action<DamageInfo, float, float> OnHealed;
+        public event Action<DamageInfo, float, float> OnDamaged;
+        public event Action<float, float> OnHealed;
 
         private Stats _stats;
         [Inject] private IEventBus _eventBus;
@@ -22,7 +22,7 @@ namespace Incision.Enemies.Components
         public void Initialize(Stats stats)
         {
             _stats = stats;
-            _stats.CurrentHealth = _stats.MaxHealth;
+            //_stats.CurrentHealth = _stats.MaxHealth;
         }
 
         public void TakeDamage(DamageInfo info)
@@ -31,11 +31,19 @@ namespace Incision.Enemies.Components
 
             float damage = Mathf.Max(0, info.Amount - _stats.Armor);
             _stats.CurrentHealth -= damage;
-            OnChanged?.Invoke(info, _stats.CurrentHealth, _stats.MaxHealth);
+            OnDamaged?.Invoke(info, _stats.CurrentHealth, _stats.MaxHealth);
             _eventBus.Publish(new OnCreatureDamaged(info));
 
             if (_stats.CurrentHealth <= 0)
                 Die(info);
+        }
+
+        public void Heal(float amount)
+        {
+            if (_stats == null || _stats.CurrentHealth <= 0 || amount <= 0f) return;
+
+            _stats.CurrentHealth = Mathf.Min(_stats.CurrentHealth + amount, _stats.MaxHealth);
+            OnHealed?.Invoke(_stats.CurrentHealth, _stats.MaxHealth);
         }
 
         private void Die(DamageInfo info)

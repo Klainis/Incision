@@ -10,8 +10,9 @@ namespace Incision.Templates
         [SerializeField, Min(0f)] private float _mass = 70f;
         
         [Header("Survivability")]
-        [SerializeField, Range(50f, 500f)] private float _maxHealth = 100f;
-        [SerializeField, Range(0f, 50f)] private float _armor = 0f;
+        [SerializeField, Range(50f, 10000f)] private float _maxHealth = 100f;
+        [SerializeField, Range(50f, 10000f)] private float _currentHealth = 100f;
+        [SerializeField, Range(0f, 10000f)] private float _armor = 0f;
         
         [Header("Movement")]
         [SerializeField, Range(1f, 50f)] private float _moveSpeed = 3.5f;
@@ -33,6 +34,7 @@ namespace Incision.Templates
         
         public float Mass => _mass;
         public float MaxHealth => _maxHealth;
+        public float CurrentHealth => _currentHealth;
         public float MoveSpeed => _moveSpeed;
         public float TurnSpeed => _turnSpeed;
         public float Armor => _armor;

@@ -1,4 +1,3 @@
-using Incision.Enemies.Interfaces;
 using Incision.Interfaces;
 using UnityEngine;
 
