@@ -22,7 +22,8 @@ namespace Incision.Enemies.Components
         public void Initialize(Stats stats)
         {
             _stats = stats;
-            //_stats.CurrentHealth = _stats.MaxHealth;
+            if (_stats.CurrentHealth > _stats.MaxHealth)
+                _stats.CurrentHealth = _stats.MaxHealth;
         }
 
         public void TakeDamage(DamageInfo info)

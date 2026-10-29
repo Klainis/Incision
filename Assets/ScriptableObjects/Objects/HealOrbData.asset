@@ -14,11 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: heal_orb
   _healAmount: 10
+  _orbAmount: 5
   _attractDistance: 8
   _pickupDistance: 0.8
-  _startSpeed: 40
+  _startSpeed: 30
   _acceleration: 50
   _maxSpeed: 80
-  _activationDelay: 0.2
+  _activationDelay: 0.25
   _targetOffset: {x: 0, y: 0, z: 0}
   _lifeTime: 30
+  _dropHorizontalSpeed: {x: 5, y: 8}
+  _dropUpSpeed: {x: 8, y: 14}
+  _dropGravity: 50
+  _bounciness: 0.45
+  _groundFriction: 0.7
+  _maxBounces: 2
+  _minBounceSpeed: 2
+  _collisionRadius: 0.3
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 1025
+  _spinSpeed: 180
+  _bobAmplitude: 0
+  _bobFrequency: 1.5

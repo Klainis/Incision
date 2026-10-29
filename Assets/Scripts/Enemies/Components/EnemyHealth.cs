@@ -28,7 +28,10 @@ namespace Incision.Enemies.Components
 
         public void CreateHealOrb(Health health)
         {
-            _objectFactory.CreateHealOrb(_healOrbData, _healOrbPrefab, transform.position + _instantiateOffset, Quaternion.identity);
+            for (int count = 1; count <= _healOrbData.OrbAmount; count++)
+            {
+                _objectFactory.CreateHealOrb(_healOrbData, _healOrbPrefab, transform.position + _instantiateOffset, Quaternion.identity);
+            }
         }
     }
 }
