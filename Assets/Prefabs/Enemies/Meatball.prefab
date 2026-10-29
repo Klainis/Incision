@@ -345,6 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7f70854413146419a3aa5bd53d8ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healOrbData: {fileID: 11400000, guid: d0d058c52d71bbf4a8883d519d9e797c, type: 2}
+  _healOrbPrefab: {fileID: 2952727751164049610, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
+  _instantiateOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &7277317956220746456
 MonoBehaviour:
   m_ObjectHideFlags: 0

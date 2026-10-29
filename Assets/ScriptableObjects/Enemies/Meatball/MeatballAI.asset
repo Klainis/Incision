@@ -18,20 +18,20 @@ MonoBehaviour:
   _maxAltitude: 100
   _groundMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 1105
   _hoverAmplitude: 1
   _hoverFrequency: 0.5
-  _maxBankAngle: 45
-  _bankSmoothing: 6
-  _avoidanceRadius: 7
+  _maxBankAngle: 20
+  _bankSmoothing: 5
+  _avoidanceRadius: 4
   _avoidanceLookAhead: 2
-  _avoidanceStrength: 1
+  _avoidanceStrength: 2
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 7569
-  _arriveSlowdownRadius: 7
-  _stopDistance: 2.5
-  _useStrafe: 0
-  _flyingCombatHeight: 10
-  _strafeRadius: 8
-  _strafeSwitchInterval: 8
+  _arriveSlowdownRadius: 8
+  _stopDistance: 4
+  _useStrafe: 1
+  _flyingCombatHeight: 4
+  _strafeRadius: 4
+  _strafeSwitchInterval: 20

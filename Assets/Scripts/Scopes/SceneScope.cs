@@ -21,6 +21,7 @@ namespace Incision.Scopes
             builder.Register<EnemyFactory>(Lifetime.Singleton); 
             builder.RegisterComponent(uiEffectManager); 
             builder.Register<ProjectileFactory>(Lifetime.Singleton);
+            builder.Register<ObjectFactory>(Lifetime.Singleton);
         }
     }
 }

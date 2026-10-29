@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mass: 70
   _maxHealth: 100
+  _currentHealth: 100
   _armor: 0
-  _moveSpeed: 10
+  _moveSpeed: 13
   _accelerationRate: 10
-  _acceleration: 100
+  _acceleration: 130
   _turnSpeed: 10
-  _detectionRadius: 50
+  _detectionRadius: 100
   _loseDetectionRadiusDelta: 3
-  _loseTargetRadius: 53
+  _loseTargetRadius: 103

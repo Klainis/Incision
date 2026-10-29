@@ -101,9 +101,14 @@ namespace Incision.Enemies.Components
                 else
                 {
                     var dir = toTarget / dist;
+                    float speedFactor = 1f;
+
                     if (dist < _settings.ArriveSlowdownRadius)
-                        dir *= dist / _settings.ArriveSlowdownRadius;
-                    _desiredDirection = dir.normalized;
+                    {
+                        speedFactor = dist / _settings.ArriveSlowdownRadius;
+                    }
+
+                    _desiredDirection = dir * speedFactor;
                 }
             }
 
