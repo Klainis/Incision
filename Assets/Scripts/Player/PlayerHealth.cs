@@ -1,3 +1,4 @@
+using Incision;
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
 using UnityEngine;
@@ -8,7 +9,7 @@ using VContainer.Unity;
 public class PlayerHealth : Health
 {
     [SerializeField] private PlayerStats _playerStatsData;
-    [SerializeField] private UIHealth _healthBar;
+    [SerializeField] private PlayerHealthUI _healthBar;
 
     [Inject] private UIEffectManager _uiEffectManager;
     

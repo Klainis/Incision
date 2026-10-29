@@ -1,3 +1,4 @@
+using Incision;
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
 using System.Collections;
@@ -9,6 +10,9 @@ public class EnemyEffector : MonoBehaviour
 {
     [Header("Materials")]
     [SerializeField] private Renderer[] _enemyRenderers;
+
+    [Header("Health")]
+    [SerializeField] private EnemyHealthUI _healthBar;
 
     [Header("Effects")]
     [SerializeField] private ParticleSystem _bloodExplosionEffect;
@@ -34,6 +38,7 @@ public class EnemyEffector : MonoBehaviour
         _enemyHealth = health;
 
         _enemyHealth.OnChanged += OnDamaged;
+        _enemyHealth.OnChanged += _healthBar.TakeDamage;
         _enemyHealth.OnDied += DieBloodExplosion;
 
         _propertyBlock = new MaterialPropertyBlock();
@@ -42,6 +47,7 @@ public class EnemyEffector : MonoBehaviour
     private void OnDisable()
     {
         _enemyHealth.OnChanged -= OnDamaged;
+        _enemyHealth.OnChanged -= _healthBar.TakeDamage;
         _enemyHealth.OnDied -= DieBloodExplosion;
     }
 

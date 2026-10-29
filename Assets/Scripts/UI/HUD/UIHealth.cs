@@ -3,19 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHealth : MonoBehaviour
+public abstract class UIHealth : MonoBehaviour
 {
     [SerializeField] private Image _healthBarFill;
     [SerializeField] private Image _damageBarFill;
     [SerializeField] private float _delay = 0.4f;
     [SerializeField] private float _speed = 0.5f;
 
-    [Space(5)]
-    [SerializeField] private TextMeshProUGUI _healthText;
-
     private float _delayTimer;
 
-    public void TakeDamage(DamageInfo info, float currentHealth, float maxHealth)
+    public virtual void TakeDamage(DamageInfo info, float currentHealth, float maxHealth)
     {
         float target = maxHealth > 0f ? Mathf.Clamp01(currentHealth / maxHealth) : 0f;
 
@@ -29,8 +26,6 @@ public class UIHealth : MonoBehaviour
         }
 
         _healthBarFill.fillAmount = target;
-
-        _healthText.text = $"{currentHealth}/{maxHealth}";
     }
 
     private void Update()
