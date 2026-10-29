@@ -26901,13 +26901,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealOrb
       objectReference: {fileID: 0}
-    - target: {fileID: 9201552940237607324, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
-      propertyPath: m_LocalPosition.x
+    - target: {fileID: 7621462402160780216, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9201552940237607324, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201552940237607324, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.06
+      value: 3.71
       objectReference: {fileID: 0}
     - target: {fileID: 9201552940237607324, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
       propertyPath: m_LocalPosition.z

@@ -47,6 +47,8 @@ namespace Incision
         private bool _isCollected;
         private bool _attractedDuringDrop;
 
+        private TrailRenderer _trailRenderer;
+
         public void Initialize()
         {
             if (_healOrbData == null) return;
@@ -83,6 +85,9 @@ namespace Incision
 
         private void Start()
         {
+            _trailRenderer = GetComponent<TrailRenderer>();
+            _trailRenderer.enabled = true;
+
             _spawnTime = Time.time;
 
             if (_lifeTime > 0f)
@@ -234,6 +239,7 @@ namespace Incision
             if (_playerHealth != null)
                 _playerHealth.Heal(_healAmount);
 
+            _trailRenderer.enabled = false;
             Destroy(gameObject);
         }
 

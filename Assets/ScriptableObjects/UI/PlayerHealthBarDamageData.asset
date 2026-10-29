@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerHealthBarDamageData
   m_EditorClassIdentifier: 
   _delay: 0.6
-  _damageBarDuration: 4
+  _damageBarDuration: 6
