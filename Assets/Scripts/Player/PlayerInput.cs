@@ -1,61 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Incision.PLayer;
 using UnityEngine;
+using VContainer;
 
 public class PlayerInput : MonoBehaviour
 {
-    public static PlayerInput Instance { get; private set; }
+    private PlayerCharacter _playerCharacter;
+    private PlayerCamera _playerCamera;
+    private CardHand _cardHand;
 
-    [SerializeField] private PlayerCharacter _playerCharacter;
-    [SerializeField] private PlayerCamera _playerCamera;
-    [SerializeField] private CardHand _cardHand;
-
-    [SerializeField] private PlayerMovementData _playerMovementData;
-    [SerializeField] private PlayerStats _playerStatsData;
+    private PlayerMovementData _playerMovementData;
+    private PlayerStats _playerStatsData;
 
     private PlayerInputActions _inputActions;
 
-    //private bool _isAttacking = false;
-
     private float _jumpTimeBuffer = 0;
 
-    public PlayerMovementData PlayerMovementData { get { return _playerMovementData; } }
-    public PlayerStats PlayerStatsData { get { return _playerStatsData; } }
-
-    private void Awake()
+    public void Intialize(PlayerCharacter character, PlayerCamera camera, CardHand hand, PlayerMovementData moveData, PlayerStats stats)
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        Instance = this;
+        _playerCharacter = character;
+        _playerCamera = camera;
+        _cardHand = hand;
+
+        _playerMovementData = moveData;
+        _playerStatsData = stats;
 
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
-    }
-
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        if ( _playerCharacter != null )
-        {
-            _playerCharacter.Initialize(_playerMovementData);
-        }
-        else
-        {
-            Debug.LogError("[Player.cs] : отсутствует ссылка на PlayerCharacter");
-        }
-
-        if (_playerCamera != null)
-        {
-            _playerCamera.Initialize(_playerCharacter.GetCameraTarget(), _playerMovementData);
-        }
-        else
-        {
-            Debug.LogError("[Player.cs] : отсутствует ссылка на PlayerCamera");
-        }
     }
 
     private void OnDestroy()

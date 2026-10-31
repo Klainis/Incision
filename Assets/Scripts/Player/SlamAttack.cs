@@ -5,41 +5,30 @@ using UnityEngine;
 
 public class SlamAttack : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacter _playerCharacter;
     [SerializeField] private Transform _slamOverlapPoint;
+
+    private PlayerCharacter _playerCharacter;
+    private PlayerStats _playerStatsData;
 
     public float hitHeight = 6;
     public float heightSpeed = 1;
     public float slamDamage = 10;
 
-    private PlayerStats _playerStatsData;
-
     private float _slamRadius;
 
-    private void OnEnable() => _playerCharacter.SlamLamded += DoSlamAttack;
-
-    private void Start()
+    public void Initialize(PlayerCharacter character, PlayerStats stats)
     {
-        if (PlayerInput.Instance.PlayerStatsData != null)
-        {
-            _playerStatsData = PlayerInput.Instance.PlayerStatsData;
+        _playerCharacter = character;
+        _playerStatsData = stats;
 
-            _slamRadius = _playerStatsData.SlamOverlapRadius;
-        }
-        else
-        {
-            Debug.LogError($"[SlamAttack.cs] : �� ������� ���������� PlayerStatsData");
-        }
+        _slamRadius = _playerStatsData.SlamOverlapRadius;
 
-        if (_playerCharacter == null)
-        {
-            _playerCharacter = GetComponent<PlayerCharacter>();
+        _playerCharacter.SlamLamded += DoSlamAttack;
+    }
 
-            if (_playerCharacter == null )
-            {
-                Debug.LogError($"[SlamAttack.cs] : �� ������� ����� PlayerCharacter");
-            }
-        }
+    private void OnDisable()
+    {
+        _playerCharacter.SlamLamded -= DoSlamAttack;
     }
 
     private void DoSlamAttack(float slamHeight)

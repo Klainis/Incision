@@ -11,27 +11,33 @@ public struct CameraInput
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
-
-    [Space]
+    [Header("Camera Settings")]
     [SerializeField] private float maxCameraAngleX = 85f;
     [SerializeField] private float minCameraAngleX = -85f;
     [SerializeField] private float moveAngleZ = 2f;
     [SerializeField] private float moveFieldOfView = 95f;
     [SerializeField] private float dashFieldOfView = 100f;
 
+    private Camera _camera;
+    private PlayerCharacter _playerCharacter;
+
     private Vector3 _eulerAngles;
 
     private float _sensitivity;
     private float _offsetSmooth;
     private float _initialCameraFieldOfView;
+    private float _currentField;
 
-    public void Initialize(Transform target, PlayerMovementData data)
+    public void Initialize(Transform target, PlayerMovementData data, Camera camera, PlayerCharacter character)
     {
+        _camera = camera;
+        _playerCharacter = character;
+
         transform.position = target.position;
         transform.eulerAngles = _eulerAngles = target.eulerAngles;
 
         _initialCameraFieldOfView = camera.fieldOfView;
+        _currentField = _initialCameraFieldOfView;
 
         _sensitivity = data.CameraSensitivity;
         _offsetSmooth = data.CameraMoveSmooth;
@@ -50,7 +56,7 @@ public class PlayerCamera : MonoBehaviour
             _eulerAngles.x = minCameraAngleX;
         }
 
-        //Наклон при движении вбок
+        //Angle offset
         if (input.Move.x == 0)
         {
             _eulerAngles.z = Mathf.Lerp(_eulerAngles.z, 0, _offsetSmooth);
@@ -64,20 +70,21 @@ public class PlayerCamera : MonoBehaviour
             _eulerAngles.z = Mathf.Lerp(_eulerAngles.z, -moveAngleZ, _offsetSmooth);
         }
 
-        //Приближение при движении вперед
-        if (PlayerCharacter.Instance.IsDashing)
+        //Field
+        if (_playerCharacter.IsDashing)
         {
-            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, dashFieldOfView, _offsetSmooth);
+            _currentField = Mathf.Lerp(_currentField, dashFieldOfView, _offsetSmooth);
         }
         else if (input.Move.y > 0)
         {
-            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, moveFieldOfView, _offsetSmooth);
+            _currentField = Mathf.Lerp(_currentField, moveFieldOfView, _offsetSmooth);
         }
         else
         {
-            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, _initialCameraFieldOfView, _offsetSmooth);
+            _currentField = Mathf.Lerp(_currentField, _initialCameraFieldOfView, _offsetSmooth);
         }
 
+        _camera.fieldOfView = _currentField;
         transform.eulerAngles = _eulerAngles;
     }
 

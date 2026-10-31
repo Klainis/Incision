@@ -29,7 +29,7 @@ namespace Incision
                 obj => obj.Initialize());
         }
 
-        //TODO: for another type of objects (gold bag, etc.) :)
+        //TODO: for another type of objects :)
 
         private T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation, Action<T> initialize) where T : Component
         {

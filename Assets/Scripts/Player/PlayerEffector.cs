@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effecter : MonoBehaviour
+public class PlayerEffector : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _speedLinesParticle;
     [SerializeField] private ParticleSystem _slamLinesParticle;

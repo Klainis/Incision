@@ -18,7 +18,8 @@ public class CardHand : MonoBehaviour
     [SerializeField] private int _handSize = 2;
     [SerializeField] private List<CardData> _startingCards = new List<CardData>();
 
-    [SerializeField] private GunAttack _gunAttack;
+    private PlayerAttack _playerAttack;
+    private PlayerAnimation _playerAnimation;
 
     private CardInstance[] _hand;
     private readonly Queue<CardInstance> _deck = new Queue<CardInstance>();
@@ -46,8 +47,11 @@ public class CardHand : MonoBehaviour
     public event Action<CardInstance> AmmoChanged;  // изменился боезапас
     public event Action<CardInstance> AbilityUsed;
 
-    private void Awake()
+    public void Initialize(PlayerAttack attack, PlayerAnimation animation)
     {
+        _playerAttack = attack;
+        _playerAnimation = animation;
+
         _hand = new CardInstance[_handSize];
         int slot = 0;
 
@@ -101,7 +105,7 @@ public class CardHand : MonoBehaviour
     {
         if (_requestedShoot && CanShoot)
         {
-            PlayerAnimation.Instance.ThrowCardTriggerAnimation();
+            _playerAnimation.ThrowCardTriggerAnimation();
         }
     }
 
@@ -152,7 +156,7 @@ public class CardHand : MonoBehaviour
 
         card.NextAbilityTime = Time.time + data.AbilityCoolDown;
 
-        AbilityContext ctx = new AbilityContext(this, _gunAttack, card);
+        AbilityContext ctx = new AbilityContext(this, _playerAttack, card);
         card.AbilityRuntime.Activate(ctx);
 
         return true;

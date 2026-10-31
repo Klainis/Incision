@@ -144,7 +144,6 @@ namespace Incision
                 {
                     transform.position = hit.point + hit.normal * _collisionRadius;
 
-                    // Разложение скорости на нормальную и касательную составляющие
                     Vector3 normalVelocity = Vector3.Project(velocity, hit.normal);
                     Vector3 tangentVelocity = velocity - normalVelocity;
 

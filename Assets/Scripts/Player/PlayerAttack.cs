@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 
-public class GunAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private CardHand _hand;
 

@@ -8,23 +8,23 @@ using VContainer.Unity;
 
 public class PlayerHealth : Health
 {
-    [SerializeField] private PlayerStats _playerStatsData;
-    [SerializeField] private PlayerHealthUI _healthBar;
+    private PlayerStats _playerStatsData;
+    private PlayerHealthUI _healthBar;
 
     [Inject] private UIEffectManager _uiEffectManager;
     
-    private void Start()
+    public void InitializePlayerHealth(PlayerStats stats, PlayerHealthUI bar)
     {
-        Initialize(_playerStatsData.CreateRuntime());
-        _healthBar.Initialize(_playerStatsData.CurrentHealth, _playerStatsData.MaxHealth, _healthBar.HealthText);
-    }
+        _playerStatsData = stats;
+        _healthBar = bar;
 
-    private void OnEnable()
-    {
         OnDamaged += _healthBar.TakeDamage;
         OnHealed += _healthBar.Heal;
         OnDamaged += TakeDamageEffect;
         OnDied += PlayerDie;
+
+        Initialize(_playerStatsData.CreateRuntime());
+        _healthBar.Initialize(_playerStatsData.CurrentHealth, _playerStatsData.MaxHealth, _healthBar.HealthText);
     }
 
     private void OnDisable()

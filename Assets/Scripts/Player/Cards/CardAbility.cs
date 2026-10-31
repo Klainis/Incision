@@ -8,10 +8,10 @@ namespace Incision
     public readonly struct AbilityContext
     {
         public readonly CardHand Hand;
-        public readonly GunAttack Gun;
+        public readonly PlayerAttack Gun;
         public readonly CardInstance Card;
 
-        public AbilityContext(CardHand hand, GunAttack gun, CardInstance card)
+        public AbilityContext(CardHand hand, PlayerAttack gun, CardInstance card)
         {
             Hand = hand;
             Gun = gun;

@@ -18,20 +18,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
     public static PlayerCharacter Instance {  get; private set; }
 
-    [SerializeField] private KinematicCharacterMotor _motor;
-    [SerializeField] private PlayerInput _player;
-
     [Header("Camera Transform")]
     [SerializeField] private Transform _cameraTarget;
-
-    [Header("Movement")]
-    [SerializeField] private DashStamina _dashStamina;
 
     [Header("Collisions")]
     [SerializeField] private LayerMask _enemyLayers;
 
-    [Header("Effects")]
-    [SerializeField] private Effecter _effecter;
+    private KinematicCharacterMotor _motor;
+    private PlayerInput _playerInput;
+    private DashStamina _dashStamina;
+    private PlayerEffector _effector;
+    private PlayerAnimation _playerAnimation;
 
     private Quaternion _requestedRotation;
 
@@ -79,7 +76,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _ignoreEnemies;
 
     //private bool _oldGroundingStatus = false;
-    private bool _isJumpingUp;
+    private bool _isJumpingUp = false;
 
     public bool IsDashing {  get { return _isDashing; } }
     public Transform GetCameraTarget() => _cameraTarget;
@@ -100,8 +97,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         Instance = this;
     }
 
-    public void Initialize(PlayerMovementData data)
+    public void Initialize(PlayerMovementData data, PlayerInput input, KinematicCharacterMotor motor, 
+        DashStamina stamina, PlayerEffector effector, PlayerAnimation playerAnimation)
     {
+        _playerInput = input;
+        _motor = motor;
+        _dashStamina = stamina;
+        _effector = effector;
+        _playerAnimation = playerAnimation;
+
         _motor.CharacterController = this;
 
         _groundMovementSpeed = data.GroundMovementSpeed;
@@ -267,7 +271,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _isDashing = true;
 
                 CallDashAnimation();
-                _effecter.PlaySpeedLines();
+                _effector.PlaySpeedLines();
 
                 Vector3 rawDir = _requestedMovement.magnitude > 0.01f ? _requestedMovement : _forwardDirection;
                 _dashDirection = Vector3.ProjectOnPlane(rawDir, _motor.CharacterUp).normalized;
@@ -305,7 +309,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 _slamStartY = _motor.TransientPosition.y;
 
-                _effecter.PlaySlamLines();
+                _effector.PlaySlamLines();
             }
         }
         if (_isSlamming)
@@ -363,7 +367,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         //JUMP
         if (_motor.GroundingStatus.IsStableOnGround && _requestedJump && _canJump)
         {
-            _player?.ConsumeJumpBuffer();
+            _playerInput?.ConsumeJumpBuffer();
 
             _requestedJump = false;
             _isJumpingUp = true;
@@ -382,7 +386,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         //DOUBLE JUMP
         if (_requestedJump && _canDoubleJump)
         {
-            _player?.ConsumeJumpBuffer();
+            _playerInput?.ConsumeJumpBuffer();
 
             _requestedJump = false;
             _isJumpingUp = true;
@@ -444,7 +448,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             yield return null;
         }
 
-        _effecter.StopSpeedLines();
+        _effector.StopSpeedLines();
         _isDashing = false;
 
         //_motor.BaseVelocity = Vector3.zero;
@@ -479,7 +483,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _isSlamming = false;
             _canSlam = true;
 
-            _effecter.StopSlamLines();
+            _effector.StopSlamLines();
 
             float slamHeight = _slamStartY - _motor.TransientPosition.y;
             SlamLamded?.Invoke(slamHeight);
@@ -489,16 +493,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private void CallRunAnimation(float speed)
     {
-        PlayerAnimation.Instance.RunAnimation(speed);
+        _playerAnimation.RunAnimation(speed);
     }
 
     private void CallFallAnimation(bool isFalling)
     {
-        PlayerAnimation.Instance.FallAnimation(isFalling);
+        _playerAnimation.FallAnimation(isFalling);
     }
 
     private void CallDashAnimation()
     {
-        PlayerAnimation.Instance.DashAnimation();
+        _playerAnimation.DashAnimation();
     }
 }

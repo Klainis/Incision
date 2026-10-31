@@ -11,7 +11,7 @@ public class DashStamina : MonoBehaviour
     private float _dashCoolDown = 0;
     private float _dashDelay = 0;
 
-    public float _stamina;
+    private float _stamina;
     private float _delayTimer;
 
     public int FullCharges => Mathf.FloorToInt(_stamina);
@@ -21,20 +21,13 @@ public class DashStamina : MonoBehaviour
 
     public event Action<float, int> Changed;
 
-    private void Start()
+    public void Initialize(PlayerMovementData moveData)
     {
-        if (PlayerInput.Instance.PlayerMovementData != null)
-        {
-            _playerMovementData = PlayerInput.Instance.PlayerMovementData;
+        _playerMovementData = moveData;
 
-            _dashMaxCharges = _playerMovementData.DashMaxCharges;
-            _dashDelay = _playerMovementData.DashDelay;
-            _dashCoolDown = _playerMovementData.DashCoolDown;
-        }
-        else
-        {
-            Debug.LogError("DashStamina : Отсутствует ссылка на PlayerMovementData");
-        }
+        _dashMaxCharges = _playerMovementData.DashMaxCharges;
+        _dashDelay = _playerMovementData.DashDelay;
+        _dashCoolDown = _playerMovementData.DashCoolDown;
 
         _stamina = _dashMaxCharges;
     }
