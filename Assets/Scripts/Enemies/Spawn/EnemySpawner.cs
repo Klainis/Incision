@@ -22,6 +22,19 @@ namespace Incision.Enemies.Components
 
         [Inject] private EnemyFactory _factory;
         [Inject] private IEventBus _eventBus;
+        
+        private int enemiesSpawned = 0;
+        private List<Enemy> _enemies = new List<Enemy>();
+
+        void Start()
+        {
+            _eventBus.Subscribe<OnCreatureDied>(OnCreatureDied);
+        }
+
+        void OnDestroy()
+        {
+            _eventBus.Unsubscribe<OnCreatureDied>(OnCreatureDied);
+        }
 
         public async Task StartSpawning()
         {
@@ -61,8 +74,20 @@ namespace Incision.Enemies.Components
             {
                 _eventBus.Publish(new Log(LOG_TAG, $"Spawning {$"{tpl.Id}_{i}".AsTag(Color.red)}"));
                 var enemy = _factory.Create(tpl, point.transform.position, point.transform.rotation, transform);
+                _enemies.Add(enemy);
+                enemiesSpawned++;
+                _eventBus.Publish(new OnEnemyCountChanged(_enemies.Count, enemiesSpawned));
                 await Task.Delay(interval);
             }
+        }
+
+        private void OnCreatureDied(OnCreatureDied evt)
+        {
+            if (!evt.Target.TryGetComponent(out Enemy enemy))
+                return;
+
+            _enemies.Remove(enemy);
+            _eventBus.Publish(new OnEnemyCountChanged(_enemies.Count, enemiesSpawned));
         }
     }
 }

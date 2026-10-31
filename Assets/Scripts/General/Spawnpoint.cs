@@ -8,5 +8,11 @@ namespace Incision
     {
         [SerializeField] private List<EnemyType> allowedEnemies;
         public bool IsAllowed(EnemyType type) => allowedEnemies.Contains(type);
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, 2f);
+        }
     }
 }
