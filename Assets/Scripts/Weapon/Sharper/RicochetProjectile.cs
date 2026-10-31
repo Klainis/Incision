@@ -35,7 +35,7 @@ public class RicochetProjectile : CardProjectile
             return;
 
         SpawnEffectOnDestroy();
-        damageable.TakeDamage(new(Damage, gameObject, transform.position, IsCrit)/*Eventbus*/);
+        damageable.TakeDamage(new(Damage, gameObject, collision.gameObject, IsCrit));
 
         if (_bouncesLeft <= 0)
         {

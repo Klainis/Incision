@@ -39,7 +39,7 @@ namespace Incision.Enemies.Runtime.Attacks
                     (
                         Damage,
                         enemy.gameObject,
-                        target.position
+                        target.gameObject
                     ));
                 }
             }

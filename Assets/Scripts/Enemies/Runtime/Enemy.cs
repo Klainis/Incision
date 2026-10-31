@@ -1,4 +1,3 @@
-
 using Incision.Data;
 using Incision.Enemies.Interfaces;
 using Incision.Enemies.Templates;
@@ -13,6 +12,7 @@ namespace Incision.Enemies.Components
     public class Enemy : MonoBehaviour, ICreature
     {
         public string Name { get; private set; }
+        public Transform Transform { get; private set; }
         
         [SerializeField] private Health _health;
         [SerializeField] private EnemyMotor _motor;
@@ -45,7 +45,9 @@ namespace Incision.Enemies.Components
         {
             template = tpl;
             stats = template.Stats.CreateRuntime();
+            
             Name = gameObject.name;
+            Transform = transform;
 
             _health.Initialize(stats);
 

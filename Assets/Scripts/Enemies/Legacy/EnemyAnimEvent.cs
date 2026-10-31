@@ -25,7 +25,7 @@ public class EnemyAnimEvent : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable)
                 && hit.CompareTag("Player"))
             {
-                damageable.TakeDamage(new DamageInfo(_enemyAttack.Damage, gameObject, _point.position));
+                damageable.TakeDamage(new DamageInfo(_enemyAttack.Damage, gameObject, _point.gameObject));
             }
         }
     }

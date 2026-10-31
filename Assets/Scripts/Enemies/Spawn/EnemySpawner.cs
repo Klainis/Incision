@@ -23,11 +23,6 @@ namespace Incision.Enemies.Components
         [Inject] private EnemyFactory _factory;
         [Inject] private IEventBus _eventBus;
 
-        private async void Start()
-        {
-            await StartSpawning();
-        }
-
         public async Task StartSpawning()
         {
             await SpawnRoutine();
@@ -39,25 +34,34 @@ namespace Incision.Enemies.Components
             {
                 await Task.Delay(wave.StartDelay);
                 _eventBus.Publish(new OnWaveStarted(wave));
-                
-                foreach (var entry in wave.Entries)
+                await SpawnWave(wave.Entries);
+                _eventBus.Publish(new OnWaveEnded(wave));
+            }
+        }
+
+        private async Task SpawnWave(List<SpawnEntry> entries)
+        {
+            foreach (var entry in entries)
+            {
+                var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.Type)).ToArray();
+                var listSize = allowedList.Length;
+                if (listSize == 0)
                 {
-                    var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.Type)).ToArray();
-                    var listSize = allowedList.Length;
-                    if (listSize == 0)
-                    {
-                        _eventBus.Publish(new LogError(LOG_TAG, $"Failed to spawn {entry.Enemy.Id.AsTag(Color.red)}. There is no spawn points for them to spawn."));
-                        continue;
-                    }
-                    
-                    for (var i = 0; i < entry.Count; i++)
-                    {
-                        _eventBus.Publish(new Log(LOG_TAG, $"Spawning {$"{entry.Enemy.Id}_{i}".AsTag(Color.red)}"));
-                        var point = allowedList[Random.Range(0, listSize)];
-                        var enemy = _factory.Create(entry.Enemy, point.transform.position, point.transform.rotation, transform);
-                        await Task.Delay(entry.Interval);
-                    }
+                    _eventBus.Publish(new LogError(LOG_TAG, $"Failed to spawn {entry.Enemy.Id.AsTag(Color.red)}. There is no spawn points for them to spawn."));
+                    continue;
                 }
+                var point = allowedList[Random.Range(0, listSize)];
+                await SpawnEnemy(entry.Enemy, entry.Count, entry.Interval, point);
+            }
+        }
+
+        private async Task SpawnEnemy(EnemyTemplate tpl, int count, int interval, Spawnpoint point)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                _eventBus.Publish(new Log(LOG_TAG, $"Spawning {$"{tpl.Id}_{i}".AsTag(Color.red)}"));
+                var enemy = _factory.Create(tpl, point.transform.position, point.transform.rotation, transform);
+                await Task.Delay(interval);
             }
         }
     }

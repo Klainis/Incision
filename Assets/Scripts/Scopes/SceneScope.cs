@@ -1,5 +1,7 @@
+using Incision.Enemies.Components;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Services;
+using Incision.Managers;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,6 +12,7 @@ namespace Incision.Scopes
     {
         [SerializeField] private PlayerInput player;
         [SerializeField] private UIEffectManager uiEffectManager;
+        [SerializeField] private EnemySpawner enemySpawner;
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log("<color=white>[DI]</color> Scene scope configuration started");
@@ -18,8 +21,11 @@ namespace Incision.Scopes
                 .AsImplementedInterfaces();
             builder.Register<NavMeshService>(Lifetime.Scoped).AsImplementedInterfaces();
             
-            builder.Register<EnemyFactory>(Lifetime.Singleton); 
-            builder.RegisterComponent(uiEffectManager); 
-        }
+            builder.Register<EnemyFactory>(Lifetime.Singleton);
+            builder.RegisterComponent(enemySpawner);
+            builder.RegisterComponent(uiEffectManager);
+            
+            builder.RegisterEntryPoint<GameFloorController>();
+;        }
     }
 }

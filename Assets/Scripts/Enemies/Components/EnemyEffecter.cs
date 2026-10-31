@@ -47,7 +47,7 @@ public class EnemyEffector : MonoBehaviour
 
     private void OnDamaged(DamageInfo info, float curr, float max)
     {
-        _uiEffectManager.ShowDamagePopup(info.Point, info.Amount, info.IsCritical);
+        _uiEffectManager.ShowDamagePopup(info.Target.transform.position, info.Amount, info.IsCritical);
 
         DamageFlash();
         HitBloodEffect(info);
@@ -87,7 +87,7 @@ public class EnemyEffector : MonoBehaviour
     private void HitBloodEffect(DamageInfo info)
     {
         if (_bloodHitEffect != null)
-            _resolver.Instantiate(_bloodHitEffect, info.Point, Quaternion.identity);
+            _resolver.Instantiate(_bloodHitEffect, info.Target.transform.position, Quaternion.identity);
     }
 
     private void DieBloodExplosion(Health health)

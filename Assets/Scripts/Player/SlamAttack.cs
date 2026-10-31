@@ -51,7 +51,7 @@ public class SlamAttack : MonoBehaviour
             if (hit.gameObject.TryGetComponent(out IDamageable damageable) &&
                 hit.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
-                damageable.TakeDamage(new (slamDamage, gameObject, hit.transform.position));
+                damageable.TakeDamage(new (slamDamage, gameObject, hit.gameObject));
 
                 Vector3 hitPos = hit.gameObject.transform.position;
                 hitPos = Vector3.MoveTowards(hitPos, hitPos + Vector3.up * hitHeight, heightSpeed * Time.deltaTime);
