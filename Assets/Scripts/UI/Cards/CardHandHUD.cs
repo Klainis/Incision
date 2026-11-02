@@ -6,19 +6,23 @@ using UnityEngine.UI;
 public class CardHandHUD : MonoBehaviour
 {
     [Header("Hand")]
-    [SerializeField] private CardHand _hand;
     [SerializeField] private CardSlotView[] _slots;
 
     [Header("NextCard")]
     [SerializeField] private GameObject _nextRoot;
     [SerializeField] private Image _nextIcon;
 
-    private void OnEnable()
+    private CardHand _hand;
+
+    public void Initialize(CardHand hand)
     {
+        _hand = hand;
+
         _hand.HandChanged += OnHandChanged;
         _hand.ActiveChanged += OnActiveChanged;
         _hand.AmmoChanged += OnAmmoChanged;
-        //_hand.AbilityUsed += OnAbilityUsed;
+
+        RefreshAll(snap: true);
     }
 
     private void OnDisable()
@@ -27,11 +31,6 @@ public class CardHandHUD : MonoBehaviour
         _hand.ActiveChanged -= OnActiveChanged;
         _hand.AmmoChanged -= OnAmmoChanged;
         //_hand.AbilityUsed -= OnAbilityUsed;
-    }
-
-    private void Start()
-    {
-        RefreshAll(snap: true);
     }
 
     private void OnHandChanged() => RefreshAll(snap: true);

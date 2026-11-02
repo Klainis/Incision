@@ -34,10 +34,12 @@ namespace Incision.PLayer
         [SerializeField] private PlayerAnimation _animation;
         [SerializeField] private PlayerAnimationsMethods _animationsMethods;
         [SerializeField] private SteppedAnimations _steppedAnimations;
+        [SerializeField] private AttackAnimationSpeed _attackAnimationSpeed;
 
         [Header("UI")]
         [SerializeField] private PlayerHealthUI _healthUI;
         [SerializeField] private StaminaBarsUI _standingBarsUI;
+        [SerializeField] private CardHandHUD _handHUD;
 
         [SerializeField] private PlayerEffector _effector;
 
@@ -72,12 +74,15 @@ namespace Incision.PLayer
             _dashStamina.Initialize(_playerMovementData);
 
             _hand.Initialize(_attack, _animation);
+            _inHandVisual.Initialize(_hand, _animation);
 
+            _handHUD.Initialize(_hand);
             _playerHealth.InitializePlayerHealth(_playerStatsData, _healthUI);
             _standingBarsUI.Initialize(_dashStamina);
 
             _animationsMethods.Initialize(_attack);
             _steppedAnimations.Initialize();
+            _attackAnimationSpeed.Initialize(_hand);
         }
     }
 }
