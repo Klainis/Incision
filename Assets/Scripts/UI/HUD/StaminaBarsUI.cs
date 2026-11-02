@@ -24,7 +24,6 @@ public class StaminaBarsUI : MonoBehaviour
     {
         for (int i = 0; i < _bars.Length; i++)
         {
-            Debug.Log("REFRESHING STAMINA BARS");
             _bars[i].fillAmount = Mathf.Clamp01(currentStamina - i);
         }
     }
