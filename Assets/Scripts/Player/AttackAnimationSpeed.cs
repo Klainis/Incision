@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class AttackAnimationSpeed : MonoBehaviour
 {
-    [SerializeField] private CardHand _hand;
     [SerializeField] private Animator _animator;
     [SerializeField] private AnimationClip _throwClip;
     [SerializeField] private string _speedParameter = "AttackSpeedMultiplier";
 
+    private CardHand _hand;
+
     private int _speedHash;
 
-    private void Awake()
+    public void Initialize(CardHand hand)
     {
-        _speedHash = Animator.StringToHash(_speedParameter);
-    }
+        _hand = hand;
 
-    private void OnEnable()
-    {
+        _speedHash = Animator.StringToHash(_speedParameter);
+
         _hand.ActiveChanged += OnChanged;
         _hand.HandChanged += Apply;
+
+        Apply();
     }
 
     private void OnDisable()
@@ -28,8 +30,6 @@ public class AttackAnimationSpeed : MonoBehaviour
         _hand.HandChanged -= Apply;
     }
 
-    private void Start() => Apply();
-
     private void OnChanged(int _) => Apply();
 
     private void Apply()
@@ -37,7 +37,7 @@ public class AttackAnimationSpeed : MonoBehaviour
         CardInstance card = _hand.ActiveCard;
         if (card == null) return;
 
-        _animator.SetFloat(_speedHash, /*_throwClip.length * */card.Data.AttackSpeed);
+        _animator.SetFloat(_speedHash, card.Data.AttackSpeed / _throwClip.length);
 
         //AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
         //Debug.Log($"state speedMultiplier = {info.speedMultiplier}");

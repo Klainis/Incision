@@ -1,6 +1,6 @@
 ﻿using Incision.Enemies.Structs;
 
-namespace Incision.Enemies.Interfaces
+namespace Incision.Interfaces
 {
     public interface IDamageable
     {

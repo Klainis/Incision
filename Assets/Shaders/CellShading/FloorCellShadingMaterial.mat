@@ -49,14 +49,16 @@ Material:
     - _2ToneStep: 0.75
     - _3ToneStep: 0.5
     - _4ToneStep: 0.25
-    - _GeneralStrength: 6
-    - _GlareSize: -1
+    - _FlashAmount: 0
+    - _GeneralStrength: 5
+    - _GlareSize: 0.01
     - _LightBlend: 0.5
     - _NoiseMultiply: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8930817, g: 0.86407375, b: 0.8116371, a: 1}
+    - _FlashColor: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _PositionRam: {r: 200, g: 200, b: 0, a: 0}
     - _PosterizeSteps: {r: 8, g: 8, b: 8, a: 0}

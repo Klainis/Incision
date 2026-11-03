@@ -1,30 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class SteppedAnimations : MonoBehaviour
 {
-    [SerializeField] private float _animationFPS = 12f;
-
-    Animator _animator;
-    float _accumulator;
-
-    private void Awake()
+    [Serializable]
+    public class AnimatorSet
     {
-        _animator = GetComponent<Animator>();
-        _animator.enabled = true;
+        public Animator animator;
+        public float animationFPS;
+
+        [NonSerialized] public float accumulator;
+    }
+
+    [SerializeField] private List<AnimatorSet> _animatorsSets = new List<AnimatorSet>();
+
+    public void Initialize()
+    {
+        foreach (AnimatorSet animatorSet in _animatorsSets)
+        {
+            if (animatorSet.animator == null)
+            {
+                Debug.LogError($"[SteppedAnimation.cs] : Absent Animator");
+                continue;
+            }
+
+            animatorSet.animator.enabled = true;
+            animatorSet.accumulator = 0;
+        }
     }
 
     private void Update()
     {
-        float step = 1f / _animationFPS;
-        _accumulator += Time.deltaTime;
+        StepAnim();
+    }
 
-        while (_accumulator >= step)
+    private void StepAnim()
+    {
+        foreach (AnimatorSet animatorSet in _animatorsSets)
         {
-            _animator.Update(step);
-            _accumulator -= step;
+            if (animatorSet.animator == null ||
+                animatorSet.animationFPS <= 0f)
+                continue;
+
+            float step = 1f / animatorSet.animationFPS;
+            animatorSet.accumulator += Time.deltaTime;
+
+            while (animatorSet.accumulator >= step)
+            {
+                animatorSet.animator.Update(step);
+                animatorSet.accumulator -= step;
+            }
         }
     }
 }

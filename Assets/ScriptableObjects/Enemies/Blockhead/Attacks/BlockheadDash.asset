@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fefc531a283724cbe1ed0d6ec4cc52, type: 3}
   m_Name: BlockheadDash
   m_EditorClassIdentifier: 
-  _damage: 5
-  _hitRange: 6
+  _damage: 12
+  _hitRange: 7
   _onHitRangeMultiplier: 0.7
   _cooldown: 1
-  _animationTrigger: IsAttacking
-  distance: 5
-  jumpHeight: 2
   startDelay: 0
   endDelay: 0
+  _animationTrigger: IsAttacking
+  distance: 4
+  jumpHeight: 2
   duration: 1
-  speed: 3
+  speed: 3.5

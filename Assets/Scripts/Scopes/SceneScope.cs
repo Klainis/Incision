@@ -12,7 +12,7 @@ namespace Incision.Scopes
 {
     public class SceneScope : LifetimeScope
     {
-        [SerializeField] private PlayerInput player;
+        [SerializeField] private Player _player;
         [SerializeField] private UIEffectManager uiEffectManager;
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private PortalSpawner portalSpawner;
@@ -21,16 +21,18 @@ namespace Incision.Scopes
         {
             Debug.Log("<color=white>[DI]</color> Scene scope configuration started");
             builder.Register<NearestPlayerTargetProvider>(Lifetime.Singleton)
-                .WithParameter(player.transform)
+                .WithParameter(_player.transform)
                 .AsImplementedInterfaces();
             builder.Register<NavMeshService>(Lifetime.Scoped).AsImplementedInterfaces();
             
-            builder.Register<EnemyFactory>(Lifetime.Singleton);
+            builder.Register<EnemyFactory>(Lifetime.Singleton); 
+            builder.Register<ProjectileFactory>(Lifetime.Singleton);
+            builder.Register<ObjectFactory>(Lifetime.Singleton);
             builder.Register<PortalFactory>(Lifetime.Singleton);
             
+            builder.RegisterComponent(uiEffectManager); 
             builder.RegisterComponent(enemySpawner);
             builder.RegisterComponent(portalSpawner);
-            builder.RegisterComponent(uiEffectManager);
             
             builder.RegisterEntryPoint<GameFloorController>();
 ;        }

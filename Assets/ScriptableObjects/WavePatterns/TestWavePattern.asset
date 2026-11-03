@@ -13,72 +13,27 @@ MonoBehaviour:
   m_Name: TestWavePattern
   m_EditorClassIdentifier: 
   _waves:
-  - StartDelay: 100
+  - StartDelay: 0
     Entries:
     - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 200
+      Count: 5
+      Interval: 50
     - Enemy: {fileID: 11400000, guid: 757a6e15508412b489888be931e0076c, type: 2}
       Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-  - StartDelay: 150
+      Interval: 100
+  - StartDelay: 2000
     Entries:
     - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 200
+      Count: 7
+      Interval: 50
     - Enemy: {fileID: 11400000, guid: 757a6e15508412b489888be931e0076c, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-  - StartDelay: 200
+      Count: 3
+      Interval: 100
+  - StartDelay: 5000
     Entries:
     - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 200
+      Count: 7
+      Interval: 50
     - Enemy: {fileID: 11400000, guid: 757a6e15508412b489888be931e0076c, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
-      Count: 1
-      Interval: 300
+      Count: 3
+      Interval: 100

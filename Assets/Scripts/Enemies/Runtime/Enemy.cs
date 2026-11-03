@@ -8,13 +8,13 @@ using VContainer;
 
 namespace Incision.Enemies.Components
 {
-    [RequireComponent(typeof(Health), typeof(EnemyMotor), typeof(EnemyBrain))]
+    [RequireComponent(typeof(EnemyHealth), typeof(EnemyMotor), typeof(EnemyBrain))]
     public class Enemy : MonoBehaviour, ICreature
     {
         public string Name { get; private set; }
         public Transform Transform { get; private set; }
         
-        [SerializeField] private Health _health;
+        [SerializeField] private EnemyHealth _health;
         [SerializeField] private EnemyMotor _motor;
         [SerializeField] private EnemyBrain _brain;
         [SerializeField] private EnemyAttacker _attacker;

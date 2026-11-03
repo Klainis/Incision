@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class PlayerAnimationsMethods : MonoBehaviour
 {
-    public static PlayerAnimationsMethods Instance { get; private set; }
+    private PlayerAttack _playerAttack;
 
-    [SerializeField] private GunAttack _gun;
-
-    private void Awake()
+    public void Initialize(PlayerAttack attack)
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-
-        if (_gun == null)
-        {
-            _gun = FindAnyObjectByType<GunAttack>();
-        }
+        _playerAttack = attack;
     }
 
     public void Attack()
     {
-        _gun?.CardAttack();
+        if (_playerAttack == null)
+        {
+            _playerAttack = FindAnyObjectByType<PlayerAttack>();
+        }
+
+        _playerAttack?.CardAttack();
     }
 }

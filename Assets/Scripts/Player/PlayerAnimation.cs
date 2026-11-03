@@ -6,20 +6,8 @@ using VContainer;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    public static PlayerAnimation Instance { get; private set; }
-
     [SerializeField] private Animator _playerAnimator;
     [Inject] private IEventBus _eventBus;
-    //[SerializeField] private Animator _cameraAnimator;
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        Instance = this;
-    }
 
     public void ThrowCardTriggerAnimation()
     {

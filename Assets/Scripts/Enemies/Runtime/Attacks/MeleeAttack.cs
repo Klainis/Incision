@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
-using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
+using Incision.Interfaces;
 using UnityEngine;
 
 namespace Incision.Enemies.Runtime.Attacks
@@ -18,7 +18,7 @@ namespace Incision.Enemies.Runtime.Attacks
 
         protected override Task PrepareAttack(Enemy enemy, Transform attackPoint, Transform target)
         {
-            if (target == null) return Task.CompletedTask;
+            if (!target) return Task.CompletedTask;
 
             var animEvents = enemy.AnimationEvents;
             animEvents.OnAttackHit += ApplyDamage;

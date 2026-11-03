@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
-using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
+using Incision.Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 

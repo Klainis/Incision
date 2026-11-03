@@ -1,4 +1,4 @@
-using Incision.Enemies.Interfaces;
+using Incision.Interfaces;
 using UnityEngine;
 
 namespace Incision.Enemies.Components

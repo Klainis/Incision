@@ -106,3 +106,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+/[Aa]ssets/KinematicCharacterController/ExampleCharacter
+/[Aa]ssets/KinematicCharacterController/Examples
+/[Aa]ssets/KinematicCharacterController/Walkthrough
+/[Aa]ssets/KinematicCharacterController/APIReference*

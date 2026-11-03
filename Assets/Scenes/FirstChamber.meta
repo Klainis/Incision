@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/FirstChamber.meta
 guid: 006615ee71f1b4a4b95448890c8a7a7a
+========
+guid: 336a44d59f0ad24419b4385c4c57335b
+>>>>>>>> main:Assets/Prefabs/Objects.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

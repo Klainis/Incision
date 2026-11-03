@@ -1,3 +1,4 @@
+using Incision;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,10 @@ using UnityEngine;
 public class CardInstance
 {
     public CardData Data { get; }
+    public string ID { get; private set; }
     public int Ammo { get; private set; }
     public float NextShotTime { get; set; }
+    public CardAbilityRuntime AbilityRuntime { get; set; }
     public float NextAbilityTime { get; set; }
 
     public bool IsEmpty => Ammo <= 0;
@@ -14,6 +17,9 @@ public class CardInstance
     public CardInstance(CardData data)
     {
         Data = data;
+        ID = data.ID;
+        AbilityRuntime = data.CardAbility != null ? data.CardAbility.CreateRuntime(this) : null;
+
         Ammo = data.MaxAmmo;
     }
 

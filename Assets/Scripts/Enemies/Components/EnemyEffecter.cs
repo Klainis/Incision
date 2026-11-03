@@ -1,3 +1,4 @@
+using Incision;
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
 using System.Collections;
@@ -10,6 +11,9 @@ public class EnemyEffector : MonoBehaviour
     [Header("Materials")]
     [SerializeField] private Renderer[] _enemyRenderers;
 
+    [Header("Health")]
+    [SerializeField] private EnemyHealthUI _healthBar;
+
     [Header("Effects")]
     [SerializeField] private ParticleSystem _bloodExplosionEffect;
     [SerializeField] private ParticleSystem _bloodHitEffect;
@@ -18,7 +22,7 @@ public class EnemyEffector : MonoBehaviour
     [SerializeField][Range(0, 1)] private float _flashAmount = 1;
     [SerializeField] private float _flashTime = 0.25f;
 
-    private Health _enemyHealth;
+    private EnemyHealth _enemyHealth;
     [Inject] private IObjectResolver _resolver;
 
     private MaterialPropertyBlock _propertyBlock;
@@ -29,11 +33,12 @@ public class EnemyEffector : MonoBehaviour
 
     private Coroutine _flashCoroutine;
 
-    public void Initialize(Health health)
+    public void Initialize(EnemyHealth health)
     {
         _enemyHealth = health;
 
-        _enemyHealth.OnChanged += OnDamaged;
+        _enemyHealth.OnDamaged += OnDamaged;
+        _enemyHealth.OnDamaged += _healthBar.TakeDamage;
         _enemyHealth.OnDied += DieBloodExplosion;
 
         _propertyBlock = new MaterialPropertyBlock();
@@ -41,7 +46,8 @@ public class EnemyEffector : MonoBehaviour
 
     private void OnDisable()
     {
-        _enemyHealth.OnChanged -= OnDamaged;
+        _enemyHealth.OnDamaged -= OnDamaged;
+        _enemyHealth.OnDamaged -= _healthBar.TakeDamage;
         _enemyHealth.OnDied -= DieBloodExplosion;
     }
 

@@ -6,13 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardData", menuName = "Scriptable Objects/CardData")]
 public class CardData : ScriptableObject
 {
+    [Header("Object ID")]
+    [SerializeField] private string _id;
+
     [Header("Visual")]
     [SerializeField] private string _cardName;
     [SerializeField] private Sprite _cardIcon;
     [SerializeField] private Material _cardHandMaterial;
 
     [Header("Card Projectile")]
-    [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private CardProjectile _projectilePrefab;
     [SerializeField] private float _projectileSpeed;
 
     [Header("Card Attack Stats")]
@@ -28,10 +31,12 @@ public class CardData : ScriptableObject
     [SerializeField] private float _abilityCoolDown = 5f;
     [SerializeField] private int _spendAbilityAmmo = 10;
 
+    public string ID => _id;
+
     public string CardName => _cardName;
     public Sprite CardIcon => _cardIcon;
     public Material CardHandMaterial => _cardHandMaterial;
-    public Projectile CardPrefab => _projectilePrefab;
+    public CardProjectile CardPrefab => _projectilePrefab;
     public float ProjectileSpeed => _projectileSpeed;
     public float Damage => _damage;
     public float AttackSpeed => _attackSpeed;

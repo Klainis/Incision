@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mass: 70
   _maxHealth: 100
+  _currentHealth: 100
   _armor: 0
   _moveSpeed: 3.5
   _accelerationRate: 10

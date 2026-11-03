@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class CardInHandVisual : MonoBehaviour
 {
-    [SerializeField] private CardHand _hand;
     [SerializeField] private Renderer _cardRenderer;
-    [SerializeField] private PlayerAnimation _playerAnimation;
     [SerializeField] private float _swapDelay = 0f;
+
+    private CardHand _hand;
+    private PlayerAnimation _playerAnimation;
 
     private Coroutine _routine;
 
-    private void OnEnable()
+    public void Initialize(CardHand hand, PlayerAnimation animation)
     {
+        _hand = hand;
+        _playerAnimation = animation;
+
         _hand.ActiveChanged += OnActiveChanged;
         _hand.HandChanged += OnHandChanged;
+
+        Apply();
     }
 
     private void OnDisable()
     {
         _hand.ActiveChanged -= OnActiveChanged;
         _hand.HandChanged -= OnHandChanged;
-    }
-
-    private void Start()
-    {
-        Apply();
     }
 
     private void OnActiveChanged(int _)

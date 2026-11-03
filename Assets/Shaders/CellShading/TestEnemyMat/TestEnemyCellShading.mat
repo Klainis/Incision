@@ -47,7 +47,7 @@ Material:
     - _4ToneStep: 0.25
     - _FlashAmount: 0
     - _GeneralStrength: 3
-    - _GlareSize: -0.5
+    - _GlareSize: 0.01
     - _LightBlend: 0.5
     - _NoiseMultiply: 0.1
     - _QueueControl: 0

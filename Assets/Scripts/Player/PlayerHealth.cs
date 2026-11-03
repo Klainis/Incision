@@ -1,3 +1,4 @@
+using Incision;
 using Incision.Enemies.Components;
 using Incision.Enemies.Structs;
 using UnityEngine;
@@ -7,36 +8,37 @@ using VContainer.Unity;
 
 public class PlayerHealth : Health
 {
-    [SerializeField] private PlayerStats _playerStatsData;
-    [SerializeField] private UIHealth _healthBar;
+    private PlayerStats _playerStatsData;
+    private PlayerHealthUI _healthBar;
 
     [Inject] private UIEffectManager _uiEffectManager;
     
-    private void Start()
+    public void InitializePlayerHealth(PlayerStats stats, PlayerHealthUI bar)
     {
-        Initialize(_playerStatsData.CreateRuntime());
-    }
+        _playerStatsData = stats;
+        _healthBar = bar;
 
-    private void OnEnable()
-    {
-        OnChanged += _healthBar.TakeDamage;
-        OnChanged += TakeDamageEffect;
-        OnDied += Die;
+        OnDamaged += _healthBar.TakeDamage;
+        OnHealed += _healthBar.Heal;
+        OnDamaged += TakeDamageEffect;
+        OnDied += PlayerDie;
+
+        Initialize(_playerStatsData.CreateRuntime());
+        _healthBar.Initialize(_playerStatsData.CurrentHealth, _playerStatsData.MaxHealth, _healthBar.HealthText);
     }
 
     private void OnDisable()
     {
-        OnChanged -= _healthBar.TakeDamage;
-        OnChanged -= TakeDamageEffect;
-        OnDied -= Die;
+        OnDamaged -= _healthBar.TakeDamage;
+        OnHealed -= _healthBar.Heal;
+        OnDamaged -= TakeDamageEffect;
+        OnDied -= PlayerDie;
     }
 
-    private void Die(Health health)
+    private void PlayerDie(Health health)
     {
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-        //DieEffect();
     }
 
     private void TakeDamageEffect(DamageInfo info, float currentHealth, float maxHealth)
