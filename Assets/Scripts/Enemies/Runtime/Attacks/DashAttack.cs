@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
-using Incision.Enemies.Interfaces;
 using Incision.Enemies.Structs;
 using Incision.Enemies.Templates;
 using Incision.Interfaces;
@@ -160,7 +159,7 @@ namespace Incision.Enemies.Runtime.Attacks
             if (!TargetInRange(attackPoint, target, EffectiveHitRange)) return;
             if (!target.TryGetComponent<IDamageable>(out var damageable)) return;
 
-            damageable.TakeDamage(new DamageInfo(Damage, enemy.gameObject, target.position));
+            damageable.TakeDamage(new DamageInfo(Damage, enemy.gameObject, target.gameObject));
         }
 
         private void EndPendingHit()

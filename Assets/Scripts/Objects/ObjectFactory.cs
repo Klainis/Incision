@@ -1,5 +1,3 @@
-using Incision.Enemies.Components;
-using Incision.Enemies.Templates;
 using Incision.Extensions;
 using Incision.Interfaces;
 using Incision.Structs.Events;

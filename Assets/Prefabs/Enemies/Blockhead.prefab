@@ -233,12 +233,12 @@ GameObject:
   - component: {fileID: 669264173755606509}
   - component: {fileID: 1017903920227990166}
   - component: {fileID: 5796007725544060031}
-  - component: {fileID: 3502351292455870783}
   - component: {fileID: 6329988965933231909}
   - component: {fileID: 7277317956220746456}
   - component: {fileID: 4668799313484945798}
   - component: {fileID: 3089595376552935454}
   - component: {fileID: 7826030874927524179}
+  - component: {fileID: 3502351292455870783}
   m_Layer: 7
   m_Name: Blockhead
   m_TagString: Untagged
@@ -357,21 +357,6 @@ MonoBehaviour:
   _animEvents: {fileID: 268026863280735180}
   _effector: {fileID: 7826030874927524179}
   _rigidbody: {fileID: 669264173755606509}
---- !u!114 &3502351292455870783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343032202664805475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b7f70854413146419a3aa5bd53d8ad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healOrbData: {fileID: 11400000, guid: d0d058c52d71bbf4a8883d519d9e797c, type: 2}
-  _healOrbPrefab: {fileID: 2952727751164049610, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
-  _instantiateOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &6329988965933231909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +427,21 @@ MonoBehaviour:
   _bloodHitEffect: {fileID: 6077063526601698735, guid: 0e373799a60228746a3cf76493170291, type: 3}
   _flashAmount: 1
   _flashTime: 0.1
+--- !u!114 &3502351292455870783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343032202664805475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc762daef6f21aa4bb3be095f89ebf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healOrbData: {fileID: 11400000, guid: d0d058c52d71bbf4a8883d519d9e797c, type: 2}
+  _healOrbPrefab: {fileID: 2952727751164049610, guid: 8f607bf083f159c4ba4ab180a85ed0ef, type: 3}
+  _instantiateOffset: {x: 0, y: 1, z: 0}
 --- !u!1001 &1958464365484584776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -538,7 +538,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5109561091440082666, guid: d153708eba7ce8144a3f736c3b6c5243, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1653,7 +1654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b66b25144faa1048a9f9ad6df3e8cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationFPS: 24
+  _animatorsSets:
+  - animator: {fileID: 4657451905626301100}
+    animationFPS: 24
 --- !u!114 &268026863280735180
 MonoBehaviour:
   m_ObjectHideFlags: 0

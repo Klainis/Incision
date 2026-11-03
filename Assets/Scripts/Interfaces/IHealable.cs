@@ -1,6 +1,4 @@
-﻿using Incision.Enemies.Structs;
-
-namespace Incision.Interfaces
+﻿namespace Incision.Interfaces
 {
     public interface IHealable
     {

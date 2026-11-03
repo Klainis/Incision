@@ -30,14 +30,14 @@ namespace Incision
                 p => p.Initialize(damage, isCrit, cardData));
         }
 
-        public EnemyProjectile CreateEnemyProjectile(RangedAttackTemplate rangedAttackData, float damage, Vector3 position, Quaternion rotation)
+        public EnemyProjectile CreateEnemyProjectile(RangedAttackTemplate rangedAttackData, float damage, Vector3 position, Quaternion rotation, GameObject owner)
         {
             return Create(
                 rangedAttackData.ProjectilePrefab,
                 rangedAttackData.ID,
                 _enemyProjectileCreated++,
                 position, rotation,
-                p => p.Initialize(damage));
+                p => p.Initialize(damage, owner));
         }
 
         //TODO: for another type of projectiles :)

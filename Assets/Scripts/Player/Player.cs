@@ -1,14 +1,13 @@
 using Incision.Interfaces;
 using KinematicCharacterController;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Incision.PLayer
+namespace Incision
 {
     public class Player : MonoBehaviour, ICreature
     {
         public string Name { get; private set; }
+        public Transform Transform { get; }
 
         [Header("Templates")]
         [SerializeField] private PlayerMovementData _playerMovementData;

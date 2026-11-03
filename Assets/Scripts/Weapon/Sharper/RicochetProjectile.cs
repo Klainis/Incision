@@ -30,7 +30,7 @@ public class RicochetProjectile : CardProjectile
         Vector3 hitPoint = collision.GetContact(0).point;
 
         SpawnEffectOnDestroy();
-        damageable.TakeDamage(new(Damage, gameObject, transform.position, IsCrit));
+        damageable.TakeDamage(new(Damage, gameObject, collision.gameObject, IsCrit));
 
         if (_chain.BouncesLeft <= 0)
         {

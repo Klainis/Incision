@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Portal/Components/PortalSpawner.cs.meta
+guid: 00eda647d46a86f43bd220196a24af98
+========
+guid: d0156e1cfc03c9a4caf14034e9e62aa0
+>>>>>>>> main:Assets/Scripts/Effects/LookAtCamera.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -7,7 +7,7 @@ public class CollisionScanProjectile : CardProjectile
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
         SpawnEffectOnDestroy();
-        damageable.TakeDamage(new(Damage, gameObject, collision.transform.position, IsCrit));
+        damageable.TakeDamage(new(Damage, gameObject, collision.gameObject, IsCrit));
     }
 
     protected override void OnOtherCollision()

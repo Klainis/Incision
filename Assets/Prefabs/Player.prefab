@@ -6152,7 +6152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d017ea4711d14a14587f6f3afcf3e177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 2628344061339571928}
   _slots:
   - {fileID: 5814415977011548506}
   - {fileID: 1645412694396360353}
@@ -6428,7 +6427,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2909298530171555054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4664da07ee9bdef408ee890c6be7c930, type: 3}
+  m_Script: {fileID: 11500000, guid: eef4ffe5c4e9caf4faa3b8a1d00fc95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovementData: {fileID: 11400000, guid: 463be7a47171dcd49817eb72d21b4c8d, type: 2}
@@ -6446,8 +6445,10 @@ MonoBehaviour:
   _animation: {fileID: 407688280574520054}
   _animationsMethods: {fileID: 788176701911203531}
   _steppedAnimations: {fileID: 324041887308208073}
+  _attackAnimationSpeed: {fileID: 4196172984049400580}
   _healthUI: {fileID: 7748254236690338928}
   _standingBarsUI: {fileID: 1272175409829382089}
+  _handHUD: {fileID: 3553563362498220479}
   _effector: {fileID: 3252590677362873563}
   _motor: {fileID: 5418925006972515532}
 --- !u!114 &3657837160234566478
@@ -14942,9 +14943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e75496fffe6764b8000e4f2b5bc7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 2628344061339571928}
   _cardRenderer: {fileID: 7859137096884972206}
-  _playerAnimation: {fileID: 407688280574520054}
   _swapDelay: 0
 --- !u!114 &4196172984049400580
 MonoBehaviour:
@@ -14958,7 +14957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1923abd2c2445da4b80341bb9e9cfcc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 2628344061339571928}
   _animator: {fileID: 1093655813619237636}
   _throwClip: {fileID: 7400000, guid: 0f4bb2bff7e05b84ba153ed47fe4b512, type: 2}
   _speedParameter: AttackSpeedMultiplier

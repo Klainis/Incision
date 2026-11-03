@@ -1,10 +1,8 @@
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
 using Incision.Enemies.Templates;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Incision.Enemies.Runtime.Attacks
 {
@@ -53,7 +51,7 @@ namespace Incision.Enemies.Runtime.Attacks
 
         protected override async Task ExecuteAttack(Enemy enemy)
         {
-            var projectile = _projectileFactory.CreateEnemyProjectile(_rangedAttackTemplate, Damage, origin, rotation);
+            var projectile = _projectileFactory.CreateEnemyProjectile(_rangedAttackTemplate, Damage, origin, rotation, enemy.gameObject);
 
             projectile.Rigidbody.AddForce(direction * _speed, _forceMode);
             await Task.Yield();

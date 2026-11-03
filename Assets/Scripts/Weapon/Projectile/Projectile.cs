@@ -5,7 +5,7 @@ namespace Incision
 {
     [SelectionBase]
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class Projectile : MonoBehaviour, ICreature
+    public abstract class Projectile : MonoBehaviour
     {
         [Header("Common")]
         [SerializeField] private ProjectileDisposeType _disposeType = ProjectileDisposeType.OnTargetCollision;
