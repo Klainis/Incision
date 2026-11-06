@@ -5853,6 +5853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 247712305}
   - component: {fileID: 247712304}
+  - component: {fileID: 247712306}
   m_Layer: 0
   m_Name: SceneScope
   m_TagString: Untagged
@@ -5879,6 +5880,7 @@ MonoBehaviour:
   - {fileID: 299565}
   - {fileID: 1327962783}
   _player: {fileID: 1741994660}
+  _view: {fileID: 247712306}
   uiEffectManager: {fileID: 223143314}
   enemySpawner: {fileID: 1143162764}
   portalSpawner: {fileID: 911409626}
@@ -5897,6 +5899,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247712306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247712303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e60d413e3ff284a88689d541de0bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Portals:
+  - Anchor: {fileID: 1729481361}
 --- !u!1001 &250385691
 PrefabInstance:
   m_ObjectHideFlags: 0
