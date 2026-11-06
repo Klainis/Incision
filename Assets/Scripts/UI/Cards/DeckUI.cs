@@ -1,3 +1,4 @@
+using Incision.Legacy;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -59,6 +60,20 @@ public class DeckUI : MonoBehaviour
 
         _panel.SetActive(!_panel.activeSelf);
         if (_panel.activeSelf) RebuildList();
+
+        GameManager.Instance?.SetCursorVisible(_panel.activeSelf);
+        Time.timeScale = _panel.activeSelf ? 0 : 1;
+    }
+
+    public void BackFromMenu() // Legacy for button
+    {
+        if (_panel == null) return;
+
+        _panel.SetActive(!_panel.activeSelf);
+        if (_panel.activeSelf) RebuildList();
+
+        GameManager.Instance?.SetCursorVisible(_panel.activeSelf);
+        Time.timeScale = _panel.activeSelf ? 0 : 1;
     }
 
     private void Refresh()
