@@ -446,7 +446,7 @@ GameObject:
   m_Component:
   - component: {fileID: 38364903}
   m_Layer: 0
-  m_Name: '---- PLAYER ----'
+  m_Name: ---- PLAYER ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,15 +617,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.32
+      value: -27.92
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.73
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.23
+      value: -42.38
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -691,7 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144474831}
   m_Layer: 0
-  m_Name: '---- TESTING ----'
+  m_Name: ---- TESTING ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -836,7 +836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269662102}
   m_Layer: 0
-  m_Name: '---- RENDERING ----'
+  m_Name: ---- RENDERING ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1715,7 +1715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475239418}
   m_Layer: 0
-  m_Name: '---- LIGHTS ----'
+  m_Name: ---- LIGHTS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19763,7 +19763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276487374}
   m_Layer: 0
-  m_Name: '---- SPAWNERS ----'
+  m_Name: ---- SPAWNERS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20375,7 +20375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1382965527}
   m_Layer: 0
-  m_Name: '---- UI ----'
+  m_Name: ---- UI ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20603,7 +20603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1432662502}
   m_Layer: 0
-  m_Name: '---- CAMERA ----'
+  m_Name: ---- CAMERA ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20890,7 +20890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516323528}
   m_Layer: 0
-  m_Name: '---- ENVIRONMENT ----'
+  m_Name: ---- ENVIRONMENT ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21470,7 +21470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729156098}
   m_Layer: 0
-  m_Name: '---- SPAWNPOINTS ----'
+  m_Name: ---- SPAWNPOINTS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21485,7 +21485,7 @@ Transform:
   m_GameObject: {fileID: 1729156097}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22932,7 +22932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948453031}
   m_Layer: 0
-  m_Name: '---- SETTINGS ----'
+  m_Name: ---- SETTINGS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
