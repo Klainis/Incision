@@ -15,10 +15,13 @@ EditorBuildSettings:
     path: Assets/Scenes/FirstChamber.unity
     guid: 122c9725ffeb7e24fa294c22a96db0e4
   - enabled: 1
+    path: Assets/Scenes/MoneyArena.unity
+    guid: 90ca54fcc3a3577488957d5bb29938b6
+  - enabled: 1
     path: Assets/Scenes/SecondChamber.unity
     guid: 50505b8630a01a944879791fcedade9c
   - enabled: 1
-    path: Assets/Scenes/MoneyArena.unity
-    guid: 90ca54fcc3a3577488957d5bb29938b6
+    path: Assets/Scenes/MainMenu.unity
+    guid: cf4d24ade087c50479e6518b91cd2ffb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}

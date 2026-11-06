@@ -64,7 +64,7 @@ namespace Incision
 
         public void Initialize ()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             _playerInput.Intialize(_character, _playerCamera, _hand, _playerMovementData, _playerStatsData);
             _character.Initialize(_playerMovementData, _playerInput, _motor, _dashStamina, _effector, _animation);
