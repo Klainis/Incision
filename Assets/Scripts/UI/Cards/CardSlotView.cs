@@ -9,8 +9,10 @@ public class CardSlotView : MonoBehaviour
 {
     [SerializeField] private Image _cardIcon;
     [SerializeField] private Image _abilityFill;
-    [SerializeField] private TMP_Text _ammoText;
-    [SerializeField] private GameObject _abilityFrame;
+    [SerializeField] private TextMeshProUGUI _ammoText;
+    [SerializeField] private TextMeshProUGUI _cardName;
+    [SerializeField] private GameObject _abilityActiveIcon;
+    [SerializeField] private GameObject _abilityInactiveIcon;
     [SerializeField] private CanvasGroup _group;
 
     [Header("Animation")]
@@ -29,6 +31,7 @@ public class CardSlotView : MonoBehaviour
         if (card == null) return;
 
         _cardIcon.sprite = card.Data.CardIcon;
+        _cardName.text = card.Data.CardName;
         SetAmmo(card);
         UpdateAbilityFill();
     }
@@ -53,11 +56,12 @@ public class CardSlotView : MonoBehaviour
         float remaining = _card.NextAbilityTime - Time.time;
         bool onCooldown = remaining > 0f;
 
-        if (_abilityFrame.activeSelf != onCooldown)
-            _abilityFrame.SetActive(onCooldown);
+        _abilityActiveIcon.SetActive(!onCooldown);
+        _abilityInactiveIcon.SetActive(onCooldown);
 
         if (onCooldown)
-            _abilityFill.fillAmount = Mathf.Clamp01(remaining / _card.Data.AbilityCoolDown);
+            _abilityFill.fillAmount = 1f - Mathf.Clamp01(remaining / _card.Data.AbilityCoolDown);
+        else _abilityFill.fillAmount = 1f;
     }
 
     private void Update()
