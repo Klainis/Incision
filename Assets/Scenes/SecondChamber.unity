@@ -27245,7 +27245,7 @@ PrefabInstance:
     - target: {fileID: 7372285748065355647, guid: e9f832f30fce2764b87aaf229f7ec1c2, type: 3}
       propertyPath: _waveTemplate
       value: 
-      objectReference: {fileID: 11400000, guid: c2f27d1d2ad2b4440bdb5e4fae47255d, type: 2}
+      objectReference: {fileID: 11400000, guid: 3329440c5c4d9c942b9cbf1ca5a4b31f, type: 2}
     - target: {fileID: 7372285748065355647, guid: e9f832f30fce2764b87aaf229f7ec1c2, type: 3}
       propertyPath: _spawnPoints.Array.size
       value: 7

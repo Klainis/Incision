@@ -21,8 +21,8 @@ MonoBehaviour:
   _damage: 20
   _maxAmmo: 20
   _spendAttackAmmo: 1
-  _attackSpeed: 3
-  _critChance: 0.1
+  _attackSpeed: 7
+  _critChance: 0.2
   _critDamageMultiplier: 1.5
   _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
   _abilityCoolDown: 10

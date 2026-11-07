@@ -18,10 +18,10 @@ MonoBehaviour:
   _cardHandMaterial: {fileID: 2100000, guid: 1a06642cecbb4204b8da2e5c0c1fd9d5, type: 2}
   _projectilePrefab: {fileID: 8592896625477048602, guid: f0002c332644ed047a596b84a759aa48, type: 3}
   _projectileSpeed: 150
-  _damage: 20
+  _damage: 5
   _maxAmmo: 20
   _spendAttackAmmo: 1
-  _attackSpeed: 50
+  _attackSpeed: 60
   _critChance: 0.5
   _critDamageMultiplier: 1.5
   _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
