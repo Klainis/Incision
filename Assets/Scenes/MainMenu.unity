@@ -1735,6 +1735,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785779757862916014, guid: 1c4913228383184468f92af7379447a5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785779757862916014, guid: 1c4913228383184468f92af7379447a5, type: 3}
       propertyPath: _mainMenuScene
       value: MainMenu
       objectReference: {fileID: 0}
