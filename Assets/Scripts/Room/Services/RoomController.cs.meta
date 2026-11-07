@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Managers/Entrypoints/GameFloorController.cs.meta
 guid: 4918e84d920d5d742a9b04f7d86e7d28
-========
-guid: aec35b3ccc9bc5f40bab0f0676fc1725
->>>>>>>> main:Assets/Scripts/Interfaces/IHealable.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

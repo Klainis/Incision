@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Portal/Portal.cs.meta
 guid: c88eefe6a10712a4a866ecea95340210
-========
-guid: 9b7f70854413146419a3aa5bd53d8ad7
->>>>>>>> main:Assets/Scripts/Enemies/Components/EnemyHealth.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
