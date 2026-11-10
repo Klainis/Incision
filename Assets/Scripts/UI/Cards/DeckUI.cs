@@ -1,10 +1,8 @@
-using Incision.Legacy;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using Incision.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using VContainer;
 
 public class DeckUI : MonoBehaviour
 {
@@ -15,12 +13,14 @@ public class DeckUI : MonoBehaviour
     [SerializeField] private Transform _deckListRoot;
     [SerializeField] private Transform _handListRoot;
     [SerializeField] private DeckCardItem _itemPrefab;
-    [SerializeField] private InputActionReference _toggleAction; // Button, потом переместить в главный ui класс
+    [SerializeField] private InputActionReference _toggleAction; // Button, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ui пїЅпїЅпїЅпїЅпїЅ
 
     private readonly List<DeckCardItem> _deckItems = new List<DeckCardItem>();
     private readonly List<DeckCardItem> _handItems = new List<DeckCardItem>();
 
-
+    [Inject] private CursorManager _cursorManager;
+    [Inject] private PauseManager _pauseManager;
+    
     private void Awake()
     {
         if (_hand == null)
@@ -59,10 +59,19 @@ public class DeckUI : MonoBehaviour
         if (_panel == null) return;
 
         _panel.SetActive(!_panel.activeSelf);
-        if (_panel.activeSelf) RebuildList();
 
-        GameManager.Instance?.SetCursorVisible(_panel.activeSelf);
-        Time.timeScale = _panel.activeSelf ? 0 : 1;
+        switch (_panel.activeSelf)
+        {
+            case true:
+                RebuildList();
+                _cursorManager.ShowCursor();
+                _pauseManager.Pause();
+                break;
+            case false:
+                _cursorManager.HideCursor();
+                _pauseManager.Resume();
+                break;
+        }
     }
 
     public void BackFromMenu() // Legacy for button
@@ -72,8 +81,18 @@ public class DeckUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
         if (_panel.activeSelf) RebuildList();
 
-        GameManager.Instance?.SetCursorVisible(_panel.activeSelf);
-        Time.timeScale = _panel.activeSelf ? 0 : 1;
+        switch (_panel.activeSelf)
+        {
+            case true:
+                RebuildList();
+                _cursorManager.ShowCursor();
+                _pauseManager.Pause();
+                break;
+            case false:
+                _cursorManager.HideCursor();
+                _pauseManager.Resume();
+                break;
+        }
     }
 
     private void Refresh()

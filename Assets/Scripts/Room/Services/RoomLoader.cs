@@ -19,7 +19,7 @@ namespace Incision.Room.Services
         private readonly SemaphoreSlim _lock = new(1, 1);
         public bool IsLoaded(string nodeId) => _loaded.ContainsKey(nodeId);
 
-        public async Task LoadAsync(RoomNode node)
+        public async Task LoadAsync(RoomNode node, LoadSceneMode mode = LoadSceneMode.Additive)
         {
             if (_loaded.ContainsKey(node.Id)) 
                 throw new TypeLoadException("Room already loaded");
@@ -28,7 +28,7 @@ namespace Incision.Room.Services
             try
             {
                 PendingRoomNode.Value = node;
-                await SceneLoader.LoadScene(node.Template.SceneName, LoadSceneMode.Additive);
+                await SceneLoader.LoadScene(node.Template.SceneName, LoadSceneMode.Single);
 
                 _loaded[node.Id] = node;
             }

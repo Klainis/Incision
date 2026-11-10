@@ -1,7 +1,11 @@
+using Incision.Events;
+using Incision.Interfaces;
 using UnityEngine;
+using VContainer;
 
 public class PlayerInput : MonoBehaviour
 {
+    [Inject] private IEventBus _eventBus;
     private PlayerCharacter _playerCharacter;
     private PlayerCamera _playerCamera;
     private CardHand _cardHand;
@@ -24,10 +28,25 @@ public class PlayerInput : MonoBehaviour
 
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+        
+        _eventBus.Subscribe<OnPauseChanged>(OnPauseChanged);
+    }
+
+    private void OnPauseChanged(OnPauseChanged evt)
+    {
+        if (evt.IsPaused)
+        {
+            _inputActions.Disable();
+        }
+        else
+        {
+            _inputActions.Enable();
+        }
     }
 
     private void OnDestroy()
     {
+        _eventBus.Unsubscribe<OnPauseChanged>(OnPauseChanged);
         _inputActions.Dispose();
     }
 

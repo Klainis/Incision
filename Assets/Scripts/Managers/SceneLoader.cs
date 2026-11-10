@@ -6,7 +6,7 @@ namespace Incision.Managers
 {
     public class SceneLoader : MonoBehaviour
     {
-        public static async Task LoadScene(string sceneName, LoadSceneMode mode)
+        public static async Task LoadScene(string sceneName, LoadSceneMode mode = LoadSceneMode.Additive)
         {
             var asyncOperation = SceneManager.LoadSceneAsync(sceneName, mode);
             asyncOperation!.allowSceneActivation = false;

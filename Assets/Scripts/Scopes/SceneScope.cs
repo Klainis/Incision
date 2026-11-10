@@ -2,6 +2,7 @@ using System;
 using Incision.Enemies.Components;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Services;
+using Incision.Extensions;
 using Incision.Portal;
 using Incision.Portal.Components;
 using Incision.Room.Components;
@@ -27,7 +28,7 @@ namespace Incision.Scopes
             var pendingNode = PendingRoomNode.Value;
 
             if (pendingNode == null)
-                throw new Exception($"{pendingNode} is not a valid room node");
+                throw new Exception("Loaded room is not valid".AsTag(Color.red));
             else
                 builder.RegisterInstance(pendingNode);
             
