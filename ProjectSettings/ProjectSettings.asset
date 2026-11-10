@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.0.1
+  bundleVersion: 0.0.3
   preloadedAssets:
   - {fileID: 11400000, guid: b2488d632ed6b22418c0312d1a6d7202, type: 2}
   - {fileID: -944628639613478452, guid: 29f0979d6f62b19419345fecc3a930a1, type: 3}
@@ -166,7 +166,7 @@ PlayerSettings:
   applicationIdentifier:
     Standalone: com.CilliPeppers.Incision
   buildNumber:
-    Standalone: 0
+    Standalone: 30
     VisionOS: 0
     iPhone: 0
     tvOS: 0
@@ -668,7 +668,8 @@ PlayerSettings:
     tvOS: UNITY_POST_PROCESSING_STACK_V2
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:

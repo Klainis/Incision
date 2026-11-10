@@ -51,3 +51,4 @@ MonoBehaviour:
   LoggingEnabled: 1
   decalBufferTemplate: {fileID: 11400000, guid: 57e222ac0491e194190f44eea0789e1b, type: 2}
   roomGraphTemplate: {fileID: 11400000, guid: 806a202056ec2ab4bb4f5f5afa3b6e3c, type: 2}
+  gameControllerSettings: {fileID: 11400000, guid: 6fe4f3f6ba8f3bf4caf025fabcd7cc9e, type: 2}
