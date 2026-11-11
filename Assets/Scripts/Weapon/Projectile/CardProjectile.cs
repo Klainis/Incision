@@ -40,6 +40,11 @@ namespace Incision
             _canRotationCard = false;
         }
 
+        protected override void OnProjectileDispose()
+        {
+            DetachTrail();
+        }
+
         public void Initialize(float damage, bool isCrit, CardData cardData)
         {
             _cardData = cardData;
@@ -100,6 +105,18 @@ namespace Incision
 
             if (_hitEffect != null)
                 Instantiate(_hitEffect, transform.position, transform.rotation);
+        }
+
+        private void DetachTrail()
+        {
+            if (_trailRenderer == null) return;
+
+            var trailTransform = _trailRenderer.transform;
+            if (trailTransform == transform) return;
+
+            trailTransform.SetParent(null, true);
+            _trailRenderer.emitting = false;
+            _trailRenderer.autodestruct = true;
         }
     }
 }

@@ -103,8 +103,7 @@ public class RicochetProjectile : CardProjectile
             }
         }
 
-        base.OnOtherCollision(collision);
-        Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        DisposeProjectile();
     }
 
     private Collider FindNearestEnemy(Vector3 from)
