@@ -49,7 +49,7 @@ namespace Incision
             }
             else
             {
-                OnOtherCollision();
+                OnOtherCollision(collision);
             }
 
             OnAnyCollision();
@@ -74,7 +74,7 @@ namespace Incision
 
         protected virtual void OnProjectileDispose() { }
         protected virtual void OnAnyCollision() { }
-        protected virtual void OnOtherCollision() { }
+        protected virtual void OnOtherCollision(Collision collision = null) { }
         protected virtual void OnTargetCollision(Collision collision, IDamageable damageable) { }
     }
 }

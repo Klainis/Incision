@@ -10,9 +10,9 @@ public class CollisionScanProjectile : CardProjectile
         damageable.TakeDamage(new(Damage, gameObject, collision.gameObject, IsCrit));
     }
 
-    protected override void OnOtherCollision()
+    protected override void OnOtherCollision(Collision collision)
     {
-        base.OnOtherCollision();
+        base.OnOtherCollision(collision);
 
         Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }

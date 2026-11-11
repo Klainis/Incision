@@ -8,6 +8,7 @@ using Incision.Portal.Components;
 using Incision.Room.Components;
 using Incision.Room.Runtime;
 using Incision.Room.Services;
+using Incision.Room.Templates;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,10 @@ namespace Incision.Scopes
 {
     public class SceneScope : LifetimeScope
     {
+        [Header("Test Room Template")]
+        [SerializeField] private RoomTemplate _debugRoomTemplate;
+
+        [Space(5)]
         [SerializeField] private Player _player;
         [SerializeField] private RoomView _view;
         [SerializeField] private UIEffectManager uiEffectManager;
@@ -25,12 +30,7 @@ namespace Incision.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log("<color=white>[DI]</color> Scene scope configuration started");
-            var pendingNode = PendingRoomNode.Value;
-
-            if (pendingNode == null)
-                throw new Exception("Loaded room is not valid".AsTag(Color.red));
-            else
-                builder.RegisterInstance(pendingNode);
+            builder.RegisterInstance(ResolveRoomNode());
             
             builder.Register<NearestPlayerTargetProvider>(Lifetime.Singleton)
                 .WithParameter(_player.transform)
@@ -48,6 +48,23 @@ namespace Incision.Scopes
             builder.RegisterComponent(portalSpawner);
             
             builder.RegisterEntryPoint<RoomController>();
-;        }
+        }
+
+        private RoomNode ResolveRoomNode()
+        {
+            if (PendingRoomNode.TryConsume(out var node))
+                return node;
+
+#if UNITY_EDITOR
+            if (_debugRoomTemplate != null)
+            {
+                Debug.LogWarning(
+                    $"[SceneScope] PendingRoomNode is Empty, using debug node {_debugRoomTemplate.name}");
+                return new RoomNode(_debugRoomTemplate, Vector2Int.zero);
+            }
+#endif
+
+            throw new InvalidOperationException("Loaded room is not valid".AsTag(Color.red));
+        }
     }
 }

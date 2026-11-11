@@ -66,9 +66,44 @@ public class RicochetProjectile : CardProjectile
         DisposeProjectile();
     }
 
-    protected override void OnOtherCollision()
+    protected override void OnOtherCollision(Collision collision)
     {
-        base.OnOtherCollision();
+        Vector3 hitPoint = collision.GetContact(0).point;
+
+        if (_chain.BouncesLeft <= 0)
+        {
+            base.OnOtherCollision(collision);
+            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            return;
+        }
+
+        Collider next = FindNearestEnemy(hitPoint);
+        if (next == null)
+        {
+            base.OnOtherCollision(collision);
+            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            return;
+        }
+
+        _chain.BouncesLeft--;
+        Vector3 dir = (next.bounds.center - hitPoint).normalized;
+
+        bool handled = _chain.BouncesLeft == 0
+                       && _chain.FinalBounce != null
+                       && _chain.FinalBounce(hitPoint, dir, collision.collider, _projectileFactory);
+
+        if (!handled)
+        {
+            CardProjectile spawned = _chain.Spawn(_projectileFactory, CardData, Damage, IsCrit, hitPoint, dir);
+            if (spawned is RicochetProjectile bounce)
+            {
+                bounce.SetChain(_chain);
+                foreach (Collider c in bounce.GetComponentsInChildren<Collider>())
+                    Physics.IgnoreCollision(c, collision.collider);
+            }
+        }
+
+        base.OnOtherCollision(collision);
         Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 

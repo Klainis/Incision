@@ -436,6 +436,7 @@ MonoBehaviour:
   - {fileID: 299565}
   - {fileID: 1327962783}
   - {fileID: 2203919644221334340}
+  _debugRoomTemplate: {fileID: 11400000, guid: 0ed8ebd4abb3a434e889adc0b1f2045f, type: 2}
   _player: {fileID: 1741994660}
   _view: {fileID: 247712306}
   uiEffectManager: {fileID: 223143314}

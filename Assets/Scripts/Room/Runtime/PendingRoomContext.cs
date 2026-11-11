@@ -2,6 +2,15 @@
 {
     public static class PendingRoomNode
     {
-        public static RoomNode Value;
+        private static RoomNode _value;
+
+        public static void Set(RoomNode node) => _value = node;
+
+        public static bool TryConsume(out RoomNode node)
+        {
+            node = _value;
+            _value = null;
+            return node != null;
+        }
     }
 }

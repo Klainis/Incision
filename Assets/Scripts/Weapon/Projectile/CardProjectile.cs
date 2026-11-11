@@ -35,7 +35,7 @@ namespace Incision
 
         public CardData CardData => _cardData;
 
-        protected override void OnOtherCollision()
+        protected override void OnOtherCollision(Collision collision)
         {
             _canRotationCard = false;
         }

@@ -19,7 +19,7 @@ namespace Incision.Enemies.Components
             damageable.TakeDamage(new(Damage, _owner, collision.gameObject, IsCrit));
         }
 
-        protected override void OnOtherCollision()
+        protected override void OnOtherCollision(Collision collision)
         {
             base.OnOtherCollision();
             

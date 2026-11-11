@@ -27,7 +27,7 @@ namespace Incision.Room.Services
             
             try
             {
-                PendingRoomNode.Value = node;
+                PendingRoomNode.Set(node);
                 await SceneLoader.LoadScene(node.Template.SceneName, LoadSceneMode.Single);
 
                 _loaded[node.Id] = node;
