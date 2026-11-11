@@ -6846,8 +6846,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMovementData: {fileID: 11400000, guid: 463be7a47171dcd49817eb72d21b4c8d, type: 2}
   _playerStatsData: {fileID: 11400000, guid: 71cdcaab9d8bef9468d6de162ed86810, type: 2}
-  _camera: {fileID: 289127154514065990}
+  _cameraMain: {fileID: 289127154514065990}
   _playerCamera: {fileID: 8510268175853682034}
+  _cameraUI: {fileID: 3427324717546539563}
+  _uiCamera: {fileID: 2251093219248966134}
   _playerInput: {fileID: 3657837160234566478}
   _character: {fileID: 8051458590544949642}
   _attack: {fileID: 6368699269705435471}
@@ -7338,7 +7340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5a4232686b4634f9ea5525daa0bc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCamera: {fileID: 3427324717546539563}
 --- !u!1 &3902011087899527618
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,11 +7,14 @@ namespace Incision.UI.Components
 {
     public class UICamera : MonoBehaviour
     {
-        [SerializeField] private Camera uiCamera;
+        private Camera uiCamera;
+
         [Inject] private IEventBus _eventBus;
         
-        void OnEnable()
+        public void Initialize(Camera camera)
         {
+            uiCamera = camera;
+
             _eventBus.Subscribe<OnPauseChanged>(OnPauseChanged);
         }
 

@@ -1,4 +1,5 @@
 using Incision.Interfaces;
+using Incision.UI.Components;
 using KinematicCharacterController;
 using UnityEngine;
 
@@ -14,8 +15,10 @@ namespace Incision
         [SerializeField] private PlayerStats _playerStatsData;
 
         [Header("Camera")]
-        [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _cameraMain;
         [SerializeField] private PlayerCamera _playerCamera;
+        [SerializeField] private Camera _cameraUI;
+        [SerializeField] private UICamera _uiCamera;
 
         [Header("Character")]
         [SerializeField] private PlayerInput _playerInput;
@@ -68,9 +71,12 @@ namespace Incision
 
             _playerInput.Intialize(_character, _playerCamera, _hand, _playerMovementData, _playerStatsData);
             _character.Initialize(_playerMovementData, _playerInput, _motor, _dashStamina, _effector, _animation);
-            _playerCamera.Initialize(_character.GetCameraTarget(), _playerMovementData, _camera, _character);
+            
             _slamAttack.Initialize(_character, _playerStatsData);
             _dashStamina.Initialize(_playerMovementData);
+
+            _playerCamera.Initialize(_character.GetCameraTarget(), _playerMovementData, _cameraMain, _character);
+            _uiCamera.Initialize(_cameraUI);
 
             _hand.Initialize(_attack, _animation);
             _inHandVisual.Initialize(_hand, _animation);
