@@ -27,8 +27,10 @@ public class PlayerInput : MonoBehaviour
         _playerStatsData = stats;
 
         _inputActions = new PlayerInputActions();
-        _inputActions.Enable();
-        
+        _inputActions.Player.Enable();
+        _inputActions.SlotActions.Enable();
+        _inputActions.UI.Enable();
+
         _eventBus.Subscribe<OnPauseChanged>(OnPauseChanged);
     }
 
@@ -36,17 +38,20 @@ public class PlayerInput : MonoBehaviour
     {
         if (evt.IsPaused)
         {
-            _inputActions.Disable();
+            _inputActions.Player.Disable();
+            _inputActions.SlotActions.Disable();
         }
         else
         {
-            _inputActions.Enable();
+            _inputActions.Player.Enable();
+            _inputActions.SlotActions.Enable();
         }
     }
 
     private void OnDestroy()
     {
         _eventBus.Unsubscribe<OnPauseChanged>(OnPauseChanged);
+        _inputActions.Disable();
         _inputActions.Dispose();
     }
 
