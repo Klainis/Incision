@@ -21,7 +21,6 @@ public class PlayerHealth : Health
         OnDamaged += _healthBar.TakeDamage;
         OnHealed += _healthBar.Heal;
         OnDamaged += TakeDamageEffect;
-        OnDied += PlayerDie;
 
         Initialize(_playerStatsData.CreateRuntime());
         _healthBar.Initialize(_playerStatsData.CurrentHealth, _playerStatsData.MaxHealth, _healthBar.HealthText);
@@ -32,13 +31,6 @@ public class PlayerHealth : Health
         OnDamaged -= _healthBar.TakeDamage;
         OnHealed -= _healthBar.Heal;
         OnDamaged -= TakeDamageEffect;
-        OnDied -= PlayerDie;
-    }
-
-    private void PlayerDie(Health health)
-    {
-        Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void TakeDamageEffect(DamageInfo info, float currentHealth, float maxHealth)

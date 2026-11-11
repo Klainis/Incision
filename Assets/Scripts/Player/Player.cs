@@ -1,7 +1,11 @@
+using Incision.Enemies.Components;
+using Incision.Events;
 using Incision.Interfaces;
 using Incision.UI.Components;
 using KinematicCharacterController;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace Incision
 {
@@ -60,6 +64,8 @@ namespace Incision
         public CardHand Hand => _hand;
         public CardInHandVisual InHandVisual => _inHandVisual;
 
+        [Inject] private IEventBus _event;
+
         private void Start() // to rewrite!!!!!
         {
             Initialize();
@@ -83,11 +89,24 @@ namespace Incision
 
             _handHUD.Initialize(_hand);
             _playerHealth.InitializePlayerHealth(_playerStatsData, _healthUI);
+            _playerHealth.OnDied += PlayerDie;
+
             _standingBarsUI.Initialize(_dashStamina);
 
             _animationsMethods.Initialize(_attack);
             _steppedAnimations.Initialize();
             _attackAnimationSpeed.Initialize(_hand);
+        }
+
+        private void OnDisable()
+        {
+            _playerHealth.OnDied -= PlayerDie;
+        }
+
+        private void PlayerDie(Health health)
+        {
+            Destroy(gameObject);
+            _event.Publish(new OnGameFinish(false, "Player died"));
         }
     }
 }
