@@ -57,21 +57,24 @@ namespace Incision.Enemies.Components
             foreach (var entry in entries)
             {
                 var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.Type)).ToArray();
-                var listSize = allowedList.Length;
-                if (listSize == 0)
+                if (allowedList.Length == 0)
                 {
                     _eventBus.Publish(new LogError(LOG_TAG, $"Failed to spawn {entry.Enemy.Id.AsTag(Color.red)}. There is no spawn points for them to spawn."));
                     continue;
                 }
-                var point = allowedList[Random.Range(0, listSize)];
-                await SpawnEnemy(entry.Enemy, entry.Count, entry.Interval, point);
+
+                await SpawnEnemy(entry.Enemy, entry.Count, entry.Interval, allowedList);
             }
         }
 
-        private async Task SpawnEnemy(EnemyTemplate tpl, int count, int interval, Spawnpoint point)
+        private async Task SpawnEnemy(EnemyTemplate tpl, int count, int interval, Spawnpoint[] points)
         {
+            var order = points.OrderBy(_ => Random.value).ToArray();
+
             for (var i = 0; i < count; i++)
             {
+                var point = order[i % order.Length];
+
                 _eventBus.Publish(new Log(LOG_TAG, $"Spawning {$"{tpl.Id}_{i}".AsTag(Color.red)}"));
                 var enemy = _factory.Create(tpl, point.transform.position, point.transform.rotation, transform);
                 _enemies.Add(enemy);
