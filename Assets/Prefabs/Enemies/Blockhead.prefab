@@ -538,8 +538,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5109561091440082666, guid: d153708eba7ce8144a3f736c3b6c5243, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -724,6 +723,10 @@ PrefabInstance:
     - target: {fileID: -7269725144006141570, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.08216
+      objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6490262118234334951, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1293,6 +1296,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 37.92844
       objectReference: {fileID: 0}
+    - target: {fileID: 4764774216626338002, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4910982472279911662, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.6817333
@@ -1400,6 +1407,10 @@ PrefabInstance:
     - target: {fileID: 6884300600127847852, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 8.373774
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7205140776170859923, guid: 0db957314b3cb044aade553d8c00e459, type: 3}
       propertyPath: m_CastShadows
