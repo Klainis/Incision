@@ -68,9 +68,10 @@ public class RicochetProjectile : CardProjectile
 
     protected override void OnOtherCollision(Collision collision)
     {
+        ContactPoint contact = collision.GetContact(0);
         Vector3 hitPoint = collision.GetContact(0).point;
 
-        if (_chain.BouncesLeft <= 0)
+        if (_chain.BouncesLeft + 1 <= 0)
         {
             base.OnOtherCollision(collision);
             Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -78,15 +79,24 @@ public class RicochetProjectile : CardProjectile
         }
 
         Collider next = FindNearestEnemy(hitPoint);
-        if (next == null)
-        {
-            base.OnOtherCollision(collision);
-            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            return;
-        }
+        Vector3 dir;
+        Vector3 incomingDir = collision.relativeVelocity.normalized;
+        Vector3 normal = contact.normal.normalized;
+
+        if(Vector3.Dot(incomingDir, normal) > 0f)
+            incomingDir = -incomingDir;
+
+
+        if (next != null)
+            dir = (next.bounds.center - hitPoint).normalized;
+        else
+            dir = Vector3.Reflect(incomingDir, normal).normalized;
+
+        //Debug.DrawRay(hitPoint, incomingDir * 4f, Color.red, 5f);
+        //Debug.DrawRay(hitPoint, contact.normal * 4f, Color.green, 5f);
+        //Debug.DrawRay(hitPoint, dir * 4f, Color.blue, 5f);
 
         _chain.BouncesLeft--;
-        Vector3 dir = (next.bounds.center - hitPoint).normalized;
 
         bool handled = _chain.BouncesLeft == 0
                        && _chain.FinalBounce != null
