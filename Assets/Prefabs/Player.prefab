@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.899371, g: 0.899371, b: 0.899371, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7063,7 +7063,7 @@ MonoBehaviour:
   _handSize: 2
   _startingCards:
   - {fileID: 11400000, guid: 6976f3f99419b324796f1db427973f6c, type: 2}
-  - {fileID: 11400000, guid: 8d3bb313bbfcf9d4fb98246072c254e0, type: 2}
+  - {fileID: 11400000, guid: f6149599201087b4db574cc7f57de419, type: 2}
   - {fileID: 11400000, guid: fb7a88f7cc432874a82baa9d7e37f14c, type: 2}
   - {fileID: 11400000, guid: fb7a88f7cc432874a82baa9d7e37f14c, type: 2}
   - {fileID: 11400000, guid: 8d3bb313bbfcf9d4fb98246072c254e0, type: 2}
@@ -12647,7 +12647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.899371, g: 0.899371, b: 0.899371, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

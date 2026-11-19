@@ -20,10 +20,10 @@ namespace Incision
         [Inject] private IObjectResolver _resolver;
         [Inject] private IEventBus _eventBus;
 
-        public CardProjectile CreateCardProjectile(CardData cardData, float damage, bool isCrit, Vector3 position, Quaternion rotation)
+        public CardProjectile CreateCardProjectile(CardData cardData, float damage, bool isCrit, Vector3 position, Quaternion rotation, CardProjectile projectile = null)
         {
             return Create(
-                cardData.CardPrefab,
+                projectile != null ? projectile : cardData.CardPrefab,
                 cardData.ID,
                 _cardProjectileCreated++,
                 position, rotation,

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
+  m_Name: ShardCardData
+  m_EditorClassIdentifier: 
+  _id: shard_card_projectile
+  _cardName: "\u041E\u0441\u043A\u043E\u043B\u043E\u043A"
+  _cardIcon: {fileID: 21300000, guid: d93d31f641153f441b4421562c5e0602, type: 3}
+  _cardHandMaterial: {fileID: 2100000, guid: 7bcceb772bdc9824ab2d95decbbaeec1, type: 2}
+  _projectilePrefab: {fileID: 4931546748106921726, guid: 10bf86ba11150a444ab2c23b051a6299, type: 3}
+  _projectileSpeed: 100
+  _damage: 20
+  _maxAmmo: 20
+  _spendAttackAmmo: 1
+  _attackSpeed: 3
+  _critChance: 0.1
+  _critDamageMultiplier: 1.5
+  _cardAbility: {fileID: 0}
+  _abilityCoolDown: 5
+  _spendAbilityAmmo: 10

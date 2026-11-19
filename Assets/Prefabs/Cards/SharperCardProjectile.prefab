@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _disposeType: 2
-  _destroyTime: 7
+  _destroyTime: 4
   _projectileRigidbody: {fileID: 4275104548347982271}
   _cardRoot: {fileID: 543331352684829255}
   _projectileMinScale: 1

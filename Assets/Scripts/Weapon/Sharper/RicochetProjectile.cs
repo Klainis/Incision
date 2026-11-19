@@ -48,21 +48,7 @@ public class RicochetProjectile : CardProjectile
         _chain.BouncesLeft--;
         Vector3 dir = (next.bounds.center - hitPoint).normalized;
 
-        bool handled = _chain.BouncesLeft == 0
-                       && _chain.FinalBounce != null
-                       && _chain.FinalBounce(hitPoint, dir, collision.collider, _projectileFactory);
-
-        if (!handled)
-        {
-            CardProjectile spawned = _chain.Spawn(_projectileFactory, CardData, Damage, IsCrit, hitPoint, dir);
-            if (spawned is RicochetProjectile bounce)
-            {
-                bounce.SetChain(_chain);
-                foreach (Collider c in bounce.GetComponentsInChildren<Collider>())
-                    Physics.IgnoreCollision(c, collision.collider);
-            }
-        }
-
+        SpawnProjectile(hitPoint, dir, collision.collider);
         DisposeProjectile();
     }
 
@@ -78,7 +64,7 @@ public class RicochetProjectile : CardProjectile
             return;
         }
 
-        Collider next = FindNearestEnemy(hitPoint);
+        //Collider next = FindNearestEnemy(hitPoint);
         Vector3 dir;
         Vector3 incomingDir = collision.relativeVelocity.normalized;
         Vector3 normal = contact.normal.normalized;
@@ -87,20 +73,22 @@ public class RicochetProjectile : CardProjectile
             incomingDir = -incomingDir;
 
 
-        if (next != null)
-            dir = (next.bounds.center - hitPoint).normalized;
-        else
-            dir = Vector3.Reflect(incomingDir, normal).normalized;
-
-        //Debug.DrawRay(hitPoint, incomingDir * 4f, Color.red, 5f);
-        //Debug.DrawRay(hitPoint, contact.normal * 4f, Color.green, 5f);
-        //Debug.DrawRay(hitPoint, dir * 4f, Color.blue, 5f);
+        //if (next != null)
+        //    dir = (next.bounds.center - hitPoint).normalized;
+        //else
+        dir = Vector3.Reflect(incomingDir, normal).normalized;
 
         _chain.BouncesLeft--;
 
+        SpawnProjectile(hitPoint, dir, collision.collider);
+        DisposeProjectile();
+    }
+
+    private void SpawnProjectile(Vector3 hitPoint, Vector3 dir, Collider collider)
+    {
         bool handled = _chain.BouncesLeft == 0
                        && _chain.FinalBounce != null
-                       && _chain.FinalBounce(hitPoint, dir, collision.collider, _projectileFactory);
+                       && _chain.FinalBounce(hitPoint, dir, collider, _projectileFactory);
 
         if (!handled)
         {
@@ -109,11 +97,9 @@ public class RicochetProjectile : CardProjectile
             {
                 bounce.SetChain(_chain);
                 foreach (Collider c in bounce.GetComponentsInChildren<Collider>())
-                    Physics.IgnoreCollision(c, collision.collider);
+                    Physics.IgnoreCollision(c, collider);
             }
         }
-
-        DisposeProjectile();
     }
 
     private Collider FindNearestEnemy(Vector3 from)
