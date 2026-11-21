@@ -28,6 +28,9 @@ public class ShardCardProjectile : CardProjectile
     private float _angleBetweenShards = 35f;
     private float _maxFanAngle = 360f;
 
+    private float _travelDistance = 6f;
+    private float _lingerTime = 2f;
+
     private float _shardDamageMultiplier = 0.35f;
     private float _shardSpeed = 40f;
     private float _spawnOffset = 0.25f;
@@ -55,6 +58,8 @@ public class ShardCardProjectile : CardProjectile
             _shardSpeed = shardCardData.ShardSpeed;
             _spawnOffset = shardCardData.SpawnOffset;
             _forceMode = shardCardData.ForceMode;
+            _travelDistance = shardCardData.TravelDistance;
+            _lingerTime = shardCardData.LingerTime;
         }
     }
 
@@ -111,7 +116,8 @@ public class ShardCardProjectile : CardProjectile
         bool isCrit = IsCrit;
         float speed = _shardSpeed;
 
-        if (TryPickOtherCard(out CardInstance other))
+        bool isOtherCard = TryPickOtherCard(out CardInstance other);
+        if (isOtherCard)
         {
             prefab = other.Data.CardPrefab;
             data = other.Data;
@@ -123,6 +129,10 @@ public class ShardCardProjectile : CardProjectile
             data, damage, isCrit, origin, Quaternion.LookRotation(dir), prefab);
 
         shard.Rigidbody.AddForce(dir * speed, _forceMode);
+
+        var limiter = shard.gameObject.AddComponent<ProjectileRangeLimiter>();
+        limiter.Initialize(shard, _travelDistance, _lingerTime);
+
         return shard;
     }
 

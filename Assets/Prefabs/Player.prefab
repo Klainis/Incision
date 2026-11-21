@@ -7062,8 +7062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handSize: 2
   _startingCards:
-  - {fileID: 11400000, guid: 6976f3f99419b324796f1db427973f6c, type: 2}
-  - {fileID: 11400000, guid: f6149599201087b4db574cc7f57de419, type: 2}
+  - {fileID: 11400000, guid: dade319f4e5ea194a9c6d222bfe1e50b, type: 2}
+  - {fileID: 11400000, guid: 8b6cd8c3d7939c54aac5dc1c416047e4, type: 2}
   - {fileID: 11400000, guid: fb7a88f7cc432874a82baa9d7e37f14c, type: 2}
   - {fileID: 11400000, guid: fb7a88f7cc432874a82baa9d7e37f14c, type: 2}
   - {fileID: 11400000, guid: 8d3bb313bbfcf9d4fb98246072c254e0, type: 2}

@@ -6,19 +6,11 @@ namespace Incision
 {
     public class ShardProjectile : CardProjectile
     {
-        [Header("Flight")]
-        [SerializeField, Min(0f)] private float _travelDistance = 6f;
-        [Tooltip("Сколько осколок лежит после остановки, потом исчезает")]
-        [SerializeField, Min(0f)] private float _lingerTime = 2f;
-
         private readonly HashSet<IDamageable> _alreadyHit = new HashSet<IDamageable>();
 
         private Collider[] _colliders;
         private Vector3 _launchDirection;
         private Vector3 _lastVelocity;
-        private Vector3 _startPosition;
-        private float _lingerTimer;
-        private bool _isStopped;
 
         private void Awake()
         {
@@ -30,31 +22,16 @@ namespace Incision
             base.Start();
 
             _colliders = GetComponentsInChildren<Collider>();
-            _startPosition = transform.position;
         }
 
         private void FixedUpdate()
         {
-            if (_isStopped)
-            {
-                _lingerTimer -= Time.fixedDeltaTime;
-                if (_lingerTimer <= 0f)
-                    DisposeProjectile();
-                return;
-            }
-
             // скорость до физического шага: после столкновения она уже изменена
             _lastVelocity = Rigidbody.velocity;
-
-            if ((Rigidbody.position - _startPosition).sqrMagnitude >= _travelDistance * _travelDistance)
-                StopFlight();
         }
 
         protected override void OnTargetCollision(Collision collision, IDamageable damageable)
         {
-            if (_isStopped)
-                return;
-
             PassThrough(collision);
 
             if (!_alreadyHit.Add(damageable))
@@ -85,21 +62,6 @@ namespace Incision
             Rigidbody.velocity = _lastVelocity.sqrMagnitude > 0.01f
                 ? _lastVelocity
                 : _launchDirection * collision.relativeVelocity.magnitude;
-        }
-
-        private void StopFlight()
-        {
-            _isStopped = true;
-            _lingerTimer = _lingerTime;
-
-            Rigidbody.velocity = Vector3.zero;
-            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-
-            foreach (Collider c in _colliders)
-            {
-                if (c != null)
-                    c.enabled = false;
-            }
         }
     }
 }

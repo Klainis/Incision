@@ -14,6 +14,10 @@ namespace Incision
         [SerializeField, Min(0f)] private float _maxFanAngle = 360f;
         [SerializeField, Min(0f)] private float _spawnOffset = 0.25f;
 
+        [Header("Shard Flight")]
+        [SerializeField, Min(0f)] private float _travelDistance = 6f;
+        [SerializeField, Min(0f)] private float _lingerTime = 2f;
+
         [Header("Stats")]
         [SerializeField, Range(0f, 1f)] private float _shardDamageMultiplier = 0.35f;
         [SerializeField, Min(0f)] private float _shardSpeed = 40f;
@@ -28,6 +32,8 @@ namespace Incision
         public float SpawnOffset => _spawnOffset;
         public float ShardDamageMultiplier => _shardDamageMultiplier;
         public float ShardSpeed => _shardSpeed;
+        public float TravelDistance => _travelDistance;
+        public float LingerTime => _lingerTime;
         public ForceMode ForceMode => _forceMode;
     }
 }
