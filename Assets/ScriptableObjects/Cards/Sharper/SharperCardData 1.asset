@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
-  m_Name: SharperCardData
+  m_Script: {fileID: 11500000, guid: 177dcf37b7a36a04abacf4e73a21721b, type: 3}
+  m_Name: SharperCardData 1
   m_EditorClassIdentifier: 
   _id: sharper_card_projectile
   _cardName: "\u0428\u0443\u043B\u0435\u0440"
@@ -22,8 +22,13 @@ MonoBehaviour:
   _maxAmmo: 32
   _spendAttackAmmo: 1
   _attackSpeed: 7
-  _critChance: 0.2
+  _critChance: 0
   _critDamageMultiplier: 1.5
   _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
   _abilityCoolDown: 10
   _spendAbilityAmmo: 5
+  _baseBounces: 1
+  _searchRadius: 15
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 2176

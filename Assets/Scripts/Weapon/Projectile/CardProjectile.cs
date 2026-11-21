@@ -51,7 +51,11 @@ namespace Incision
             _name = gameObject.name;
             _damage = damage;
             _isCrit = isCrit;
+
+            OnInitialized();
         }
+
+        protected virtual void OnInitialized() { }
 
         protected override void Start()
         {

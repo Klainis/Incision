@@ -23,19 +23,15 @@ public readonly struct ShardEmpower
 
 public class ShardCardProjectile : CardProjectile
 {
-    public enum ConeAxis { Reflect, Forward, SurfaceNormal }
+    private ShardProjectile _shardPrefab;
+    private int _shardCount = 5;
+    private float _angleBetweenShards = 35f;
+    private float _maxFanAngle = 360f;
 
-    [Header("Shards")]
-    [SerializeField] private CardProjectile _shardPrefab;
-    [SerializeField, Min(1)] private int _shardCount = 5;
-    [SerializeField, Range(5f, 90f)] private float _angleBetweenShards = 35f;
-    [SerializeField, Min(0f)] private float _maxFanAngle = 360f;
-
-    [SerializeField, Range(0f, 1f)] private float _shardDamageMultiplier = 0.35f;
-    [SerializeField, Min(0f)] private float _shardSpeed = 40f;
-    [SerializeField, Min(0f)] private float _spawnOffset = 0.25f;
-    [SerializeField] private ConeAxis _coneAxis = ConeAxis.Reflect;
-    [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
+    private float _shardDamageMultiplier = 0.35f;
+    private float _shardSpeed = 40f;
+    private float _spawnOffset = 0.25f;
+    private ForceMode _forceMode = ForceMode.Impulse;
 
     [Inject] private ProjectileFactory _projectileFactory;
 
@@ -43,6 +39,24 @@ public class ShardCardProjectile : CardProjectile
     private bool _hasSplit;
 
     public void Empower(in ShardEmpower empower) => _empower = empower;
+
+    protected override void OnInitialized()
+    {
+        ShardCardData shardCardData = CardData as ShardCardData;
+
+        if (shardCardData != null)
+        {
+            Debug.Log("SPAWN SHARD CART");
+            _shardPrefab = shardCardData.ShardPrefab;
+            _shardCount = shardCardData.ShardCount;
+            _angleBetweenShards = shardCardData.AngleBetweenShards;
+            _maxFanAngle += shardCardData.MaxFanAngle;
+            _shardDamageMultiplier = shardCardData.ShardDamageMultiplier;
+            _shardSpeed = shardCardData.ShardSpeed;
+            _spawnOffset = shardCardData.SpawnOffset;
+            _forceMode = shardCardData.ForceMode;
+        }
+    }
 
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
@@ -71,7 +85,7 @@ public class ShardCardProjectile : CardProjectile
 
         Vector3 finalDir = (-collision.relativeVelocity).normalized;
         finalDir.y = 0;
-        Quaternion axisRotation = Quaternion.LookRotation(GetAxis(normal, finalDir));
+        Quaternion axisRotation = Quaternion.LookRotation(finalDir);
 
         int total = _shardCount + (_empower.HasValue ? _empower.Value.ExtraShards : 0);
         float shardDamage = Damage * _shardDamageMultiplier;
@@ -131,16 +145,6 @@ public class ShardCardProjectile : CardProjectile
 
         card = candidate;
         return true;
-    }
-
-    private Vector3 GetAxis(Vector3 normal, Vector3 flightDirection)
-    {
-        switch (_coneAxis)
-        {
-            case ConeAxis.Forward: return flightDirection;
-            case ConeAxis.SurfaceNormal: return normal;
-            default: return Vector3.Reflect(flightDirection, normal);
-        }
     }
 
     private Vector3 CardDirection(Quaternion axisRotation, int index, int total)

@@ -4,18 +4,16 @@ using UnityEngine;
 
 namespace Incision
 {
-    public class SharperCardData : MonoBehaviour
+    [CreateAssetMenu(fileName = "SharperCardData", menuName = "Scriptable Objects/CardData/SharperCardData")]
+    public class SharperCardData : CardData
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        [Header("Ricochet")]
+        [SerializeField] private int _baseBounces = 1;
+        [SerializeField] private float _searchRadius = 25f;
+        [SerializeField] private LayerMask _enemyLayers;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public int BaseBounces => _baseBounces;
+        public float SearchRadius => _searchRadius;
+        public LayerMask EnemyLayers => _enemyLayers;
     }
 }

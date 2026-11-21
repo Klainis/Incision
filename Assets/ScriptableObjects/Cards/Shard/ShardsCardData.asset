@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
-  m_Name: ShardCardData
+  m_Script: {fileID: 11500000, guid: e0b4043f60fddb7488e9f8a76a205e73, type: 3}
+  m_Name: ShardsCardData
   m_EditorClassIdentifier: 
   _id: shard_card_projectile
   _cardName: "\u041E\u0441\u043A\u043E\u043B\u043E\u043A"
@@ -22,8 +22,16 @@ MonoBehaviour:
   _maxAmmo: 20
   _spendAttackAmmo: 1
   _attackSpeed: 3
-  _critChance: 0.1
+  _critChance: 0.2
   _critDamageMultiplier: 1.5
   _cardAbility: {fileID: 0}
   _abilityCoolDown: 5
   _spendAbilityAmmo: 10
+  _shardPrefab: {fileID: 4879011243965327378, guid: 14361da8cde4a3a4ca7775330bd23212, type: 3}
+  _shardCount: 5
+  _angleBetweenShards: 15
+  _maxFanAngle: 360
+  _spawnOffset: 0.25
+  _shardDamageMultiplier: 0.35
+  _shardSpeed: 40
+  _forceMode: 1

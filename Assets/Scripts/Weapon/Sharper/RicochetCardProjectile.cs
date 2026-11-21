@@ -5,22 +5,30 @@ using VContainer;
 
 public class RicochetCardProjectile : CardProjectile
 {
-    [Header("Ricochet")]
-    [SerializeField] private int _baseBounces = 1;
-    [SerializeField] private float _searchRadius = 25f;
-    [SerializeField] private LayerMask _enemyLayers;
+    private int _baseBounces = 1;
+    private float _searchRadius = 25f;
+    private LayerMask _enemyLayers;
 
     private readonly Collider[] _buffer = new Collider[32];
     private RicochetChain _chain;
 
     [Inject] private ProjectileFactory _projectileFactory;
 
-    private void OnEnable()
-    {
-        _chain = new RicochetChain { BouncesLeft = _baseBounces };
-    }
-
     public void SetChain(RicochetChain chain) => _chain = chain;
+
+    protected override void OnInitialized()
+    {
+        SharperCardData sharperCardData = CardData as SharperCardData;
+
+        if (sharperCardData != null)
+        {
+            _baseBounces = sharperCardData.BaseBounces;
+            _searchRadius = sharperCardData.SearchRadius;
+            _enemyLayers = sharperCardData.EnemyLayers;
+
+            _chain = new RicochetChain { BouncesLeft = _baseBounces };
+        }
+    }
 
     protected override void OnTargetCollision(Collision collision, IDamageable damageable)
     {
