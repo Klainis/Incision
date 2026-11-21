@@ -16,21 +16,22 @@ public class ShardBarrageAbility : CardAbility
     private class ShardBarrageRuntime : CardAbilityRuntime
     {
         private readonly ShardBarrageAbility _data;
-        private float _activeUntil;
+        private float _endTime;
 
-        public ShardBarrageRuntime(CardInstance owner, ShardBarrageAbility data) : base(owner)
-        {
-            _data = data;
-        }
+        public ShardBarrageRuntime(CardInstance owner, ShardBarrageAbility data) : base(owner) => _data = data;
+
+        public override bool IsActive => Time.time < _endTime;
+        public override float RemainingTime => Mathf.Max(0f, _endTime - Time.time);
+        public override float Duration => _data._duration;
 
         public override void Activate(AbilityContext ctx)
         {
-            _activeUntil = Time.time + _data._duration;
+            _endTime = Time.time + _data._duration;
         }
 
         public override void OnProjectileSpawned(Projectile projectile, AbilityContext ctx)
         {
-            if (Time.time > _activeUntil) return;
+            if (!IsActive) return;
             if (projectile is not ShardCardProjectile shard) return;
 
             shard.Empower(new ShardEmpower(

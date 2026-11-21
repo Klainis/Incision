@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardInHandVisual : MonoBehaviour
 {
     [SerializeField] private Renderer _cardRenderer;
+    [SerializeField] private GameObject _outlineObject;
     [SerializeField] private float _swapDelay = 0f;
 
     private CardHand _hand;
@@ -21,6 +22,14 @@ public class CardInHandVisual : MonoBehaviour
         _hand.HandChanged += OnHandChanged;
 
         Apply();
+
+        _outlineObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (_hand != null && _hand.ActiveCard != null && _hand.ActiveCard.IsAbilityActive) _outlineObject.SetActive(true);
+        else _outlineObject.SetActive(false);
     }
 
     private void OnDisable()

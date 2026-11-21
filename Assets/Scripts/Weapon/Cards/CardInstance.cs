@@ -11,6 +11,7 @@ public class CardInstance
     public float NextShotTime { get; set; }
     public CardAbilityRuntime AbilityRuntime { get; set; }
     public float NextAbilityTime { get; set; }
+    public bool IsAbilityActive => AbilityRuntime != null && AbilityRuntime.IsActive;
 
     public bool IsEmpty => Ammo <= 0;
 

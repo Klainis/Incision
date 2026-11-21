@@ -13,17 +13,19 @@ public class DoubleRicochetAbility : CardAbility
 
     private class Runtime : CardAbilityRuntime
     {
-        private readonly DoubleRicochetAbility _def;
+        private readonly DoubleRicochetAbility _data;
         private float _endTime;
         private bool _internalSpawn;
 
-        public Runtime(DoubleRicochetAbility def, CardInstance owner) : base(owner) => _def = def;
+        public Runtime(DoubleRicochetAbility data, CardInstance owner) : base(owner) => _data = data;
 
-        public bool IsActive => Time.time < _endTime;
+        public override bool IsActive => Time.time < _endTime;
+        public override float RemainingTime => Mathf.Max(0f, _endTime - Time.time);
+        public override float Duration => _data._duration;
 
         public override void Activate(AbilityContext ctx)
         {
-            _endTime = Time.time + _def._duration;
+            _endTime = Time.time + _data._duration;
         }
 
         public override void OnProjectileSpawned(Projectile projectile, AbilityContext ctx)
@@ -37,7 +39,7 @@ public class DoubleRicochetAbility : CardAbility
 
             ricochet.SetChain(new RicochetChain
             {
-                BouncesLeft = _def._bounces,
+                BouncesLeft = _data._bounces,
                 FinalBounce = (origin, dir, ignore, projectileFactory) => FireSecondCard(ctx, projectileFactory, origin, dir, ignore)
             });
         }

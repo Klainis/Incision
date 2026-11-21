@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 7bcceb772bdc9824ab2d95decbbaeec1, type: 2}
-  - {fileID: 2100000, guid: 23c34133d87799143ad7d7ca3c30fc13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -214,15 +213,6 @@ MonoBehaviour:
   _cardRotaionSpeed: 180
   _trailRenderer: {fileID: 1515651248814640437}
   _projectileColliderForEnemy: {fileID: 7040988457720755023}
-  _shardPrefab: {fileID: 4879011243965327378, guid: 14361da8cde4a3a4ca7775330bd23212, type: 3}
-  _shardCount: 5
-  _angleBetweenShards: 10
-  _maxFanAngle: 360
-  _shardDamageMultiplier: 0.2
-  _shardSpeed: 40
-  _spawnOffset: 0.4
-  _coneAxis: 1
-  _forceMode: 1
 --- !u!1 &3680487404382489697
 GameObject:
   m_ObjectHideFlags: 0

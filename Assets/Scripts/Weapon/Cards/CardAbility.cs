@@ -26,6 +26,10 @@ namespace Incision
 
     public abstract class CardAbilityRuntime
     {
+        public virtual bool IsActive => false;
+        public virtual float RemainingTime => 0f;
+        public virtual float Duration => 0f;
+
         [Inject] public ProjectileFactory projectileFactory;
 
         protected CardInstance Owner { get; }
