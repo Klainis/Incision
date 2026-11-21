@@ -24,7 +24,7 @@ MonoBehaviour:
   _attackSpeed: 3
   _critChance: 0.2
   _critDamageMultiplier: 1.5
-  _cardAbility: {fileID: 0}
+  _cardAbility: {fileID: 11400000, guid: 780f083d15cddc84f861ce46f3f45111, type: 2}
   _abilityCoolDown: 5
   _spendAbilityAmmo: 10
   _shardPrefab: {fileID: 4879011243965327378, guid: 14361da8cde4a3a4ca7775330bd23212, type: 3}

@@ -141,7 +141,7 @@ public class ShardCardProjectile : CardProjectile
 
         CardProjectile prefab = candidate.Data.CardPrefab;
 
-        //if (prefab == null || prefab is ShardCardProjectile) return false;
+        if (prefab == null) return false;
 
         card = candidate;
         return true;
