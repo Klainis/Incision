@@ -3,7 +3,7 @@ using Incision.Interfaces;
 using UnityEngine;
 using VContainer;
 
-public class RicochetProjectile : CardProjectile
+public class RicochetCardProjectile : CardProjectile
 {
     [Header("Ricochet")]
     [SerializeField] private int _baseBounces = 1;
@@ -93,7 +93,7 @@ public class RicochetProjectile : CardProjectile
         if (!handled)
         {
             CardProjectile spawned = _chain.Spawn(_projectileFactory, CardData, Damage, IsCrit, hitPoint, dir);
-            if (spawned is RicochetProjectile bounce)
+            if (spawned is RicochetCardProjectile bounce)
             {
                 bounce.SetChain(_chain);
                 foreach (Collider c in bounce.GetComponentsInChildren<Collider>())

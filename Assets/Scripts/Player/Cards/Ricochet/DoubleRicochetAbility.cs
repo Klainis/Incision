@@ -29,7 +29,7 @@ public class DoubleRicochetAbility : CardAbility
         public override void OnProjectileSpawned(Projectile projectile, AbilityContext ctx)
         {
             if (_internalSpawn || !IsActive) return;
-            if (projectile is not RicochetProjectile ricochet) return;
+            if (projectile is not RicochetCardProjectile ricochet) return;
 
             var data = ricochet.CardData;
             float damage = ricochet.Damage;
@@ -67,7 +67,7 @@ public class DoubleRicochetAbility : CardAbility
                 Physics.IgnoreCollision(col, ignore);
 
             // ¬тора€ карта не запускает свою цепочку рикошетов
-            if (projectile is RicochetProjectile r)
+            if (projectile is RicochetCardProjectile r)
                 r.SetChain(chain);
 
             return true;
