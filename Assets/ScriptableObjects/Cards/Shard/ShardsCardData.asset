@@ -32,6 +32,8 @@ MonoBehaviour:
   _angleBetweenShards: 15
   _maxFanAngle: 360
   _spawnOffset: 0.25
+  _travelDistance: 6
+  _lingerTime: 1
   _shardDamageMultiplier: 0.35
   _shardSpeed: 40
   _forceMode: 1
