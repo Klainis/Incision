@@ -11,7 +11,7 @@ using VContainer.Unity;
 
 public class StatusEffectController : MonoBehaviour, IStatusReceiver
 {
-    public string LOG_TAG { get; } = "[Status Effect]".AsTag(Color.gray);
+    public string LOG_TAG { get; } = "[StatusEffectController]".AsTag(Color.white);
 
     [SerializeField] private StatusFlags _immunities;
 
@@ -23,7 +23,7 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
 
     public bool Has(StatusFlags f) => (Flags & f) != 0;
 
-    public bool TryApply(StatusEffectTemplate tpl, GameObject source, float? duration = null)
+    public bool TryApplyStatus(StatusEffectTemplate tpl, GameObject source, float? duration = null)
     {
         var fresh = tpl.CreateRuntime(source);
         if ((fresh.Flags & _immunities) != 0)
@@ -31,7 +31,7 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
             _eventBus.Publish(
                 new Log(
                     LOG_TAG,
-                    $"Failed to apply status {tpl.Id} from {source.name} because enemy has immunity"
+                    $"Failed to apply status {tpl.Id.AsTag(Color.magenta)} from {source.name.AsTag(Color.cyan)} because enemy has {"immunity".AsTag(Color.red)}"
                     )
             );
             return false;
@@ -52,7 +52,7 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
             _eventBus.Publish(
                 new Log(
                     LOG_TAG,
-                    $"Apply status {tpl.Id} from {source.name}"
+                    $"Apply status {tpl.Id.AsTag(Color.magenta)} from {source.name.AsTag(Color.cyan)}. Duration: {tpl.Duration}"
                     )
             );
             return true;
@@ -66,7 +66,7 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
         _eventBus.Publish(
             new Log(
                 LOG_TAG,
-                $"Apply status {tpl.Id} from {source.name}"
+                $"Apply status {tpl.Id.AsTag(Color.magenta)} from {source.name.AsTag(Color.cyan)}. Duration: {tpl.Duration}"
                 )
         );
         return true;

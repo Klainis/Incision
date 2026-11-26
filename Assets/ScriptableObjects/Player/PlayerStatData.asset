@@ -24,4 +24,5 @@ MonoBehaviour:
   _loseDetectionRadiusDelta: 3
   _loseTargetRadius: 15
   _slamOverlapRadius: 4
-  _slamStunTime: 1
+  _statusEffects:
+  - {fileID: 11400000, guid: d2056d1707cfbf64db2326481c9a20bd, type: 2}

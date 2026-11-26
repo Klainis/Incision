@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: StunEffectTemplate
   m_EditorClassIdentifier: Assembly-CSharp:Incision:StunTemplate
-  _id: 
+  _id: stun_status
   _duration: 3
-  _stackMode: 0
-  _maxStacks: 1
+  _stackMode: 1
+  _maxStacks: 5
   _vfx: {fileID: 0}

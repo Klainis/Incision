@@ -9,6 +9,6 @@ namespace Incision.Interfaces
 {
     public interface IStatusReceiver
     {
-        public bool TryApply(StatusEffectTemplate tpl, GameObject source, float? duration = null);
+        public bool TryApplyStatus(StatusEffectTemplate tpl, GameObject source, float? duration = null);
     }
 }
