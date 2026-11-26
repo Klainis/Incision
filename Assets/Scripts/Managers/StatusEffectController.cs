@@ -1,23 +1,41 @@
+using Incision.Extensions;
 using Incision.Interfaces;
+using Incision.Structs.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using VContainer;
+using VContainer.Unity;
 
 public class StatusEffectController : MonoBehaviour, IStatusReceiver
 {
+    public string LOG_TAG { get; } = "[Status Effect]".AsTag(Color.gray);
+
     [SerializeField] private StatusFlags _immunities;
 
     private readonly List<StatusEffect> _effects = new();
     public StatusFlags Flags { get; private set; }
     public event Action<StatusFlags> FlagsChanged;
 
+    [Inject] IEventBus _eventBus;
+
     public bool Has(StatusFlags f) => (Flags & f) != 0;
 
     public bool TryApply(StatusEffectTemplate tpl, GameObject source, float? duration = null)
     {
         var fresh = tpl.CreateRuntime(source);
-        if ((fresh.Flags & _immunities) != 0) return false;
+        if ((fresh.Flags & _immunities) != 0)
+        {
+            _eventBus.Publish(
+                new Log(
+                    LOG_TAG,
+                    $"Failed to apply status {tpl.Id} from {source.name} because enemy has immunity"
+                    )
+            );
+            return false;
+        }
 
         var existing = _effects.Find(e => e.Template == tpl);
         if (existing != null)
@@ -30,6 +48,13 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
                     existing.Stacks = Mathf.Min(existing.Stacks + 1, tpl.MaxStacks);
                     existing.Remaining = duration ?? tpl.Duration; break;
             }
+
+            _eventBus.Publish(
+                new Log(
+                    LOG_TAG,
+                    $"Apply status {tpl.Id} from {source.name}"
+                    )
+            );
             return true;
         }
 
@@ -37,6 +62,13 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
         _effects.Add(fresh);
         fresh.OnApply(this);
         RecalculateFlags();
+
+        _eventBus.Publish(
+            new Log(
+                LOG_TAG,
+                $"Apply status {tpl.Id} from {source.name}"
+                )
+        );
         return true;
     }
 
