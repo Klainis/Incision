@@ -26,7 +26,6 @@ namespace Incision
 
         private void FixedUpdate()
         {
-            // скорость до физического шага: после столкновения она уже изменена
             _lastVelocity = Rigidbody.velocity;
         }
 
@@ -58,7 +57,6 @@ namespace Incision
                 }
             }
 
-            // если удар случился на самом первом шаге, скорость ещё не записана
             Rigidbody.velocity = _lastVelocity.sqrMagnitude > 0.01f
                 ? _lastVelocity
                 : _launchDirection * collision.relativeVelocity.magnitude;
