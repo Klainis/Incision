@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 130162810375806363}
   - component: {fileID: 289127154514065990}
   - component: {fileID: 681510488576423133}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -634,7 +634,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2850346634141078809}
+  - {fileID: 6046881824543107156}
   m_Father: {fileID: 2582943678972535506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &289127154514065990
@@ -676,7 +678,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16273
+    m_Bits: 15761
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6666,9 +6668,9 @@ GameObject:
   - component: {fileID: 6046881824543107156}
   - component: {fileID: 1627132473916012924}
   - component: {fileID: 3718966421925615790}
-  m_Layer: 9
-  m_Name: ArmsCamera
-  m_TagString: Untagged
+  m_Layer: 0
+  m_Name: PlayerCamera
+  m_TagString: PlayerCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6681,12 +6683,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2661505768889276292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2582943678972535506}
+  m_Father: {fileID: 130162810375806363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1627132473916012924
 Camera:
@@ -6727,7 +6729,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 66
+    m_Bits: 578
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6767,7 +6769,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
-  m_ClearDepth: 0
+  m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
@@ -7295,7 +7297,7 @@ GameObject:
   - component: {fileID: 3427324717546539563}
   - component: {fileID: 3144671244526508261}
   - component: {fileID: 2251093219248966134}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: UICamera
   m_TagString: UICamera
   m_Icon: {fileID: 0}
@@ -7310,12 +7312,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3111523683746377127}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2582943678972535506}
+  m_Father: {fileID: 130162810375806363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3427324717546539563
 Camera:
@@ -17599,7 +17601,7 @@ GameObject:
   - component: {fileID: 3222856567252457147}
   - component: {fileID: 2196089415569678523}
   - component: {fileID: 4993129287061427581}
-  m_Layer: 9
+  m_Layer: 1
   m_Name: SpotLightForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17981,7 +17983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4002188108109614242}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18641,7 +18643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9208874870437484218}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlamPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18847,8 +18849,6 @@ Transform:
   m_Children:
   - {fileID: 3222856567252457147}
   - {fileID: 130162810375806363}
-  - {fileID: 2850346634141078809}
-  - {fileID: 6046881824543107156}
   - {fileID: 1162788062316256005}
   - {fileID: 443420128828903848}
   - {fileID: 1258440339157169830}

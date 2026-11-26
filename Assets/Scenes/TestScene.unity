@@ -130,9 +130,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2661505768889276292, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_Name
+      value: PlayerOverlayCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 2909298530171555054, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111523683746377127, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
+      propertyPath: m_Name
+      value: UIOverlayCamera
       objectReference: {fileID: 0}
     - target: {fileID: 6247525476331909004, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12823,7 +12831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12831,7 +12839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.11
+      value: -39.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12872,6 +12880,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_Name
       value: SphereLowPoly
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 92f6792052af4e646b8821f7d2c66cb4, type: 3}
       propertyPath: m_IsActive
