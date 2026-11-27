@@ -18,13 +18,14 @@ namespace Incision.Enemies.Components
         public string LOG_TAG { get; } = "[Enemy Spawner]".AsTag(Color.magenta);
         
         [SerializeField] private WavePatternTemplate _waveTemplate;
-        [SerializeField] private List<Spawnpoint> _spawnPoints;
+        [SerializeField] private List<EnemySpawnpoint> _spawnPoints;
 
         [Inject] private EnemyFactory _factory;
         [Inject] private IEventBus _eventBus;
         
         private int enemiesSpawned = 0;
         private List<Enemy> _enemies = new List<Enemy>();
+        private bool _finishedSpawning;
 
         void Start()
         {
@@ -39,6 +40,7 @@ namespace Incision.Enemies.Components
         public async Task StartSpawning()
         {
             await SpawnRoutine();
+            _finishedSpawning = true;
         }
 
         private async Task SpawnRoutine()
@@ -56,7 +58,7 @@ namespace Incision.Enemies.Components
         {
             foreach (var entry in entries)
             {
-                var allowedList = _spawnPoints.Where(sp => sp.IsAllowed(entry.Enemy.Type)).ToArray();
+                var allowedList = _spawnPoints.Where(sp => sp != null && sp.IsAllowed(entry.Enemy.Type)).ToArray();
                 if (allowedList.Length == 0)
                 {
                     _eventBus.Publish(new LogError(LOG_TAG, $"Failed to spawn {entry.Enemy.Id.AsTag(Color.red)}. There is no spawn points for them to spawn."));
@@ -79,7 +81,7 @@ namespace Incision.Enemies.Components
                 var enemy = _factory.Create(tpl, point.transform.position, point.transform.rotation, transform);
                 _enemies.Add(enemy);
                 enemiesSpawned++;
-                _eventBus.Publish(new OnEnemyCountChanged(_enemies.Count, enemiesSpawned));
+                PublishEnemyCount();
                 await Task.Delay(interval);
             }
         }
@@ -89,8 +91,15 @@ namespace Incision.Enemies.Components
             if (!evt.Target.TryGetComponent(out Enemy enemy))
                 return;
 
-            _enemies.Remove(enemy);
-            _eventBus.Publish(new OnEnemyCountChanged(_enemies.Count, enemiesSpawned));
+            if (!_enemies.Remove(enemy))
+                return;
+
+            PublishEnemyCount();
+        }
+
+        private void PublishEnemyCount()
+        {
+            _eventBus.Publish(new OnEnemyCountChanged(this, _enemies.Count, enemiesSpawned, _finishedSpawning));
         }
     }
 }

@@ -18,9 +18,11 @@ namespace Incision.Managers
         [Inject] private GameControllerSettings _settings;
         [Inject] private readonly LocationLoader _loc;
         [Inject] private readonly IEventBus _eventBus;
+        [Inject] private readonly GoldManager _goldManager;
 
         public async Task StartGame()
         {
+            _goldManager.Reset();
             _eventBus.Subscribe<OnPortalEntered>(OnPortalEntered);
             _eventBus.Subscribe<OnGameFinish>(FinishGame);
             await _loc.BuildAsync(roomCount: 8);

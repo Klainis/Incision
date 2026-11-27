@@ -19575,6 +19575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healOrbData: {fileID: 11400000, guid: d0d058c52d71bbf4a8883d519d9e797c, type: 2}
+  _effectTemplate: {fileID: 11400000, guid: 49058bd2288e51d478f723eb3137a2e1, type: 2}
 --- !u!96 &3124299408085423923
 TrailRenderer:
   serializedVersion: 3
