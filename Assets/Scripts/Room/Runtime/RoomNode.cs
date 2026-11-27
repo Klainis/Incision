@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Incision.Room.Templates;
+using Incision.Treasures;
 using UnityEngine;
 
 namespace Incision.Room.Runtime
@@ -21,5 +22,7 @@ namespace Incision.Room.Runtime
         }
 
         public bool CanAcceptPortal => Connections.Count < Template.MaxPortals;
+        
+        public BaseTreasureTemplate GetRandomTreasure() => Template.Treasure;
     }
 }

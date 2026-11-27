@@ -8,6 +8,7 @@ using Incision.Portal.Components;
 using Incision.Room.Components;
 using Incision.Room.Runtime;
 using Incision.Structs.Events;
+using Incision.Treasures.Events;
 using VContainer.Unity;
 using Color = System.Drawing.Color;
 
@@ -23,6 +24,7 @@ namespace Incision.Room.Services
         private PortalLinkRegistry _linkRegistry;
         private EnemySpawner _enemySpawner;
         private IEventBus _eventBus;
+        private bool _cleared;
 
         public RoomController(
             IEventBus eventBus, 
@@ -64,8 +66,12 @@ namespace Incision.Room.Services
 
         private void OnEnemyCountChanged(OnEnemyCountChanged evt)
         {
-            _eventBus.Publish(new Log(LOG_TAG, evt.Message));
-            if (evt.Current > 0) return;
+            if (_cleared || evt.Spawner != _enemySpawner || !evt.WavesFinished || evt.Current != 0)
+                return;
+            _cleared = true;
+            
+            if (_node.Template.Type == RoomType.Treasure)
+                _eventBus.Publish(new SpawnTreasure(_node));
             
             foreach (var entry in _view.Portals)
             {

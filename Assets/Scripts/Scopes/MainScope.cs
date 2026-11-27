@@ -31,6 +31,7 @@ namespace Incision.Scopes
                 .AsSelf();
             builder.Register<PauseManager>(Lifetime.Singleton);
             builder.Register<CursorManager>(Lifetime.Singleton);
+            builder.Register<GoldManager>(Lifetime.Singleton);
             
             builder.RegisterInstance(new LocationConfig { CellSize = 60f });
             builder.RegisterInstance(roomGraphTemplate);

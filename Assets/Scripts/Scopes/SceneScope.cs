@@ -26,6 +26,7 @@ namespace Incision.Scopes
         [SerializeField] private UIEffectManager uiEffectManager;
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private PortalSpawner portalSpawner;
+        [SerializeField] private TreasureSpawner treasureSpawner;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -46,6 +47,9 @@ namespace Incision.Scopes
             builder.RegisterComponent(uiEffectManager); 
             builder.RegisterComponent(enemySpawner);
             builder.RegisterComponent(portalSpawner);
+            
+            if (treasureSpawner is not null)
+                builder.RegisterComponent(treasureSpawner);
             
             builder.RegisterEntryPoint<RoomController>();
         }
