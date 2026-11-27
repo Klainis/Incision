@@ -30,7 +30,7 @@ namespace Incision.Enemies.Components
         {
             if (_stats == null || _stats.CurrentHealth <= 0) return;
 
-            float damage = Mathf.Max(0, info.Amount - _stats.Armor);
+            var damage = Mathf.Max(0, info.Amount - _stats.Armor);
             _stats.CurrentHealth -= damage;
             OnDamaged?.Invoke(info, _stats.CurrentHealth, _stats.MaxHealth);
             _eventBus.Publish(new OnCreatureDamaged(info));
