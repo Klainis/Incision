@@ -5,6 +5,7 @@ namespace Incision.Room.Runtime
     public class RoomGraph
     {
         public Dictionary<string, RoomNode> Nodes = new();
+        public List<List<RoomNode>> Layers = new();
         public string StartNodeId;
     }
 }
