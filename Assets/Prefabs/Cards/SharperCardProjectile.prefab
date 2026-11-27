@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8d47df33388786042a51f558e51f2de0, type: 2}
-  - {fileID: 2100000, guid: 23c34133d87799143ad7d7ca3c30fc13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +95,7 @@ GameObject:
   - component: {fileID: 4275104548347982271}
   - component: {fileID: 6006597717926973051}
   - component: {fileID: 7040988457720755023}
-  - component: {fileID: 5048540492764176421}
+  - component: {fileID: 3490881308512310496}
   m_Layer: 8
   m_Name: SharperCardProjectile
   m_TagString: Untagged
@@ -190,7 +189,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5048540492764176421
+--- !u!114 &3490881308512310496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,26 +198,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3073034408043554007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cae1f6b64833b840ac89e52aaaf6fa2, type: 3}
+  m_Script: {fileID: 11500000, guid: a013341191c8e554a99dd0f78b1835bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _disposeType: 2
-  _destroyTime: 7
+  _disposeType: 1
+  _destroyTime: 4
   _projectileRigidbody: {fileID: 4275104548347982271}
   _cardRoot: {fileID: 543331352684829255}
   _projectileMinScale: 1
   _projectileMaxScale: 2
-  _distanceForChangeScale: 35
+  _distanceForChangeScale: 50
   _spawnEffectOnDestroy: 1
-  _hitEffect: {fileID: 9222612009757004086, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  _cardRotaionSpeed: 600
+  _hitEffect: {fileID: 0}
+  _cardRotaionSpeed: 180
   _trailRenderer: {fileID: 1515651248814640437}
   _projectileColliderForEnemy: {fileID: 7040988457720755023}
-  _baseBounces: 1
-  _searchRadius: 100
-  _enemyLayers:
-    serializedVersion: 2
-    m_Bits: 2176
 --- !u!1 &3680487404382489697
 GameObject:
   m_ObjectHideFlags: 0

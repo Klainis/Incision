@@ -9,21 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc31b2ada80af4591ae3c528f44db9, type: 3}
+  m_Script: {fileID: 11500000, guid: 177dcf37b7a36a04abacf4e73a21721b, type: 3}
   m_Name: SharperCardData
   m_EditorClassIdentifier: 
   _id: sharper_card_projectile
   _cardName: "\u0428\u0443\u043B\u0435\u0440"
   _cardIcon: {fileID: 2018903885, guid: bbb19eb7d57e62648ae0d11f1acb1f30, type: 3}
   _cardHandMaterial: {fileID: 2100000, guid: 8d47df33388786042a51f558e51f2de0, type: 2}
-  _projectilePrefab: {fileID: 5048540492764176421, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
-  _projectileSpeed: 200
+  _projectilePrefab: {fileID: 3490881308512310496, guid: 79311553aee7f244fb77e48430d37ad3, type: 3}
+  _projectileSpeed: 120
   _damage: 20
-  _maxAmmo: 20
+  _maxAmmo: 32
   _spendAttackAmmo: 1
   _attackSpeed: 7
-  _critChance: 0.2
+  _critChance: 0
   _critDamageMultiplier: 1.5
   _cardAbility: {fileID: 11400000, guid: ef25b2ec5a36c3246ba555c543a3cff0, type: 2}
   _abilityCoolDown: 10
   _spendAbilityAmmo: 5
+  _baseBounces: 1
+  _searchRadius: 15
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 2176

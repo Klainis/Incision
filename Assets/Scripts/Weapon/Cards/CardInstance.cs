@@ -1,0 +1,58 @@
+using Incision;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CardInstance
+{
+    public CardData Data { get; }
+    public string ID { get; private set; }
+    public int Ammo { get; private set; }
+    public float NextShotTime { get; set; }
+    public CardAbilityRuntime AbilityRuntime { get; set; }
+    public float NextAbilityTime { get; set; }
+    public bool IsAbilityActive => AbilityRuntime != null && AbilityRuntime.IsActive;
+
+    public bool IsEmpty => Ammo <= 0;
+
+    public CardInstance(CardData data)
+    {
+        Data = data;
+        ID = data.ID;
+        AbilityRuntime = data.CardAbility != null ? data.CardAbility.CreateRuntime(this) : null;
+
+        Ammo = data.MaxAmmo;
+    }
+
+    public bool TrySpendAmmo(int amount)
+    {
+        if (Ammo < amount) return false;
+
+        Ammo -= amount;
+
+        return true;
+    }
+
+    public bool TrySpenAbilityAmmo(int amount)
+    {
+        if (Ammo < amount) 
+            Ammo = 0;
+        else
+            Ammo -= amount;
+
+        return true;
+    }
+
+    public void Reload()
+    {
+        Ammo = Data.MaxAmmo;
+        NextShotTime = 0f;
+    }
+
+    public float RollDamage(out bool isCrit)
+    {
+        isCrit = Random.value < Data.CritChance;
+
+        return isCrit ? Data.Damage * Data.CritDamageMultiplier : Data.Damage;
+    }
+}

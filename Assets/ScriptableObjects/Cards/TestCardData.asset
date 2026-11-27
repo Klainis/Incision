@@ -17,7 +17,7 @@ MonoBehaviour:
   _cardIcon: {fileID: 21300000, guid: 7ba751f1c6c08194e8acff4bc9265926, type: 3}
   _cardHandMaterial: {fileID: 2100000, guid: 9312b28ff49e0cd409b384f290b6d611, type: 2}
   _projectilePrefab: {fileID: 8592896625477048602, guid: 73af19fc5fa2eee4fbfa647d7f0c595e, type: 3}
-  _projectileSpeed: 150
+  _projectileSpeed: 120
   _damage: 20
   _maxAmmo: 20
   _spendAttackAmmo: 1

@@ -1,4 +1,6 @@
 using Incision.Interfaces;
+using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class SlamAttack : MonoBehaviour
@@ -7,6 +9,7 @@ public class SlamAttack : MonoBehaviour
 
     private PlayerCharacter _playerCharacter;
     private PlayerStats _playerStatsData;
+    private List<StatusEffectTemplate> _statusEffects;
 
     public float hitHeight = 6;
     public float heightSpeed = 1;
@@ -18,6 +21,7 @@ public class SlamAttack : MonoBehaviour
     {
         _playerCharacter = character;
         _playerStatsData = stats;
+        _statusEffects = stats?.StatusEffects;
 
         _slamRadius = _playerStatsData.SlamOverlapRadius;
 
@@ -35,14 +39,27 @@ public class SlamAttack : MonoBehaviour
 
         foreach (var hit in _hits)
         {
-            if (hit.gameObject.TryGetComponent(out IDamageable damageable) &&
-                hit.gameObject.layer != LayerMask.NameToLayer("Player"))
-            {
-                damageable.TakeDamage(new (slamDamage, gameObject, hit.gameObject));
+            //TakeDamage(hit.gameObject);
+            ApplyStun(hit.gameObject);
+        }
+    }
 
-                Vector3 hitPos = hit.gameObject.transform.position;
-                hitPos = Vector3.MoveTowards(hitPos, hitPos + Vector3.up * hitHeight, heightSpeed * Time.deltaTime);
-            }
+    private void TakeDamage(GameObject hit)
+    {
+        if (hit.gameObject.TryGetComponent(out IDamageable damageable) &&
+                hit.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            damageable.TakeDamage(new(slamDamage, gameObject, hit.gameObject));
+        }
+    }
+
+    private void ApplyStun(GameObject hit)
+    {
+        if (hit.gameObject.TryGetComponent(out IStatusReceiver statusReceiver) &&
+                hit.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            foreach (StatusEffectTemplate statusTemplate in _statusEffects)
+                statusReceiver.TryApplyStatus(statusTemplate, gameObject);
         }
     }
 }

@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9312b28ff49e0cd409b384f290b6d611, type: 2}
-  - {fileID: 2100000, guid: 23c34133d87799143ad7d7ca3c30fc13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _disposeType: 1
-  _destroyTime: 7
+  _destroyTime: 5
   _projectileRigidbody: {fileID: 4275104548347982271}
   _cardRoot: {fileID: 543331352684829255}
   _projectileMinScale: 1

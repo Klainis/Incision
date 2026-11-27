@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UICamera
   - Portal
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3795612753
+    locked: 0
+  - name: PlayerModel
+    uniqueID: 28185203
     locked: 0
