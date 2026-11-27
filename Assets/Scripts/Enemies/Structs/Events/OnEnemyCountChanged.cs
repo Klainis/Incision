@@ -5,16 +5,16 @@ namespace Incision
 {
     public readonly struct OnEnemyCountChanged : IEvent
     {
-        public readonly int Current;
-        public readonly int Max;
+        public readonly int CurrentEnemy;
+        public readonly int MaxEnemy;
         public readonly EnemySpawner Spawner;
         public readonly bool WavesFinished;
         public string Message { get; }
 
         public OnEnemyCountChanged(EnemySpawner spawner, int current, int max, bool wavesFinished)
         {
-            Current = current;
-            Max = max;
+            CurrentEnemy = current;
+            MaxEnemy = max;
             Spawner = spawner;
             WavesFinished = wavesFinished;
             Message = $"Enemy count changed. Alive: {current}, Max: {max}";

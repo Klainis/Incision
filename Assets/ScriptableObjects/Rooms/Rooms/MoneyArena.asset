@@ -16,3 +16,5 @@ MonoBehaviour:
   type: 4
   weight: 1
   maxPortals: 2
+  possibleTreasures:
+  - {fileID: 11400000, guid: 4b8e236fe681c15409bcffb37ccafa79, type: 2}

@@ -1220,7 +1220,7 @@ namespace KinematicCharacterController
                 {
                     if (stabilityReport.IsMovingTowardsEmptySideOfLedge)
                     {
-                        // Max snap vel
+                        // MaxEnemy snap vel
                         Vector3 velocityOnLedgeNormal = Vector3.Project(velocity, stabilityReport.LedgeFacingDirection);
                         if (velocityOnLedgeNormal.magnitude >= MaxVelocityForLedgeSnap)
                         {

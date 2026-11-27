@@ -72,16 +72,20 @@ namespace Incision.Room.Services
 
         private void OnEnemyCountChanged(OnEnemyCountChanged evt)
         {
-            if (_cleared || evt.Spawner != _enemySpawner || !evt.WavesFinished || evt.Current != 0)
+            _eventBus.Publish(new Log(LOG_TAG, evt.Message));
+
+            if (_cleared || evt.Spawner != _enemySpawner || !evt.WavesFinished || evt.CurrentEnemy != 0)
+            {
+                _eventBus.Publish(new Log(LOG_TAG, $"Cleared: {_cleared}, \n " +
+                    $"Not this Spawner: {evt.Spawner != _enemySpawner}, \n " +
+                    $"Wave not Finished: {!evt.WavesFinished}, \n" +
+                    $"Enemy alive: {evt.CurrentEnemy}"));
                 return;
+            }
             _cleared = true;
             
-            if (_node.Template.Type == RoomType.Treasure)
+            if (_node.Template.Type == RoomType.MoneyArena)
                 _eventBus.Publish(new SpawnTreasure(_node));
-            
-            foreach (var entry in _view.Portals)
-            _eventBus.Publish(new Log(LOG_TAG, evt.Message));
-            if (evt.Current > 0) return;
 
             var conns = _node.Connections;
 

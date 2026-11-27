@@ -1039,7 +1039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 85307869}
   m_Layer: 0
-  m_Name: '---- ENEMIES ----'
+  m_Name: ---- ENEMIES ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,13 +1461,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
 --- !u!114 &211557863 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558134863555616801, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1238928817741707071, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
   m_PrefabInstance: {fileID: 211557862}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3674e4744e65aca419c01752986781c6, type: 3}
+  m_Script: {fileID: 11500000, guid: eba2cefbf64faec4d825d00aaddb057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &276689903
@@ -1625,7 +1625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290052672}
   m_Layer: 0
-  m_Name: '---- SETTINGS ----'
+  m_Name: ---- SETTINGS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2438,7 +2438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576757642}
   m_Layer: 0
-  m_Name: '---- ENVIRONMENT ----'
+  m_Name: ---- ENVIRONMENT ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2985,7 +2985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5077782373600588964, guid: 8e27bf49308b5494b834d3fc05563e68, type: 3}
       propertyPath: allowedEnemies.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 8e27bf49308b5494b834d3fc05563e68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3058,7 +3058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 754809800}
   m_Layer: 0
-  m_Name: '---- EFFECTS ----'
+  m_Name: ---- EFFECTS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3150,13 +3150,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
 --- !u!114 &789498652 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558134863555616801, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1238928817741707071, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
   m_PrefabInstance: {fileID: 789498651}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3674e4744e65aca419c01752986781c6, type: 3}
+  m_Script: {fileID: 11500000, guid: eba2cefbf64faec4d825d00aaddb057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &810487885
@@ -6535,7 +6535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292917659}
   m_Layer: 0
-  m_Name: '---- LIGHTS ----'
+  m_Name: ---- LIGHTS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7788,13 +7788,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
 --- !u!114 &1540869939 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558134863555616801, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1238928817741707071, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
   m_PrefabInstance: {fileID: 1540869938}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3674e4744e65aca419c01752986781c6, type: 3}
+  m_Script: {fileID: 11500000, guid: eba2cefbf64faec4d825d00aaddb057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1543168219
@@ -8465,7 +8465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685639806}
   m_Layer: 0
-  m_Name: '---- PLAYER ----'
+  m_Name: ---- PLAYER ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8680,7 +8680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1748347548}
   m_Layer: 0
-  m_Name: '---- UI ----'
+  m_Name: ---- UI ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9277,7 +9277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1977199981}
   m_Layer: 0
-  m_Name: '---- RENDERING ----'
+  m_Name: ---- RENDERING ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
