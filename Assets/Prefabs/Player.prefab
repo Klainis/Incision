@@ -6669,7 +6669,7 @@ GameObject:
   - component: {fileID: 1627132473916012924}
   - component: {fileID: 3718966421925615790}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: PlayerOverlayCamera
   m_TagString: PlayerCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7298,7 +7298,7 @@ GameObject:
   - component: {fileID: 3144671244526508261}
   - component: {fileID: 2251093219248966134}
   m_Layer: 0
-  m_Name: UICamera
+  m_Name: UIOverlayCamera
   m_TagString: UICamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

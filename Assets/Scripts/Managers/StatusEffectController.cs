@@ -25,6 +25,27 @@ public class StatusEffectController : MonoBehaviour, IStatusReceiver
 
     public bool TryApplyStatus(StatusEffectTemplate tpl, GameObject source, float? duration = null)
     {
+        if (tpl == null)
+        {
+            _eventBus.Publish(
+                new Log(
+                    LOG_TAG,
+                    $"{"Missing".AsTag(Color.red)} status template."
+                    )
+            );
+            return false;
+        }
+        if (source == null)
+        {
+            _eventBus.Publish(
+                new Log(
+                    LOG_TAG,
+                    $"{"Missing".AsTag(Color.red)} source for status."
+                    )
+            );
+            return false;
+        }
+
         var fresh = tpl.CreateRuntime(source);
         if ((fresh.Flags & _immunities) != 0)
         {
