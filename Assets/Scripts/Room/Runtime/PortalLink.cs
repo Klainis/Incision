@@ -2,8 +2,9 @@
 {
     public class PortalLink
     {
-        public string SourceRoomId;       
-        public Spawnpoint Anchor;          
-        public string TargetSceneName; 
+        public string SourceRoomId;
+        public Spawnpoint Anchor;
+        //public string TargetSceneName;
+        public string TargetSceneID;
     }
 }

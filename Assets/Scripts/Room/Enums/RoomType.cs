@@ -6,7 +6,7 @@ namespace Incision.Room
         Start,
         Boss,
         Normal,
-        GoldArena,
+        MoneyArena,
         ArcanaArena,
         Altar,
         Shop,

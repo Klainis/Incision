@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Incision.Enemies.Components;
@@ -51,14 +53,18 @@ namespace Incision.Room.Services
 
         private void AssignPortals()
         {
-            var conns = _node.Connections;
-            
+            var connetions = _node.Connections; // ID
+
+            _eventBus.Publish(new Log(LOG_TAG, $"Room: {_node.Template.SceneName.AsTag(Color.White.ToArgb().ToString())}; \n " +
+                $"Connections: {string.Join(",", connetions)}; \n" +
+                $"ID: {_node.Id.AsTag(Color.White.ToArgb().ToString())}"));
+
             for (var i = 0; i < _view.Portals.Length; i++)
             {
-                var entry = _view.Portals[i];
-                var used = i < conns.Count;
+                var portalEntry = _view.Portals[i];
+                var use = i < connetions.Count;
             
-                entry.TargetSceneName = used ? conns[i] : null;
+                portalEntry.TargetSceneID = use ? connetions[i] : null;
             }
         }
 
@@ -66,15 +72,22 @@ namespace Incision.Room.Services
         {
             _eventBus.Publish(new Log(LOG_TAG, evt.Message));
             if (evt.Current > 0) return;
-            
-            foreach (var entry in _view.Portals)
+
+            var conns = _node.Connections;
+
+            for (var i = 0; i < _view.Portals.Length; i++)
             {
+                var use = i < conns.Count;
+                if (!use) break;
+
+                var portalEntry = _view.Portals[i];
                 var link = new PortalLink
                 {
                     SourceRoomId = _node.Id,
-                    Anchor = entry.Anchor,
-                    TargetSceneName = entry.TargetSceneName
+                    Anchor = portalEntry.Anchor,
+                    TargetSceneID = portalEntry.TargetSceneID
                 };
+
                 _linkRegistry.Register(link);
                 _portalSpawner.SpawnPortal(link);
             }

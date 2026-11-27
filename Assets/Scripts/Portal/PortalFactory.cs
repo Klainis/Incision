@@ -15,13 +15,13 @@ namespace Incision.Portal
         [Inject] private IObjectResolver resolver;
         [Inject] private IEventBus _eventBus;
         
-        public Portal Create(Portal definition, Vector3 position, Quaternion rotation, Transform parent = null)
+        public Portal Create(Portal definition, Vector3 position, Quaternion rotation, string targetSceneName, Transform parent = null)
         {
             created++;
             _eventBus.Publish(
                 new Log(
                     LOG_TAG, 
-                    $"Creating {definition.name.AsTag(Color.yellow)} at {position.ToString().AsTag(Color.yellow)}"
+                    $"Creating {definition.name.AsTag(Color.yellow)} to {targetSceneName.AsTag(Color.white)} at {position.ToString().AsTag(Color.yellow)}"
                 )
             );
             var p = resolver.Instantiate(definition, position, rotation, parent);

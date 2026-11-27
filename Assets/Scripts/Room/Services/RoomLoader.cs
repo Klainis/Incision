@@ -34,7 +34,7 @@ namespace Incision.Room.Services
             }
             finally
             {
-                _eventBus.Publish(new Log("[RoomLoader]", $"Welcome to {node.Id}"));
+                _eventBus.Publish(new Log("[RoomLoader]", $"Welcome to {node.Template.SceneName}. ID: {node.Id}"));
                 _lock.Release();
             }
         }

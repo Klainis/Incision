@@ -98,30 +98,33 @@ namespace Incision.Room.Services
 
             var layout = BuildLayout();
             var graph = new RoomGraph();
-            List<RoomNode> roomNodes = null;
+            List<RoomNode> nodesOnOldLayer = null;
 
-            for (var y = 0; y < layout.Count; y++) // layout 
+            for (var y = 0; y < layout.Count; y++) // for layout 
             {
-                var layer = new List<RoomNode>();
-                for (var x = 0; x < layout[y].Length; x++) // room in layout
+                var nodesOnNewLayer = new List<RoomNode>(); // nodesOnNewLayer
+
+                for (var x = 0; x < layout[y].Length; x++) // for room in nodesOnNewLayer
                 {
                     var type = layout[y][x];
                     var tpl = _catalog.GetRandomRoom(type);
                     if (!tpl)
                         throw new NullReferenceException($"{LOG_TAG} RoomCatalog dont have this room type: {type.ToString().AsTag(Color.white)}");
 
-                    var node = new RoomNode(tpl, new Vector2Int(x, y));
+                    var node = new RoomNode(tpl, new Vector2Int(x, y)); // room of type
                     graph.Nodes[node.Id] = node;
-                    layer.Add(node);
+                    nodesOnNewLayer.Add(node);
                 }
 
-                if (roomNodes != null)
-                    foreach (var node in roomNodes)
-                        foreach (var n in layer)
-                            node.Connections.Add(n.Id);
+                if (nodesOnOldLayer != null)
+                {
+                    foreach (var oldNode in nodesOnOldLayer)
+                        foreach (var newNode in nodesOnNewLayer)
+                            oldNode.Connections.Add(newNode.Id);
+                }
 
-                graph.Layers.Add(layer);
-                roomNodes = layer;
+                graph.Layers.Add(nodesOnNewLayer);
+                nodesOnOldLayer = nodesOnNewLayer;
             }
 
             graph.StartNodeId = graph.Layers[0][0].Id;
@@ -134,7 +137,7 @@ namespace Incision.Room.Services
             var choices = new List<RoomType>();
             AddMany(choices, RoomType.Altar, GetRandomCountFromRange(_template.AltarCount));
             AddMany(choices, RoomType.ArcanaArena, GetRandomCountFromRange(_template.ArcanaCount));
-            AddMany(choices, RoomType.GoldArena, GetRandomCountFromRange(_template.GoldCount));
+            AddMany(choices, RoomType.MoneyArena, GetRandomCountFromRange(_template.GoldCount));
             AddMany(choices, RoomType.Elite, GetRandomCountFromRange(_template.EliteCount));
             AddMany(choices, RoomType.Shop, GetRandomCountFromRange(_template.ShopCount));
             choices = choices.OrderBy(_ => UnityEngine.Random.value).ToList();
@@ -142,7 +145,7 @@ namespace Incision.Room.Services
             var layers = new List<RoomType[]>
             {
                 new[] { RoomType.Start },
-                new[] { RoomType.GoldArena }
+                new[] { RoomType.MoneyArena }
             };
 
             while (choices.Count > 0)
@@ -150,7 +153,7 @@ namespace Incision.Room.Services
                 var roomA = choices[0];
                 choices.RemoveAt(0);
 
-                var roomB = RoomType.GoldArena;
+                var roomB = RoomType.MoneyArena;
                 var idx = choices.FindIndex(c => c != roomA);
                 if (idx >= 0)
                 {
@@ -159,7 +162,7 @@ namespace Incision.Room.Services
                 }
 
                 layers.Add(new[] { roomA, roomB });
-                layers.Add(new[] { RoomType.GoldArena });
+                layers.Add(new[] { RoomType.MoneyArena });
             }
 
             layers.Add(new[] { RoomType.Hub });
@@ -167,8 +170,8 @@ namespace Incision.Room.Services
 
             //For target GoldenArena count
             var goldTarget = GetRandomCountFromRange(_template.GoldCount);
-            while (layers.Sum(l => l.Count(r => r == RoomType.GoldArena)) < goldTarget)
-                InsertAfterSingle(layers, RoomType.GoldArena, layers.Count - 3);
+            while (layers.Sum(l => l.Count(r => r == RoomType.MoneyArena)) < goldTarget)
+                InsertAfterSingle(layers, RoomType.MoneyArena, layers.Count - 3);
 
             //Second HUB
             if (GetRandomCountFromRange(_template.HubCount) > 1)

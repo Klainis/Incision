@@ -15,6 +15,8 @@ namespace Incision.Managers
 {
     public class GameController : ITaggable
     {
+        public string LOG_TAG { get; } = "[GameController]".AsTag(Color.yellow);
+
         [Inject] private GameControllerSettings _settings;
         [Inject] private readonly LocationLoader _loc;
         [Inject] private readonly IEventBus _eventBus;
@@ -40,8 +42,10 @@ namespace Incision.Managers
                 _eventBus.Publish(new Log(LOG_TAG, evt.Message));
                 // TODO: needs a solution for loading with empty scene as starter, currently it breaks lighting
                 // await _loc.EnsureRoomUnloaded(evt.PortalLink.SourceRoomId);
-                if (!string.IsNullOrEmpty(evt.PortalLink.TargetSceneName))
-                    await _loc.EnsureRoomLoaded(evt.PortalLink.TargetSceneName);
+                if (!string.IsNullOrEmpty(evt.PortalLink.TargetSceneID))
+                {
+                    await _loc.EnsureRoomLoaded(evt.PortalLink.TargetSceneID);
+                }
                 else
                 {
                     _eventBus.Publish(new OnGameFinish(false, "End of run"));
@@ -52,7 +56,5 @@ namespace Incision.Managers
                 _eventBus.Publish(new LogError(LOG_TAG, e.Message));
             }
         }
-
-        public string LOG_TAG { get; } = "[GameController]".AsTag(Color.yellow);
     }
 }

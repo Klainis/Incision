@@ -6,6 +6,7 @@ namespace Incision.Room.Runtime
     public class PortalEntry
     {
         public Spawnpoint Anchor;
-        [NonSerialized] public string TargetSceneName;
+        //[NonSerialized] public string TargetSceneName;
+        [NonSerialized] public string TargetSceneID;
     }
 }
