@@ -29,7 +29,7 @@ namespace Incision
 
         //TODO: for another type of objects :)
 
-        private T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation, Action<T> initialize) where T : Component
+        public T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation, Action<T> initialize) where T : Component
         {
             T obj = _resolver.Instantiate(prefab, position, rotation);
             initialize(obj);
