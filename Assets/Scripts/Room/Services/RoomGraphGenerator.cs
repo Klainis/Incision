@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Incision.Extensions;
@@ -26,6 +27,7 @@ namespace Incision.Room.Services
         {
             _catalog = template.Catalog;
             _maxSpawnAttempts = template.MaxSpawnAttempts;
+            _template = template;
         }
         
         private static readonly Vector2Int[] Dirs =
@@ -92,32 +94,34 @@ namespace Incision.Room.Services
 
         public RoomGraph Generate()
         {
+            Debug.Log($"template={(_template != null)}, catalog={(_catalog != null)}");
+
             var layout = BuildLayout();
             var graph = new RoomGraph();
-            List<RoomNode> prev = null;
+            List<RoomNode> roomNodes = null;
 
-            for (var y = 0; y < layout.Count; y++)
+            for (var y = 0; y < layout.Count; y++) // layout 
             {
                 var layer = new List<RoomNode>();
-                for (var x = 0; x < layout[y].Length; x++)
+                for (var x = 0; x < layout[y].Length; x++) // room in layout
                 {
                     var type = layout[y][x];
                     var tpl = _catalog.GetRandomRoom(type);
                     if (!tpl)
-                        _eventBus.Publish(new LogError(LOG_TAG, "RoomCatalog dont have this room type!"));
+                        throw new NullReferenceException($"{LOG_TAG} RoomCatalog dont have this room type: {type.ToString().AsTag(Color.white)}");
 
                     var node = new RoomNode(tpl, new Vector2Int(x, y));
                     graph.Nodes[node.Id] = node;
                     layer.Add(node);
                 }
 
-                if (prev != null)
-                    foreach (var p in prev)
+                if (roomNodes != null)
+                    foreach (var node in roomNodes)
                         foreach (var n in layer)
-                            p.Connections.Add(n.Id);
+                            node.Connections.Add(n.Id);
 
                 graph.Layers.Add(layer);
-                prev = layer;
+                roomNodes = layer;
             }
 
             graph.StartNodeId = graph.Layers[0][0].Id;
@@ -133,7 +137,7 @@ namespace Incision.Room.Services
             AddMany(choices, RoomType.GoldArena, GetRandomCountFromRange(_template.GoldCount));
             AddMany(choices, RoomType.Elite, GetRandomCountFromRange(_template.EliteCount));
             AddMany(choices, RoomType.Shop, GetRandomCountFromRange(_template.ShopCount));
-            choices = choices.OrderBy(_ => Random.value).ToList();
+            choices = choices.OrderBy(_ => UnityEngine.Random.value).ToList();
 
             var layers = new List<RoomType[]>
             {
@@ -179,7 +183,7 @@ namespace Incision.Room.Services
                 .Where(i => layers[i].Length == 1).ToList();
             if (candidates.Count == 0) return;
 
-            var i = candidates[Random.Range(0, candidates.Count)];
+            var i = candidates[UnityEngine.Random.Range(0, candidates.Count)];
             layers.Insert(i + 1, new[] { type });
         }
 
@@ -188,6 +192,6 @@ namespace Incision.Room.Services
             for (var i = 0; i < count; i++) list.Add(type);
         }
 
-        private static int GetRandomCountFromRange(Vector2Int range) => Random.Range(range.x, range.y + 1);
+        private static int GetRandomCountFromRange(Vector2Int range) => UnityEngine.Random.Range(range.x, range.y + 1);
     }
 }

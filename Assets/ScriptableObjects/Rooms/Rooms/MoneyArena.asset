@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MoneyArena
   m_EditorClassIdentifier: 
   sceneName: MoneyArena
-  type: 3
-  weight: 2
-  maxPortals: 1
+  type: 4
+  weight: 1
+  maxPortals: 2

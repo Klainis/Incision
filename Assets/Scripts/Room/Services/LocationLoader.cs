@@ -14,9 +14,9 @@ namespace Incision.Room.Services
         [Inject] private readonly LocationConfig _cfg;
 
         private RoomGraph _graph;
-        public async Task<RoomGraph> BuildAsync(int roomCount)
+        public async Task<RoomGraph> BuildAsync()
         {
-            _graph = _gen.Generate(roomCount);
+            _graph = _gen.Generate();
 
             await EnsureRoomLoaded(_graph.StartNodeId, LoadSceneMode.Single);
             return _graph;

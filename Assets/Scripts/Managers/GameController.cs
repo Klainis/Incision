@@ -23,7 +23,7 @@ namespace Incision.Managers
         {
             _eventBus.Subscribe<OnPortalEntered>(OnPortalEntered);
             _eventBus.Subscribe<OnGameFinish>(FinishGame);
-            await _loc.BuildAsync(roomCount: 8);
+            await _loc.BuildAsync();
         }
 
         public void FinishGame(OnGameFinish evt)

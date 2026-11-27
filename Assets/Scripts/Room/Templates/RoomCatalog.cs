@@ -29,6 +29,7 @@ namespace Incision.Room.Templates
         //}
         public RoomTemplate GetRandomRoom(RoomType type = RoomType.NotSet)
         {
+            Debug.Log($"Room type: {type}");
             var valid = Rooms.Where(r => r.Type == type).ToList();
             if (valid.Count == 0) return null;
 
