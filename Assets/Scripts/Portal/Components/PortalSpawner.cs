@@ -13,7 +13,7 @@ namespace Incision.Portal.Components
 
         public void SpawnPortal(PortalLink link)
         {
-            var p = _portalFactory.Create(_portalPrefab, link.Anchor.transform.position, link.Anchor.transform.rotation, gameObject.transform);
+            var p = _portalFactory.Create(_portalPrefab, link.Anchor.transform.position, link.Anchor.transform.rotation, link.TargetSceneID, gameObject.transform);
             p.Initialize(link);
         }
     }

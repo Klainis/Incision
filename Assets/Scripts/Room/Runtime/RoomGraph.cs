@@ -6,5 +6,7 @@ namespace Incision.Room.Runtime
     {
         public Dictionary<string, RoomNode> Nodes = new();
         public string StartNodeId;
+
+        public List<List<RoomNode>> Layers = new(); // For Debug
     }
 }

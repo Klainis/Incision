@@ -9,14 +9,14 @@ namespace Incision.Room.Services
 {
     public class LocationLoader
     {
-        [Inject] private readonly IRoomGraphGenerator _gen;
+        [Inject] private readonly IRoomGraphGenerator _graphGenerator;
         [Inject] private readonly IRoomLoader _loader;
         [Inject] private readonly LocationConfig _cfg;
 
         private RoomGraph _graph;
-        public async Task<RoomGraph> BuildAsync(int roomCount)
+        public async Task<RoomGraph> BuildAsync()
         {
-            _graph = _gen.Generate(roomCount);
+            _graph = _graphGenerator.Generate();
 
             await EnsureRoomLoaded(_graph.StartNodeId, LoadSceneMode.Single);
             return _graph;
@@ -28,7 +28,7 @@ namespace Incision.Room.Services
                 return;
             
             if (!_graph.Nodes.TryGetValue(roomID, out var node))
-                throw new NullReferenceException($"Graph has no {roomID} node");
+                throw new NullReferenceException($"Graph has no {roomID} node. \n Scene: {node.Template.SceneName}");
                 
             await _loader.LoadAsync(node, mode);
         }
@@ -38,7 +38,7 @@ namespace Incision.Room.Services
             if (!_loader.IsLoaded(roomID))
                 return;
             if (!_graph.Nodes.TryGetValue(roomID, out var node))
-                throw new NullReferenceException($"Graph has no {roomID} node");
+                throw new NullReferenceException($"Graph has no {roomID} node. \n Scene: {node.Template.SceneName}");
                 
             await _loader.UnloadAsync(roomID);
         }

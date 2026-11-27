@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1502b5130580aa04eb8b5567be722ac6, type: 3}
   m_Name: RoomGraphSettings
   m_EditorClassIdentifier: 
-  roomCatalog: {fileID: 11400000, guid: e4d9bf29faee7d846aef503a11cb5f34, type: 2}
-  maxRooms: 10
+  _roomCatalog: {fileID: 11400000, guid: e4d9bf29faee7d846aef503a11cb5f34, type: 2}
+  _maxSpawnAttempts: 2500
+  _goldCount: {x: 5, y: 7}
+  _altarCount: {x: 0, y: 0}
+  _arcanaCount: {x: 2, y: 3}
+  _eliteCount: {x: 0, y: 0}
+  _hubCount: {x: 0, y: 0}
+  _shopCount: {x: 0, y: 0}

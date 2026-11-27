@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: Incision.Scopes.MainScope
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1796875528}

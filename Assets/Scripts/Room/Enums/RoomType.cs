@@ -2,11 +2,15 @@ namespace Incision.Room
 {
     public enum RoomType
     {
+        NotSet,
         Start,
         Boss,
         Normal,
-        Treasure,
+        MoneyArena,
+        ArcanaArena,
+        Altar,
         Shop,
-        NotSet
+        Elite,
+        Hub
     }
 }
