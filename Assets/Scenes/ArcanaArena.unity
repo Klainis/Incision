@@ -2228,6 +2228,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1555805958}
     m_Modifications:
+    - target: {fileID: 1238928817741707071, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
+      propertyPath: allowedEnemies.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2224570146405622999, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (7)

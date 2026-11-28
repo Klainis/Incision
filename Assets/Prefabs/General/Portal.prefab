@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88eefe6a10712a4a866ecea95340210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalIcon: {fileID: 0}
+  _portalIcon: {fileID: 2780146411756195080}
 --- !u!65 &6317585094177681227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 2}
+  m_SizeDelta: {x: 1.5, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3376128709313331504
 CanvasRenderer:
@@ -5379,3 +5379,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
+  _ignoreY: 1
+  _ignoreX: 0

@@ -626,17 +626,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
   m_PrefabInstance: {fileID: 134936008}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &134936010 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558134863555616801, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
-  m_PrefabInstance: {fileID: 134936008}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3674e4744e65aca419c01752986781c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &141108277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8313990414986019567, guid: 935154cb9a696574fac4af28c066baed, type: 3}
@@ -751,7 +740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5077782373600588964, guid: 8e27bf49308b5494b834d3fc05563e68, type: 3}
       propertyPath: allowedEnemies.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8144062581719185254, guid: 8e27bf49308b5494b834d3fc05563e68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24312,17 +24301,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8144062581719185254, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
   m_PrefabInstance: {fileID: 1558986005}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1558986007 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558134863555616801, guid: 3a05e8573ea40064a8cc6feeb3fbf8d2, type: 3}
-  m_PrefabInstance: {fileID: 1558986005}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3674e4744e65aca419c01752986781c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &1570879978 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 289127154514065990, guid: 2b5bdfe608002954e8d5bd48c7c03bd0, type: 3}
@@ -31209,8 +31187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Portals:
-  - Anchor: {fileID: 134936010}
-  - Anchor: {fileID: 1558986007}
+  - Anchor: {fileID: 0}
+  - Anchor: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
