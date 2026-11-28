@@ -84,7 +84,7 @@ namespace Incision
             _playerCamera.Initialize(_character.GetCameraTarget(), _playerMovementData, _cameraMain, _character);
             _uiCamera.Initialize(_cameraUI);
 
-            _hand.Initialize(_attack, _animation);
+            _hand.Initialize(_attack, _animation, _attackAnimationSpeed);
             _inHandVisual.Initialize(_hand, _animation);
 
             _handHUD.Initialize(_hand);

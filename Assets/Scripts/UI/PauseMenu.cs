@@ -1,4 +1,5 @@
 
+using Incision.Arcana;
 using Incision.Events;
 using Incision.Interfaces;
 using Incision.Managers;
@@ -14,6 +15,11 @@ namespace Incision.UI
         [Inject] private PauseManager _pauseManager;
         [Inject] private CursorManager _cursorManager;
         [Inject] private IEventBus _eventBus;
+
+        private ArcanaRewardController _arcanaReward;
+
+        [Inject]
+        private void SetArcanaReward(ArcanaRewardController arcanaReward) => _arcanaReward = arcanaReward;
         
         private void Start()
         {
@@ -22,7 +28,7 @@ namespace Incision.UI
 
         private void Update()
         {
-            if (!Input.GetKeyDown(KeyCode.Escape)) 
+            if (_arcanaReward?.IsOpen == true || !Input.GetKeyDown(KeyCode.Escape))
                 return;
             
             if (_pauseManager.IsPaused)
@@ -37,6 +43,9 @@ namespace Incision.UI
 
         public void Pause()
         {
+            if (_arcanaReward?.IsOpen == true)
+                return;
+
             _pauseManager.Pause();
             _pauseMenu.SetActive(true);
             _cursorManager.ShowCursor();
@@ -44,6 +53,9 @@ namespace Incision.UI
 
         public void Resume()
         {
+            if (_arcanaReward?.IsOpen == true)
+                return;
+
             _pauseManager.Resume();
             _pauseMenu.SetActive(false);
             _cursorManager.HideCursor();

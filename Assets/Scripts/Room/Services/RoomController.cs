@@ -102,7 +102,7 @@ namespace Incision.Room.Services
             }
             _cleared = true;
             
-            if (_node.Template.Type == RoomType.MoneyArena)
+            if (_node.Template.Type == RoomType.MoneyArena || _node.Template.Type == RoomType.ArcanaArena)
                 _eventBus.Publish(new SpawnTreasure(_node));
 
             RegisterPortals();

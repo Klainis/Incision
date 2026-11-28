@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Incision.Arcana;
 using Incision.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,8 @@ public class DeckUI : MonoBehaviour
 
     [Inject] private CursorManager _cursorManager;
     [Inject] private PauseManager _pauseManager;
+
+    [Inject] private ArcanaRewardController _arcanaReward;
     
     private void Awake()
     {
@@ -56,7 +59,7 @@ public class DeckUI : MonoBehaviour
 
     private void OnToggle(InputAction.CallbackContext _)
     {
-        if (_panel == null) return;
+        if (_panel == null || _arcanaReward?.IsOpen == true) return;
 
         _panel.SetActive(!_panel.activeSelf);
 
@@ -76,7 +79,7 @@ public class DeckUI : MonoBehaviour
 
     public void BackFromMenu() // Legacy for button
     {
-        if (_panel == null) return;
+        if (_panel == null || _arcanaReward?.IsOpen == true) return;
 
         _panel.SetActive(!_panel.activeSelf);
         if (_panel.activeSelf) RebuildList();

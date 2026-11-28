@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Incision.Arcana;
 using Incision.Events;
 using Incision.Extensions;
 using Incision.Interfaces;
@@ -24,12 +25,16 @@ namespace Incision.Managers
         [Inject] private readonly LocationLoader _loc;
         [Inject] private readonly IEventBus _eventBus;
         [Inject] private readonly GoldManager _goldManager;
+        [Inject] private readonly ArcanaLoadout _arcanaLoadout;
+        [Inject] private readonly ArcanaRewardController _arcanaReward;
 
         public RoomGraph Graph => _graph;
 
         public async Task StartGame()
         {
             _goldManager.Reset();
+            _arcanaReward.Decline();
+            _arcanaLoadout.Reset();
             _eventBus.Subscribe<OnPortalEntered>(OnPortalEntered);
             _eventBus.Subscribe<OnGameFinish>(FinishGame);
 
@@ -40,6 +45,7 @@ namespace Incision.Managers
 
         public void FinishGame(OnGameFinish evt)
         {
+            _arcanaReward.Decline();
             _eventBus.Unsubscribe<OnPortalEntered>(OnPortalEntered);
             _eventBus.Unsubscribe<OnGameFinish>(FinishGame);
             SceneManager.LoadScene(_settings.MainScene);

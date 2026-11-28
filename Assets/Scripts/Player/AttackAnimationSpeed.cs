@@ -37,9 +37,14 @@ public class AttackAnimationSpeed : MonoBehaviour
         CardInstance card = _hand.ActiveCard;
         if (card == null) return;
 
-        _animator.SetFloat(_speedHash, card.Data.AttackSpeed / _throwClip.length);
+        ApplyAttackSpeed(_hand.GetAttackSpeed(card.Data));
 
         //AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
         //Debug.Log($"state speedMultiplier = {info.speedMultiplier}");
+    }
+
+    public void ApplyAttackSpeed(float attackSpeed)
+    {
+        _animator.SetFloat(_speedHash, attackSpeed / _throwClip.length);
     }
 }

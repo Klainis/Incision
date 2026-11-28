@@ -78,7 +78,8 @@ namespace Incision
         protected void Start()
         {
             _trailRenderer = GetComponent<TrailRenderer>();
-            _trailRenderer.enabled = true;
+            if (_trailRenderer != null)
+                _trailRenderer.enabled = true;
 
             _spawnTime = Time.time;
 
@@ -88,7 +89,7 @@ namespace Incision
             StartCoroutine(LifeRoutine());
         }
 
-        private IEnumerator LifeRoutine()
+        protected virtual IEnumerator LifeRoutine()
         {
             if (DropsOnSpawn)
                 yield return DropRoutine();
@@ -213,12 +214,13 @@ namespace Incision
 
         protected abstract Transform ResolvePlayerTarget(Transform currentTarget, float attractDistance);
 
-        private void Collect()
+        protected void Collect()
         {
             if (_isCollected) return;
             _isCollected = true;
 
-            _trailRenderer.enabled = false;
+            if (_trailRenderer != null)
+                _trailRenderer.enabled = false;
             Destroy(gameObject);
             OnPickedUp();
         }

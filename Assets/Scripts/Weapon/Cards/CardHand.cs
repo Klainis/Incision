@@ -1,8 +1,10 @@
 using Incision;
+using Incision.Arcana;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public struct PlayerCardInput
 {
@@ -20,9 +22,13 @@ public class CardHand : MonoBehaviour
 
     private PlayerAttack _playerAttack;
     private PlayerAnimation _playerAnimation;
+    private AttackAnimationSpeed _attackAnimationSpeed;
+    private ArcanaCombatModifiers _arcanaModifiers;
 
     private CardInstance[] _hand;
     private readonly Queue<CardInstance> _deck = new Queue<CardInstance>();
+    private readonly HashSet<CardInstance> _spentThisCycle = new HashSet<CardInstance>();
+    private int _cycleCardCount;
     private int _activeIndex;
 
     private bool _requestedShoot;
@@ -42,17 +48,24 @@ public class CardHand : MonoBehaviour
     public bool CanShoot => ActiveCard != null && !ActiveCard.IsEmpty && Time.time >= ActiveCard.NextShotTime;
     public bool CanUseAbility => ActiveCard != null && !ActiveCard.IsEmpty && ActiveCard.AbilityRuntime != null && Time.time >= ActiveCard.NextAbilityTime;
 
-    public event Action HandChanged;                // карта в слоте заменилась
-    public event Action<int> ActiveChanged;         // сменился активный слот
-    public event Action<CardInstance> AmmoChanged;  // изменился боезапас
+    public event Action HandChanged;
+    public event Action<int> ActiveChanged;
+    public event Action<CardInstance> AmmoChanged;
     public event Action<CardInstance> AbilityUsed;
 
-    public void Initialize(PlayerAttack attack, PlayerAnimation animation)
+    [Inject]
+    private void SetArcanaModifiers(ArcanaCombatModifiers arcanaModifiers) => _arcanaModifiers = arcanaModifiers;
+
+    public void Initialize(PlayerAttack attack, PlayerAnimation animation, AttackAnimationSpeed attackAnimationSpeed)
     {
         _playerAttack = attack;
         _playerAnimation = animation;
+        _attackAnimationSpeed = attackAnimationSpeed;
 
         _hand = new CardInstance[_handSize];
+        _deck.Clear();
+        _spentThisCycle.Clear();
+        _cycleCardCount = _startingCards.Count;
         int slot = 0;
 
         foreach (CardData data in _startingCards)
@@ -105,6 +118,7 @@ public class CardHand : MonoBehaviour
     {
         if (_requestedShoot && CanShoot)
         {
+            _attackAnimationSpeed?.ApplyAttackSpeed(GetAttackSpeed(ActiveCard.Data));
             _playerAnimation.ThrowCardTriggerAnimation();
         }
     }
@@ -130,10 +144,15 @@ public class CardHand : MonoBehaviour
 
         damage = card.RollDamage(out isCrit);
         data = card.Data;
-        card.NextShotTime = Time.time + 1f / data.AttackSpeed;
+        bool isLastCharge = card.Ammo == 1 && data.SpendAttackAmmo == 1;
+        damage *= _arcanaModifiers?.GetDamageMultiplier(_spentThisCycle.Count, _cycleCardCount, isLastCharge) ?? 1f;
+        card.NextShotTime = Time.time + 1f / GetAttackSpeed(data);
 
         return SpendAttackAmmo(card, data.SpendAttackAmmo);
     }
+
+    internal float GetAttackSpeed(CardData data) =>
+        data.AttackSpeed * (_arcanaModifiers?.GetAttackSpeedMultiplier(Time.time) ?? 1f);
 
     public bool TryConsumeAbility(out CardData data)
     {
@@ -193,12 +212,16 @@ public class CardHand : MonoBehaviour
     {
         CardInstance spent = _hand[slot];
 
+        _spentThisCycle.Add(spent);
+        if (_spentThisCycle.Count >= _cycleCardCount)
+            _spentThisCycle.Clear();
+
         spent.Reload();
 
         if (_deck.Count > 0)
         {
-            _hand[slot] = _deck.Dequeue(); // на её место встаёт следующая
-            _deck.Enqueue(spent);          // пустая уходит в конец колоды
+            _hand[slot] = _deck.Dequeue();
+            _deck.Enqueue(spent);
         }
 
         HandChanged?.Invoke();
@@ -210,7 +233,7 @@ public class CardHand : MonoBehaviour
         if (index < 0 || index >= _hand.Length || index == _activeIndex)
             return;
 
-        if (_hand[index] == null) // пустой слот
+        if (_hand[index] == null)
             return;
 
         _activeIndex = index;

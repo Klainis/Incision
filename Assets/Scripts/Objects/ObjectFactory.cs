@@ -1,7 +1,7 @@
 using Incision.Extensions;
 using Incision.Interfaces;
 using Incision.Structs.Events;
-using System;
+using Incision.Treasures;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,20 +19,25 @@ namespace Incision
 
         public HealOrb CreateHealOrb(HealOrbTemplate data, HealOrb prefab, Vector3 position, Quaternion rotation)
         {
-            return Create(
+            var orb = Create(
                 prefab,
                 data.ID,
                 _healOrbCreated++,
-                position, rotation,
-                obj => obj.Initialize());
+                position, rotation);
+            orb.Initialize();
+            return orb;
         }
 
-        //TODO: for another _type of objects :)
+        public Treasure CreateTreasure(BaseTreasureTemplate data, Vector3 position, Quaternion rotation)
+        {
+            var treasure = Create(data.TreasurePrefab, data.ID, 0, position, rotation);
+            treasure.Initialize(_eventBus, data);
+            return treasure;
+        }
 
-        public T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation, Action<T> initialize) where T : Component
+        private T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation) where T : Component
         {
             T obj = _resolver.Instantiate(prefab, position, rotation);
-            initialize(obj);
             obj.name = $"{id}_{index}";
 
             _eventBus.Publish(
