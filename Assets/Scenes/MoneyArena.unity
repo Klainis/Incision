@@ -2394,10 +2394,10 @@ MonoBehaviour:
   _debugRoomTemplate: {fileID: 11400000, guid: 764409c78cf199b48baefad10de9cd49, type: 2}
   _player: {fileID: 63354433}
   _view: {fileID: 566936923}
-  uiEffectManager: {fileID: 838602533}
-  enemySpawner: {fileID: 335552557}
-  portalSpawner: {fileID: 1364090355}
-  treasureSpawner: {fileID: 5986622763664037756}
+  _uiEffectManager: {fileID: 838602533}
+  _enemySpawner: {fileID: 335552557}
+  _portalSpawner: {fileID: 1364090355}
+  _treasureSpawner: {fileID: 5986622763664037756}
 --- !u!4 &566936922
 Transform:
   m_ObjectHideFlags: 0

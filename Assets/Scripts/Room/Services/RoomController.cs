@@ -53,9 +53,22 @@ namespace Incision.Room.Services
         public async Task StartAsync(CancellationToken cancellation = new CancellationToken())
         {
             AssignPortals();
-            
-            await _enemySpawner.StartSpawning();
-            _eventBus.Publish(new Log(LOG_TAG,"All Enemies Spawned"));
+
+            if (_node.Template.Type == RoomType.MoneyArena ||
+                _node.Template.Type == RoomType.ArcanaArena ||
+                _node.Template.Type == RoomType.Elite ||
+                _node.Template.Type == RoomType.Boss)
+            {
+                await _enemySpawner.StartSpawning();
+                _eventBus.Publish(new Log(LOG_TAG, "All Enemies Spawned"));
+            }
+
+            if (_node.Template.Type == RoomType.Start ||
+                _node.Template.Type == RoomType.Shop ||
+                _node.Template.Type == RoomType.Hub)
+            {
+                RegisterPortals();
+            }
         }
 
         private void AssignPortals()
@@ -92,6 +105,11 @@ namespace Incision.Room.Services
             if (_node.Template.Type == RoomType.MoneyArena)
                 _eventBus.Publish(new SpawnTreasure(_node));
 
+            RegisterPortals();
+        }
+
+        private void RegisterPortals()
+        {
             var conns = _node.Connections;
 
             for (var i = 0; i < _view.Portals.Length; i++)

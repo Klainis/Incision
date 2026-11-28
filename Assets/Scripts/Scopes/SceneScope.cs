@@ -23,10 +23,10 @@ namespace Incision.Scopes
         [Space(5)]
         [SerializeField] private Player _player;
         [SerializeField] private RoomView _view;
-        [SerializeField] private UIEffectManager uiEffectManager;
-        [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] private PortalSpawner portalSpawner;
-        [SerializeField] private TreasureSpawner treasureSpawner;
+        [SerializeField] private UIEffectManager _uiEffectManager;
+        [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private PortalSpawner _portalSpawner;
+        [SerializeField] private TreasureSpawner _treasureSpawner;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -43,13 +43,17 @@ namespace Incision.Scopes
             builder.Register<ObjectFactory>(Lifetime.Singleton);
             builder.Register<PortalFactory>(Lifetime.Singleton);
 
-            builder.RegisterComponent(_view);
-            builder.RegisterComponent(uiEffectManager); 
-            builder.RegisterComponent(enemySpawner);
-            builder.RegisterComponent(portalSpawner);
+            if (_view is not null)
+                builder.RegisterComponent(_view);
+            if (_uiEffectManager is not null)
+                builder.RegisterComponent(_uiEffectManager);
+            if (_enemySpawner is not null)
+                builder.RegisterComponent(_enemySpawner);
+            if (_portalSpawner is not null)
+                builder.RegisterComponent(_portalSpawner);
             
-            if (treasureSpawner is not null)
-                builder.RegisterComponent(treasureSpawner);
+            if (_treasureSpawner is not null)
+                builder.RegisterComponent(_treasureSpawner);
             
             builder.RegisterEntryPoint<RoomController>();
         }

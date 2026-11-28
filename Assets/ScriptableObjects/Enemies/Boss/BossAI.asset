@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917e6218f5c61fe44a6403a75bd38682, type: 3}
+  m_Name: BossAI
+  m_EditorClassIdentifier: 
+  _idleTime: 2
+  _patrolRadius: 3
+  _minAltitude: 8
+  _maxAltitude: 100
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 1105
+  _hoverAmplitude: 1
+  _hoverFrequency: 0.5
+  _maxBankAngle: 20
+  _bankSmoothing: 5
+  _avoidanceRadius: 4
+  _avoidanceLookAhead: 2
+  _avoidanceStrength: 2
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 7569
+  _arriveSlowdownRadius: 8
+  _stopDistance: 4
+  _useStrafe: 0
+  _flyingCombatHeight: 4
+  _strafeRadius: 4
+  _strafeSwitchInterval: 20

@@ -134,13 +134,16 @@ namespace Incision.Room.Services
 
         private List<RoomType[]> BuildLayout()
         {
-            var choices = new List<RoomType>();
-            AddMany(choices, RoomType.Altar, GetRandomCountFromRange(_template.AltarCount));
-            AddMany(choices, RoomType.ArcanaArena, GetRandomCountFromRange(_template.ArcanaCount));
-            AddMany(choices, RoomType.MoneyArena, GetRandomCountFromRange(_template.GoldCount));
-            AddMany(choices, RoomType.Elite, GetRandomCountFromRange(_template.EliteCount));
-            AddMany(choices, RoomType.Shop, GetRandomCountFromRange(_template.ShopCount));
-            choices = choices.OrderBy(_ => UnityEngine.Random.value).ToList();
+            var pool = new List<RoomType>();
+            AddMany(pool, RoomType.Altar, GetRandomCountFromRange(_template.AltarCount));
+            AddMany(pool, RoomType.ArcanaArena, GetRandomCountFromRange(_template.ArcanaCount));
+            AddMany(pool, RoomType.Elite, GetRandomCountFromRange(_template.EliteCount));
+            AddMany(pool, RoomType.Shop, GetRandomCountFromRange(_template.ShopCount));
+
+            var moneyCount = Mathf.Max(0, GetRandomCountFromRange(_template.GoldCount) - 1);
+            AddMany(pool, RoomType.MoneyArena, moneyCount);
+
+            pool = pool.OrderBy(_ => UnityEngine.Random.value).ToList();
 
             var layers = new List<RoomType[]>
             {
@@ -148,21 +151,37 @@ namespace Incision.Room.Services
                 new[] { RoomType.MoneyArena }
             };
 
-            while (choices.Count > 0)
+            while (pool.Count > 0)
             {
-                var roomA = choices[0];
-                choices.RemoveAt(0);
+                //var roomA = pool[0];
+                //pool.RemoveAt(0);
 
-                var roomB = RoomType.MoneyArena;
-                var idx = choices.FindIndex(c => c != roomA);
-                if (idx >= 0)
+                //var roomB = RoomType.MoneyArena;
+                //var idx = pool.FindIndex(c => c != roomA);
+                //if (idx >= 0)
+                //{
+                //    roomB = pool[idx];
+                //    pool.RemoveAt(idx);
+                //}
+
+                //layers.Add(new[] { roomA, roomB });
+                //layers.Add(new[] { RoomType.MoneyArena });
+
+                var roomA = Pop(pool);
+
+                var idx = pool.FindIndex(c => c != roomA);
+                if (idx < 0)
                 {
-                    roomB = choices[idx];
-                    choices.RemoveAt(idx);
+                    layers.Add(new[] { roomA });
+                    continue;
                 }
 
+                var roomB = pool[idx];
+                pool.RemoveAt(idx);
                 layers.Add(new[] { roomA, roomB });
-                layers.Add(new[] { RoomType.MoneyArena });
+
+                if(pool.Count > 0 && UnityEngine.Random.value >= 0.5)
+                    layers.Add(new[] { Pop(pool) });
             }
 
             layers.Add(new[] { RoomType.Hub });
@@ -178,6 +197,13 @@ namespace Incision.Room.Services
                 InsertAfterSingle(layers, RoomType.Hub, layers.Count - 4);
 
             return layers;
+        }
+
+        private static RoomType Pop(List<RoomType> list)
+        {
+            var item = list[0];
+            list.RemoveAt(0);
+            return item;
         }
 
         private static void InsertAfterSingle(List<RoomType[]> layers, RoomType type, int maxIndex)

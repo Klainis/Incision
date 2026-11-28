@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SingleEnemyWavePattern
   m_EditorClassIdentifier: 
   _waves:
-  - StartDelay: 3
+  - StartDelay: 150
     Entries:
-    - Enemy: {fileID: 11400000, guid: de688baca3b076445b1bc4031bb4b62b, type: 2}
+    - Enemy: {fileID: 11400000, guid: d99e302d5b79c03428cb66226ac6ab04, type: 2}
       Count: 1
-      Interval: 0
+      Interval: 1

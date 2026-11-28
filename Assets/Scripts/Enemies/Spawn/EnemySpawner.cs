@@ -29,12 +29,12 @@ namespace Incision.Enemies.Components
 
         void Start()
         {
-            _eventBus.Subscribe<OnCreatureDied>(OnCreatureDied);
+            _eventBus?.Subscribe<OnCreatureDied>(OnCreatureDied);
         }
 
         void OnDestroy()
         {
-            _eventBus.Unsubscribe<OnCreatureDied>(OnCreatureDied);
+            _eventBus?.Unsubscribe<OnCreatureDied>(OnCreatureDied);
         }
 
         public async Task StartSpawning()
