@@ -11,7 +11,9 @@ using Incision.Room.Components;
 using Incision.Room.Runtime;
 using Incision.Structs.Events;
 using Incision.Treasures.Events;
+using VContainer;
 using VContainer.Unity;
+using static UnityEngine.EventSystems.EventTrigger;
 using Color = System.Drawing.Color;
 
 namespace Incision.Room.Services
@@ -25,6 +27,7 @@ namespace Incision.Room.Services
         private PortalSpawner _portalSpawner;
         private PortalLinkRegistry _linkRegistry;
         private EnemySpawner _enemySpawner;
+        private LocationLoader _locationLoader;
         private IEventBus _eventBus;
         private bool _cleared;
 
@@ -33,6 +36,7 @@ namespace Incision.Room.Services
             EnemySpawner enemySpawner, 
             PortalSpawner portalSpawner, 
             PortalLinkRegistry portalLinkRegistry,
+            LocationLoader locationLoader,
             RoomNode roomNode, 
             RoomView view)
         {
@@ -42,6 +46,7 @@ namespace Incision.Room.Services
             _node = roomNode;
             _linkRegistry = portalLinkRegistry;
             _view = view;
+            _locationLoader = locationLoader;
             _eventBus.Subscribe<OnEnemyCountChanged>(OnEnemyCountChanged);
         }
 
@@ -95,11 +100,13 @@ namespace Incision.Room.Services
                 if (!use) break;
 
                 var portalEntry = _view.Portals[i];
+                var target = string.IsNullOrEmpty(portalEntry.TargetSceneID) ? null : _locationLoader.GetNode(portalEntry.TargetSceneID);
                 var link = new PortalLink
                 {
                     SourceRoomId = _node.Id,
                     Anchor = portalEntry.Anchor,
-                    TargetSceneID = portalEntry.TargetSceneID
+                    TargetSceneID = portalEntry.TargetSceneID,
+                    Icon = target.Template.PortalIcon
                 };
 
                 _linkRegistry.Register(link);

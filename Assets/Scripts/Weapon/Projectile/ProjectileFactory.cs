@@ -40,7 +40,7 @@ namespace Incision
                 p => p.Initialize(damage, owner));
         }
 
-        //TODO: for another type of projectiles :)
+        //TODO: for another _type of projectiles :)
 
         private T Create<T>(T prefab, string id, uint index, Vector3 position, Quaternion rotation, Action<T> initialize) where T : Projectile
         {

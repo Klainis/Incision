@@ -678,7 +678,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 15761
+    m_Bits: 15763
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 133b14a6619156b419fbcdf88e9c3bb2, type: 3}
+  m_Sprite: {fileID: 1941890765, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1613,7 +1613,7 @@ Transform:
   m_GameObject: {fileID: 2270610372795274963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1702,7 +1702,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1754,9 +1754,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 4
-      minScalar: 5
+      minMaxState: 3
+      scalar: 13
+      minScalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1874,7 +1874,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.1
-      minScalar: 0.3
+      minScalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1926,8 +1926,8 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
-      minScalar: 2.1
+      scalar: 1.5
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2254,7 +2254,7 @@ ParticleSystem:
     angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0
+    radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 180, y: 0, z: 0}
@@ -2337,7 +2337,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 4.0761776
+      value: 2
       mode: 0
       spread: 0
       speed:
@@ -6729,7 +6729,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 578
+    m_Bits: 576
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -17580,7 +17580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e5ba9c204a600f04f86af04585b14467, type: 3}
+  m_Sprite: {fileID: 1688066843, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17636,9 +17636,9 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8104698, b: 0.55660367, a: 1}
   m_Intensity: 2
-  m_Range: 4
-  m_SpotAngle: 103.43585
-  m_InnerSpotAngle: 33.658096
+  m_Range: 6
+  m_SpotAngle: 100
+  m_InnerSpotAngle: 60
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -20452,6 +20452,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 691679955017245247}
     m_Modifications:
+    - target: {fileID: 1001092178264847574, guid: 1e9c852ed2cc75e4894ac2fd397b6b73, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -491432785, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
     - target: {fileID: 2412680957323942541, guid: 1e9c852ed2cc75e4894ac2fd397b6b73, type: 3}
       propertyPath: m_SizeDelta.x
       value: 29
@@ -20588,10 +20592,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7562073067280981149, guid: 1e9c852ed2cc75e4894ac2fd397b6b73, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2140809703, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
     - target: {fileID: 7729147352429030791, guid: 1e9c852ed2cc75e4894ac2fd397b6b73, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2172488d27f80e044b80bac3580bced4, type: 3}
+      objectReference: {fileID: 289759917, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
+    - target: {fileID: 8321035489373689987, guid: 1e9c852ed2cc75e4894ac2fd397b6b73, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1299457770, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -6,16 +6,23 @@ namespace Incision.Room.Templates
     [CreateAssetMenu(fileName = "RoomTemplate", menuName = "General/Rooms/RoomTemplate")]
     public class RoomTemplate : ScriptableObject
     {
-        [SerializeField] [Scene] private string sceneName;
-        [SerializeField] private RoomType type;
-        [SerializeField] [Range(0.01f, 5.0f)] private int weight = 1;
-        [SerializeField] private int maxPortals = 4;
-        [SerializeField] private BaseTreasureTemplate[] possibleTreasures;
+        [Header("General")]
+        [SerializeField] [Scene] private string _sceneName;
+        [SerializeField] private RoomType _type;
+        [SerializeField] [Range(0.01f, 5.0f)] private int _weight = 1;
+
+        [Header("Portals")]
+        [SerializeField] private Sprite _portalIcon;
+        [SerializeField] private int _maxPortals = 4;
+
+        [Header("Treasures")]
+        [SerializeField] private BaseTreasureTemplate[] _possibleTreasures;
         
-        public string SceneName => sceneName;
-        public RoomType Type => type;
-        public int Weight => weight;
-        public int MaxPortals => maxPortals;
-        public BaseTreasureTemplate Treasure => possibleTreasures[Random.Range(0, possibleTreasures.Length)];
+        public string SceneName => _sceneName;
+        public RoomType Type => _type;
+        public int Weight => _weight;
+        public Sprite PortalIcon => _portalIcon;
+        public int MaxPortals => _maxPortals;
+        public BaseTreasureTemplate Treasure => _possibleTreasures[Random.Range(0, _possibleTreasures.Length)];
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Incision.Managers;
 using Incision.Room.Runtime;
 using Incision.Room.Services.Interfaces;
 using UnityEngine.SceneManagement;
@@ -42,6 +43,11 @@ namespace Incision.Room.Services
                 
             await _loader.UnloadAsync(roomID);
         }
+
+        public RoomGraph GetGraph() => _graph;
+
+        public RoomNode GetNode(string id) =>
+            _graph != null && _graph.Nodes.TryGetValue(id, out var n) ? n : null;
     }
 
     public class LocationConfig { public float CellSize = 60f; }

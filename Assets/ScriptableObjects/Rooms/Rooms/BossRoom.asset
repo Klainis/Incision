@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e304e82cb29f6a34b931589e907c4177, type: 3}
   m_Name: BossRoom
   m_EditorClassIdentifier: 
-  sceneName: BossRoom
-  type: 2
-  weight: 1
-  maxPortals: 1
+  _sceneName: BossRoom
+  _type: 2
+  _weight: 1
+  _portalIcon: {fileID: 0}
+  _maxPortals: 4
+  _possibleTreasures: []

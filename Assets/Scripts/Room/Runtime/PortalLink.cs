@@ -1,4 +1,6 @@
-﻿namespace Incision.Room.Runtime
+﻿using UnityEngine;
+
+namespace Incision.Room.Runtime
 {
     public class PortalLink
     {
@@ -6,5 +8,6 @@
         public Spawnpoint Anchor;
         //public string TargetSceneName;
         public string TargetSceneID;
+        public Sprite Icon;
     }
 }

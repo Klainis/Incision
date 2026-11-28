@@ -4,6 +4,7 @@ using Incision.Events;
 using Incision.Extensions;
 using Incision.Interfaces;
 using Incision.Portal.Structs.Events;
+using Incision.Room.Runtime;
 using Incision.Room.Services;
 using Incision.Structs.Events;
 using Incision.Templates;
@@ -17,17 +18,24 @@ namespace Incision.Managers
     {
         public string LOG_TAG { get; } = "[GameController]".AsTag(Color.yellow);
 
+        private RoomGraph _graph;
+
         [Inject] private GameControllerSettings _settings;
         [Inject] private readonly LocationLoader _loc;
         [Inject] private readonly IEventBus _eventBus;
         [Inject] private readonly GoldManager _goldManager;
+
+        public RoomGraph Graph => _graph;
 
         public async Task StartGame()
         {
             _goldManager.Reset();
             _eventBus.Subscribe<OnPortalEntered>(OnPortalEntered);
             _eventBus.Subscribe<OnGameFinish>(FinishGame);
+
             await _loc.BuildAsync();
+
+            _graph = _loc.GetGraph();
         }
 
         public void FinishGame(OnGameFinish evt)

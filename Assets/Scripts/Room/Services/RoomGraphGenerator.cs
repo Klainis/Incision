@@ -111,7 +111,7 @@ namespace Incision.Room.Services
                     if (!tpl)
                         throw new NullReferenceException($"{LOG_TAG} RoomCatalog dont have this room type: {type.ToString().AsTag(Color.white)}");
 
-                    var node = new RoomNode(tpl, new Vector2Int(x, y)); // room of type
+                    var node = new RoomNode(tpl, new Vector2Int(x, y)); // room of _type
                     graph.Nodes[node.Id] = node;
                     nodesOnNewLayer.Add(node);
                 }

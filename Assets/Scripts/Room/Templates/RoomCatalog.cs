@@ -13,19 +13,19 @@ namespace Incision.Room.Templates
 
         //private Dictionary<RoomType, int> _weights = new Dictionary<RoomType, int>();
 
-        //public RoomTemplate GetRandomRoom(RoomType type = RoomType.NotSet)
+        //public RoomTemplate GetRandomRoom(RoomType _type = RoomType.NotSet)
         //{   
-        //    var valid = Rooms.Where(rt => rt.Type == type);
-        //    var weight = _weights[type];
+        //    var valid = Rooms.Where(rt => rt.Type == _type);
+        //    var _weight = _weights[_type];
 
-        //    if (type != RoomType.NotSet)
-        //        return Weighted(valid.ToList(), weight);
+        //    if (_type != RoomType.NotSet)
+        //        return Weighted(valid.ToList(), _weight);
 
         //    valid = Rooms.Where(rt => rt.Type != RoomType.Start && rt.Type != RoomType.NotSet);
-        //    weight = Rooms.Sum(r => r.Weight) - GetWeights(RoomType.Start);
+        //    _weight = Rooms.Sum(r => r.Weight) - GetWeights(RoomType.Start);
 
 
-        //    return Weighted(valid.ToList(), weight);
+        //    return Weighted(valid.ToList(), _weight);
         //}
         public RoomTemplate GetRandomRoom(RoomType type = RoomType.NotSet)
         {
@@ -57,7 +57,7 @@ namespace Incision.Room.Templates
         //    _weights.Add(RoomType.Hub, GetWeights(RoomType.Hub));
         //}
 
-        //private int GetWeights(RoomType type) => Rooms.Where(r => r.Type == type).Sum(r => r.Weight);
+        //private int GetWeights(RoomType _type) => Rooms.Where(r => r.Type == _type).Sum(r => r.Weight);
 
         public RoomTemplate StartRoom => GetRandomRoom(RoomType.Start);
         public RoomTemplate EndRoom => GetRandomRoom(RoomType.Boss);
