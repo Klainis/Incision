@@ -52,3 +52,7 @@ MonoBehaviour:
   decalBufferTemplate: {fileID: 11400000, guid: 57e222ac0491e194190f44eea0789e1b, type: 2}
   roomGraphTemplate: {fileID: 11400000, guid: 806a202056ec2ab4bb4f5f5afa3b6e3c, type: 2}
   gameControllerSettings: {fileID: 11400000, guid: 6fe4f3f6ba8f3bf4caf025fabcd7cc9e, type: 2}
+  _arcanaDefinitions:
+  - {fileID: 11400000, guid: d78bbc558bcf30a469a82b261a3a5f74, type: 2}
+  - {fileID: 11400000, guid: bc6e1dc66cb8b1c42b77e19f686c0f62, type: 2}
+  - {fileID: 11400000, guid: 7d42b5c407788a749b12738359022dcd, type: 2}

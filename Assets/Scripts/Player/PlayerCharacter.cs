@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using KinematicCharacterController;
 using System;
+using Incision.Events;
+using Incision.Interfaces;
+using VContainer;
 
 public struct CharacterInput
 {
@@ -29,6 +32,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private DashStamina _dashStamina;
     private PlayerEffector _effector;
     private PlayerAnimation _playerAnimation;
+    [Inject] private IEventBus _eventBus;
 
     private Quaternion _requestedRotation;
 
@@ -277,6 +281,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _dashDirection = Vector3.ProjectOnPlane(rawDir, _motor.CharacterUp).normalized;
 
                 StartDashRoutine();
+                _eventBus?.Publish(new OnPlayerDashStarted(Time.time));
             }
         }
         if (_isDashing)

@@ -23,6 +23,8 @@ namespace Incision.Room.Templates
         public int Weight => _weight;
         public Sprite PortalIcon => _portalIcon;
         public int MaxPortals => _maxPortals;
-        public BaseTreasureTemplate Treasure => _possibleTreasures[Random.Range(0, _possibleTreasures.Length)];
+        public BaseTreasureTemplate Treasure => _possibleTreasures != null && _possibleTreasures.Length > 0
+            ? _possibleTreasures[Random.Range(0, _possibleTreasures.Length)]
+            : null;
     }
 }

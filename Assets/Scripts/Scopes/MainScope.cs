@@ -1,4 +1,5 @@
 using Incision.Effects;
+using Incision.Arcana;
 using Incision.Managers;
 using Incision.Room.Services;
 using Incision.Templates;
@@ -17,6 +18,7 @@ namespace Incision.Scopes
         
         [SerializeField] private RoomGraphTemplate roomGraphTemplate;
         [SerializeField] private GameControllerSettings gameControllerSettings;
+        [SerializeField] private ArcanaDefinition[] _arcanaDefinitions;
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.unityLogger.logEnabled = LoggingEnabled;
@@ -32,6 +34,10 @@ namespace Incision.Scopes
             builder.Register<PauseManager>(Lifetime.Singleton);
             builder.Register<CursorManager>(Lifetime.Singleton);
             builder.Register<GoldManager>(Lifetime.Singleton);
+            builder.Register<ArcanaCatalog>(Lifetime.Singleton).WithParameter(_arcanaDefinitions);
+            builder.Register<ArcanaLoadout>(Lifetime.Singleton);
+            builder.Register<ArcanaRewardController>(Lifetime.Singleton);
+            builder.RegisterBuildCallback(resolver => resolver.Resolve<ArcanaRewardController>());
             
             builder.RegisterInstance(new LocationConfig { CellSize = 60f });
             builder.RegisterInstance(roomGraphTemplate);

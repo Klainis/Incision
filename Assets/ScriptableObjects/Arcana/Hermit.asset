@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02eced1711bfb8547abd1f5d87a71436, type: 3}
+  m_Name: Hermit
+  m_EditorClassIdentifier:
+  _id: hermit
+  _displayName: The Hermit
+  _description: Deal more damage as fewer cards remain in the deck.
+  _rarity: 0
+  _effect: {fileID: 11400000, guid: a6412f906b89a234a912fce270e2fd39, type: 2}

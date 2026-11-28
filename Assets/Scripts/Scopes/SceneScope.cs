@@ -1,4 +1,5 @@
 using System;
+using Incision.Arcana;
 using Incision.Enemies.Components;
 using Incision.Enemies.Runtime;
 using Incision.Enemies.Services;
@@ -37,6 +38,10 @@ namespace Incision.Scopes
                 .WithParameter(_player.transform)
                 .AsImplementedInterfaces();
             builder.Register<NavMeshService>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<ArcanaCombatModifiers>(Lifetime.Scoped);
+            builder.RegisterComponentOnNewGameObject<ArcanaRewardView>(Lifetime.Scoped, "Arcana Reward View")
+                .UnderTransform(transform);
+            builder.RegisterBuildCallback(resolver => resolver.Resolve<ArcanaRewardView>());
             
             builder.Register<EnemyFactory>(Lifetime.Singleton); 
             builder.Register<ProjectileFactory>(Lifetime.Singleton);

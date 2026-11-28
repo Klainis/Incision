@@ -17,4 +17,5 @@ MonoBehaviour:
   _weight: 1
   _portalIcon: {fileID: -323910179, guid: ec0fd66dc91569e43821c8b5877e0f5e, type: 3}
   _maxPortals: 4
-  _possibleTreasures: []
+  _possibleTreasures:
+  - {fileID: 11400000, guid: 3c185c745b51f944fae950b9067b0778, type: 2}

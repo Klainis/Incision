@@ -41,6 +41,7 @@ namespace Incision.Enemies.Components
         {
             await SpawnRoutine();
             _finishedSpawning = true;
+            PublishEnemyCount();
         }
 
         private async Task SpawnRoutine()
